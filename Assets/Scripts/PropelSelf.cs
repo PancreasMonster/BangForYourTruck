@@ -7,8 +7,7 @@ public class PropelSelf : MonoBehaviour
 {
     public float force;
     public Image bg, fill, bgcd, fillcd;  //cd = cooldown
-    public float cooldownDelay;
-    Rigidbody rb;
+    public float cooldownDelay;    Rigidbody rb;
     bool triggerDown = false, coolingDown = false;
     float t, power;
 
