@@ -17,7 +17,7 @@ public class BananaMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, dir, .1f);
+        transform.position = Vector3.MoveTowards(transform.position, dir, .25f);
         if (Vector3.Distance(transform.position, dir) < 0.1)
         {
             Explode();     
