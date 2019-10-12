@@ -27,6 +27,10 @@ public class Turret : AIBehaviours
             Vector3 dir = currentTarget.transform.position - transform.position;
             dir.Normalize();
             transform.rotation = Quaternion.LookRotation(dir);
+            if (Vector3.Distance(transform.position, currentTarget.transform.position) > 10)
+            {
+                currentTarget = null;
+            }
         }      
     }
 
@@ -81,6 +85,7 @@ public class Turret : AIBehaviours
             cooldown = true;
             GameObject clone = Instantiate(banana, transform.position, Quaternion.identity);
             clone.GetComponent<BananaMove>().dir = dir;
+            clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
         if (currentTarget != null)
             clone.GetComponent<BananaMove>().target = currentTarget;
             yield return new WaitForSeconds(1);
