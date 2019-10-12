@@ -15,52 +15,20 @@ public class Turret : AIBehaviours
 
     // Start is called before the first frame update
     void Start()
-    {
-        NMA.enabled = false;
-        NMA.speed = speed;
+    { 
         StartCoroutine(EnemyCheck());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!inAir)
+       if (currentTarget != null)
         {
-          //  if (Vector3.Distance(transform.position, target.transform.position) > targetDist)
-          //  {
-         //       NMA.destination = target.transform.position;
-         //   }
-             if (currentTarget == null)
-            {
-                //NMA.destination = transform.position;
-                // target.GetComponent<BaseHealth>().health -= 10 * Time.deltaTime;
-                // if (!cooldown && currentTarget != null)
-                //    StartCoroutine(FireBanana(target));
-            }
-            //hp.fillAmount = health / maxhealth;
-        }
-        //if (health <= 0)
-        //    Destroy(this.gameObject);
-    } 
-
-    /* void OnCollisionEnter(Collision col)
-     {
-         if (col.transform.tag == "Plane" && inAir)
-         {
-             NMA.enabled = true;
-             inAir = false;
-             gameObject.layer = 11;
-             GetComponent<Rigidbody>().isKinematic = true;
-             hpBar.SetActive(true);
-             FindEnemyBase();
-             StartCoroutine(EnemyCheck());
-         }
-     }*/
-
-    // void FindEnemyBase()
-    //{
-    //      target = homeBase.GetComponent<FireCannon>().enemyBase.gameObject;
-    // }
+            Vector3 dir = currentTarget.transform.position - transform.position;
+            dir.Normalize();
+            transform.rotation = Quaternion.LookRotation(dir);
+        }      
+    }
 
     public IEnumerator EnemyCheck()
     {
@@ -68,10 +36,13 @@ public class Turret : AIBehaviours
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10, layer);
         foreach (Collider c in hitColliders)
         {
-            if (c.gameObject.tag == "Resource")
+            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
             {
-                targets.Add(c.gameObject);
-                Debug.Log(c.transform.name);
+                if (c.gameObject.GetComponent<Health>().playerNum != GetComponentInParent<Health>().playerNum)
+                {
+                    targets.Add(c.gameObject);
+                    Debug.Log(c.transform.name);
+                }
             }
         }
         float dist = 100;
@@ -83,48 +54,37 @@ public class Turret : AIBehaviours
                 currentTarget = t;
             }
         }
-         if (currentTarget != null && currentTarget.GetComponent<Health>() != null)
+        if (targets.Count > 0 && currentTarget != null && currentTarget.GetComponent<Health>() != null)
         {
-            while (currentTarget.GetComponent<Health>().health >= 0)
+            while ( currentTarget != null && currentTarget.GetComponent<Health>().health >= 0)
             {
-               // NMA.destination = transform.position;
-                currentTarget.GetComponent<Health>().health -= 25 * Time.deltaTime;
                 if (!cooldown && currentTarget != null)
-                    StartCoroutine(FireBanana(currentTarget));
-                yield return null;
+                    StartCoroutine(FireBullet(currentTarget));
+                yield return new WaitForSeconds(1);
             }
             currentTarget = null;
             targets.Clear();
-            //  } 
-
-            /*  if (currentTarget != null && currentTarget.GetComponent<Attacker>() != null)
-              {
-
-                  while (currentTarget.GetComponent<Attacker>().health >= 0)
-                  {
-                      NMA.destination = transform.position;
-                      currentTarget.GetComponent<Attacker>().health -= 25 * Time.deltaTime;
-                      if (!cooldown && currentTarget != null)
-                          StartCoroutine(FireBanana(currentTarget));
-                      yield return null;
-                  }
-                  currentTarget = null;
-                  targets.Clear();
-              } */
             yield return new WaitForSeconds(.25f);
             Debug.Log("Check");
             StartCoroutine(EnemyCheck());
+        } else {
+            yield return new WaitForSeconds(.25f);
+            Debug.Log("Check");
+            StartCoroutine(EnemyCheck());
+
         }
 
-        IEnumerator FireBanana(GameObject t)
+    }
+        IEnumerator FireBullet(GameObject t)
         {
-            Vector3 dir = t.transform.position - transform.position;
-            dir.Normalize();
+            Vector3 dir = t.transform.position;
             cooldown = true;
             GameObject clone = Instantiate(banana, transform.position, Quaternion.identity);
             clone.GetComponent<BananaMove>().dir = dir;
+        if (currentTarget != null)
+            clone.GetComponent<BananaMove>().target = currentTarget;
             yield return new WaitForSeconds(1);
             cooldown = false;
         }
-    }
+    
 }

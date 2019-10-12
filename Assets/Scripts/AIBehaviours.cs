@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public abstract class AIBehaviours : MonoBehaviour
 {
-    public GameObject target, homeBase;
+    public GameObject target;
     public float speed, health, maxhealth;
-    public bool inAir = true, player1;
+    public bool player1;
 
     [HideInInspector]
-    public NavMeshAgent NMA;
+    
 
     public void Awake()
     {
-        NMA = GetComponent<NavMeshAgent>();
+        
     }
 }
