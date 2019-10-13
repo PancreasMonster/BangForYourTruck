@@ -49,7 +49,7 @@ public class Turret : AIBehaviours
                 }
             }
         }
-        float dist = 100;
+        float dist = 1000;
         foreach (GameObject t in targets)
         {
             if (Vector3.Distance(t.transform.position, transform.position) < dist)
@@ -69,11 +69,11 @@ public class Turret : AIBehaviours
             currentTarget = null;
             targets.Clear();
             yield return new WaitForSeconds(.25f);
-            Debug.Log("Check");
+
             StartCoroutine(EnemyCheck());
         } else {
             yield return new WaitForSeconds(.25f);
-            Debug.Log("Check");
+       
             StartCoroutine(EnemyCheck());
 
         }

@@ -37,6 +37,7 @@ public class FireDisk : MonoBehaviour
         {
             GameObject Disc = Instantiate(disc, transform.position, Quaternion.identity);
             Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
+            Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
             triggerDown = false;
             t = 0;
             power = 0;
