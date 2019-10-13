@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 3557079031038534206}
   - component: {fileID: 3557079031038534193}
   - component: {fileID: 3557079031038534200}
-  - component: {fileID: 3557079031038534201}
   m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
@@ -203,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b61b530f19b72c4eb4b1a73a7dd2cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftStickMovement: 0
+  LeftStickMovement: 1
   force: 3
 --- !u!54 &3557079031038534206
 Rigidbody:
@@ -255,20 +254,3 @@ MonoBehaviour:
   bg: {fileID: 0}
   fill: {fileID: 0}
   disc: {fileID: 1035590340929009073, guid: 62638cb1d7c574746ad0b5b69cffd27a, type: 3}
---- !u!114 &3557079031038534201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3557079031038534192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f371b4f6754b5c4a85f2ecceaaf30cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oldVelocity: 0
-  minimumForce: 3
-  multAmount: 7
-  resourceAmount: 0
-  resourceText: {fileID: 0}
