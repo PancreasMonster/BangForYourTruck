@@ -15,12 +15,13 @@ public class PropelSelf : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        print("RightTrigger" + GetComponent<Health>().playerNum)
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("RightTrigger") > 0 && !triggerDown && !coolingDown)
+        if (Input.GetAxis("RightTrigger" + 1) > 0 && !triggerDown && !coolingDown)
         {
             triggerDown = true;
             bg.gameObject.SetActive(true);
@@ -33,7 +34,7 @@ public class PropelSelf : MonoBehaviour
             fill.fillAmount = power;
         }
 
-        if (Input.GetAxis("RightTrigger") == 0 && triggerDown)
+        if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum) == 0 && triggerDown)
         {
             if (power < .25f) power = .25f;
             rb.AddForce(transform.forward * force * power);

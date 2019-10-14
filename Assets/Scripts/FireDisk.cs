@@ -20,7 +20,7 @@ public class FireDisk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("LeftTrigger") > 0 && !triggerDown)
+        if (Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum) > 0 && !triggerDown)
         {
             triggerDown = true;
             bg.gameObject.SetActive(true);
@@ -33,7 +33,7 @@ public class FireDisk : MonoBehaviour
             fill.fillAmount = power;
         }
 
-        if (Input.GetAxis("LeftTrigger") == 0 && triggerDown)
+        if (Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum) == 0 && triggerDown)
         {
             GameObject Disc = Instantiate(disc, transform.position, Quaternion.identity);
             Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
