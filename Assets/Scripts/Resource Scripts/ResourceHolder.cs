@@ -12,7 +12,7 @@ public class ResourceHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        resourceText = GameObject.Find("ResourceCanvas").GetComponentInChildren<Text>();
+        //resourceText = GameObject.Find("ResourceCanvas").GetComponentInChildren<Text>();
     }
 
     // Update is called once per frame

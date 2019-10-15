@@ -8,7 +8,7 @@ public class Turret : AIBehaviours
     public LayerMask layer;
     public float targetDist = 5;
     public Image hp, progress;
-    public GameObject hpBar, progressBar, currentTarget, banana;
+    public GameObject currentTarget, banana;
     public ParticleSystem ps;
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
@@ -45,7 +45,6 @@ public class Turret : AIBehaviours
                 if (c.gameObject.GetComponent<Health>().playerNum != GetComponentInParent<Health>().playerNum)
                 {
                     targets.Add(c.gameObject);
-                    Debug.Log(c.transform.name);
                 }
             }
         }

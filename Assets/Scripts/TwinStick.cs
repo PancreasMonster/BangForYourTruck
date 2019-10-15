@@ -18,14 +18,14 @@ public class TwinStick : MonoBehaviour
     void Update()
     {
         if (LeftStickMovement) {
-            Vector3 playerMovement = Vector3.right * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum) + Vector3.forward * Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum);
+            Vector3 playerMovement = Vector3.right * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()) + Vector3.forward * Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString());
             if (playerMovement.sqrMagnitude > 0.0f)
             {
                 rb.AddForce(playerMovement * force);
             }
         }
 
-        Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal" + GetComponent<Health>().playerNum) + Vector3.forward * -Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum);
+        Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal" + GetComponent<Health>().playerNum.ToString()) + Vector3.forward * -Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString());
         if(playerDirection.sqrMagnitude > 0.0f)
         {
             transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
