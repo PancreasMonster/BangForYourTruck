@@ -41,6 +41,8 @@ public class FireDisk : MonoBehaviour
             Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
             if(Disc.GetComponent<ResourceCollection>() != null)
             Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
+            if (Disc.GetComponent<Health>() != null)
+                Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
             triggerDown = false;
             t = 0;
             power = 0;
