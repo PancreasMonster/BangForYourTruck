@@ -19,26 +19,25 @@ public class TwinStick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LeftStickMovement) {
-            Vector3 playerMovement = transform.right * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()) 
-                + transform.forward * Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString());
-            if (playerMovement.sqrMagnitude > 0.0f)
-            {
-                rb.AddForce(playerMovement * force);
-            }
-        }
+        //transform.right * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()) + 
+        Vector3 playerMovement = transform.forward * Input.GetAxis("Vertical" + GetComponent<Health>().playerNum.ToString());
+       //if (playerMovement.sqrMagnitude > 0.0f)
+      //  {
+            rb.AddForce(playerMovement * force);
+      //  }
+        
 
         /* Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal" + GetComponent<Health>().playerNum.ToString()); // + transform.forward * -Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString());
          if(playerDirection.sqrMagnitude > 0.0f)
          {
              transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
          } */
-        CamControl();
+        
     }
 
     void LateUpdate()
     {
-       
+        CamControl();
     }
 
     void CamControl ()
