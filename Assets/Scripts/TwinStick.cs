@@ -5,8 +5,10 @@ using UnityEngine;
 public class TwinStick : MonoBehaviour
 {
     public bool LeftStickMovement;
+    float rotationSpeed = 2;
     public float force;
     Rigidbody rb;
+    float mouseX, mouseY;
 
     // Start is called before the first frame update
     void Start()
@@ -18,17 +20,33 @@ public class TwinStick : MonoBehaviour
     void Update()
     {
         if (LeftStickMovement) {
-            Vector3 playerMovement = Vector3.right * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()) + Vector3.forward * Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString());
+            Vector3 playerMovement = transform.right * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()) 
+                + transform.forward * Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString());
             if (playerMovement.sqrMagnitude > 0.0f)
             {
                 rb.AddForce(playerMovement * force);
             }
         }
 
-        Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal" + GetComponent<Health>().playerNum.ToString()) + Vector3.forward * -Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString());
-        if(playerDirection.sqrMagnitude > 0.0f)
-        {
-            transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
-        }
+        /* Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal" + GetComponent<Health>().playerNum.ToString()); // + transform.forward * -Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString());
+         if(playerDirection.sqrMagnitude > 0.0f)
+         {
+             transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+         } */
+        CamControl();
+    }
+
+    void LateUpdate()
+    {
+       
+    }
+
+    void CamControl ()
+    {
+        mouseX += Input.GetAxis("RHorizontal" + GetComponent<Health>().playerNum.ToString()) * rotationSpeed;
+        //mouseY -= Input.GetAxis("RVertical" + GetComponent<Health>().playerNum.ToString()) * rotationSpeed;
+       // mouseY = Mathf.Clamp(mouseY, -35, 60);
+
+        transform.rotation = Quaternion.Euler(0, mouseX, 0);
     }
 }
