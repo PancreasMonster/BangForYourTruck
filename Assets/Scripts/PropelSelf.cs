@@ -10,11 +10,15 @@ public class PropelSelf : MonoBehaviour
     public float cooldownDelay;    Rigidbody rb;
     bool triggerDown = false, coolingDown = false;
     float t, power;
+    PowerHolder ph;
+    PowerCosts pc;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        ph = GetComponent<PowerHolder>();
+        pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
     }
 
     // Update is called once per frame
@@ -35,16 +39,30 @@ public class PropelSelf : MonoBehaviour
 
         if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && triggerDown)
         {
-            if (power < .25f) power = .25f;
-            rb.AddForce(transform.forward * force * power);
+            if (ph.powerAmount >= pc.powerCosts[0])
+            {
+                if (power < .25f) power = .25f;
+                rb.AddForce(transform.forward * force * power);
 
-            triggerDown = false;
-            t = 0;
-            power = 0;
-            fill.fillAmount = 0;
-            bg.gameObject.SetActive(false);
-            coolingDown = true;
-            StartCoroutine(Cooldown());
+                triggerDown = false;
+                t = 0;
+                power = 0;
+                fill.fillAmount = 0;
+                bg.gameObject.SetActive(false);
+                coolingDown = true;
+                ph.losePower(pc.powerCosts[0]);
+                StartCoroutine(Cooldown());
+            }
+            else
+            {
+                triggerDown = false;
+                t = 0;
+                power = 0;
+                fill.fillAmount = 0;
+                bg.gameObject.SetActive(false);
+                coolingDown = true;
+                StartCoroutine(Cooldown());
+            }
         }
     }
 
