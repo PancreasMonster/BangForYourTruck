@@ -8,6 +8,7 @@ public class ResourceHolder : MonoBehaviour
 
     public int resourceAmount = 30;
     public Text resourceText;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class ResourceHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         resourceText.text = resourceAmount.ToString();
     }
 }
