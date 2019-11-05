@@ -16,6 +16,8 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxHealth = health;
+
         GameObject hpBar = Instantiate(healthBarCanvas, new Vector3(transform.position.x, transform.position.y+1.5f, transform.position.z), Quaternion.identity);
         hpBar.GetComponent<FaceCamera>().Cam1();
         GameObject hpBar2 = Instantiate(healthBarCanvas, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
@@ -25,7 +27,6 @@ public class Health : MonoBehaviour
         hpBarHolder = hpBar;
         hpBarHolder2 = hpBar2;
         hpBarFill = hpBar.GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
-        maxHealth = health;
     }
 
     // Update is called once per frame
