@@ -10,7 +10,9 @@ public class FireDisk : MonoBehaviour
     public List<GameObject> discSelection = new List<GameObject>();
     public GameObject currentDisc;
     bool triggerDown = false, dpadTrigger = false, dpadLeft = false, dpadRight = false;
-    float t, power;
+    float t;
+    public float barSpeed;
+    float power;
     public int currentI;
     ResourceHolder rh;
     ResourceCosts rc;
@@ -38,7 +40,7 @@ public class FireDisk : MonoBehaviour
 
         if (triggerDown)
         {
-            t += Time.deltaTime;
+            t += Time.deltaTime * barSpeed;
             power = Mathf.Pow((Mathf.Sin(t)), 2);
             fill.fillAmount = power;
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TwinStick : MonoBehaviour
 {
     public bool LeftStickMovement;
-    float rotationSpeed = 2;
+    public float rotationSpeed = 2;
     public float force;
     Rigidbody rb;
     float mouseX, mouseY;
