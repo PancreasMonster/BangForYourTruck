@@ -42,7 +42,7 @@ public class Health : MonoBehaviour
                 Destroy(baseUI);
             Destroy(hpBarHolder);
             Destroy(this.gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

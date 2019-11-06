@@ -7,19 +7,24 @@ public class ResourceHolder : MonoBehaviour
 {
 
     public int resourceAmount = 30;
-    public Text resourceText;
-    
+    public int resourceIncome;
 
     // Start is called before the first frame update
     void Start()
     {
-        //resourceText = GameObject.Find("ResourceCanvas").GetComponentInChildren<Text>();
+        StartCoroutine(PassiveIncome());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        resourceText.text = resourceAmount.ToString();
+            
+    }
+
+    IEnumerator PassiveIncome ()
+    {
+        yield return new WaitForSeconds(5);
+        resourceAmount += resourceIncome;
+        StartCoroutine(PassiveIncome());
     }
 }

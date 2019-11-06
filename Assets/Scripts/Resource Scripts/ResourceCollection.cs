@@ -30,12 +30,12 @@ public class ResourceCollection : MonoBehaviour
 
     public IEnumerator Collect()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 4);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 4000);
         foreach (Collider c in hitColliders)
         {
             if (c.gameObject.GetComponent<Resource>() != null && c.gameObject != this.gameObject)
             {               
-                int collectionAmount = Mathf.RoundToInt(Mathf.Min(5, 1f / Vector3.Distance(transform.position, c.transform.position)));
+                int collectionAmount = Mathf.RoundToInt(Mathf.Min(5, 40f / Vector3.Distance(transform.position, c.transform.position)));
                 c.GetComponent<Resource>().resource -= collectionAmount;
                 c.transform.localScale = new Vector3(c.transform.localScale.x, c.transform.localScale.y - (collectionAmount/100f), c.transform.localScale.z);
                 c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y - ((collectionAmount/2f)/100f), c.transform.position.z);

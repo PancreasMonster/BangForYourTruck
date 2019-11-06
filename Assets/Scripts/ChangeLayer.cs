@@ -18,7 +18,7 @@ public class ChangeLayer : MonoBehaviour
 
     IEnumerator LayerDelay ()
     {
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.5f);
         this.gameObject.layer = 0;
     }
 }
