@@ -104,12 +104,12 @@ GameObject:
   - component: {fileID: 3557079031038534203}
   - component: {fileID: 3557079031038534202}
   - component: {fileID: 3557079031038534205}
-  - component: {fileID: 3557079031038534204}
   - component: {fileID: 3557079031038534207}
   - component: {fileID: 3557079031038534206}
   - component: {fileID: 3557079031038534193}
   - component: {fileID: 3557079031038534200}
   - component: {fileID: 8640140823915310113}
+  - component: {fileID: 4709010575072462211}
   m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
@@ -179,19 +179,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &3557079031038534204
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3557079031038534192}
-  m_Material: {fileID: 13400000, guid: dac5825aa0fa2554889a3e5b18d14927, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3557079031038534207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftStickMovement: 1
+  rotationSpeed: 2
   force: 8
 --- !u!54 &3557079031038534206
 Rigidbody:
@@ -260,7 +248,9 @@ MonoBehaviour:
   - {fileID: 5943942836313356381, guid: 4833b37c11b83b84aa0a0b30c33f0674, type: 3}
   - {fileID: 6036643723817719630, guid: 6c6cdc09cf52cf747ad4e23efb7b71c6, type: 3}
   currentDisc: {fileID: 0}
+  barSpeed: 0
   currentI: 0
+  pc: {fileID: 0}
 --- !u!114 &8640140823915310113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bolt: {fileID: 0}
-  playerBullet: {fileID: 0}
-  target: {fileID: 0}
   sprite: {fileID: 0}
   particleSys: {fileID: 0}
   firePoint: {fileID: 0}
@@ -286,13 +274,23 @@ MonoBehaviour:
   targetSpeed: 0
   chains: []
   aTexture: {fileID: 0}
-  player1: 0
-  player2: 0
-  player3: 0
-  player4: 0
-  axis: 
-  colourName: 
-  layerIndex: 0
+--- !u!114 &4709010575072462211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557079031038534192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05075ccef816eb048b96620e70582f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjustSpeed: 1
+  toRotation: {x: 0, y: 0, z: 0, w: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &2269371974008125583
 PrefabInstance:
   m_ObjectHideFlags: 0

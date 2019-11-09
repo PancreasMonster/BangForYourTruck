@@ -51,7 +51,7 @@ public class FireDisk : MonoBehaviour
             {
                 if (ph.powerAmount >= pc.powerCosts[1])
                 {
-                    GameObject Disc = Instantiate(currentDisc, transform.position, Quaternion.identity);
+                    GameObject Disc = Instantiate(currentDisc, transform.position + new Vector3(0, 10, 0), Quaternion.identity);
                     Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
