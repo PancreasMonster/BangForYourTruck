@@ -9,12 +9,12 @@ public class RearWheelDrive : MonoBehaviour {
 	public float maxTorque = 300;
 	public GameObject wheelShape;
     public float torque, breakForce;
-    Quaternion initialRot;
+  
 
     // here we find all the WheelColliders down in the hierarchy
     public void Start()
 	{
-        initialRot = transform.rotation;
+     
 
 		wheels = GetComponentsInChildren<WheelCollider>();
 
@@ -36,11 +36,7 @@ public class RearWheelDrive : MonoBehaviour {
 	// this helps us to figure our which wheels are front ones and which are rear
 	public void Update()
 	{
-        float AngleDiff = Vector3.Angle(transform.up, Vector3.up);
-        if (AngleDiff > 60)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, initialRot, .7f * Time.deltaTime);
-        }
+        
 
 		float angle = maxAngle * Input.GetAxis("Horizontal1");
 		torque = maxTorque * Input.GetAxis("Vertical1");
