@@ -52,8 +52,8 @@ public class TwinStick : MonoBehaviour
     void CamControl ()
     {
         if (Input.GetAxis("RHorizontal" + GetComponent<Health>().playerNum.ToString()) != 0) { 
-        //mouseY -= Input.GetAxis("RVertical" + GetComponent<Health>().playerNum.ToString()) * rotationSpeed;
-        // mouseY = Mathf.Clamp(mouseY, -35, 60);
+        mouseY -= Input.GetAxis("RVertical" + GetComponent<Health>().playerNum.ToString()) * rotationSpeed;
+        mouseY = Mathf.Clamp(mouseY, -35, 60);
         mouseX = Input.GetAxis("RHorizontal" + GetComponent<Health>().playerNum.ToString());
         rb.AddTorque(Vector3.up * mouseX * rotationSpeed, ForceMode.VelocityChange);
             } else
