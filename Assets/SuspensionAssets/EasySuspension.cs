@@ -9,7 +9,7 @@ public class EasySuspension : MonoBehaviour {
 	[Range(0, 3)]
 	public float dampingRatio = 0.8f;
 
-	[Range(-1, 1)]
+	[Range(-20, 20)]
 	public float forceShift = 0.03f;
 
 	public bool setSuspensionDistance = true;

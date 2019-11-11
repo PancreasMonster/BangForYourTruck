@@ -74,6 +74,6 @@ public class RearWheelDrive : MonoBehaviour {
 
 		}
 
-        torque *= .75f;
+        
     }
 }
