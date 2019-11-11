@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
     public GameObject healthBarCanvas, hpBarHolder, hpBarHolder2, baseUI;
     Image hpBarFill;
     public bool mbase;
+    bool dead;
 
     // Start is called before the first frame update
     void Start()
@@ -36,13 +37,32 @@ public class Health : MonoBehaviour
     void Update()
     {
         //hpBarFill.fillAmount = health / maxHealth;
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
+            dead = true;
             if (mbase)
                 Destroy(baseUI);
             Destroy(hpBarHolder);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (GetComponentInChildren<ExplodeOnDeath>() != null)
+            {
+                BroadcastMessage("Explode");
+                
+
+                if (GetComponentInChildren<Turret>() != null)
+                {
+                    Turret turret = GetComponentInChildren<Turret>();
+                    turret.enabled = false;
+
+                }
+            }
+
+            if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
+            {
+                BroadcastMessage("Explode");
+
+            }
         }
     }
 }
