@@ -7,9 +7,7 @@ public class Turret : AIBehaviours
 {
     public LayerMask layer;
     public float targetDist = 5;
-    public Image hp, progress;
     public GameObject currentTarget, banana;
-    public ParticleSystem ps;
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
 
@@ -26,7 +24,7 @@ public class Turret : AIBehaviours
         {
             Vector3 dir = currentTarget.transform.position - transform.position;
             dir.Normalize();
-            transform.rotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z));
             if (Vector3.Distance(transform.position, currentTarget.transform.position) > 10)
             {
                 currentTarget = null;
@@ -45,14 +43,17 @@ public class Turret : AIBehaviours
                 if (c.gameObject.GetComponent<Health>().playerNum != GetComponentInParent<Health>().playerNum)
                 {
                     targets.Add(c.gameObject);
+                    Debug.Log(c.transform.name);
                 }
             }
         }
+        
         float dist = 1000;
         foreach (GameObject t in targets)
         {
             if (Vector3.Distance(t.transform.position, transform.position) < dist)
             {
+                
                 dist = Vector3.Distance(t.transform.position, transform.position);
                 currentTarget = t;
             }

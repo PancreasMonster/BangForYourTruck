@@ -32,7 +32,7 @@ public class FireDisk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) > 0 && !triggerDown)
+        if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !triggerDown)
         {
             triggerDown = true;
             bg.gameObject.SetActive(true);
@@ -45,13 +45,13 @@ public class FireDisk : MonoBehaviour
             fill.fillAmount = power;
         }
 
-        if (Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && triggerDown)
+        if (Input.GetButtonUp("PadX" + GetComponent<Health>().playerNum.ToString()) && triggerDown)
         {
             if (rh.resourceAmount >= rc.resourceCosts[currentI])
             {
                 if (ph.powerAmount >= pc.powerCosts[1])
                 {
-                    GameObject Disc = Instantiate(currentDisc, transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+                    GameObject Disc = Instantiate(currentDisc, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
                     Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;

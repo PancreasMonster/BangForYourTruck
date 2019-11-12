@@ -14,7 +14,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &3384440280328907190
 BoxCollider:
@@ -27,8 +27,20 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.709563, y: 1.6299222, z: 0.1587423}
-  m_Center: {x: -0.011885758, y: -0.11783949, z: 0.07930826}
+  m_Size: {x: 1.709563, y: 1.629922, z: 0.48795444}
+  m_Center: {x: -0.011885758, y: -0.11783953, z: -0.005832633}
+--- !u!114 &-4408758514823660181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7885699090595056563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2190d52b5d0d14c9a1b12ede1c6e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2183767104409653946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40,6 +52,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Raider Disc Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5adb85d12bf105a46a01964dd0fc90fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
@@ -59,7 +76,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
@@ -69,12 +86,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}

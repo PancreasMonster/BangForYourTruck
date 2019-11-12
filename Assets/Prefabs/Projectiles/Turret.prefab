@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4522970500648190766}
   - component: {fileID: 6657665496388769290}
   - component: {fileID: 4577927902009068459}
-  m_Layer: 0
+  - component: {fileID: 1890706696518687424}
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +52,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &4522970500648190766
 BoxCollider:
@@ -99,6 +100,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2190d52b5d0d14c9a1b12ede1c6e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1890706696518687424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593902555177473991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05075ccef816eb048b96620e70582f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjustSpeed: 1
+  layer:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!114 &716712911891856118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,12 +137,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   targetDist: 5
-  hp: {fileID: 0}
-  progress: {fileID: 0}
-  currentTarget: {fileID: 762268960002465050, guid: 885dbd428ba250f4a82d7a41fc239825,
-    type: 3}
-  banana: {fileID: 0}
-  ps: {fileID: 0}
+  currentTarget: {fileID: 0}
+  banana: {fileID: 762268960002465050, guid: 885dbd428ba250f4a82d7a41fc239825, type: 3}
 --- !u!1001 &3593902554829933960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Flamethrower Unwrap
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2d4063a8f7992b948a2f345d348b458d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2d4063a8f7992b948a2f345d348b458d,
         type: 3}
@@ -234,6 +252,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raider Disc 2
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5adb85d12bf105a46a01964dd0fc90fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -323,6 +346,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret Building Unwrap
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 8883090a3eddade4dadddd59cc410f0a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8883090a3eddade4dadddd59cc410f0a,
         type: 3}
