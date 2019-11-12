@@ -7,6 +7,7 @@ public class FireDisk : MonoBehaviour
 {
     public float force;
     public Image bg, fill;
+    public Text text;
     public List<GameObject> discSelection = new List<GameObject>();
     public GameObject currentDisc;
     bool triggerDown = false, dpadTrigger = false, dpadLeft = false, dpadRight = false;
@@ -32,6 +33,8 @@ public class FireDisk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        text.text = rc.resourcesID[currentI];
+
         if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !triggerDown)
         {
             triggerDown = true;
@@ -51,7 +54,7 @@ public class FireDisk : MonoBehaviour
             {
                 if (ph.powerAmount >= pc.powerCosts[1])
                 {
-                    GameObject Disc = Instantiate(currentDisc, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+                    GameObject Disc = Instantiate(currentDisc, transform.position + new Vector3(0, 0, 0), currentDisc.transform.rotation);
                     Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
