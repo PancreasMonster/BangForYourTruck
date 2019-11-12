@@ -69,4 +69,9 @@ public class ResourceCollection : MonoBehaviour
         yield return new WaitForSeconds(.25f);
         StartCoroutine(Collect());
     }
+
+     void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, maxRange);
+    }
 }
