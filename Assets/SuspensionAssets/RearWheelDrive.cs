@@ -8,7 +8,7 @@ public class RearWheelDrive : MonoBehaviour {
 	public float maxAngle = 30;
 	public float maxTorque = 300;
 	public GameObject wheelShape;
-    public float torque, breakForce;
+    public float sumTorque, forwardTorque, backwardTorque, breakForce;
   
 
     // here we find all the WheelColliders down in the hierarchy
@@ -39,28 +39,31 @@ public class RearWheelDrive : MonoBehaviour {
         
 
 		float angle = maxAngle * Input.GetAxis("Horizontal1");
-		torque = maxTorque * Input.GetAxis("Vertical1");
+		forwardTorque = maxTorque * Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString());
+        backwardTorque = maxTorque * -Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString());
+        sumTorque = forwardTorque + backwardTorque;
 
-		foreach (WheelCollider wheel in wheels)
+        foreach (WheelCollider wheel in wheels)
 		{
 			// a simple car where front wheels steer while rear ones drive
 			if (wheel.transform.localPosition.z > 0)
 				wheel.steerAngle = angle;
 
 			if (wheel.transform.localPosition.z < 0)
-				wheel.motorTorque = torque;
+				wheel.motorTorque = sumTorque;
 
-            if (Input.GetAxis("Vertical1") == 0)
+            if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0)
             {
                 wheel.brakeTorque = breakForce;
+                
             } else
             {
                 wheel.brakeTorque = 0;
             }
-                
 
-			// update visual wheels if any
-			if (wheelShape) 
+            Debug.Log(Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()));
+            // update visual wheels if any
+            if (wheelShape) 
 			{
 				Quaternion q;
 				Vector3 p;
