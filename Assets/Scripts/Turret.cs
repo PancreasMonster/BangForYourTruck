@@ -37,7 +37,7 @@ public class Turret : AIBehaviours
     public IEnumerator EnemyCheck()
     {
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10, layer);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 100, layer);
         foreach (Collider c in hitColliders)
         {
             if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)

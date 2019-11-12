@@ -9,14 +9,21 @@ public class ResourceCollection : MonoBehaviour
     public float maxRange;
     public GameObject mbase;
     Rigidbody rb;
+    ParticleSystem myParticleSystem;
+    ParticleSystem.EmissionModule emissionModule;
 
+   
 
-   void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
         oldVelocity = rb.velocity.sqrMagnitude;
         minimumForce *= minimumForce;
         StartCoroutine(Collect());
+
+        myParticleSystem = GetComponentInChildren<ParticleSystem>();
+        emissionModule = myParticleSystem.emission;
+
     }
 
 
@@ -31,6 +38,13 @@ public class ResourceCollection : MonoBehaviour
         
     }
 
+    float SetParticleRateValue(float particleRate)
+    {
+        emissionModule.rateOverTime = particleRate;
+        return particleRate;
+    }
+
+
     public IEnumerator Collect()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange);
@@ -43,6 +57,13 @@ public class ResourceCollection : MonoBehaviour
                 c.transform.localScale = new Vector3(c.transform.localScale.x, c.transform.localScale.y - (collectionAmount/100f), c.transform.localScale.z);
                 c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y - ((collectionAmount/2f)/100f), c.transform.position.z);
                 mbase.GetComponent<ResourceHolder>().resourceAmount += collectionAmount;
+                SetParticleRateValue(collectionAmount);
+            }
+
+            if (hitColliders.Length == 0)
+            {
+                SetParticleRateValue(0f);
+
             }
         }
         yield return new WaitForSeconds(.25f);
