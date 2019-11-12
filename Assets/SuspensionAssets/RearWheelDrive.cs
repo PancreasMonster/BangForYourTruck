@@ -38,7 +38,7 @@ public class RearWheelDrive : MonoBehaviour {
 	{
         
 
-		float angle = maxAngle * Input.GetAxis("Horizontal1");
+		float angle = maxAngle * Input.GetAxis("Horizontal" + GetComponent<Health>().playerNum.ToString());
 		forwardTorque = maxTorque * Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString());
         backwardTorque = maxTorque * -Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString());
         sumTorque = forwardTorque + backwardTorque;
@@ -61,8 +61,7 @@ public class RearWheelDrive : MonoBehaviour {
                 wheel.brakeTorque = 0;
             }
 
-            Debug.Log(Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()));
-            // update visual wheels if any
+            
             if (wheelShape) 
 			{
 				Quaternion q;
