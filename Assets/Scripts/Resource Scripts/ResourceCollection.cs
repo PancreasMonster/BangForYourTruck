@@ -57,12 +57,12 @@ public class ResourceCollection : MonoBehaviour
                 c.transform.localScale = new Vector3(c.transform.localScale.x, c.transform.localScale.y - (collectionAmount/100f), c.transform.localScale.z);
                 c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y - ((collectionAmount/2f)/100f), c.transform.position.z);
                 mbase.GetComponent<ResourceHolder>().resourceAmount += collectionAmount;
-                SetParticleRateValue(collectionAmount);
+                //SetParticleRateValue(collectionAmount);
             }
 
             if (hitColliders.Length == 0)
             {
-                SetParticleRateValue(0f);
+               // SetParticleRateValue(0f);
 
             }
         }
