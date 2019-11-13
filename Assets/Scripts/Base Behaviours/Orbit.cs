@@ -13,7 +13,7 @@ public class Orbit : MonoBehaviour
 
     void Start()
     {
-        offset = new Vector3(player.position.x, player.position.y + 8.0f, player.position.z + 7.0f);
+        offset = transform.position - player.transform.position;
     }
 
     void LateUpdate()

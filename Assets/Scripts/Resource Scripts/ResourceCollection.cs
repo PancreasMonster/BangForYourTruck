@@ -7,9 +7,10 @@ public class ResourceCollection : MonoBehaviour
     public float oldVelocity, minimumForce, multAmount;
     public float collectionRate;
     public float maxRange;
+    public float finalCollectionAmount;
     public GameObject mbase;
     Rigidbody rb;
-    ParticleSystem myParticleSystem;
+    public ParticleSystem myParticleSystem;
     ParticleSystem.EmissionModule emissionModule;
 
    
@@ -21,9 +22,8 @@ public class ResourceCollection : MonoBehaviour
         minimumForce *= minimumForce;
         StartCoroutine(Collect());
 
-        myParticleSystem = GetComponentInChildren<ParticleSystem>();
-        emissionModule = myParticleSystem.emission;
 
+       // myParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
 
@@ -40,6 +40,8 @@ public class ResourceCollection : MonoBehaviour
 
     float SetParticleRateValue(float particleRate)
     {
+        emissionModule = myParticleSystem.emission;
+
         emissionModule.rateOverTime = particleRate;
         return particleRate;
     }
@@ -47,25 +49,33 @@ public class ResourceCollection : MonoBehaviour
 
     public IEnumerator Collect()
     {
+        float addedCollectionAmount = 0f;
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange);
         foreach (Collider c in hitColliders)
         {
             if (c.gameObject.GetComponent<Resource>() != null && c.gameObject != this.gameObject)
-            {               
+            {
+                
                 int collectionAmount = Mathf.RoundToInt(Mathf.Min(5, collectionRate / Vector3.Distance(transform.position, c.transform.position)));
                 c.GetComponent<Resource>().resource -= collectionAmount;
                 c.transform.localScale = new Vector3(c.transform.localScale.x, c.transform.localScale.y - (collectionAmount/100f), c.transform.localScale.z);
                 c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y - ((collectionAmount/2f)/100f), c.transform.position.z);
                 mbase.GetComponent<ResourceHolder>().resourceAmount += collectionAmount;
-                //SetParticleRateValue(collectionAmount);
+                addedCollectionAmount += collectionRate;
             }
+
+
 
             if (hitColliders.Length == 0)
             {
-               // SetParticleRateValue(0f);
+               SetParticleRateValue(0f);
 
-            }
+            }        
         }
+
+        SetParticleRateValue(addedCollectionAmount);
+
         yield return new WaitForSeconds(.25f);
         StartCoroutine(Collect());
     }
