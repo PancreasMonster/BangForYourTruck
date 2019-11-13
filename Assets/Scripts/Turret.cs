@@ -10,10 +10,11 @@ public class Turret : AIBehaviours
     public GameObject currentTarget, banana;
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
+    public AudioSource shootAudio;
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         StartCoroutine(EnemyCheck());
     }
 
@@ -87,6 +88,7 @@ public class Turret : AIBehaviours
             clone.GetComponent<BananaMove>().dir = dir;
             clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
         if (currentTarget != null)
+            shootAudio.Play();
             clone.GetComponent<BananaMove>().target = currentTarget;
             yield return new WaitForSeconds(1);
             cooldown = false;
