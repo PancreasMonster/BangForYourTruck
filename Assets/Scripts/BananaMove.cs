@@ -18,7 +18,7 @@ public class BananaMove : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, dir, 1f);
-        if (Vector3.Distance(transform.position, dir) < 0.1)
+        if (Vector3.Distance(transform.position, dir) < 0.1f)
         {
             
             Explode();     
