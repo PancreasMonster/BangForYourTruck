@@ -61,6 +61,8 @@ public class ResourceCollection : MonoBehaviour
                 c.GetComponent<Resource>().resource -= collectionAmount;
                 c.transform.localScale = new Vector3(c.transform.localScale.x, c.transform.localScale.y - (collectionAmount/100f), c.transform.localScale.z);
                 c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y - ((collectionAmount/2f)/100f), c.transform.position.z);
+                if (c.transform.localScale.y <= 0)
+                    Destroy(c.gameObject);
                 mbase.GetComponent<ResourceHolder>().resourceAmount += collectionAmount;
                 addedCollectionAmount += collectionRate;
             }

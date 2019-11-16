@@ -12,6 +12,8 @@ public class PropelSelf : MonoBehaviour
     float t, power;
     PowerHolder ph;
     PowerCosts pc;
+    RaycastHit hit;
+    LayerMask layer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,44 +26,76 @@ public class PropelSelf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       /* if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) && !triggerDown && !coolingDown)
-        {
-            triggerDown = true;
-            bg.gameObject.SetActive(true);
-        }
+        /* if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) && !triggerDown && !coolingDown)
+         {
+             triggerDown = true;
+             bg.gameObject.SetActive(true);
+         }
 
-        if (triggerDown)
-        {
-            t += Time.deltaTime;
-            power = Mathf.Pow((Mathf.Sin(t)), 2);
-            fill.fillAmount = power;
-        } */
+         if (triggerDown)
+         {
+             t += Time.deltaTime;
+             power = Mathf.Pow((Mathf.Sin(t)), 2);
+             fill.fillAmount = power;
+         } */
 
-        if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) /*&& triggerDown*/)
+        if (Physics.Raycast(transform.position, Vector3.down * 5, out hit, 5, layer))
         {
-            if (ph.powerAmount >= pc.powerCosts[0])
+            if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) /*&& triggerDown*/)
             {
-                if (power < .25f) power = .25f;
-                rb.AddForce(transform.forward * force /* * power */);
+                if (ph.powerAmount >= pc.powerCosts[0])
+                {
+                   
+                    rb.AddForce(transform.forward * force /* * power */);
 
-                triggerDown = false;
-                t = 0;
-                power = 0;
-                fill.fillAmount = 0;
-                bg.gameObject.SetActive(false);
-                coolingDown = true;
-                ph.losePower(pc.powerCosts[0]);
-                StartCoroutine(Cooldown());
+                    triggerDown = false;
+                    t = 0;
+                    power = 0;
+                    fill.fillAmount = 0;
+                    bg.gameObject.SetActive(false);
+                    coolingDown = true;
+                    ph.losePower(pc.powerCosts[0]);
+                    StartCoroutine(Cooldown());
+                }
+                else
+                {
+                    triggerDown = false;
+                    t = 0;
+                    power = 0;
+                    fill.fillAmount = 0;
+                    bg.gameObject.SetActive(false);
+                    coolingDown = true;
+                    StartCoroutine(Cooldown());
+                }
             }
-            else
+        } else
+        {
+            if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) /*&& triggerDown*/)
             {
-                triggerDown = false;
-                t = 0;
-                power = 0;
-                fill.fillAmount = 0;
-                bg.gameObject.SetActive(false);
-                coolingDown = true;
-                StartCoroutine(Cooldown());
+                if (ph.powerAmount >= pc.powerCosts[0])
+                {
+                    rb.velocity = Vector3.zero;
+                    rb.AddForce(transform.forward * force /* * power */);
+
+                    triggerDown = false;
+                    t = 0;
+                    power = 0;
+                    fill.fillAmount = 0;
+                    bg.gameObject.SetActive(false);
+                    coolingDown = true;
+                    ph.losePower(pc.powerCosts[0]);
+                    StartCoroutine(Cooldown());
+                }
+                else
+                {
+                    triggerDown = false;
+                    t = 0;
+                    power = 0;
+                    fill.fillAmount = 0;
+                    bg.gameObject.SetActive(false);
+                    coolingDown = true;
+                    StartCoroutine(Cooldown());
+                }
             }
         }
     }

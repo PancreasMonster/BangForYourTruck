@@ -16,6 +16,9 @@ public class Resource : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (resource <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -17,7 +17,7 @@ public class BananaMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, dir, .25f);
+        transform.position = Vector3.MoveTowards(transform.position, dir, 1f);
         if (Vector3.Distance(transform.position, dir) < 0.1)
         {
             
@@ -30,7 +30,7 @@ public class BananaMove : MonoBehaviour
 
     public void Explode ()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 4);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
         foreach (Collider c in hitColliders)
         {
             if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
