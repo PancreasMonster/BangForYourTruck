@@ -47,6 +47,8 @@ public class FlipOver : MonoBehaviour
         {
             float horAngle = Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString());
             float vertAngle = Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString());
+            if (Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString()) == 0)
+                rigidbody.angularVelocity = rigidbody.angularVelocity * .9f;
             rigidbody.AddTorque(cam.transform.forward * -horAngle * angForce);
             rigidbody.AddTorque(cam.transform.right * vertAngle * angForce);
         }
