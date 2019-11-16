@@ -19,6 +19,7 @@ public class FireDisk : MonoBehaviour
     ResourceCosts rc;
     PowerHolder ph;
     public PowerCosts pc;
+    public Transform firingPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class FireDisk : MonoBehaviour
     {
         text.text = rc.resourcesID[currentI];
 
-        if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !triggerDown)
+        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && !triggerDown)
         {
             triggerDown = true;
             bg.gameObject.SetActive(true);
@@ -48,13 +49,13 @@ public class FireDisk : MonoBehaviour
             fill.fillAmount = power;
         }
 
-        if (Input.GetButtonUp("PadX" + GetComponent<Health>().playerNum.ToString()) && triggerDown)
+        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && triggerDown)
         {
             if (rh.resourceAmount >= rc.resourceCosts[currentI])
             {
                 if (ph.powerAmount >= pc.powerCosts[1])
                 {
-                    GameObject Disc = Instantiate(currentDisc, transform.position + new Vector3(0, 0, 0), currentDisc.transform.rotation);
+                    GameObject Disc = Instantiate(currentDisc, firingPoint.position, currentDisc.transform.rotation);
                     Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;

@@ -7,6 +7,8 @@ public class FlipOver : MonoBehaviour
     RaycastHit hit, hit2;
     public LayerMask layer;
     public float force, angForce;
+    [Range(0,1)]
+    public float angularDamping; //how much of a percentage of the previous frame's angular velocity is carried to the next frame
     Rigidbody rigidbody;
     Quaternion toRotation;
     Quaternion fromRotation;
@@ -28,7 +30,7 @@ public class FlipOver : MonoBehaviour
     {
         if(Physics.Raycast(transform.position, Vector3.down * 5, out hit, 5, layer))
         {
-            if (Input.GetButtonDown("RightStick" + GetComponent<Health>().playerNum.ToString()))
+            if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()))
             {
                 GetComponent<Rigidbody>().AddForce(Vector3.up * force);
                 //StartCoroutine(FlipBack());

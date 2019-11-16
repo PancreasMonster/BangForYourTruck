@@ -26,18 +26,21 @@ public class Turret : AIBehaviours
     void Update()
     {
         
-        if (ctDir != null)
-        {
-            if (Vector3.Distance(transform.position, ctDir.transform.position) < range)
-            {
-                Vector3 dir = ctDir.transform.position - transform.position;
-                dir.Normalize();
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), 5 * Time.deltaTime);
-            }
-        }
+       
 
         if (currentTarget != null)
         {
+
+            if (ctDir != null)
+            {
+                if (Vector3.Distance(transform.position, ctDir.transform.position) < range)
+                {
+                    Vector3 dir = ctDir.transform.position - transform.position;
+                    dir.Normalize();
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), 5 * Time.deltaTime);
+                }
+            }
+
             float magDist = Vector3.Distance(transform.position, currentTarget.transform.position);
             if (magDist > range)
             {
