@@ -15,6 +15,7 @@ public class FlipOver : MonoBehaviour
     bool Flip;
     bool cooldown;
     float timer;
+    public Camera cam;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +26,12 @@ public class FlipOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Physics.Raycast(transform.position, transform.up, out hit, 10, layer) && !cooldown)
+        if(Physics.Raycast(transform.position, Vector3.down * 5, out hit, 5, layer))
         {
             if (Input.GetButtonDown("RightStick" + GetComponent<Health>().playerNum.ToString()))
             {
                 GetComponent<Rigidbody>().AddForce(Vector3.up * force);
-                StartCoroutine(FlipBack());
+                //StartCoroutine(FlipBack());
             }
         }
 
@@ -42,10 +43,12 @@ public class FlipOver : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        if (timer > .5f)
+        if (timer > .25f)
         {
-            float angle = Input.GetAxis("Horizontal" + GetComponent<Health>().playerNum.ToString());
-            rigidbody.AddTorque(transform.forward * angle * angForce);
+            float horAngle = Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString());
+            float vertAngle = Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString());
+            rigidbody.AddTorque(cam.transform.forward * -horAngle * angForce);
+            rigidbody.AddTorque(cam.transform.right * vertAngle * angForce);
         }
 
         /* if (Vector3.Dot(transform.up, Vector3.up) < .2f)

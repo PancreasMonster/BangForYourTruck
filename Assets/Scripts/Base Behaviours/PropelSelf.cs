@@ -24,7 +24,7 @@ public class PropelSelf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) && !triggerDown && !coolingDown)
+       /* if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) && !triggerDown && !coolingDown)
         {
             triggerDown = true;
             bg.gameObject.SetActive(true);
@@ -35,14 +35,14 @@ public class PropelSelf : MonoBehaviour
             t += Time.deltaTime;
             power = Mathf.Pow((Mathf.Sin(t)), 2);
             fill.fillAmount = power;
-        }
+        } */
 
-        if (Input.GetButtonUp("PadA" + GetComponent<Health>().playerNum.ToString()) && triggerDown)
+        if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) /*&& triggerDown*/)
         {
             if (ph.powerAmount >= pc.powerCosts[0])
             {
                 if (power < .25f) power = .25f;
-                rb.AddForce(transform.forward * force * power);
+                rb.AddForce(transform.forward * force /* * power */);
 
                 triggerDown = false;
                 t = 0;
