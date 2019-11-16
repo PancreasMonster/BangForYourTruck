@@ -7,7 +7,9 @@ public class Turret : AIBehaviours
 {
     public LayerMask layer;
     public float targetDist = 5;
-    public GameObject currentTarget, banana;
+    public float fireRate = 2;
+    public float tickRate = 4; // the times per second that the turret checks for a target
+    public GameObject currentTarget, ctDir, banana;
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
     public AudioSource shootAudio;
@@ -21,11 +23,18 @@ public class Turret : AIBehaviours
     // Update is called once per frame
     void Update()
     {
+        if(ctDir != null)
+        {
+            if (Vector3.Distance(transform.position, ctDir.transform.position) < 100)
+            {
+                Vector3 dir = ctDir.transform.position - transform.position;
+                dir.Normalize();
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), 5 * Time.deltaTime);
+            }
+        } 
+
        if (currentTarget != null)
         {
-            Vector3 dir = currentTarget.transform.position - transform.position;
-            dir.Normalize();
-            transform.rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z));
             if (Vector3.Distance(transform.position, currentTarget.transform.position) > 10)
             {
                 currentTarget = null;
@@ -44,7 +53,6 @@ public class Turret : AIBehaviours
                 if (c.gameObject.GetComponent<Health>().playerNum != GetComponentInParent<Health>().playerNum)
                 {
                     targets.Add(c.gameObject);
-                    Debug.Log(c.transform.name);
                 }
             }
         }
@@ -57,6 +65,7 @@ public class Turret : AIBehaviours
                 
                 dist = Vector3.Distance(t.transform.position, transform.position);
                 currentTarget = t;
+                ctDir = t;
             }
         }
         if (targets.Count > 0 && currentTarget != null && currentTarget.GetComponent<Health>() != null)
@@ -65,15 +74,15 @@ public class Turret : AIBehaviours
             {
                 if (!cooldown && currentTarget != null)
                     StartCoroutine(FireBullet(currentTarget));
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(fireRate);
             }
             currentTarget = null;
             targets.Clear();
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(tickRate);
 
             StartCoroutine(EnemyCheck());
         } else {
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(tickRate);
        
             StartCoroutine(EnemyCheck());
 
