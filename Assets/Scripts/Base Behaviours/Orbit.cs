@@ -8,19 +8,25 @@ public class Orbit : MonoBehaviour
     public float turnSpeed = 4.0f;
     public Transform player, childPos;
     public int playerNum;
+    public float timeAllowance;
+    public LayerMask layer;
 
+    private RaycastHit hit;
+    private float timer;
     private Vector3 offset;
     private Vector3 origPos;
     private bool lockedBehind = true;
+    private bool disorient;
 
     void Start()
     {
-        offset = transform.position - player.transform.position;
-        origPos = offset;
+        offset = new Vector3(0, 10, -26);
+        origPos = new Vector3(0, 10, -26);
     }
 
     void LateUpdate()
     {
+        
         float yRotation = childPos.eulerAngles.y;
         Vector3 dir = player.position - transform.position;
         dir.Normalize();
@@ -31,7 +37,33 @@ public class Orbit : MonoBehaviour
         }
         if (lockedBehind)
         {
-            transform.position = new Vector3(childPos.position.x, player.position.y + 10, childPos.position.z);
+            if (Physics.Raycast(player.transform.position, -transform.up, out hit, 5, layer))
+            {
+                timer = 0;
+            }
+            else
+            {
+                timer += Time.deltaTime;
+            }
+
+            if (timer > timeAllowance)
+            {
+                  if (!disorient)
+                  {
+                    offset = transform.position - player.transform.position;
+                      disorient = true;
+                 }
+
+                transform.position = player.position + offset;
+                offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed, Vector3.up) * offset;
+                transform.LookAt(player.position);
+            }
+            else
+            {
+                transform.position = new Vector3 (player.TransformPoint(origPos).x, player.position.y + 10, player.TransformPoint(origPos).z);
+                disorient = false;
+            }
+            
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
             transform.LookAt(player.position);
         }
@@ -40,7 +72,7 @@ public class Orbit : MonoBehaviour
         {
             transform.position = player.position + offset;
             offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed, Vector3.up) * offset;
-            
+            transform.LookAt(player.position);
         }
        
     }
