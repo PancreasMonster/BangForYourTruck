@@ -22,7 +22,7 @@ public class BaseExplodeOnDeath : MonoBehaviour
         for (int i = 0; i < particles.Length; i++)
         {
             particles[i].Play();
-            Debug.Log("Exploded");
+            //Debug.Log("Exploded");
             GetComponent<AudioSource>().Play();
         }
     }

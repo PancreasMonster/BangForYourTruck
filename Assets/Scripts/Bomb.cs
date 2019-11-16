@@ -15,16 +15,10 @@ public class Bomb : MonoBehaviour
         StartCoroutine(Explode()); 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator Explode ()
     {
         yield return new WaitForSeconds(bombDelay);
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units
         foreach (Collider c in hitColliders)
         {
             Rigidbody rb = c.GetComponent<Rigidbody>();

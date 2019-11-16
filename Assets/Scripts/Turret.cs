@@ -9,7 +9,9 @@ public class Turret : AIBehaviours
     public float targetDist = 5;
     public float fireRate = 2;
     public float tickRate = 4; // the times per second that the turret checks for a target
+    public float range = 100; // max range where units can be spotted and lost
     public GameObject currentTarget, ctDir, banana;
+    public Transform firingPoint; // where the bullets and raycast originate from
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
     public AudioSource shootAudio;
@@ -23,29 +25,42 @@ public class Turret : AIBehaviours
     // Update is called once per frame
     void Update()
     {
-        if(ctDir != null)
+        
+        if (ctDir != null)
         {
-            if (Vector3.Distance(transform.position, ctDir.transform.position) < 100)
+            if (Vector3.Distance(transform.position, ctDir.transform.position) < range)
             {
                 Vector3 dir = ctDir.transform.position - transform.position;
                 dir.Normalize();
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), 5 * Time.deltaTime);
             }
-        } 
+        }
 
-       if (currentTarget != null)
+        if (currentTarget != null)
         {
-            if (Vector3.Distance(transform.position, currentTarget.transform.position) > 10)
+            float magDist = Vector3.Distance(transform.position, currentTarget.transform.position);
+            if (magDist > range)
             {
                 currentTarget = null;
             }
-        }      
+
+
+            RaycastHit hit;
+            if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - transform.position).normalized, out hit, range))
+            {
+                if (hit.transform.gameObject != currentTarget.gameObject)
+                {
+                    Debug.Log("Lost");
+                    currentTarget = null;
+                }
+            }
+        }
     }
 
     public IEnumerator EnemyCheck()
     {
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 100, layer);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layer);
         foreach (Collider c in hitColliders)
         {
             if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
@@ -60,12 +75,20 @@ public class Turret : AIBehaviours
         float dist = 1000;
         foreach (GameObject t in targets)
         {
-            if (Vector3.Distance(t.transform.position, transform.position) < dist)
+            float magDist = Vector3.Distance(t.transform.position, transform.position);
+            if (magDist < dist)
             {
-                
-                dist = Vector3.Distance(t.transform.position, transform.position);
-                currentTarget = t;
-                ctDir = t;
+                RaycastHit hit;
+                if (Physics.Raycast(firingPoint.position, (t.transform.position - transform.position).normalized, out hit, range))
+                {
+                    if (hit.transform.gameObject == t.gameObject)
+                    {
+                        Debug.Log("Found");
+                        dist = Vector3.Distance(t.transform.position, transform.position);
+                        currentTarget = t;
+                        ctDir = t;
+                    }
+                }
             }
         }
         if (targets.Count > 0 && currentTarget != null && currentTarget.GetComponent<Health>() != null)
@@ -93,7 +116,7 @@ public class Turret : AIBehaviours
         {
             Vector3 dir = t.transform.position;
             cooldown = true;
-            GameObject clone = Instantiate(banana, transform.position, Quaternion.identity);
+            GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
             clone.GetComponent<BananaMove>().dir = dir;
             clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
         if (currentTarget != null)
