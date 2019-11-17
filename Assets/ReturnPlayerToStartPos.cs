@@ -30,12 +30,14 @@ public class ReturnPlayerToStartPos : MonoBehaviour
         if (other.gameObject == player1)
         {
             player1.transform.position = player1StartPos;
+            player1.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         }
 
         if (other.gameObject == player2)
         {
             player2.transform.position = player2StartPos;
+            player2.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         }
     }
