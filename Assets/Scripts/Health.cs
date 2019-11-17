@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
 
-    public float health, maxHealth;
+    public float health, maxHealth, currentHealth;
     public int playerNum;
     public GameObject healthBarCanvas, hpBarHolder, hpBarHolder2, baseUI;
     Image hpBarFill;
@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         maxHealth = health;
+        currentHealth = health;
         if (!mbase)
         {
            
@@ -42,7 +43,18 @@ public class Health : MonoBehaviour
             health = maxHealth;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(currentHealth > health)
+        {
+            GetComponent<FlagHolder>().DropFlag();
+            currentHealth = health;
+        }
+
+        if (currentHealth < health)
+        {
+            currentHealth = health;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         //hpBarFill.fillAmount = health / maxHealth;
