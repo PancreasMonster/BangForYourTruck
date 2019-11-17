@@ -8,7 +8,8 @@ public class Meteor : MonoBehaviour
     public float force;
     public float maxRange;
     public float damage;
-    private Vector3 directionToFall = Vector3.zero;
+    public Vector3 directionToFall;
+    private bool timeToFall = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Meteor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(timeToFall)
         transform.position = Vector3.MoveTowards(transform.position, directionToFall, fallSpeed);
         if (Vector3.Distance(transform.position, directionToFall) < 0.1f)
         {
@@ -28,9 +30,8 @@ public class Meteor : MonoBehaviour
 
     public void AssignTarget (GameObject target)
     {
-        Vector3 dir = target.transform.position - transform.position;
-        dir.Normalize();
-        directionToFall = dir;
+        directionToFall = target.transform.position;
+        timeToFall = true;
     }
 
     public void Explode()

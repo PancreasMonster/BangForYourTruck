@@ -17,9 +17,10 @@ public class MeteorManager : MonoBehaviour
     public ParticleSystem ps;
     public LineRenderer lr;
     public float lrWidth = 0, psLife = 0;
-    float lrWidthMax = 200;
+    float lrWidthMax = 50;
     private bool start, stop, startLaser, stopLaser;
-    public AudioSource aud;
+    private float origWidth;
+   // public AudioSource aud;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class MeteorManager : MonoBehaviour
         timer = delayBetweenMeteorStrikes;
         lr.startWidth = lrWidth;
         lr.endWidth = lrWidth;
+        origWidth = lrWidth;
     }
 
     // Update is called once per frame
@@ -47,12 +49,12 @@ public class MeteorManager : MonoBehaviour
         main.startLifetime = psLife;
         if (startLaser && lrWidth < lrWidthMax && !stopLaser)
         {
-            lrWidth += 3f * 100 * (lrWidthMax / 200) * Time.deltaTime;
+            lrWidth += 1f * 100 * (lrWidthMax / 200) * Time.deltaTime;
         }
 
         if (stopLaser && lrWidth > 0)
         {
-            lrWidth -= 3f * 100 * (lrWidthMax / 200) * Time.deltaTime;
+            lrWidth -= 1f * 100 * (lrWidthMax / 200) * Time.deltaTime;
         }
 
         if (start && psLife < .66f * 25f && !stop)
@@ -69,15 +71,25 @@ public class MeteorManager : MonoBehaviour
     IEnumerator MeteorStrike ()
     {
         yield return new WaitForSeconds (delayBetweenMeteorStrikes - laserGap);
-        int rand = Random.Range(0, dropZones.Count);
+        int rand = Random.Range(0, dropZones.Count-1);
+        Debug.Log(rand);
+        Debug.Log(dropZones[rand].transform.name);
+        Debug.Log(dropZones[rand].transform.position);
         Vector3 spawnHeight = new Vector3(dropZones[rand].transform.position.x, dropZones[rand].transform.position.y + meteorSpawnHeight, dropZones[rand].transform.position.z);
-        lr.SetPosition(0, spawnHeight);
-        lr.SetPosition(1, dropZones[rand].transform.position);
-        StartCoroutine(StartLaser());
-        yield return new WaitForSeconds(delayBetweenMeteorStrikes - laserGap);
-        timer = delayBetweenMeteorStrikes;
         Vector3 randCircle = Random.insideUnitCircle * meteorSpawnCircleRadius;
         Vector3 spawnVector = new Vector3(spawnHeight.x + randCircle.x, spawnHeight.y, spawnHeight.z + randCircle.y);
+        Debug.Log(spawnHeight);
+        Debug.Log(randCircle);
+        Debug.Log(spawnVector);
+        lrWidth = origWidth;
+        lr.startWidth = lrWidth;
+        lr.endWidth = lrWidth;
+        lr.SetPosition(0, spawnHeight);
+        lr.SetPosition(1, new Vector3(dropZones[rand].transform.position.x, dropZones[rand].transform.position.y - 5f, dropZones[rand].transform.position.z));
+        StartCoroutine(StartLaser());
+        yield return new WaitForSeconds(laserGap);
+        timer = delayBetweenMeteorStrikes;
+        
         GameObject clone = Instantiate(meteor, spawnVector, Quaternion.identity);
         clone.GetComponent<Meteor>().AssignTarget(dropZones[rand]);
         StartCoroutine(MeteorStrike());
@@ -85,7 +97,8 @@ public class MeteorManager : MonoBehaviour
 
     public IEnumerator StartLaser()
     {
-        aud.Play();
+        //aud.Play();
+        
         start = true;
         yield return new WaitForSeconds(4.5f);
         startLaser = true;
@@ -93,6 +106,10 @@ public class MeteorManager : MonoBehaviour
         stop = true;
         stopLaser = true;
         yield return new WaitForSeconds(2);
-        lrWidth = 0;
+        lrWidth = 0;        
+        start = false;
+        startLaser = false;
+        stop = false;
+        stopLaser = false;
     }
 }
