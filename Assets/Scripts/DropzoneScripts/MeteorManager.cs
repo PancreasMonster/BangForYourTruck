@@ -71,16 +71,10 @@ public class MeteorManager : MonoBehaviour
     IEnumerator MeteorStrike ()
     {
         yield return new WaitForSeconds (delayBetweenMeteorStrikes - laserGap);
-        int rand = Random.Range(0, dropZones.Count-1);
-        Debug.Log(rand);
-        Debug.Log(dropZones[rand].transform.name);
-        Debug.Log(dropZones[rand].transform.position);
+        int rand = Random.Range(0, dropZones.Count-1);      
         Vector3 spawnHeight = new Vector3(dropZones[rand].transform.position.x, dropZones[rand].transform.position.y + meteorSpawnHeight, dropZones[rand].transform.position.z);
         Vector3 randCircle = Random.insideUnitCircle * meteorSpawnCircleRadius;
-        Vector3 spawnVector = new Vector3(spawnHeight.x + randCircle.x, spawnHeight.y, spawnHeight.z + randCircle.y);
-        Debug.Log(spawnHeight);
-        Debug.Log(randCircle);
-        Debug.Log(spawnVector);
+        Vector3 spawnVector = new Vector3(spawnHeight.x + randCircle.x, spawnHeight.y, spawnHeight.z + randCircle.y);       
         lrWidth = origWidth;
         lr.startWidth = lrWidth;
         lr.endWidth = lrWidth;

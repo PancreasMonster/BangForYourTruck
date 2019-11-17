@@ -8,7 +8,8 @@ public class Meteor : MonoBehaviour
     public float force;
     public float maxRange;
     public float damage;
-    public Vector3 directionToFall;
+    private Vector3 directionToFall;
+    public GameObject powerUp, meteorResource;
     private bool timeToFall = false;
 
     // Start is called before the first frame update
@@ -47,7 +48,12 @@ public class Meteor : MonoBehaviour
             Health h = c.GetComponent<Health>();
             if (h != null)
                 h.health -= damage;
+
         }
+        Vector3 randCircle = Random.insideUnitCircle * 5;
+        Vector3 randCircle2 = Random.insideUnitCircle * 5;
+        Instantiate(powerUp, new Vector3(directionToFall.x + randCircle.x, directionToFall.y, directionToFall.z + randCircle.y), Quaternion.identity);
+        Instantiate(meteorResource, new Vector3(directionToFall.x + randCircle2.x, directionToFall.y, directionToFall.z + randCircle2.y), Quaternion.identity);
         Destroy(this.gameObject);
     }
 }
