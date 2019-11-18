@@ -17,11 +17,12 @@ public class Orbit : MonoBehaviour
     private Vector3 origPos;
     private bool lockedBehind = true;
     private bool disorient;
+    public FlipOver fo;
 
     void Start()
     {
         offset = new Vector3(0, 10, -26);
-        origPos = new Vector3(0, 10, -26);
+        origPos = new Vector3(0, 10, -26);      
     }
 
     void LateUpdate()
@@ -37,16 +38,9 @@ public class Orbit : MonoBehaviour
         }
         if (lockedBehind)
         {
-            if (Physics.Raycast(player.transform.position, -transform.up, out hit, 5, layer))
-            {
-                timer = 0;
-            }
-            else
-            {
-                timer += Time.deltaTime;
-            }
+            
 
-            if (timer > timeAllowance)
+            if (fo.timer > timeAllowance)
             {
                   if (!disorient)
                   {

@@ -10,90 +10,59 @@ public class FlipOver : MonoBehaviour
     [Range(0,1)]
     public float angularDamping; //how much of a percentage of the previous frame's angular velocity is carried to the next frame
     Rigidbody rigidbody;
+    Health h;
     Quaternion toRotation;
     Quaternion fromRotation;
     Vector3 targetNormal;
     Vector3 T;
     bool Flip;
     bool cooldown;
-    float timer;
+    public float timer;
     public Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponentInParent<Rigidbody>();
+        h = GetComponentInParent<Health>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(Physics.Raycast(transform.position, Vector3.down * 5, out hit, 5, layer))
-        {
-            if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()))
-            {
-                GetComponent<Rigidbody>().AddForce(Vector3.up * force);
-                //StartCoroutine(FlipBack());
-            }
-        }
+        
 
-        if (Physics.Raycast(transform.position, -transform.up, out hit2, 5, layer))
-        {
-            timer = 0;
-        } else
+        if (!Flip)
         {
             timer += Time.deltaTime;
-        }
+        } 
+      
 
         if (timer > .25f)
         {
-            float horAngle = Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString());
-            float vertAngle = Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString());
-            if (Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + GetComponent<Health>().playerNum.ToString()) == 0)
-                rigidbody.angularVelocity = rigidbody.angularVelocity * .9f;
+            float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
+            float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
+            if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
+                rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
             rigidbody.AddTorque(cam.transform.forward * -horAngle * angForce);
             rigidbody.AddTorque(cam.transform.right * vertAngle * angForce);
-        }
+        }     
 
-        /* if (Vector3.Dot(transform.up, Vector3.up) < .2f)
-         {
-             if (!Flip)
-                 Flip = true;
-             Vector3 x = Vector3.Cross(transform.position.normalized, Vector3.up.normalized);
-             float theta = Mathf.Asin(x.magnitude);
-             Vector3 w = x.normalized * theta / Time.fixedDeltaTime;
+    }
 
-             Quaternion q = transform.rotation * rigidbody.inertiaTensorRotation;
-             T = q * Vector3.Scale(rigidbody.inertiaTensor, (Quaternion.Inverse(q) * w));
+    private void OnTriggerEnter(Collider other)
+    {
+        Flip = true;
+        timer = 0;
+    }
 
-             rigidbody.AddTorque(T * 1f);
-         } else if (Flip) {
-             Flip = false;
-             rigidbody.angularVelocity = rigidbody.angularVelocity * .2f;
-         }
-         Debug.Log((Vector3.Dot(transform.up, Vector3.up)));*/
-
+    private void OnTriggerExit(Collider other)
+    {
+        Flip = false;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, -Vector3.up * .75f);
-    }
-
-    public IEnumerator FlipBack()
-    {
-        cooldown = true;
-        //yield return new WaitForSeconds(.25f);
-       /* if (Physics.Raycast(transform.position, -Vector3.up, out hit, 20, layer))
-        {
-
-            targetNormal = hit.normal;
-            fromRotation = transform.rotation;
-            toRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-            transform.rotation = Quaternion.Slerp(fromRotation, toRotation, 1f * Time.deltaTime);
-        } */
-        yield return new WaitForSeconds(1);
-        cooldown = false;
-        
+        Gizmos.DrawRay(transform.position, -Vector3.up * 1f);
     }
 }

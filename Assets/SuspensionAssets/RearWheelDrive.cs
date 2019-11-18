@@ -10,14 +10,16 @@ public class RearWheelDrive : MonoBehaviour {
 	public GameObject wheelShape;
     public float sumTorque, forwardTorque, backwardTorque, breakForce;
     bool accelerating, decelerating;
+    Rigidbody rigidbody;
+    WheelHit hit, hit2, hit3, hit4;
   
 
     // here we find all the WheelColliders down in the hierarchy
     public void Start()
 	{
-     
 
-		wheels = GetComponentsInChildren<WheelCollider>();
+        rigidbody = GetComponent<Rigidbody>();
+        wheels = GetComponentsInChildren<WheelCollider>();
 
 		for (int i = 0; i < wheels.Length; ++i) 
 		{
@@ -58,6 +60,8 @@ public class RearWheelDrive : MonoBehaviour {
                 if (wheel.rpm > 800)
                     wheel.motorTorque = 0;
                     }
+
+           //  wheel.
 
             if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0)
             {
