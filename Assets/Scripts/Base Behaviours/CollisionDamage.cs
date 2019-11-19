@@ -30,7 +30,7 @@ public class CollisionDamage : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        if(coll.transform.tag == "Player")
+        if (coll.transform.GetComponent<Health>() != null)
         {
             float damage = Mathf.RoundToInt(Mathf.Min(20, oldVelocity / 100));
             coll.transform.GetComponent<Health>().health -= damage;
