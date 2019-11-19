@@ -25,21 +25,22 @@ public class Turret : AIBehaviours
     // Update is called once per frame
     void Update()
     {
-        
-       
+
+        if (ctDir != null)
+        {
+            if (Vector3.Distance(transform.position, ctDir.transform.position) < range)
+            {
+                Vector3 dir = ctDir.transform.position - transform.position;
+                dir.Normalize();
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), 5 * Time.deltaTime);
+            }
+        }
 
         if (currentTarget != null)
         {
-
-            if (ctDir != null)
-            {
-                if (Vector3.Distance(transform.position, ctDir.transform.position) < range)
-                {
-                    Vector3 dir = ctDir.transform.position - transform.position;
-                    dir.Normalize();
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), 5 * Time.deltaTime);
-                }
-            }
+           // Debug.DrawLine(firingPoint.position, currentTarget.transform.position, Color.red);
+            
+           
 
             float magDist = Vector3.Distance(transform.position, currentTarget.transform.position);
             if (magDist > range)
@@ -47,14 +48,26 @@ public class Turret : AIBehaviours
                 currentTarget = null;
             }
 
-
             RaycastHit hit;
-            if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - transform.position).normalized, out hit, range))
+            if (currentTarget.gameObject.tag == "Player")
             {
-                if (hit.transform.gameObject != currentTarget.gameObject)
+                if (Physics.Raycast(firingPoint.position, (new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 0.9824486f, currentTarget.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                 {
-                    Debug.Log("Lost");
-                    currentTarget = null;
+                    if (hit.transform.gameObject != currentTarget.gameObject)
+                    {
+                        Debug.Log("Lost");
+                        currentTarget = null;
+                    }
+                }
+            } else
+            {
+                if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - firingPoint.position).normalized, out hit, range, layer))
+                {
+                    if (hit.transform.gameObject != currentTarget.gameObject)
+                    {
+                        Debug.Log("Lost");
+                        currentTarget = null;
+                    }
                 }
             }
         }
@@ -81,15 +94,39 @@ public class Turret : AIBehaviours
             float magDist = Vector3.Distance(t.transform.position, transform.position);
             if (magDist < dist)
             {
+                ctDir = t;
+                dist = Vector3.Distance(t.transform.position, transform.position);
                 RaycastHit hit;
-                if (Physics.Raycast(firingPoint.position, (t.transform.position - transform.position).normalized, out hit, range))
+                if (t.gameObject.tag == "Player")
                 {
-                    if (hit.transform.gameObject == t.gameObject)
+                    if (Physics.Raycast(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                     {
-                        Debug.Log("Found");
-                        dist = Vector3.Distance(t.transform.position, transform.position);
-                        currentTarget = t;
-                        ctDir = t;
+                        if (hit.transform.gameObject == t.gameObject)
+                        {
+                            Debug.Log("Found");
+
+                            
+                            currentTarget = t;   
+                        }
+
+                        if (hit.transform.gameObject != t.gameObject)
+                        {
+                            Debug.DrawRay(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized * hit.distance, Color.blue);
+                        }
+
+                    }
+                } else
+                {
+                    if (Physics.Raycast(firingPoint.position, (t.transform.position - firingPoint.position).normalized, out hit, range, layer))
+                    {
+                        if (hit.transform.gameObject == t.gameObject)
+                        {
+                            Debug.Log("Found");
+
+                            
+                            currentTarget = t;
+                        }
+
                     }
                 }
             }

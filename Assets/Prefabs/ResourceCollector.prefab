@@ -4753,6 +4753,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-7688707533832622934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943942836313356381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cfdbd3c54becaa4fa62aff1a2c145e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldVelocity: 0
+  minimumForce: 0
+  minimumDamage: 20
 --- !u!114 &6571574255004433621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4773,6 +4788,28 @@ MonoBehaviour:
   finalCollectionAmount: 0
   mbase: {fileID: 0}
   myParticleSystem: {fileID: 6090257680642058757}
+--- !u!114 &8040974200893105320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943942836313356381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34586655caa8129448857388951ce7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 0
+  currentHealth: 0
+  playerNum: 0
+  healthBarCanvas: {fileID: 4105945699236562807, guid: 7639f25d764cf3a4bbc5d3499d915439,
+    type: 3}
+  hpBarHolder: {fileID: 0}
+  hpBarHolder2: {fileID: 0}
+  baseUI: {fileID: 0}
+  mbase: 0
 --- !u!1 &9153984294972517944
 GameObject:
   m_ObjectHideFlags: 0
@@ -5075,6 +5112,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035590340929009075, guid: 62638cb1d7c574746ad0b5b69cffd27a,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.6722397
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035590340929009075, guid: 62638cb1d7c574746ad0b5b69cffd27a,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.1722397
       objectReference: {fileID: 0}
     - target: {fileID: 1035590340929009084, guid: 62638cb1d7c574746ad0b5b69cffd27a,
         type: 3}

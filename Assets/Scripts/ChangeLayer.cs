@@ -19,6 +19,11 @@ public class ChangeLayer : MonoBehaviour
     IEnumerator LayerDelay ()
     {
         yield return new WaitForSeconds(2f);
-        this.gameObject.layer = 0;
+        this.gameObject.layer = 16;
+        Transform[] childrenT = GetComponentsInChildren<Transform>();
+        foreach (Transform t in childrenT)
+        {
+            t.gameObject.layer = 16;
+        }
     }
 }

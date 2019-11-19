@@ -84,6 +84,6 @@ public class ResourceCollection : MonoBehaviour
 
      void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(transform.position, maxRange);
+        //Gizmos.DrawSphere(transform.position, maxRange);
     }
 }
