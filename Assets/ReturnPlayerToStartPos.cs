@@ -31,6 +31,8 @@ public class ReturnPlayerToStartPos : MonoBehaviour
         {
             player1.transform.position = player1StartPos;
             player1.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            player1.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            player1.transform.rotation = Quaternion.Euler(0, 0, 0);
             player1.GetComponent<FlagHolder>().FallOff();
         }
 
@@ -38,6 +40,8 @@ public class ReturnPlayerToStartPos : MonoBehaviour
         {
             player2.transform.position = player2StartPos;
             player2.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            player2.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            player2.transform.rotation = Quaternion.Euler(0, 0, 0);
             player2.GetComponent<FlagHolder>().FallOff();
         }
     }
