@@ -59,8 +59,8 @@ public class ResourceCollection : MonoBehaviour
                 
                 int collectionAmount = Mathf.RoundToInt(Mathf.Min(5, collectionRate / Vector3.Distance(transform.position, c.transform.position)));
                 c.GetComponent<Resource>().resource -= collectionAmount;
-                c.transform.localScale = new Vector3(c.transform.localScale.x, c.transform.localScale.y - (collectionAmount/100f), c.transform.localScale.z);
-                c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y - ((collectionAmount/2f)/100f), c.transform.position.z);
+                c.transform.localScale = new Vector3(c.transform.localScale.x, c.transform.localScale.y - (collectionAmount/c.GetComponent<Resource>().resource), c.transform.localScale.z);
+                c.transform.position = new Vector3(c.transform.position.x, c.transform.position.y - ((collectionAmount/2f)/ c.GetComponent<Resource>().resource), c.transform.position.z);
                 if (c.transform.localScale.y <= 0)
                     Destroy(c.gameObject);
                 mbase.GetComponent<ResourceHolder>().resourceAmount += collectionAmount;

@@ -24,6 +24,7 @@ public class JumpCheck : MonoBehaviour
             if (!delay)
             if(Input.GetButtonDown("PadA" + h.playerNum.ToString())) {
                 rb.AddForce(Vector3.up * force);
+                    rb.angularVelocity = Vector3.zero;
                     StartCoroutine(JumpDelay());
             }
         } 
@@ -35,6 +36,11 @@ public class JumpCheck : MonoBehaviour
         jump = true;       
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        jump = true;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         jump = false;
@@ -43,7 +49,9 @@ public class JumpCheck : MonoBehaviour
     IEnumerator JumpDelay ()
     {
         delay = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.1f);
+        rb.angularVelocity = Vector3.zero;
+        yield return new WaitForSeconds(.9f);
         delay = false;
     }
 }

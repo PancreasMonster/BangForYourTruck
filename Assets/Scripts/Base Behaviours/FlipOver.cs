@@ -19,6 +19,7 @@ public class FlipOver : MonoBehaviour
     bool cooldown;
     public float timer;
     public Camera cam;
+    public float timerAllowance = .4f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,7 @@ public class FlipOver : MonoBehaviour
         } 
       
 
-        if (timer > .25f)
+        if (timer > timerAllowance)
         {
             float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
             float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
@@ -51,6 +52,12 @@ public class FlipOver : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+    {
+        Flip = true;
+        timer = 0;
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         Flip = true;
         timer = 0;
