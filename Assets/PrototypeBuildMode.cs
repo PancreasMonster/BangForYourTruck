@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PrototypeBuildMode : MonoBehaviour
 {
-    public float moveSpeed;
+    public float vertMoveSpeed;
+    public float horizMoveSpeed;
     Rigidbody rb;
+    Vector3 startRotation;
+    float camVertSpeed = 1f;
 
+    public GameObject vCam;
+    public GameObject vCamTarget;
     public GameObject capsuleChild;
     public float yRotationSpeed = 5f;
     public float xRotationSpeed = .5f;
@@ -18,6 +23,7 @@ public class PrototypeBuildMode : MonoBehaviour
     void Start()
     {
       rb = GetComponent<Rigidbody>();
+      startRotation = new Vector3(vCamTarget.transform.position.x, vCamTarget.transform.position.y, vCamTarget.transform.position.z);
     }
 
     // Update is called once per frame
@@ -32,34 +38,36 @@ public class PrototypeBuildMode : MonoBehaviour
         if (Input.GetKey("a"))
         {
             Debug.Log("a");
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime, Space.Self);
+            transform.Translate(Vector3.left * vertMoveSpeed * Time.deltaTime, Space.Self);
         }
 
         if (Input.GetKey("d"))
         {
             Debug.Log("d");
-            transform.Translate(Vector3.left * -moveSpeed * Time.deltaTime, Space.Self);
+            transform.Translate(Vector3.left * -vertMoveSpeed * Time.deltaTime, Space.Self);
         }
 
         if (Input.GetKey("w"))
         {
             Debug.Log("w");
-            if (transform.rotation.x <= maxXRot)
+            if (vCamTarget.transform.position.y < startRotation.y + 2f)
             {
-                Debug.Log("looking down");
-
-
-                capsuleChild.transform.Rotate(transform.rotation.x + xRotationSpeed, transform.rotation.y, transform.rotation.z, Space.World);
+                Debug.Log("looking up");
+                vCamTarget.transform.Translate(Vector3.up * vertMoveSpeed * Time.deltaTime, Space.Self); ;
+                vCamTarget.transform.Translate(Vector3.forward * -horizMoveSpeed * Time.deltaTime, Space.Self); ;
+                //capsuleChild.transform.Rotate(transform.rotation.x + xRotationSpeed, transform.rotation.y, transform.rotation.z, Space.World);
             }
         }
 
         if (Input.GetKey("s"))
         {
-            if (transform.rotation.x >= minXRot)
+            if (vCamTarget.transform.position.y > startRotation.y - .5f)
             {
-                Debug.Log("looking up");
+                Debug.Log("looking down");
 
-                capsuleChild.transform.Rotate(transform.rotation.x - xRotationSpeed, transform.rotation.y, transform.rotation.z, Space.World);
+                vCamTarget.transform.Translate(Vector3.up * -vertMoveSpeed * Time.deltaTime, Space.Self); ;
+                vCamTarget.transform.Translate(Vector3.forward * horizMoveSpeed * Time.deltaTime, Space.Self); ;
+                //capsuleChild.transform.Rotate(transform.rotation.x - xRotationSpeed, transform.rotation.y, transform.rotation.z, Space.World);
             }
         }
     }
