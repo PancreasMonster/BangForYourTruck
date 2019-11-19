@@ -6,7 +6,7 @@ public class CollisionDamage : MonoBehaviour
 {
 
 
-    public float oldVelocity, minimumForce;
+    public float oldVelocity, minimumForce, minimumDamage = 20;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class CollisionDamage : MonoBehaviour
     {
         if (coll.transform.GetComponent<Health>() != null)
         {
-            float damage = Mathf.RoundToInt(Mathf.Min(20, oldVelocity / 100));
+            float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
             coll.transform.GetComponent<Health>().health -= damage;
         }
     }

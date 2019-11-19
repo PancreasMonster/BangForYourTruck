@@ -43,6 +43,7 @@ public class FaceCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(mbase != null) 
         transform.position = mbase.transform.position - offset;
 
         transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward,
