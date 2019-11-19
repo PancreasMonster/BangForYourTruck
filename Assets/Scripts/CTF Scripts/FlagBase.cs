@@ -10,8 +10,9 @@ public class FlagBase : MonoBehaviour
     public int flagScore;
     public FlagBase fb;
 
-    private Vector3 flagOrigPos;
-    public bool flagTaken = false;
+    public Vector3 flagOrigPos;
+    public int hitCount;
+    public bool flagTaken = false, hitDetect, flagDrop;
 
     // Start is called before the first frame update
     void Start()
@@ -29,20 +30,30 @@ public class FlagBase : MonoBehaviour
     {
         if (!flagTaken)
         {
-            if (other.transform.GetComponent<Health>() != null)
+            if (other.transform.GetComponentInParent<Health>() != null)
             {
-                if (other.transform.GetComponent<Health>().playerNum != playerNum)
+                if (other.transform.GetComponentInParent<Health>().playerNum != playerNum)
                 {
-                    other.GetComponent<FlagHolder>().TakeFlag(flag);
-                    flagTaken = true;
+                    if (hitDetect == false)
+                    {
+                        if (!flagDrop)
+                        {
+                            other.GetComponentInParent<FlagHolder>().TakeFlag(flag);
+                            flagTaken = true;
+                            hitDetect = true;
+                            hitCount += 1;
+                            Debug.Log("Hit" + hitCount.ToString());
+                        }
+                    }
                 }
 
-                if (other.transform.GetComponent<Health>().playerNum == playerNum && other.transform.GetComponent<FlagHolder>().flagTaken == true)
+                if (other.transform.GetComponentInParent<Health>().playerNum == playerNum && other.transform.GetComponentInParent<FlagHolder>().flagTaken == true)
                 {
                     flagScore += 1;
                     fb.flagTaken = false;
-                    other.GetComponent<FlagHolder>().DropFlag();
-                    other.GetComponent<FlagHolder>().flag.GetComponent<Flag>().GoBackToStart();
+                    fb.hitDetect = false;
+                    other.GetComponentInParent<FlagHolder>().DeliverFlag();
+                    other.GetComponentInParent<FlagHolder>().flag.GetComponent<Flag>().GoBackToStart();
                 }
             }
         }

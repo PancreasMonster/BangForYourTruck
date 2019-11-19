@@ -32,8 +32,17 @@ public class FlagHolder : MonoBehaviour
     {
         if (flag != null)
         {
-            flagTaken = false;
+            flagTaken = false;          
             flag.GetComponent<Flag>().StartTimer();
+            flag = null;
+        }
+    }
+
+    public void DeliverFlag()
+    {
+        if (flag != null)
+        {
+            flagTaken = false;          
         }
     }
 

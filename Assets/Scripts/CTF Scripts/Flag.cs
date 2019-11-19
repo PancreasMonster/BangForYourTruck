@@ -29,7 +29,10 @@ public class Flag : MonoBehaviour
         {
             transform.localPosition = origPos;
             fb.flagTaken = false;
+            fb.hitDetect = false;
+            fb.flagDrop = false;
             dropped = false;
+            timer = waitTime;
         }
     }
 
@@ -41,6 +44,7 @@ public class Flag : MonoBehaviour
 
     public void StartTimer()
     {
+        fb.flagDrop = true;
         timer = waitTime;
         dropped = true;
         StartCoroutine(changeLayer());

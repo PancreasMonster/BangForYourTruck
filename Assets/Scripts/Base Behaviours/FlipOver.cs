@@ -94,6 +94,8 @@ public class FlipOver : MonoBehaviour
     IEnumerator JumpDelay()
     {
         delay = true;
+        yield return null;
+        rigidbody.angularVelocity = Vector3.zero;
         yield return new WaitForSeconds(1f);
         delay = false;
     }
