@@ -38,20 +38,23 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health > maxHealth)
+        if (mbase)
         {
-            health = maxHealth;
-        }
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
 
-        if(currentHealth > health)
-        {
-            GetComponent<FlagHolder>().DropFlag();
-            currentHealth = health;
-        }
+            if (currentHealth > health)
+            {
+                GetComponent<FlagHolder>().DropFlag();
+                currentHealth = health;
+            }
 
-        if (currentHealth < health)
-        {
-            currentHealth = health;
+            if (currentHealth < health)
+            {
+                currentHealth = health;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

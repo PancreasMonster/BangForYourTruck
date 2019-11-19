@@ -52,6 +52,7 @@ public class FlagBase : MonoBehaviour
                     flagScore += 1;
                     fb.flagTaken = false;
                     fb.hitDetect = false;
+                    fb.flagDrop = false;
                     other.GetComponentInParent<FlagHolder>().DeliverFlag();
                     other.GetComponentInParent<FlagHolder>().flag.GetComponent<Flag>().GoBackToStart();
                 }

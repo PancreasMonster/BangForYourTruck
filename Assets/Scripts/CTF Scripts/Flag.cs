@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flag : MonoBehaviour
 {
     public Vector3 origPos;
+    public int playerNum;
     public float waitTime = 10;
     private bool flagTaken;
     private bool dropped;
@@ -54,6 +55,8 @@ public class Flag : MonoBehaviour
     {
         transform.localPosition = origPos;
         fb.flagTaken = false;
+        fb.hitDetect = false;
+        fb.flagDrop = false;
     }
 
     public void setFlagTaken(string state)
@@ -94,13 +97,16 @@ public class Flag : MonoBehaviour
     {
         if(coll.gameObject.layer == 8)
         {
-            dropped = false;
-            coll.transform.GetComponent<FlagHolder>().TakeFlag(this.gameObject);
-            transform.gameObject.layer = 15;
-            Transform[] childrenT = GetComponentsInChildren<Transform>();
-            foreach (Transform t in childrenT)
+            if (coll.transform.GetComponentInParent<Health>().playerNum == playerNum)
             {
-                t.gameObject.layer = 15;
+                dropped = false;
+                coll.transform.GetComponent<FlagHolder>().TakeFlag(this.gameObject);
+                transform.gameObject.layer = 15;
+                Transform[] childrenT = GetComponentsInChildren<Transform>();
+                foreach (Transform t in childrenT)
+                {
+                    t.gameObject.layer = 15;
+                }
             }
         }
     }

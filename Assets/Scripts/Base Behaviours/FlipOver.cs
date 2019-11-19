@@ -39,13 +39,15 @@ public class FlipOver : MonoBehaviour
     {
         {
             if (!delay)
-                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down, out hit2, 10, layer))
+                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down, out hit2, 5, layer))
                 {
                     if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
                     {
+                        StartCoroutine(JumpDelay());
                         rigidbody.AddForce(Vector3.up * force);
                         rigidbody.angularVelocity = Vector3.zero;
-                        StartCoroutine(JumpDelay());
+                        
+                        Debug.Log("Hit");
                     }
                 }
         }
@@ -67,8 +69,8 @@ public class FlipOver : MonoBehaviour
             float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
             if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
                 rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
-            rigidbody.AddTorque(cam.transform.forward * -horAngle * angForce);
-            rigidbody.AddTorque(cam.transform.right * vertAngle * angForce);
+            rigidbody.AddTorque(cam.transform.forward * -horAngle * angForce, ForceMode.Force);
+            rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
         }     
 
     }
