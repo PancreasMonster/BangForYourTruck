@@ -20,6 +20,7 @@ public class FlipOver : MonoBehaviour
     public float timer;
     public Camera cam;
     public float timerAllowance = .4f;
+    bool delay;
 
     // Start is called before the first frame update
     void Start()
@@ -28,16 +29,37 @@ public class FlipOver : MonoBehaviour
         h = GetComponentInParent<Health>();
     }
 
+    private void Update()
+    {
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, Color.red);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        {
+            if (!delay)
+                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down, out hit2, 10, layer))
+                {
+                    if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
+                    {
+                        rigidbody.AddForce(Vector3.up * force);
+                        rigidbody.angularVelocity = Vector3.zero;
+                        StartCoroutine(JumpDelay());
+                    }
+                }
+        }
 
-        if (!Flip)
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 10, layer))
+        {
+            timer = 0;
+        } else
         {
             timer += Time.deltaTime;
-        } 
-      
+            
+        }
+
+        
 
         if (timer > timerAllowance)
         {
@@ -68,8 +90,11 @@ public class FlipOver : MonoBehaviour
         Flip = false;
     }
 
-    private void OnDrawGizmos()
+
+    IEnumerator JumpDelay()
     {
-        Gizmos.DrawRay(transform.position, -Vector3.up * 1f);
+        delay = true;
+        yield return new WaitForSeconds(1f);
+        delay = false;
     }
 }
