@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8704502814135268252}
   - component: {fileID: 4752616964760167909}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: Saw Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldVelocity: 0
   minimumForce: 0
+  minimumDamage: 20
 --- !u!1001 &2183767104409653946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,7 +198,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5adb85d12bf105a46a01964dd0fc90fd,
         type: 3}
@@ -284,6 +285,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Disc Trail
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253771290860623317, guid: 88ab1ca13c06295469966750603a94fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5253771290860623318, guid: 88ab1ca13c06295469966750603a94fc,
         type: 3}
