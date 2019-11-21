@@ -10,7 +10,9 @@ public class Turret : AIBehaviours
     public float fireRate = 2;
     public float tickRate = 4; // the times per second that the turret checks for a target
     public float range = 100; // max range where units can be spotted and lost
-    public GameObject currentTarget, ctDir, banana;
+    public GameObject currentTarget; //the game data needed for finding the target via raycast
+    public GameObject ctDir; //the game data needed to rotate towards the target
+    public GameObject banana;
     public Transform firingPoint; // where the bullets and raycast originate from
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
