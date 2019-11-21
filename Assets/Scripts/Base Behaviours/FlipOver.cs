@@ -21,6 +21,7 @@ public class FlipOver : MonoBehaviour
     public Camera cam;
     public float timerAllowance = .4f;
     bool delay;
+    bool turnDelay;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,7 @@ public class FlipOver : MonoBehaviour
                 }
         }
 
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 10, layer))
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 10, layer) && !turnDelay)
         {
             timer = 0;
         } else
@@ -96,8 +97,12 @@ public class FlipOver : MonoBehaviour
     IEnumerator JumpDelay()
     {
         delay = true;
+        timer = timerAllowance;
+        turnDelay = true;
         yield return null;
         rigidbody.angularVelocity = Vector3.zero;
+        yield return new WaitForSeconds(.25f);
+        turnDelay = false;
         yield return new WaitForSeconds(1f);
         delay = false;
     }
