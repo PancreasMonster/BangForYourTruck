@@ -13,31 +13,40 @@ public class BananaMove : MonoBehaviour
     public GameObject target;
     public Vector3 dir;
     public int team;
+    public float range = 10;
+    public float maxDamage = 20;
 
     // Update is called once per frame
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, dir, 1f);
-        if (Vector3.Distance(transform.position, dir) < 0.1f)
-        {
-            
-            Explode();     
-        }
+        
 
         //if (target == null)
         //    Destroy(this.gameObject);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Explode();
+    }
+
     public void Explode ()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider c in hitColliders)
         {
             if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
             {
                 if (c.gameObject.GetComponent<Health>().playerNum != team)
                 {
-                    c.GetComponent<Health>().health -= Mathf.Min( 20, 4f / Vector3.Distance(transform.position,c.transform.position));
+                    if (Vector3.Distance(transform.position, c.transform.position) > range / 2f) {
+                        c.GetComponent<Health>().health -= maxDamage / 2f;
+                            }
+                    else if (Vector3.Distance(transform.position, c.transform.position) <= range / 2f)
+                    {
+                        .GetComponent<Health>().health -= maxDamage;
+                    }
                     if(c.GetComponentInChildren<Shaker>() != null)
                     c.GetComponentInChildren<Shaker>().PlayShake();
                 }

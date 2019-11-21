@@ -9,7 +9,8 @@ public class RearWheelDrive : MonoBehaviour {
 	public float maxTorque = 300;
 	public GameObject wheelShape;
     public float sumTorque, forwardTorque, backwardTorque, breakForce;
-    bool accelerating, decelerating;
+    public float maxSpeed = 800; // max speed of the vehicle, warning: raising this too high will cause problems
+    bool accelerating, decelerating;   
     Rigidbody rigidbody;
     WheelHit hit, hit2, hit3, hit4;
   
@@ -41,7 +42,7 @@ public class RearWheelDrive : MonoBehaviour {
 	// this helps us to figure our which wheels are front ones and which are rear
 	public void FixedUpdate()
 	{
-        
+        Debug.DrawRay(transform.position, rigidbody.velocity * 100, Color.blue);
 
 		float angle = maxAngle * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString());
 		forwardTorque = maxTorque * Input.GetAxisRaw("RightTrigger" + GetComponent<Health>().playerNum.ToString());
@@ -57,7 +58,7 @@ public class RearWheelDrive : MonoBehaviour {
 
             if (wheel.transform.localPosition.z < 0) {
                 wheel.motorTorque = sumTorque;
-                if (wheel.rpm > 800)
+                if (wheel.rpm > maxSpeed)
                     wheel.motorTorque = 0;
                     }
 
@@ -72,6 +73,13 @@ public class RearWheelDrive : MonoBehaviour {
                 wheel.brakeTorque = 0;
             }
 
+            if(Input.GetButton("PadB" + GetComponent<Health>().playerNum.ToString())) //handbrake, trying to get it to work
+            {
+              //  if(wheel.motorTorque > 0)
+                //    wheel.motorTorque =  -wheel.motorTorque;
+                //if (wheel.motorTorque < 0)
+                 //   wheel.motorTorque = 0;
+            }
             
             if (wheelShape) 
 			{

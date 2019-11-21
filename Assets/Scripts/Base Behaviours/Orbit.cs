@@ -13,16 +13,17 @@ public class Orbit : MonoBehaviour
 
     private RaycastHit hit;
     private float timer;
-    private Vector3 offset;
+    public Vector3 offset = new Vector3(0, 10, -26);
     private Vector3 origPos;
     private bool lockedBehind = true;
     private bool disorient;
     public FlipOver fo;
 
+
     void Start()
     {
-        offset = new Vector3(0, 10, -26);
-        origPos = new Vector3(0, 10, -26);      
+        //offset = new Vector3(0, 10, -26);
+        origPos = offset;      
     }
 
     void LateUpdate()
