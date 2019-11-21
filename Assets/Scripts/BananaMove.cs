@@ -45,7 +45,7 @@ public class BananaMove : MonoBehaviour
                             }
                     else if (Vector3.Distance(transform.position, c.transform.position) <= range / 2f)
                     {
-                        .GetComponent<Health>().health -= maxDamage;
+                        c.GetComponent<Health>().health -= maxDamage;
                     }
                     if(c.GetComponentInChildren<Shaker>() != null)
                     c.GetComponentInChildren<Shaker>().PlayShake();
