@@ -6,20 +6,24 @@ public class BananaMove : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {      
+        rb = GetComponent<Rigidbody>();      
     }
 
+    private Rigidbody rb;
     public GameObject target;
     public Vector3 dir;
     public int team;
+    public float speed = 5;
     public float range = 10;
     public float maxDamage = 20;
+
+   
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, dir, 1f);
+        rb.AddForce(dir * speed);// = Vector3.MoveTowards(transform.position, dir, 1f);
         
 
         //if (target == null)

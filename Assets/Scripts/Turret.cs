@@ -156,7 +156,8 @@ public class Turret : AIBehaviours
     }
         IEnumerator FireBullet(GameObject t)
         {
-            Vector3 dir = t.transform.position;
+            Vector3 dir = t.transform.position - firingPoint.position;
+            dir.Normalize();
             cooldown = true;
             GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
             clone.GetComponent<BananaMove>().dir = dir;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8033291172685308168}
   - component: {fileID: 3843954817748529732}
   - component: {fileID: 3855018968253291571}
+  - component: {fileID: 5193289934003029188}
   m_Layer: 10
   m_Name: Fireball
   m_TagString: Untagged
@@ -112,6 +113,9 @@ MonoBehaviour:
   target: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   team: 0
+  speed: 500
+  range: 10
+  maxDamage: 20
 --- !u!114 &3855018968253291571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +130,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle: {fileID: 9105065575723536939, guid: 7e6fe5913aa82524285db5931e878740,
     type: 3}
+--- !u!54 &5193289934003029188
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762268960002465050}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4926565042672535368
 GameObject:
   m_ObjectHideFlags: 0
