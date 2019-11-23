@@ -23,7 +23,9 @@ public class BananaMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.AddForce(dir * speed);// = Vector3.MoveTowards(transform.position, dir, 1f);
+        if(dir != null)
+        rb.AddForce(dir * speed);
+        // = Vector3.MoveTowards(transform.position, dir, 1f);
         
 
         //if (target == null)

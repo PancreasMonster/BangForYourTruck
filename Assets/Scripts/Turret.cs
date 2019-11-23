@@ -10,10 +10,13 @@ public class Turret : AIBehaviours
     public float fireRate = 2;
     public float tickRate = 4; // the times per second that the turret checks for a target
     public float range = 100; // max range where units can be spotted and lost
+    public float shootAngle = 45; // angle of the mortar strike
+    public float mortarSpeed = 10; //speed of the mortar
     public GameObject currentTarget; //the game data needed for finding the target via raycast
     public GameObject ctDir; //the game data needed to rotate towards the target
     public GameObject banana;
     public Transform firingPoint; // where the bullets and raycast originate from
+    public bool mortarTurret;
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
     public AudioSource shootAudio;
@@ -50,25 +53,29 @@ public class Turret : AIBehaviours
                 currentTarget = null;
             }
 
-            RaycastHit hit;
-            if (currentTarget.gameObject.tag == "Player")
+            if (!mortarTurret)
             {
-                if (Physics.Raycast(firingPoint.position, (new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 0.9824486f, currentTarget.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
+                RaycastHit hit;
+                if (currentTarget.gameObject.tag == "Player")
                 {
-                    if (hit.transform.gameObject != currentTarget.gameObject)
+                    if (Physics.Raycast(firingPoint.position, (new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 0.9824486f, currentTarget.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                     {
-                        Debug.Log("Lost");
-                        currentTarget = null;
+                        if (hit.transform.gameObject != currentTarget.gameObject)
+                        {
+                            Debug.Log("Lost");
+                            currentTarget = null;
+                        }
                     }
                 }
-            } else
-            {
-                if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - firingPoint.position).normalized, out hit, range, layer))
+                else
                 {
-                    if (hit.transform.gameObject != currentTarget.gameObject)
+                    if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - firingPoint.position).normalized, out hit, range, layer))
                     {
-                        Debug.Log("Lost");
-                        currentTarget = null;
+                        if (hit.transform.gameObject != currentTarget.gameObject)
+                        {
+                            Debug.Log("Lost");
+                            currentTarget = null;
+                        }
                     }
                 }
             }
@@ -99,37 +106,44 @@ public class Turret : AIBehaviours
                 ctDir = t;
                 dist = Vector3.Distance(t.transform.position, transform.position);
                 RaycastHit hit;
-                if (t.gameObject.tag == "Player")
+                if (!mortarTurret)
                 {
-                    if (Physics.Raycast(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
+                    if (t.gameObject.tag == "Player")
                     {
-                        if (hit.transform.gameObject == t.gameObject)
+                        if (Physics.Raycast(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                         {
-                            Debug.Log("Found");
+                            if (hit.transform.gameObject == t.gameObject)
+                            {
+                                Debug.Log("Found");
 
-                            
-                            currentTarget = t;   
+
+                                currentTarget = t;
+                            }
+
+                            if (hit.transform.gameObject != t.gameObject)
+                            {
+                                Debug.DrawRay(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized * hit.distance, Color.blue);
+                            }
+
                         }
-
-                        if (hit.transform.gameObject != t.gameObject)
+                    }
+                    else
+                    {
+                        if (Physics.Raycast(firingPoint.position, (t.transform.position - firingPoint.position).normalized, out hit, range, layer))
                         {
-                            Debug.DrawRay(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized * hit.distance, Color.blue);
-                        }
+                            if (hit.transform.gameObject == t.gameObject)
+                            {
+                                Debug.Log("Found");
 
+
+                                currentTarget = t;
+                            }
+
+                        }
                     }
                 } else
                 {
-                    if (Physics.Raycast(firingPoint.position, (t.transform.position - firingPoint.position).normalized, out hit, range, layer))
-                    {
-                        if (hit.transform.gameObject == t.gameObject)
-                        {
-                            Debug.Log("Found");
-
-                            
-                            currentTarget = t;
-                        }
-
-                    }
+                    currentTarget = t;
                 }
             }
         }
@@ -138,7 +152,12 @@ public class Turret : AIBehaviours
             while ( currentTarget != null && currentTarget.GetComponent<Health>().health >= 0)
             {
                 if (!cooldown && currentTarget != null)
-                    StartCoroutine(FireBullet(currentTarget));
+                {
+                    if(!mortarTurret)
+                        StartCoroutine(FireBullet(currentTarget));
+                    if(mortarTurret)
+                        StartCoroutine(FireMortar());
+                } 
                 yield return new WaitForSeconds(fireRate);
             }
             currentTarget = null;
@@ -168,5 +187,27 @@ public class Turret : AIBehaviours
             yield return new WaitForSeconds(1);
             cooldown = false;
         }
-    
+
+    IEnumerator FireMortar()
+    {
+        GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
+        Rigidbody unitRB = clone.GetComponent<Rigidbody>();
+        unitRB.velocity = BallisticVel(currentTarget.transform, shootAngle);
+        clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
+        if (currentTarget != null)
+            shootAudio.Play();
+        yield return new WaitForSeconds(1);
+        cooldown = false;
+    }
+
+    public Vector3 BallisticVel(Transform target, float angle)
+    {
+        Vector3 targetDir = target.position - firingPoint.position;
+        float dist = targetDir.magnitude;
+        float radAngle = angle * Mathf.Deg2Rad;
+        targetDir.y = dist * Mathf.Tan(radAngle);
+        float velocity = Mathf.Sqrt(dist * Physics.gravity.magnitude * mortarSpeed / Mathf.Sin(radAngle * 2));
+        return velocity * targetDir.normalized;
+    }
+
 }
