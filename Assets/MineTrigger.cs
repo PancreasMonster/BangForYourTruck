@@ -22,10 +22,17 @@ public class MineTrigger : MonoBehaviour
     {
 
 
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.tag == "Player")
+        {
             Debug.Log("HIT Player");
 
+            Trigger();
+        }
+    }
+
+       void Trigger() {
             Instantiate(bomb, transform.position, transform.rotation);
             GetComponentInParent<ExplosiveMine>().DestroyThisGameObject();
     }
 }
+

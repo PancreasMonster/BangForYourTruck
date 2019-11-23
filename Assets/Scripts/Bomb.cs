@@ -26,10 +26,23 @@ public class Bomb : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Explode();
+
+        rb.constraints = RigidbodyConstraints.FreezePositionX |
+                            RigidbodyConstraints.FreezePositionY |
+                            RigidbodyConstraints.FreezePositionZ;
     }
 
     void Explode()
     {
+        
+        StopAllCoroutines();
+        anim.Play();
+        audio.Play();
+        Invoke("DamageAndForce",.1f);
+        Invoke("DestroyThisGameObject",1f);
+    }
+
+    void DamageAndForce() {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units
         foreach (Collider c in hitColliders)
         {
@@ -41,18 +54,14 @@ public class Bomb : MonoBehaviour
             if (h != null)
                 h.health -= damage;
         }
-        StopAllCoroutines();
-        anim.Play();
-        audio.Play();
-        Invoke("DestroyThisGameObject",1f);
-
-        rb.constraints = RigidbodyConstraints.FreezePositionX |
-                            RigidbodyConstraints.FreezePositionY |
-                            RigidbodyConstraints.FreezePositionZ;
     }
 
     IEnumerator ExplodeAfterTime ()
     {
+        rb.constraints = RigidbodyConstraints.FreezePositionX |
+                            RigidbodyConstraints.FreezePositionY |
+                            RigidbodyConstraints.FreezePositionZ;
+
         yield return new WaitForSeconds(bombDelay);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units
         foreach (Collider c in hitColliders)
@@ -68,10 +77,6 @@ public class Bomb : MonoBehaviour
         anim.Play();
         audio.Play();
         Invoke("DestroyThisGameObject", 1f);
-
-        rb.constraints = RigidbodyConstraints.FreezePositionX |
-                            RigidbodyConstraints.FreezePositionY |
-                            RigidbodyConstraints.FreezePositionZ;
     }
 
     void DestroyThisGameObject()
