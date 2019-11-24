@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5629,6 +5629,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &523703074
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1040634318}
+    m_Modifications:
+    - target: {fileID: -927199367670048503, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_Name
+      value: Raider Mining Outpost Blue Team
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c3b3272fbb613a84fa15d2ca2ee43678, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f41012521c595264c973b06077a7033c, type: 3}
+--- !u!4 &523703075 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
+    type: 3}
+  m_PrefabInstance: {fileID: 523703074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &609646434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5921,7 +6001,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2d4063a8f7992b948a2f345d348b458d,
         type: 3}
       propertyPath: m_Name
-      value: Turret_Flamethrower
+      value: Turret_Flamethrower Red Team
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2d4063a8f7992b948a2f345d348b458d,
         type: 3}
@@ -6211,6 +6291,7 @@ Transform:
   - {fileID: 258004241}
   - {fileID: 863446483}
   - {fileID: 368777492}
+  - {fileID: 523703075}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11744,6 +11825,7 @@ Transform:
   - {fileID: 1166281889}
   - {fileID: 2136739451}
   - {fileID: 1521644706}
+  - {fileID: 1923115114}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11763,7 +11845,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f41012521c595264c973b06077a7033c,
         type: 3}
       propertyPath: m_Name
-      value: Raider Mining Outpost Unwrap
+      value: Raider Mining Outpost Red Team
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
         type: 3}
@@ -11932,7 +12014,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 8883090a3eddade4dadddd59cc410f0a,
         type: 3}
       propertyPath: m_Name
-      value: Turret_Building
+      value: Turret_Building Red Team
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8883090a3eddade4dadddd59cc410f0a,
         type: 3}
@@ -12038,6 +12120,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1923115113
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1636622501}
+    m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_Name
+      value: Raider Tyre Blue Team
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -27.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 84c618adfca78b74a8a97f295d4424ef,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2683e1fe24452e644ba4f9dd683f3ad7, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84c618adfca78b74a8a97f295d4424ef, type: 3}
+--- !u!4 &1923115114 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 84c618adfca78b74a8a97f295d4424ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1923115113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1951050264
 GameObject:
   m_ObjectHideFlags: 0
