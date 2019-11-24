@@ -9,6 +9,7 @@ public class BuildModeMovement : MonoBehaviour
     public float suspensionLenght;
     public float dampingForce;
     public List<Transform> hoverPoints = new List<Transform>();
+    public Transform centreOfMass;
     RaycastHit flHit, frHit, blHit, brHit;
     Rigidbody rb;
     public LayerMask layer;
@@ -18,6 +19,7 @@ public class BuildModeMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = centreOfMass.localPosition;
     }
 
     // Update is called once per frame
@@ -33,10 +35,10 @@ public class BuildModeMovement : MonoBehaviour
         {
             if (Physics.Raycast(t.position, -transform.up, out hit, suspensionLenght, layer))
             {
-                rb.AddForceAtPosition(hit.normal.normalized * suspensionForce * (1.0f - (hit.distance / suspensionLenght)), t.position);
+                rb.AddForceAtPosition(Vector3.up * suspensionForce * (1.0f - (hit.distance / suspensionLenght)), t.position);
                 Debug.DrawLine(t.position, hit.point, Color.blue);
             }
-            else
+           /* else
             {
                 if(transform.position.y > t.transform.position.y)
                 {
@@ -45,7 +47,7 @@ public class BuildModeMovement : MonoBehaviour
                 {
                     rb.AddForceAtPosition(t.transform.up * -suspensionForce, t.transform.position);
                 }
-            } 
+            } */
 
 
         }
