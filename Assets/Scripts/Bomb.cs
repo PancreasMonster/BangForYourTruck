@@ -58,9 +58,9 @@ public class Bomb : MonoBehaviour
 
     IEnumerator ExplodeAfterTime ()
     {
-        rb.constraints = RigidbodyConstraints.FreezePositionX |
+       /* rb.constraints = RigidbodyConstraints.FreezePositionX |
                             RigidbodyConstraints.FreezePositionY |
-                            RigidbodyConstraints.FreezePositionZ;
+                            RigidbodyConstraints.FreezePositionZ; */
 
         yield return new WaitForSeconds(bombDelay);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units

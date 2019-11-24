@@ -13,6 +13,7 @@ public class BuildModeCamera : MonoBehaviour
     public Transform target;
     public float maxVerticalHeight = 5f, minVerticalHeight = -5f;
     public float mainCamFoVBaseValue, mainCamFoVScaleValue;
+    public float baseTargetRange, scaleTargetRange;
 
     private float verticalHeight;
     private float minYOffset, maxYOffset;
@@ -34,10 +35,10 @@ public class BuildModeCamera : MonoBehaviour
         transform.position = player.position + offset;
         offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;       
         transform.LookAt(target.position);
-        mainCam.fieldOfView = mainCamFoVBaseValue + (mainCamFoVScaleValue * (verticalHeight / minMaxOffset));
+        mainCam.fieldOfView = mainCamFoVBaseValue + (mainCamFoVScaleValue * (minMaxOffset / verticalHeight));
         verticalHeight = Mathf.Clamp(verticalHeight, minYOffset, maxYOffset);
         if(verticalHeight >= minYOffset && verticalHeight <= maxYOffset)
         verticalHeight += -Input.GetAxisRaw("RVertical" + playerNum.ToString()) * verticalSpeed * Time.deltaTime;
-        target.localPosition = new Vector3(0, 0, 5 + (5 * (minMaxOffset / verticalHeight)));
+        target.localPosition = new Vector3(0, 0, 15 + (12.5f * (verticalHeight / minMaxOffset))); 
     }
 }

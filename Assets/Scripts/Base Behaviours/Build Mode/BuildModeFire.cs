@@ -10,6 +10,7 @@ public class BuildModeFire : MonoBehaviour
     public float fireAngle;
     public float mortarSpeed;
     public Transform aimTarget, firingPoint;
+    public GameObject bomb;
     [Range (1, 50)]
     public int resolution;
 
@@ -32,6 +33,12 @@ public class BuildModeFire : MonoBehaviour
     {
         RenderArc();
         FindVelocity(aimTarget, fireAngle);
+        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()))
+        {
+            GameObject clone = Instantiate(bomb, firingPoint.position, Quaternion.identity);
+            Rigidbody unitRB = clone.GetComponent<Rigidbody>();
+            unitRB.velocity = BallisticVel(aimTarget, fireAngle);
+        }
     }
 
     // Renders the trajectory path of projectile

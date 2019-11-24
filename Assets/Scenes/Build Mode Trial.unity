@@ -240,7 +240,7 @@ SphereCollider:
   m_GameObject: {fileID: 128420034}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -807,7 +807,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!4 &481254575
 Transform:
@@ -899,6 +899,7 @@ MonoBehaviour:
   mortarSpeed: 1
   aimTarget: {fileID: 128420038}
   firingPoint: {fileID: 887761264}
+  bomb: {fileID: 2882771185483001440, guid: 1efea7238c0dd3047b590ee9ee9c20d9, type: 3}
   resolution: 30
 --- !u!120 &481254580
 LineRenderer:
@@ -1204,7 +1205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887761263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.76, z: 1.44}
+  m_LocalPosition: {x: 0, y: 2.21, z: 1.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 481254575}
@@ -1471,8 +1472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followCam: {fileID: 1567985967}
-  positionLerpSpeed: 5
-  rotationLerpSpeed: 5
+  positionLerpSpeed: 8
+  rotationLerpSpeed: 8
 --- !u!1 &1090667397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,7 +1644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 90
   playerNum: 1
-  offset: {x: -2, y: 5, z: -13}
+  offset: {x: -2, y: 5, z: -8}
   mainCam: {fileID: 1067438132}
   verticalSpeed: 30
   player: {fileID: 481254575}
@@ -1652,6 +1653,8 @@ MonoBehaviour:
   minVerticalHeight: -2
   mainCamFoVBaseValue: 40
   mainCamFoVScaleValue: 10
+  baseTargetRange: 15
+  scaleTargetRange: 12.5
 --- !u!4 &1567985967
 Transform:
   m_ObjectHideFlags: 0

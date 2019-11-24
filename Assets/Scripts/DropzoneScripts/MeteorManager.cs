@@ -35,7 +35,7 @@ public class MeteorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = timer.ToString();
+        text.text = timer.ToString("F2");
         timer -= Time.deltaTime;
         SkyLaser();
     }
