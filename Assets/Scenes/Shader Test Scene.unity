@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6409,7 +6409,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
       propertyPath: m_Name
-      value: Raider Buggy Cell Shading
+      value: Raider Buggy Red Team
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
@@ -6429,22 +6429,22 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.70577025
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.04345599
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.043455977
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.70577025
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
@@ -6454,7 +6454,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90.00001
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
@@ -6464,7 +6464,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 7.0470004
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: b534e367dec11a74897a96036c9fca4f,
         type: 3}
@@ -11226,6 +11226,26 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1450004112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 572438f2a3b4b2446a3ea30a75e51173,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172221355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1450004113
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450004112}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -6570403536550579372, guid: 572438f2a3b4b2446a3ea30a75e51173, type: 3}
 --- !u!1001 &1533074882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11321,6 +11341,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1533074882}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1538851229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -927199367670048503, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_Name
+      value: Raider Buggy Blue Team
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6992692
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.104988694
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.10498867
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6992692
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -17.077002
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: b534e367dec11a74897a96036c9fca4f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f85987339e4ab614aa6acaa21ace45ff, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b534e367dec11a74897a96036c9fca4f, type: 3}
 --- !u!1001 &1621482264
 PrefabInstance:
   m_ObjectHideFlags: 0
