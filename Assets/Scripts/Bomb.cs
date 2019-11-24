@@ -16,11 +16,11 @@ public class Bomb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
         StartCoroutine(ExplodeAfterTime());
         anim = GetComponent<Animation>();
         audio = GetComponent<AudioSource>();
-        rb = GetComponent<Rigidbody>();
+       
     }
 
     private void OnCollisionEnter(Collision collision)
