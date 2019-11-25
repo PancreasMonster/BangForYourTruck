@@ -1,16 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildModeFire : MonoBehaviour
 {
     LineRenderer lr;
-
+    public Image bg, fill;
+    public Text text;
+    public List<GameObject> discSelection = new List<GameObject>();
+    public GameObject currentDisc;
+    bool triggerDown = false, dpadTrigger = false, dpadLeft = false, dpadRight = false;
     public float velocity;
     public float fireAngle;
     public float mortarSpeed;
     public Transform aimTarget, firingPoint;
     public GameObject bomb;
+    public int currentI;
+    private bool cooldown;
+    public float cooldownDelay = 1.5f;
+    ResourceHolder rh;
+    ResourceCosts rc;
+    PowerHolder ph;
+    public PowerCosts pc;
     [Range (1, 50)]
     public int resolution;
 
@@ -19,13 +31,18 @@ public class BuildModeFire : MonoBehaviour
 
      void Awake()
     {
-        lr = GetComponent<LineRenderer>();
-        g = Mathf.Abs(Physics.gravity.y);
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentDisc = discSelection[0];
+        rh = GetComponent<ResourceHolder>();
+        rc = GameObject.Find("ResourceCost").GetComponent<ResourceCosts>();
+        ph = GetComponent<PowerHolder>();
+        pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
+        lr = GetComponent<LineRenderer>();
+        g = Mathf.Abs(Physics.gravity.y);
     }
 
     // Update is called once per frame
@@ -33,11 +50,67 @@ public class BuildModeFire : MonoBehaviour
     {
         RenderArc();
         FindVelocity(aimTarget, fireAngle);
-        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()))
+        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
-            GameObject clone = Instantiate(bomb, firingPoint.position, Quaternion.identity);
-            Rigidbody unitRB = clone.GetComponent<Rigidbody>();
-            unitRB.velocity = BallisticVel(aimTarget, fireAngle);
+            if (rh.resourceAmount >= rc.resourceCosts[currentI])
+            {
+                if (ph.powerAmount >= pc.powerCosts[1])
+                {
+                    cooldown = true;
+                    StartCoroutine(Cooldown());
+                    GameObject clone = Instantiate(bomb, firingPoint.position, Quaternion.identity);
+                    Rigidbody unitRB = clone.GetComponent<Rigidbody>();
+                    unitRB.velocity = BallisticVel(aimTarget, fireAngle);
+                }
+            }
+        }
+
+        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) < 0 && !dpadTrigger)
+        {
+            dpadTrigger = true;
+            dpadLeft = true;
+        }
+
+        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) > 0 && !dpadTrigger)
+        {
+            dpadTrigger = true;
+            dpadRight = true;
+        }
+
+        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) == 0 && dpadTrigger)
+        {
+            if (dpadLeft)
+            {
+                if (currentI == 0)
+                {
+                    currentI = discSelection.Count - 1;
+                    currentDisc = discSelection[currentI];
+                    dpadLeft = false;
+                }
+                else
+                {
+                    currentI--;
+                    currentDisc = discSelection[currentI];
+                    dpadLeft = false;
+                }
+            }
+
+            if (dpadRight)
+            {
+                if (currentI == discSelection.Count - 1)
+                {
+                    currentI = 0;
+                    currentDisc = discSelection[currentI];
+                    dpadRight = false;
+                }
+                else
+                {
+                    currentI++;
+                    currentDisc = discSelection[currentI];
+                    dpadRight = false;
+                }
+            }
+            dpadTrigger = false;
         }
     }
 
@@ -90,5 +163,11 @@ public class BuildModeFire : MonoBehaviour
         float radAngle = angle * Mathf.Deg2Rad;
         targetDir.y = dist * Mathf.Tan(radAngle);
         velocity = Mathf.Sqrt(dist * Physics.gravity.magnitude * mortarSpeed / Mathf.Sin(radAngle * 2));
+    }
+
+    IEnumerator Cooldown ()
+    {
+        yield return new WaitForSeconds(cooldownDelay);
+        cooldown = false;
     }
 }
