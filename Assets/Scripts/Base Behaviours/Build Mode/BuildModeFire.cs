@@ -63,6 +63,8 @@ public class BuildModeFire : MonoBehaviour
                     GameObject clone = Instantiate(bomb, firingPoint.position, Quaternion.identity);
                     Rigidbody unitRB = clone.GetComponent<Rigidbody>();
                     unitRB.velocity = BallisticVel(aimTarget, fireAngle);
+                    rh.resourceAmount -= rc.resourceCosts[currentI];
+                    ph.losePower(pc.powerCosts[1]);
                 }
             }
         }
