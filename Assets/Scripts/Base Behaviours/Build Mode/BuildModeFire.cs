@@ -60,7 +60,7 @@ public class BuildModeFire : MonoBehaviour
                 {
                     cooldown = true;
                     StartCoroutine(Cooldown());
-                    GameObject clone = Instantiate(bomb, firingPoint.position, Quaternion.identity);
+                    GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
                     Rigidbody unitRB = clone.GetComponent<Rigidbody>();
                     unitRB.velocity = BallisticVel(aimTarget, fireAngle);
                     rh.resourceAmount -= rc.resourceCosts[currentI];
