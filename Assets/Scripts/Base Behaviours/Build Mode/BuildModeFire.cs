@@ -48,6 +48,8 @@ public class BuildModeFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        text.text = rc.resourcesID[currentI];
+
         RenderArc();
         FindVelocity(aimTarget, fireAngle);
         if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)

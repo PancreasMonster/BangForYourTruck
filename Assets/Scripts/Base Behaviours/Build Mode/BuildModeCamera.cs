@@ -108,6 +108,6 @@ public class BuildModeCamera : MonoBehaviour
         verticalHeight = Mathf.Clamp(verticalHeight, minYOffset, maxYOffset);
         if(verticalHeight >= minYOffset && verticalHeight <= maxYOffset)
         verticalHeight += -Input.GetAxisRaw("RVertical" + playerNum.ToString()) * verticalSpeed * Time.deltaTime;
-        target.localPosition = new Vector3(0, 0, 15 + (12.5f * (verticalHeight / minMaxOffset))); 
+        target.localPosition = new Vector3(0, 0, baseTargetRange + (scaleTargetRange * (verticalHeight / minMaxOffset))); 
     }
 }
