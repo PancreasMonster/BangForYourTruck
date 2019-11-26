@@ -76,7 +76,7 @@ public class Orbit : MonoBehaviour
                  }
 
                 transform.position = player.position + offset;
-                offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed, Vector3.up) * offset;
+                offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;
                 transform.LookAt(player.position);
             }
             else
