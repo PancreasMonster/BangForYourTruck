@@ -4798,6 +4798,7 @@ GameObject:
   - component: {fileID: 4577927902009068459}
   - component: {fileID: 1890706696518687424}
   - component: {fileID: -308162840601131014}
+  - component: {fileID: 3710444519502329352}
   m_Layer: 16
   m_Name: Turret
   m_TagString: Untagged
@@ -4917,6 +4918,22 @@ MonoBehaviour:
   oldVelocity: 0
   minimumForce: 0
   minimumDamage: 20
+--- !u!111 &3710444519502329352
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593902555177473991}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 498caa7801fea6a42a10effaf644cbfe, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 498caa7801fea6a42a10effaf644cbfe, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &716712911891856118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,10 +4958,13 @@ MonoBehaviour:
   fireRate: 2
   tickRate: 0
   range: 100
+  shootAngle: 45
+  mortarSpeed: 10
   currentTarget: {fileID: 0}
   ctDir: {fileID: 0}
   banana: {fileID: 762268960002465050, guid: 885dbd428ba250f4a82d7a41fc239825, type: 3}
   firingPoint: {fileID: 2326556515749166047}
+  mortarTurret: 0
   shootAudio: {fileID: 7498531600837794626}
 --- !u!1 &9033719156428910726
 GameObject:
