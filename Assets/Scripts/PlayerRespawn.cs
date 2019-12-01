@@ -78,8 +78,17 @@ public class PlayerRespawn : MonoBehaviour
         }
     } */
 
+    public void playerDeath(int playerNum)
+    {
+        if (playerNum == 1)
+            StartCoroutine(FallPlayer1());
+        if (playerNum == 2)
+            StartCoroutine(FallPlayer2());
+    }
+
     public IEnumerator FallPlayer1()
     {
+        player1.transform.position = new Vector3(0, -2000, 00);
         if (player1Cam.GetComponent<BuildModeCamera>().enabled == true)
             player1Cam.GetComponent<BuildModeCamera>().SwapMode();
         player1Cam.GetComponent<Orbit>().death = true;
@@ -98,6 +107,7 @@ public class PlayerRespawn : MonoBehaviour
 
     public IEnumerator FallPlayer2()
     {
+        player1.transform.position = new Vector3(0, -2000, 00);
         if (player2Cam.GetComponent<BuildModeCamera>().enabled == true)
             player2Cam.GetComponent<BuildModeCamera>().SwapMode();
         player2Cam.GetComponent<Orbit>().death = true;

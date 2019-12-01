@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     Image hpBarFill, hpBarFill2;
     public bool mbase;
     bool dead;
+    public PlayerRespawn pr;
 
     // Start is called before the first frame update
     void Start()
@@ -70,30 +71,45 @@ public class Health : MonoBehaviour
         if (health <= 0 && !dead)
         {
             dead = true;
-            if (mbase) 
-                Destroy(baseUI);
-            Destroy(hpBarHolder);
+            if (mbase)
+            {
+                //Destroy(baseUI);
+                StartCoroutine(deadTime());
+            }
+
             if (!mbase)
+            {
                 Destroy(this.gameObject);
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 if (GetComponentInChildren<ExplodeOnDeath>() != null)
-            {
-                BroadcastMessage("Explode");
-                
-
-                if (GetComponentInChildren<Turret>() != null)
                 {
-                    Turret turret = GetComponentInChildren<Turret>();
-                    turret.enabled = false;
+                    BroadcastMessage("Explode");
+
+
+                    if (GetComponentInChildren<Turret>() != null)
+                    {
+                        Turret turret = GetComponentInChildren<Turret>();
+                        turret.enabled = false;
+
+                    }
+                }
+
+                if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
+                {
+                    BroadcastMessage("Explode");
 
                 }
             }
-
-            if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
-            {
-                BroadcastMessage("Explode");
-
-            }
         }
+    }
+
+    public IEnumerator deadTime ()
+    {
+        pr.playerDeath(playerNum);
+        hpBarHolder.SetActive(false);
+        yield return new WaitForSeconds(pr.deathTimer);
+        dead = false;
+        health = maxHealth;
+        hpBarHolder.SetActive(true);
     }
 }
