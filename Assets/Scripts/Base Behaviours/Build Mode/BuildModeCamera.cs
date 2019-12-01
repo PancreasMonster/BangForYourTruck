@@ -40,29 +40,7 @@ public class BuildModeCamera : MonoBehaviour
     {
         if (Input.GetButtonDown("PadY" + playerNum.ToString()) && !Cooldown)
         {
-            Rigidbody rb = player.GetComponent<Rigidbody>();
-            rb.drag = setDrag;
-            rb.constraints &= ~RigidbodyConstraints.FreezeRotationX;
-            rb.constraints &= ~RigidbodyConstraints.FreezeRotationY;
-            rb.constraints &= ~RigidbodyConstraints.FreezeRotationZ;
-            changeFromThis();
-            player.GetComponent<RearWheelDrive>().enabled = true;
-            player.GetComponent<BuildModeProtoMovement>().enabled = false;
-            player.GetComponent<BuildModeFire>().enabled = false;
-
-           
-            foreach (WheelCollider w in wheels)
-            {
-                w.gameObject.SetActive(true);
-            }
-
-
-
-            player.GetComponent<LineRenderer>().enabled = false;
-            hoverBox.GetComponent<BoxCollider>().enabled = false;            
-            GetComponent<BuildModeCamera>().enabled = false;
-            GetComponent<Orbit>().enabled = true;
-            
+            SwapMode();           
         }
 
         foreach (Transform t in wheelVisuals)
@@ -74,6 +52,32 @@ public class BuildModeCamera : MonoBehaviour
                 animSpeed * Time.deltaTime);
         }
 
+    }
+
+    public void SwapMode()
+    {
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        rb.drag = setDrag;
+        rb.constraints &= ~RigidbodyConstraints.FreezeRotationX;
+        rb.constraints &= ~RigidbodyConstraints.FreezeRotationY;
+        rb.constraints &= ~RigidbodyConstraints.FreezeRotationZ;
+        changeFromThis();
+        player.GetComponent<RearWheelDrive>().enabled = true;
+        player.GetComponent<BuildModeProtoMovement>().enabled = false;
+        player.GetComponent<BuildModeFire>().enabled = false;
+
+
+        foreach (WheelCollider w in wheels)
+        {
+            w.gameObject.SetActive(true);
+        }
+
+
+
+        player.GetComponent<LineRenderer>().enabled = false;
+        hoverBox.GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BuildModeCamera>().enabled = false;
+        GetComponent<Orbit>().enabled = true;
     }
 
     public void changeToThis(WheelCollider[] w)
