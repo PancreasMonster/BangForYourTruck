@@ -229,6 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446705933670300261}
   - component: {fileID: 446705933670300262}
+  - component: {fileID: 7758986275486094291}
   m_Layer: 8
   m_Name: a0r
   m_TagString: Untagged
@@ -280,6 +281,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!114 &7758986275486094291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446705933670300260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1848074eee38bc247a4f6de3aa81ca60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 446705935003971823}
+  skidmarksController: {fileID: 0}
 --- !u!1 &446705933891480770
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446705933891480771}
   - component: {fileID: 446705933891480780}
+  - component: {fileID: 1908767303362736488}
   m_Layer: 8
   m_Name: a1r
   m_TagString: Untagged
@@ -341,6 +357,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 0.45
   m_Enabled: 1
+--- !u!114 &1908767303362736488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446705933891480770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1848074eee38bc247a4f6de3aa81ca60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 446705935003971823}
+  skidmarksController: {fileID: 0}
 --- !u!1 &446705933949377014
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446705933949377015}
   - component: {fileID: 446705933949377008}
+  - component: {fileID: 8302096954544316461}
   m_Layer: 8
   m_Name: a1l
   m_TagString: Untagged
@@ -402,6 +433,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 0.45
   m_Enabled: 1
+--- !u!114 &8302096954544316461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446705933949377014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1848074eee38bc247a4f6de3aa81ca60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 446705935003971823}
+  skidmarksController: {fileID: 0}
 --- !u!1 &446705934731022947
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446705934731022956}
   - component: {fileID: 446705934731022957}
+  - component: {fileID: 967211329826985797}
   m_Layer: 8
   m_Name: a0l
   m_TagString: Untagged
@@ -463,6 +509,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!114 &967211329826985797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446705934731022947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1848074eee38bc247a4f6de3aa81ca60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 446705935003971823}
+  skidmarksController: {fileID: 0}
 --- !u!1 &446705935003971820
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,6 +711,7 @@ MonoBehaviour:
   powerAmount: 100
   maxPower: 100
   powerRegen: 20
+  infinitePowerTime: 0
 --- !u!114 &3103788003073040734
 MonoBehaviour:
   m_ObjectHideFlags: 0
