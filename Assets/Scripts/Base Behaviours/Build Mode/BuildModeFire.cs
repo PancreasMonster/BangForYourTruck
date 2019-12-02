@@ -65,6 +65,12 @@ public class BuildModeFire : MonoBehaviour
                         clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
                     if (clone.GetComponent<Health>() != null)
                         clone.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+                    if (clone.GetComponent<Bomb>() != null)
+                    {
+                        StopAllCoroutines();
+                        cooldown = false;
+                    }
+                        
                     Rigidbody unitRB = clone.GetComponent<Rigidbody>();
                     unitRB.velocity = BallisticVel(aimTarget, fireAngle);
                     rh.resourceAmount -= rc.resourceCosts[currentI];
