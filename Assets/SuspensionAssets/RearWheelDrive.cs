@@ -45,7 +45,8 @@ public class RearWheelDrive : MonoBehaviour {
         Debug.DrawRay(transform.position, rigidbody.velocity * 100, Color.blue);
 
 		float angle = maxAngle * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString());
-		forwardTorque = maxTorque * Input.GetAxisRaw("RightTrigger" + GetComponent<Health>().playerNum.ToString());
+        float driftAmount = Mathf.Abs(Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()));
+        forwardTorque = maxTorque * Input.GetAxisRaw("RightTrigger" + GetComponent<Health>().playerNum.ToString());
         backwardTorque = maxTorque * -Input.GetAxisRaw("LeftTrigger" + GetComponent<Health>().playerNum.ToString());
         sumTorque = forwardTorque + backwardTorque;
       
@@ -58,6 +59,13 @@ public class RearWheelDrive : MonoBehaviour {
 
             if (wheel.transform.localPosition.z < 0) {
                 wheel.motorTorque = sumTorque;
+                WheelFrictionCurve curve = new WheelFrictionCurve();
+                curve.extremumSlip = 1.125f;
+                curve.extremumValue = .83333333f;
+                curve.asymptoteSlip = .5f;
+                curve.asymptoteValue = .75f;
+                curve.stiffness = .55f - (.2f * driftAmount);
+                wheel.sidewaysFriction = curve;
                 if (wheel.rpm > maxSpeed)
                     wheel.motorTorque = 0;
                     }
