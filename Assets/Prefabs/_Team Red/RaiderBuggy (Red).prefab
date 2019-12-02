@@ -584,6 +584,7 @@ Transform:
   - {fileID: 830800530726199610}
   - {fileID: 1880135671410605386}
   - {fileID: 171069980623444865}
+  - {fileID: 7779873540668321222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -733,12 +734,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446705935003971820}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd34ad327a1609c4e9bfb45ad7a61539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5000
+  mineForce: 2000
   bg: {fileID: 7730069217427075221}
   fill: {fileID: 7730069215929095011}
   text: {fileID: 0}
@@ -749,10 +751,13 @@ MonoBehaviour:
   - {fileID: 4336395155454841737, guid: 3bf5f1d45f4d4eb44815ab261bef8f8d, type: 3}
   - {fileID: 5774676616864719764, guid: 0a24f1c90753eb1439b4cf6f125834ca, type: 3}
   currentDisc: {fileID: 0}
+  raiderDisc: {fileID: 0}
+  mine: {fileID: 0}
   barSpeed: 3
   currentI: 0
   pc: {fileID: 0}
   firingPoint: {fileID: 5639179706481400195}
+  discFiringPoint: {fileID: 7779873540668321222}
 --- !u!65 &6380914825200652616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1820,6 +1825,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &4805467923109444588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7779873540668321222}
+  m_Layer: 0
+  m_Name: DiscFiringPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7779873540668321222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805467923109444588}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: 4.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 446705935003971816}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4889471294819374105
 GameObject:
   m_ObjectHideFlags: 0

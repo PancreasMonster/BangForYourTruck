@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!54 &7643202864011162503
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367879940656556380}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!135 &9182787497453860280
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367879940656556380}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 9
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7546882148470795265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367879940656556380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebbd03ded84728408e128a1e00dc147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrust: 500
+--- !u!114 &-3469150412946050283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367879940656556380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c138341798185de4c8db30517e510db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bomb: {fileID: 2882771185483001440, guid: 1efea7238c0dd3047b590ee9ee9c20d9, type: 3}
+  primeTime: 1.5
+--- !u!65 &1246073451975280775
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367879940656556380}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.944531, y: 7.944537, z: 2.812646}
+  m_Center: {x: -0.0000030994415, y: 0.0000014305119, z: 1.406323}
 --- !u!1001 &7051021393247875157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,7 +79,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 4c4ed88de5b206e41b39bd93d6f8064f,
         type: 3}
       propertyPath: m_Name
-      value: Raider Landmine Blue Team
+      value: Raider Landmine Blue Team Variant
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4c4ed88de5b206e41b39bd93d6f8064f,
         type: 3}
@@ -89,3 +158,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f27c85331f6a3bd4fa59ef7a109e3078, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c4ed88de5b206e41b39bd93d6f8064f, type: 3}
+--- !u!1 &1367879940656556380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 4c4ed88de5b206e41b39bd93d6f8064f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7051021393247875157}
+  m_PrefabAsset: {fileID: 0}

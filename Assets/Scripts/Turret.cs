@@ -56,25 +56,28 @@ public class Turret : AIBehaviours
             if (!mortarTurret)
             {
                 RaycastHit hit;
-                if (currentTarget.gameObject.tag == "Player")
+                if (currentTarget != null)
                 {
-                    if (Physics.Raycast(firingPoint.position, (new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 0.9824486f, currentTarget.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
+                    if (currentTarget.gameObject.tag == "Player")
                     {
-                        if (hit.transform.gameObject != currentTarget.gameObject)
+                        if (Physics.Raycast(firingPoint.position, (new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 0.9824486f, currentTarget.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                         {
-                            Debug.Log("Lost");
-                            currentTarget = null;
+                            if (hit.transform.gameObject != currentTarget.gameObject)
+                            {
+                                Debug.Log("Lost");
+                                currentTarget = null;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - firingPoint.position).normalized, out hit, range, layer))
+                    else
                     {
-                        if (hit.transform.gameObject != currentTarget.gameObject)
+                        if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - firingPoint.position).normalized, out hit, range, layer))
                         {
-                            Debug.Log("Lost");
-                            currentTarget = null;
+                            if (hit.transform.gameObject != currentTarget.gameObject)
+                            {
+                                Debug.Log("Lost");
+                                currentTarget = null;
+                            }
                         }
                     }
                 }

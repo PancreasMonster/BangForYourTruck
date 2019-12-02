@@ -11,7 +11,7 @@ public class ExplosiveMine : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(0, thrust, 0, ForceMode.Impulse);
+        //rb.AddForce(0, thrust, 0, ForceMode.Impulse);
     }
 
     // Update is called once per frame
@@ -22,13 +22,12 @@ public class ExplosiveMine : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 14)
-        {
+       
 
             rb.constraints = RigidbodyConstraints.FreezePositionX |
                              RigidbodyConstraints.FreezePositionY |
                              RigidbodyConstraints.FreezePositionZ;
-        }
+        
     }
 
     public void DestroyThisGameObject()

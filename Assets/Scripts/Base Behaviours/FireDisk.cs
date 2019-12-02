@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class FireDisk : MonoBehaviour
 {
     public float force;
+    public float mineForce;
     public Image bg, fill;
     public Text text;
     public List<GameObject> discSelection = new List<GameObject>();
     public GameObject currentDisc;
+    public GameObject raiderDisc;
+    public GameObject mine;
     bool triggerDown = false, dpadTrigger = false, dpadLeft = false, dpadRight = false;
     float t;
     public float barSpeed;
@@ -20,6 +23,7 @@ public class FireDisk : MonoBehaviour
     PowerHolder ph;
     public PowerCosts pc;
     public Transform firingPoint;
+    public Transform discFiringPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +38,8 @@ public class FireDisk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = rc.resourcesID[currentI];
-
+       // text.text = rc.resourcesID[currentI];
+       /*
         if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && !triggerDown)
         {
             triggerDown = true;
@@ -48,26 +52,27 @@ public class FireDisk : MonoBehaviour
             power = Mathf.Pow((Mathf.Sin(t)), 2);
             fill.fillAmount = power;
         }
+        */
 
-        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && triggerDown)
+        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()))
         {
             if (rh.resourceAmount >= rc.resourceCosts[currentI])
             {
                 if (ph.powerAmount >= pc.powerCosts[1])
                 {
-                    GameObject Disc = Instantiate(currentDisc, firingPoint.position, currentDisc.transform.rotation);
-                    Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force * power);
+                    GameObject Disc = Instantiate(raiderDisc, discFiringPoint.position, raiderDisc.transform.rotation);
+                    Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
                     if (Disc.GetComponent<Health>() != null)
                         Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
-                    triggerDown = false;
-                    t = 0;
-                    power = 0;
-                    fill.fillAmount = 0;
-                    bg.gameObject.SetActive(false);
-                    rh.resourceAmount -= rc.resourceCosts[currentI];
-                    ph.losePower(pc.powerCosts[1]);
+                   // triggerDown = false;
+                   // t = 0;
+                   // power = 0;
+                  //  fill.fillAmount = 0;
+                  //  bg.gameObject.SetActive(false);
+                   // rh.resourceAmount -= rc.resourceCosts[currentI];
+                    ph.losePower(pc.powerCosts[2]);
                 } else
                 {
                     triggerDown = false;
@@ -77,6 +82,45 @@ public class FireDisk : MonoBehaviour
                     bg.gameObject.SetActive(false);
                 }
             } else
+            {
+                triggerDown = false;
+                t = 0;
+                power = 0;
+                fill.fillAmount = 0;
+                bg.gameObject.SetActive(false);
+            }
+        }
+
+        if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()))
+        {
+            if (rh.resourceAmount >= rc.resourceCosts[currentI])
+            {
+                if (ph.powerAmount >= pc.powerCosts[1])
+                {
+                    GameObject Disc = Instantiate(mine, firingPoint.position, mine.transform.rotation);
+                    Disc.GetComponent<Rigidbody>().AddForce((transform.forward + transform.up).normalized * mineForce);
+                    if (Disc.GetComponent<ResourceCollection>() != null)
+                        Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
+                    if (Disc.GetComponent<Health>() != null)
+                        Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+                    // triggerDown = false;
+                    // t = 0;
+                    // power = 0;
+                    //  fill.fillAmount = 0;
+                    //  bg.gameObject.SetActive(false);
+                    rh.resourceAmount -= rc.resourceCosts[4];
+                    ph.losePower(pc.powerCosts[2]);
+                }
+                else
+                {
+                    triggerDown = false;
+                    t = 0;
+                    power = 0;
+                    fill.fillAmount = 0;
+                    bg.gameObject.SetActive(false);
+                }
+            }
+            else
             {
                 triggerDown = false;
                 t = 0;
