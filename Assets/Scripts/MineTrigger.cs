@@ -35,7 +35,7 @@ public class MineTrigger : MonoBehaviour
     }
 
        void Trigger() {
-            Instantiate(bomb, transform.position, transform.rotation);
+        Instantiate(bomb, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), transform.rotation);
             GetComponentInParent<ExplosiveMine>().DestroyThisGameObject();
     }
 
