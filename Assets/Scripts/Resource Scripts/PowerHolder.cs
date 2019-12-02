@@ -10,6 +10,9 @@ public class PowerHolder : MonoBehaviour
     public float powerAmount, maxPower, powerRegen;
     float regenDelay;
 
+    bool infinitePower;
+    public float infinitePowerTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,33 @@ public class PowerHolder : MonoBehaviour
         {
             powerAmount = maxPower;
         }
+
+        if (infinitePower)
+        {
+            powerAmount = maxPower;
+
+        }
+    }
+
+    public void InfinitePowerOn()
+    {
+
+        if (infinitePower == true)
+        {
+            CancelInvoke();
+            Invoke("InfinitePowerOff", infinitePowerTime);
+        }
+
+        else {
+
+            infinitePower = true;
+            Invoke("InfinitePowerOff", infinitePowerTime);
+
+        }
+    }
+
+    public void InfinitePowerOff() {
+        infinitePower = false;
     }
 
     public void losePower (float loss)
