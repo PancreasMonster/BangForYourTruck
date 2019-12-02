@@ -9,7 +9,8 @@ public class Meteor : MonoBehaviour
     public float maxRange;
     public float damage;
     private Vector3 directionToFall;
-    public GameObject powerUp, meteorResource;
+    public List<GameObject> powerUp = new List<GameObject>();
+    public GameObject meteorResource;
     private bool timeToFall = false;
 
     // Start is called before the first frame update
@@ -52,7 +53,8 @@ public class Meteor : MonoBehaviour
         }
         Vector3 randCircle = Random.insideUnitCircle * 5;
         Vector3 randCircle2 = Random.insideUnitCircle * 5;
-        Instantiate(powerUp, new Vector3(directionToFall.x + randCircle.x, directionToFall.y, directionToFall.z + randCircle.y), Quaternion.identity);
+        int rand = Random.Range(0, powerUp.Count);
+        Instantiate(powerUp[rand], new Vector3(directionToFall.x + randCircle.x, directionToFall.y, directionToFall.z + randCircle.y), Quaternion.identity);
         Instantiate(meteorResource, new Vector3(directionToFall.x + randCircle2.x, directionToFall.y, directionToFall.z + randCircle2.y), Quaternion.identity);
         Destroy(this.gameObject);
     }

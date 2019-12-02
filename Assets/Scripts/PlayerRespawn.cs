@@ -107,7 +107,7 @@ public class PlayerRespawn : MonoBehaviour
 
     public IEnumerator FallPlayer2()
     {
-        player1.transform.position = new Vector3(0, -2000, 00);
+        player2.transform.position = new Vector3(0, -2000, 00);
         if (player2Cam.GetComponent<BuildModeCamera>().enabled == true)
             player2Cam.GetComponent<BuildModeCamera>().SwapMode();
         player2Cam.GetComponent<Orbit>().death = true;
