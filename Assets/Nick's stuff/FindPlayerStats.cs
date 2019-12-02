@@ -36,7 +36,7 @@ public class FindPlayerStats : MonoBehaviour
 
         if (playerHealth <= 0)
         {
-            Destroy(this.gameObject);
+         //   Destroy(this.gameObject);
         }
     }
 }

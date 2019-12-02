@@ -106,10 +106,10 @@ public class Health : MonoBehaviour
     public IEnumerator deadTime ()
     {
         pr.playerDeath(playerNum);
-        hpBarHolder.SetActive(false);
+        //hpBarHolder.SetActive(false);
         yield return new WaitForSeconds(pr.deathTimer);
         dead = false;
         health = maxHealth;
-        hpBarHolder.SetActive(true);
+        //hpBarHolder.SetActive(true);
     }
 }

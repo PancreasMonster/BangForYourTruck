@@ -56,9 +56,9 @@ public class FireDisk : MonoBehaviour
 
         if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()))
         {
-            if (rh.resourceAmount >= rc.resourceCosts[currentI])
-            {
-                if (ph.powerAmount >= pc.powerCosts[1])
+            //if (rh.resourceAmount >= rc.resourceCosts[currentI])
+          //  {
+                if (ph.powerAmount >= pc.powerCosts[2])
                 {
                     GameObject Disc = Instantiate(raiderDisc, discFiringPoint.position, raiderDisc.transform.rotation);
                     Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
@@ -81,21 +81,21 @@ public class FireDisk : MonoBehaviour
                     fill.fillAmount = 0;
                     bg.gameObject.SetActive(false);
                 }
-            } else
+          /*  } else
             {
                 triggerDown = false;
                 t = 0;
                 power = 0;
                 fill.fillAmount = 0;
                 bg.gameObject.SetActive(false);
-            }
+            } */
         }
 
         if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()))
         {
-            if (rh.resourceAmount >= rc.resourceCosts[currentI])
+            if (rh.resourceAmount >= rc.resourceCosts[4])
             {
-                if (ph.powerAmount >= pc.powerCosts[1])
+                if (ph.powerAmount >= pc.powerCosts[3])
                 {
                     GameObject Disc = Instantiate(mine, firingPoint.position, mine.transform.rotation);
                     Disc.GetComponent<Rigidbody>().AddForce((transform.forward + transform.up).normalized * mineForce);
@@ -109,7 +109,7 @@ public class FireDisk : MonoBehaviour
                     //  fill.fillAmount = 0;
                     //  bg.gameObject.SetActive(false);
                     rh.resourceAmount -= rc.resourceCosts[4];
-                    ph.losePower(pc.powerCosts[2]);
+                    ph.losePower(pc.powerCosts[3]);
                 }
                 else
                 {

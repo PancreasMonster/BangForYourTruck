@@ -73,7 +73,7 @@ public class BuildModeCamera : MonoBehaviour
         }
 
 
-
+        player.GetComponent<FireDisk>().enabled = true;
         player.GetComponent<LineRenderer>().enabled = false;
         hoverBox.GetComponent<BoxCollider>().enabled = false;
         GetComponent<BuildModeCamera>().enabled = false;

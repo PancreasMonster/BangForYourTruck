@@ -48,6 +48,7 @@ public class Orbit : MonoBehaviour
                 w.gameObject.SetActive(false);
             }
             player.GetComponent<LineRenderer>().enabled = true;
+            player.GetComponent<FireDisk>().enabled = false;
             hoverBox.GetComponent<BoxCollider>().enabled = true;
             GetComponent<BuildModeCamera>().changeToThis(wheels);
             GetComponent<BuildModeCamera>().enabled = true;

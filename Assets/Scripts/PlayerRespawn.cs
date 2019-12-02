@@ -101,6 +101,7 @@ public class PlayerRespawn : MonoBehaviour
         player1.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         player1.transform.rotation = origPlayer1Rot;
         player1.GetComponent<FlagHolder>().FallOff();
+        player1.GetComponent<Health>().health = player1.GetComponent<Health>().maxHealth;
         player1Death = false;
         player1Text.text = "";
     }
@@ -120,6 +121,7 @@ public class PlayerRespawn : MonoBehaviour
         player2.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         player2.transform.rotation = origPlayer2Rot;
         player2.GetComponent<FlagHolder>().FallOff();
+        player2.GetComponent<Health>().health = player2.GetComponent<Health>().maxHealth;
         player2Death = false;
         player2Text.text = "";
     }
