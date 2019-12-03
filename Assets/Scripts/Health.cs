@@ -109,7 +109,7 @@ public class Health : MonoBehaviour
         //hpBarHolder.SetActive(false);
         yield return new WaitForSeconds(pr.deathTimer);
         dead = false;
-        health = maxHealth;
+        
         //hpBarHolder.SetActive(true);
     }
 }
