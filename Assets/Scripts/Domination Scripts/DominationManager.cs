@@ -24,8 +24,8 @@ public class DominationManager : MonoBehaviour
     {
         if (!gameWon)
         {
-            blueText.text = "Domination points: " + blueTeamPoints.ToString();
-            redText.text = "Domination points: " + redTeamPoints.ToString();
+            blueText.text = "Blue Team: " + blueTeamPoints.ToString();
+            redText.text = "Red Team: " + redTeamPoints.ToString();
         }
 
         if(blueTeamPoints > winAmount && !gameWon)
