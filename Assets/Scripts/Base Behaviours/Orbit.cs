@@ -84,7 +84,7 @@ public class Orbit : MonoBehaviour
 
                     transform.position = player.position + jumpOffset;
                     jumpOffset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * jumpOffset;
-                    transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                    transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.position.z));
                 }
                 else
                 {
@@ -99,7 +99,7 @@ public class Orbit : MonoBehaviour
             {
                 transform.position = player.position + offset;
                 offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;
-                transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.position.z));
             }
         }
         else
