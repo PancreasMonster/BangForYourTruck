@@ -27,9 +27,14 @@ public class BuildModeCamera : MonoBehaviour
     private float origCamFOV = 40;
     public Vector3 origOffset = new Vector3(0, 10, -26);
 
+    public GameObject driveModeWeapons;
+    public GameObject buildModeDpad;
+    bool buildMode;
+
     // Start is called before the first frame update
     void Start()
     {
+        buildMode = false;
         verticalHeight = offset.y;
         minYOffset = verticalHeight + minVerticalHeight;
         maxYOffset = verticalHeight + maxVerticalHeight;
@@ -40,7 +45,7 @@ public class BuildModeCamera : MonoBehaviour
     {
         if (Input.GetButtonDown("PadY" + playerNum.ToString()) && !Cooldown)
         {
-            SwapMode();           
+            SwapMode();
         }
 
         foreach (Transform t in wheelVisuals)
@@ -66,6 +71,7 @@ public class BuildModeCamera : MonoBehaviour
         player.GetComponent<BuildModeProtoMovement>().enabled = false;
         player.GetComponent<BuildModeFire>().enabled = false;
 
+        
 
         foreach (WheelCollider w in wheels)
         {
@@ -89,16 +95,21 @@ public class BuildModeCamera : MonoBehaviour
             t.gameObject.SetActive(true);
             
         }
+        ToggleUIElements();
     }
 
     private void changeFromThis()
     {
+        
+
         foreach (Transform t in wheelVisuals)
         {
             t.gameObject.SetActive(false);           
         }
+
         offset = origOffset;
         mainCam.fieldOfView = origCamFOV;
+        ToggleUIElements();
     }
 
     // Update is called once per frame
@@ -113,5 +124,17 @@ public class BuildModeCamera : MonoBehaviour
         if(verticalHeight >= minYOffset && verticalHeight <= maxYOffset)
         verticalHeight += -Input.GetAxisRaw("RVertical" + playerNum.ToString()) * verticalSpeed * Time.deltaTime;
         target.localPosition = new Vector3(0, 0, baseTargetRange + (scaleTargetRange * (verticalHeight / minMaxOffset))); 
+    }
+
+    void ToggleUIElements() {
+        if (buildMode) {
+            driveModeWeapons.SetActive(false);
+            buildModeDpad.SetActive(true);
+            buildMode = false;
+        } else {
+            driveModeWeapons.SetActive(true);
+            buildModeDpad.SetActive(false);
+            buildMode = true;
+        }
     }
 }
