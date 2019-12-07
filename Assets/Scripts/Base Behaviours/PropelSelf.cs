@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PropelSelf : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PropelSelf : MonoBehaviour
     public Image bg, fill, bgcd, fillcd;  //cd = cooldown
     public float cooldownDelay;    Rigidbody rb;
     bool triggerDown = false, coolingDown = false;
+    public PostProcessVolume PPV;
+    public ParticleSystem ps, psChild;
     float t, power;
     PowerHolder ph;
     PowerCosts pc;
@@ -41,13 +44,13 @@ public class PropelSelf : MonoBehaviour
 
         if (Physics.Raycast(transform.position, Vector3.down * 5, out hit, 5, layer))
         {
-            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) /*&& triggerDown*/)
+            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
             {
                 if (ph.powerAmount >= pc.powerCosts[0])
                 {
                    
-                    rb.AddForce(transform.forward * force /* * power */);
-
+                    rb.AddForce(((4 * transform.forward) + (3 * transform.up)).normalized  * force /* * power */);
+                    StartCoroutine(BoostEffect());
                     triggerDown = false;
                     t = 0;
                     power = 0;
@@ -70,13 +73,13 @@ public class PropelSelf : MonoBehaviour
             }
         } else
         {
-            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) /*&& triggerDown*/)
+            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
             {
                 if (ph.powerAmount >= pc.powerCosts[0])
                 {
                     rb.velocity = Vector3.zero;
                     rb.AddForce(transform.forward * force /* * power */);
-
+                    StartCoroutine(BoostEffect());
                     triggerDown = false;
                     t = 0;
                     power = 0;
@@ -111,5 +114,33 @@ public class PropelSelf : MonoBehaviour
         }
         bgcd.gameObject.SetActive(false);
         coolingDown = false;
+    }
+
+    IEnumerator BoostEffect ()
+    {
+        ps.Play();
+        psChild.Play();
+        GetComponent<AudioSource>().Play();
+        ChromaticAberration ChromAberr = null;
+        PPV.profile.TryGetSettings(out ChromAberr);
+        DepthOfField dop = null;
+        PPV.profile.TryGetSettings(out dop);
+        while (ChromAberr.intensity.value <= 1)
+        {
+            ChromAberr.intensity.value += (10f * Time.deltaTime);
+            dop.focalLength.value += (40f * Time.deltaTime);
+            yield return null;
+        }
+        yield return new WaitForSeconds(.4f);
+        ps.Stop();
+        psChild.Stop();
+        
+        while (ChromAberr.intensity.value >= 0)
+        {
+            ChromAberr.intensity.value -= (5 * Time.deltaTime);
+            dop.focalLength.value -= (40f * Time.deltaTime);
+            yield return null;
+        }
+        dop.focalLength.value = 260f;
     }
 }
