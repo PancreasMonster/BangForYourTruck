@@ -16,7 +16,7 @@ public class PropelSelf : MonoBehaviour
     PowerHolder ph;
     PowerCosts pc;
     RaycastHit hit;
-    LayerMask layer;
+    public LayerMask layer;
 
     // Start is called before the first frame update
     void Start()
@@ -42,14 +42,17 @@ public class PropelSelf : MonoBehaviour
              fill.fillAmount = power;
          } */
 
-        if (Physics.Raycast(transform.position, Vector3.down * 5, out hit, 5, layer))
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down * 5, out hit, 5, layer))
         {
             if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
             {
                 if (ph.powerAmount >= pc.powerCosts[0])
                 {
-                   
-                    rb.AddForce(((4 * transform.forward) + (3 * transform.up)).normalized  * force /* * power */);
+                    Vector3 dir = (8 * transform.forward) + (7 * transform.up);
+                    dir.Normalize();
+                    rb.AddForce(dir * force /* * power */);
+                   // rb.AddForce(transform.forward * force /* * power */);
+                    Debug.Log(dir);
                     StartCoroutine(BoostEffect());
                     triggerDown = false;
                     t = 0;

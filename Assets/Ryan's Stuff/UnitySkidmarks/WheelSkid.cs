@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
+
 
 // Example skid script. Put this on a WheelCollider.
 // Copyright 2017 Nition, BSD licence (see LICENCE file). http://nition.co
@@ -24,19 +26,30 @@ public class WheelSkid : MonoBehaviour {
 	const float WHEEL_SLIP_MULTIPLIER = 10.0f; // For wheelspin. Adjust how much skids show
 	int lastSkid = -1; // Array index for the skidmarks controller. Index of last skidmark piece this wheel used
 	float lastFixedUpdateTime;
+    public bool sound;
+    public AudioSource aud;
+    public float timer;
+    public List<ParticleSystem> particleSystems = new List<ParticleSystem>();
+    float driftTimer;
+    public PostProcessVolume PPV;
+    ChromaticAberration ChromAberr = null;
+    
 
 	// #### UNITY INTERNAL METHODS ####
 
 	protected void Awake() {
 		wheelCollider = GetComponent<WheelCollider>();
-		lastFixedUpdateTime = Time.time;
+        if(sound)
+        PPV.profile.TryGetSettings(out ChromAberr);
+        lastFixedUpdateTime = Time.time;
 	}
 
 	protected void FixedUpdate() {
 		lastFixedUpdateTime = Time.time;
 	}
 
-	protected void LateUpdate() {
+	protected void LateUpdate()
+    {
 		if (wheelCollider.GetGroundHit(out wheelHitInfo))
 		{
 			// Check sideways speed
@@ -61,6 +74,78 @@ public class WheelSkid : MonoBehaviour {
 			// Skid if we should
 			if (skidTotal >= SKID_FX_SPEED) {
 				float intensity = Mathf.Clamp01(skidTotal / MAX_SKID_INTENSITY);
+
+                
+
+                if (sound)
+                {
+                    if (intensity > .4f)
+                    {
+                        timer += Time.deltaTime;
+                    }
+                    else
+                    {
+                        timer = 0;
+                    }
+
+                    if (timer > 0.1f && intensity > .5f && rb.velocity.sqrMagnitude > 200 && !aud.isPlaying)
+                    {
+                        aud.Play();
+                        foreach(ParticleSystem ps in particleSystems)
+                        {
+                            ps.Play();
+                        }
+                        aud.volume = Mathf.Lerp(aud.volume, intensity - .5f, 1.5f * Time.deltaTime);
+                        driftTimer += Time.deltaTime;
+                    }
+
+                    if (intensity < .5f || rb.velocity.sqrMagnitude < 200 && aud.isPlaying)
+                    {
+                        foreach (ParticleSystem ps in particleSystems)
+                        {
+                            ps.Stop();
+                        }
+                        aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
+                        StartCoroutine(audioStop());
+                        driftTimer = 0;
+                    }
+
+                    
+                    
+                    DepthOfField dop = null;
+                    PPV.profile.TryGetSettings(out dop);
+
+                    if (timer > .2f)
+                    {
+                        ChromAberr.intensity.value = Mathf.Clamp(timer - .2f, 0, .6f);
+                        dop.focalLength.value = Mathf.Clamp((timer * 12) + 260, 260, 280);
+                    } else if (ChromAberr.intensity.value > 0)
+                    {
+                        ChromAberr.intensity.value = Mathf.Lerp(ChromAberr.intensity.value, 0, 2 * Time.deltaTime);
+                        dop.focalLength.value = Mathf.Lerp(dop.focalLength.value, 260, 2 * Time.deltaTime);
+                    }
+                   /* while (ChromAberr.intensity.value <= 1)
+                    {
+                        ChromAberr.intensity.value += (10f * Time.deltaTime);
+                        dop.focalLength.value += (40f * Time.deltaTime);
+                        yield return null;
+                    }
+                    yield return new WaitForSeconds(.4f);
+                    
+
+                    while (ChromAberr.intensity.value >= 0)
+                    {
+                        ChromAberr.intensity.value -= (5 * Time.deltaTime);
+                        dop.focalLength.value -= (40f * Time.deltaTime);
+                        yield return null;
+                    }
+                    dop.focalLength.value = 260f; */
+                
+
+
+
+
+            }
 				// Account for further movement since the last FixedUpdate
 				Vector3 skidPoint = wheelHitInfo.point + (rb.velocity * (Time.time - lastFixedUpdateTime));
 				lastSkid = skidmarksController.AddSkidMark(skidPoint, wheelHitInfo.normal, intensity, lastSkid);
@@ -71,8 +156,16 @@ public class WheelSkid : MonoBehaviour {
 		}
 		else {
 			lastSkid = -1;
+            if (sound)
+                aud.Stop();
 		}
 	}
+
+    IEnumerator audioStop ()
+    {
+        yield return new WaitForSeconds(.33f);
+        aud.Stop();
+    }
 
 	// #### PUBLIC METHODS ####
 

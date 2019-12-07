@@ -21,7 +21,7 @@ public class FlipOver : MonoBehaviour
     public Camera cam;
     public float timerAllowance = .4f;
     bool delay;
-    bool turnDelay;
+    public bool turnDelay;
 
     // Start is called before the first frame update
     void Start()
@@ -76,29 +76,14 @@ public class FlipOver : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Flip = true;
-        timer = 0;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        Flip = true;
-        timer = 0;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Flip = false;
-    }
+    
 
 
     IEnumerator JumpDelay()
     {
-        delay = true;
-        timer = timerAllowance;
         turnDelay = true;
+        delay = true;
+        timer = timerAllowance;        
         yield return null;
         rigidbody.angularVelocity = Vector3.zero;
         yield return new WaitForSeconds(.25f);
