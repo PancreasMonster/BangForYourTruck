@@ -17,6 +17,7 @@ public class PropelSelf : MonoBehaviour
     PowerCosts pc;
     RaycastHit hit;
     public LayerMask layer;
+    public float limitingForce = .75f;
 
     // Start is called before the first frame update
     void Start()
@@ -44,36 +45,65 @@ public class PropelSelf : MonoBehaviour
 
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down * 5, out hit, 5, layer))
         {
-            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
+            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()))
             {
-                if (ph.powerAmount >= pc.powerCosts[0])
+                if (!coolingDown)
                 {
-                    Vector3 dir = (8 * transform.forward) + (7 * transform.up);
-                    dir.Normalize();
-                    rb.AddForce(dir * force /* * power */);
-                   // rb.AddForce(transform.forward * force /* * power */);
-                    Debug.Log(dir);
-                    StartCoroutine(BoostEffect());
-                    triggerDown = false;
-                    t = 0;
-                    power = 0;
-                    fill.fillAmount = 0;
-                    bg.gameObject.SetActive(false);
-                    coolingDown = true;
-                    ph.losePower(pc.powerCosts[0]);
-                    StartCoroutine(Cooldown());
+                    if (ph.powerAmount >= pc.powerCosts[0])
+                    {
+                       
+                        rb.AddForce(transform.forward * force /* * power */);
+                        StartCoroutine(BoostEffect());
+                        triggerDown = false;
+                        t = 0;
+                        power = 0;
+                        fill.fillAmount = 0;
+                        bg.gameObject.SetActive(false);
+                        coolingDown = true;
+                        ph.losePower(pc.powerCosts[0]);
+                        StartCoroutine(Cooldown());
+                    }
+                    else
+                    {
+                        triggerDown = false;
+                        t = 0;
+                        power = 0;
+                        fill.fillAmount = 0;
+                        bg.gameObject.SetActive(false);
+                        coolingDown = true;
+                        StartCoroutine(Cooldown());
+                    }
                 }
-                else
-                {
-                    triggerDown = false;
-                    t = 0;
-                    power = 0;
-                    fill.fillAmount = 0;
-                    bg.gameObject.SetActive(false);
-                    coolingDown = true;
-                    StartCoroutine(Cooldown());
+                else {
+                    if (ph.powerAmount >= pc.powerCosts[0])
+                    {
+                        Vector3 dir = (8 * transform.forward) + (7 * transform.up);
+                        dir.Normalize();
+                        rb.AddForce(dir * force * limitingForce /* * power */);
+                        rb.angularVelocity = Vector3.zero;
+                        Debug.Log(dir);
+                        StartCoroutine(BoostEffect());
+                        triggerDown = false;
+                        t = 0;
+                        power = 0;
+                        fill.fillAmount = 0;
+                        bg.gameObject.SetActive(false);
+                        coolingDown = true;
+                        ph.losePower(pc.powerCosts[0]);
+                        StartCoroutine(Cooldown());
+                    }
+                    else
+                    {
+                        triggerDown = false;
+                        t = 0;
+                        power = 0;
+                        fill.fillAmount = 0;
+                        bg.gameObject.SetActive(false);
+                        coolingDown = true;
+                        StartCoroutine(Cooldown());
+                    }
                 }
-            }
+            } 
         } else
         {
             if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
