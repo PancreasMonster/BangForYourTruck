@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
 
     public float health, maxHealth, currentHealth;
     public int playerNum;
-    public GameObject healthBarCanvas, hpBarHolder, hpBarHolder2, baseUI;
+    public GameObject healthBarCanvas, hpBarHolder, hpBarHolder2, baseUI, car, wheel;
     Image hpBarFill, hpBarFill2;
     public bool mbase;
     bool dead;
@@ -79,7 +79,9 @@ public class Health : MonoBehaviour
 
             if (!mbase)
             {
-                Destroy(this.gameObject);
+                Destroy(this.gameObject, 5);
+                Destroy(hpBarHolder);
+                Destroy(hpBarHolder2);
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 if (GetComponentInChildren<ExplodeOnDeath>() != null)
                 {
@@ -105,6 +107,20 @@ public class Health : MonoBehaviour
 
     public IEnumerator deadTime ()
     {
+        GameObject Car = Instantiate(car, transform.position, transform.rotation);
+        Rigidbody carRB = Car.GetComponent<Rigidbody>();
+        carRB.AddForce((Vector3.up * 80000) + GetComponent<Rigidbody>().velocity);
+        Destroy(Car, 5);
+        for (int x = 0; x < 2; x++)
+        {
+            for (int z = 0; z < 2; z++)
+            {
+                GameObject Wheel = Instantiate(wheel, new Vector3(transform.position.x - 2.5f + (x * 5), transform.position.y + 1f, transform.position.z + .1f + (-1.1f * z)), Quaternion.identity);
+                Rigidbody wheelRB = Wheel.GetComponent<Rigidbody>();
+                wheelRB.AddForce(Random.onUnitSphere * 5000);
+                Destroy(Wheel, 5);
+            }
+        }
         pr.playerDeath(playerNum);
         //hpBarHolder.SetActive(false);
         yield return new WaitForSeconds(pr.deathTimer);

@@ -2461,9 +2461,9 @@ WheelCollider:
   m_Radius: 0.5
   m_SuspensionSpring:
     spring: 562.0179
-    damper: 19.72172
+    damper: 19.721718
     targetPosition: 0.5
-  m_SuspensionDistance: 1.2396696
+  m_SuspensionDistance: 1.2396694
   m_ForceAppPointDistance: 0.99766743
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -2794,6 +2794,7 @@ MonoBehaviour:
   oldVelocity: 0
   minimumForce: 0
   minimumDamage: 20
+  teamNum: 0
 --- !u!114 &7650665680617533915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2835,6 +2836,8 @@ MonoBehaviour:
   hpBarHolder: {fileID: 0}
   hpBarHolder2: {fileID: 0}
   baseUI: {fileID: 0}
+  car: {fileID: 403703403108079683, guid: 88501f53f9bd6c54aa7aae8ef239b154, type: 3}
+  wheel: {fileID: 8723195822683896792, guid: 5b199426c5bfca64fad7849121bdeccb, type: 3}
   mbase: 1
   pr: {fileID: 0}
 --- !u!114 &4101954298733220621
@@ -2861,6 +2864,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 0
+  limitingForce: 0.75
 --- !u!114 &1620192004229468756
 MonoBehaviour:
   m_ObjectHideFlags: 0
