@@ -38,6 +38,7 @@ public class Orbit : MonoBehaviour
         if(Input.GetButtonDown("PadY" + playerNum.ToString()) && !death)
         {
             Rigidbody rb = player.GetComponent<Rigidbody>();
+            rb.AddForce(Vector3.up * 22500);
             rb.drag = setDrag;
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             player.transform.rotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.y, 0);

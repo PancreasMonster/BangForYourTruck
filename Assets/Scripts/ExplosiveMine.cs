@@ -20,15 +20,7 @@ public class ExplosiveMine : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-       
-
-            rb.constraints = RigidbodyConstraints.FreezePositionX |
-                             RigidbodyConstraints.FreezePositionY |
-                             RigidbodyConstraints.FreezePositionZ;
-        
-    }
+   
 
     public void DestroyThisGameObject()
     {
