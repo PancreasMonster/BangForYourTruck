@@ -88,12 +88,14 @@ public class Health : MonoBehaviour
                     BroadcastMessage("Explode");
 
 
-                    if (GetComponentInChildren<Turret>() != null)
-                    {
-                        Turret turret = GetComponentInChildren<Turret>();
-                        turret.enabled = false;
+                    
+                }
 
-                    }
+                if (GetComponentInChildren<Turret>() != null)
+                {
+                    Turret turret = GetComponentInChildren<Turret>();
+                    turret.enabled = false;
+
                 }
 
                 if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
