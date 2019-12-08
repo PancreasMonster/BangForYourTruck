@@ -157,8 +157,15 @@ public class WheelSkid : MonoBehaviour {
 		else {
 			lastSkid = -1;
             if (sound)
+            {
                 aud.Stop();
-		}
+                foreach (ParticleSystem ps in particleSystems)
+                {
+                    ps.Stop();
+                }
+            }
+
+            }
 	}
 
     IEnumerator audioStop ()
