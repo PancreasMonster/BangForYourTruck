@@ -63,6 +63,7 @@ public class BuildModeCamera : MonoBehaviour
     {
         Rigidbody rb = player.GetComponent<Rigidbody>();
         rb.drag = setDrag;
+        
         rb.constraints &= ~RigidbodyConstraints.FreezeRotationX;
         rb.constraints &= ~RigidbodyConstraints.FreezeRotationY;
         rb.constraints &= ~RigidbodyConstraints.FreezeRotationZ;

@@ -61,6 +61,7 @@ public class FireDisk : MonoBehaviour
                 if (ph.powerAmount >= pc.powerCosts[2])
                 {
                     GameObject Disc = Instantiate(raiderDisc, discFiringPoint.position, raiderDisc.transform.rotation);
+                    Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
                     Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
@@ -99,6 +100,7 @@ public class FireDisk : MonoBehaviour
                 {
                     GameObject Disc = Instantiate(mine, firingPoint.position, mine.transform.rotation);
                     Disc.GetComponent<Rigidbody>().AddForce((transform.forward + transform.up).normalized * mineForce);
+                    Disc.GetComponent<MineTrigger>().teamNum = GetComponent<Health>().playerNum;
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
                     if (Disc.GetComponent<Health>() != null)

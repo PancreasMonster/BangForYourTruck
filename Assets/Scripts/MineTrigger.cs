@@ -5,13 +5,16 @@ using UnityEngine;
 public class MineTrigger : MonoBehaviour
 {
     public GameObject bomb;
+    public int teamNum;
     public float primeTime = 1.5f;
-    bool primed = false;
+    bool primed = false, triggered = false;
+    public float lifeTime = 15f;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(setPrime()); 
+        StartCoroutine(setPrime());
+        Destroy(this.gameObject, lifeTime);
     }
 
     // Update is called once per frame
@@ -20,15 +23,15 @@ public class MineTrigger : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (primed)
         {
 
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.GetComponent<Health>() != null && other.gameObject.GetComponent<Health>().playerNum != teamNum && !triggered)
             {
                 Debug.Log("HIT Player");
-
+                triggered = true;
                 Trigger();
             }
         }
