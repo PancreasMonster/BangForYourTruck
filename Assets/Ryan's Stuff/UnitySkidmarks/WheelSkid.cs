@@ -79,7 +79,7 @@ public class WheelSkid : MonoBehaviour {
 
                 if (sound)
                 {
-                    if (intensity > .4f)
+                    if (intensity > .4f && rb.velocity.sqrMagnitude > 200)
                     {
                         timer += Time.deltaTime;
                     }
@@ -88,7 +88,7 @@ public class WheelSkid : MonoBehaviour {
                         timer = 0;
                     }
 
-                    if (timer > 0.1f && intensity > .5f && rb.velocity.sqrMagnitude > 200 && !aud.isPlaying)
+                    if (timer > 0.1f && intensity > .4f && rb.velocity.sqrMagnitude > 200 && !aud.isPlaying)
                     {
                         aud.Play();
                         foreach(ParticleSystem ps in particleSystems)
@@ -99,7 +99,7 @@ public class WheelSkid : MonoBehaviour {
                         driftTimer += Time.deltaTime;
                     }
 
-                    if (intensity < .5f || rb.velocity.sqrMagnitude < 200 && aud.isPlaying)
+                    if (intensity < .4f || rb.velocity.sqrMagnitude < 200 && aud.isPlaying)
                     {
                         foreach (ParticleSystem ps in particleSystems)
                         {
