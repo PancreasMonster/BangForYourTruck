@@ -120,7 +120,7 @@ public class Health : MonoBehaviour
             {
                 GameObject Wheel = Instantiate(wheel, new Vector3(transform.position.x - 2.5f + (x * 5), transform.position.y + 1f, transform.position.z + .1f + (-1.1f * z)), Quaternion.identity);
                 Rigidbody wheelRB = Wheel.GetComponent<Rigidbody>();
-                wheelRB.AddForce(Random.onUnitSphere * 5000);
+                wheelRB.AddForce(Random.onUnitSphere * 7500);
                 Destroy(Wheel, 5);
             }
         }

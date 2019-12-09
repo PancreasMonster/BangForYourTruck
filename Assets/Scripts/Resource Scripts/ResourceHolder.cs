@@ -6,25 +6,25 @@ using UnityEngine.UI;
 public class ResourceHolder : MonoBehaviour
 {
 
-    public int resourceAmount = 30;
+    public float resourceAmount = 30;
     public int resourceIncome;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(PassiveIncome());
+        //StartCoroutine(PassiveIncome());
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+        resourceAmount += resourceIncome * Time.deltaTime;
     }
 
-    IEnumerator PassiveIncome ()
+  /*  IEnumerator PassiveIncome ()
     {
         yield return new WaitForSeconds(5);
         resourceAmount += resourceIncome;
         StartCoroutine(PassiveIncome());
-    }
+    } */
 }
