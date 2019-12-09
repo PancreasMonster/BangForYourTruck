@@ -56,6 +56,7 @@ public class Orbit : MonoBehaviour
             hoverBox.GetComponent<BoxCollider>().enabled = true;
             GetComponent<BuildModeCamera>().changeToThis(wheels);
             GetComponent<BuildModeCamera>().enabled = true;
+            GetComponent<BuildModeCamera>().ToggleUIElements();
             GetComponent<Orbit>().enabled = false;
         }
     }

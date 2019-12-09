@@ -64,8 +64,13 @@ public class Turret : AIBehaviours
                         {
                             if (hit.transform.gameObject != currentTarget.gameObject)
                             {
-                                Debug.Log("Lost");
+                                
                                 currentTarget = null;
+                                
+                            } else
+                            {
+                                Debug.Log(hit.transform.name);
+                                Debug.DrawLine(firingPoint.position, hit.point, Color.green);
                             }
                         }
                     }
@@ -77,6 +82,8 @@ public class Turret : AIBehaviours
                             {
                                 Debug.Log("Lost");
                                 currentTarget = null;
+                                Debug.Log(hit.transform.name);
+                                Debug.DrawLine(firingPoint.position, hit.point, Color.green);
                             }
                         }
                     }
@@ -117,7 +124,7 @@ public class Turret : AIBehaviours
                         {
                             if (hit.transform.gameObject == t.gameObject)
                             {
-                                Debug.Log("Found");
+                                Debug.Log(hit.transform.name);
 
 
                                 currentTarget = t;
@@ -139,7 +146,7 @@ public class Turret : AIBehaviours
                                 Debug.Log("Found");
 
 
-                                currentTarget = t;
+                               // currentTarget = t;
                             }
 
                         }

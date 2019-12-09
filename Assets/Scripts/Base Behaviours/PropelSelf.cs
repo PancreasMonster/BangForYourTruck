@@ -81,7 +81,7 @@ public class PropelSelf : MonoBehaviour
                         dir.Normalize();
                         rb.AddForce(dir * force * limitingForce /* * power */);
                         rb.angularVelocity = Vector3.zero;
-                        Debug.Log(dir);
+                       // Debug.Log(dir);
                         StartCoroutine(BoostEffect());
                         triggerDown = false;
                         t = 0;

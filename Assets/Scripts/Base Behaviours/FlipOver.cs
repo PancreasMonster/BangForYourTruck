@@ -48,7 +48,7 @@ public class FlipOver : MonoBehaviour
                         rigidbody.AddForce(Vector3.up * force);
                         rigidbody.angularVelocity = Vector3.zero;
                         
-                        Debug.Log("Hit");
+                      //  Debug.Log("Hit");
                     }
                 }
         }

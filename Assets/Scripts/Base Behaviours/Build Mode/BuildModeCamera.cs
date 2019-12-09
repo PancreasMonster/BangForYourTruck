@@ -96,7 +96,8 @@ public class BuildModeCamera : MonoBehaviour
             t.gameObject.SetActive(true);
             
         }
-        ToggleUIElements();
+        driveModeWeapons.SetActive(false);
+        buildModeDpad.SetActive(true);
     }
 
     private void changeFromThis()
@@ -110,7 +111,8 @@ public class BuildModeCamera : MonoBehaviour
 
         offset = origOffset;
         mainCam.fieldOfView = origCamFOV;
-        ToggleUIElements();
+        driveModeWeapons.SetActive(true);
+        buildModeDpad.SetActive(false);
     }
 
     // Update is called once per frame
@@ -127,14 +129,12 @@ public class BuildModeCamera : MonoBehaviour
         target.localPosition = new Vector3(0, 0, baseTargetRange + (scaleTargetRange * (verticalHeight / minMaxOffset))); 
     }
 
-    void ToggleUIElements() {
+    public void ToggleUIElements() {
         if (buildMode) {
-            driveModeWeapons.SetActive(false);
-            buildModeDpad.SetActive(true);
+            
             buildMode = false;
         } else {
-            driveModeWeapons.SetActive(true);
-            buildModeDpad.SetActive(false);
+           
             buildMode = true;
         }
     }

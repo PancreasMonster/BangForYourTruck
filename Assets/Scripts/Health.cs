@@ -94,7 +94,7 @@ public class Health : MonoBehaviour
                 if (GetComponentInChildren<Turret>() != null)
                 {
                     GetComponentInChildren<Turret>().enabled = false;
-
+                    GetComponentInChildren<Turret>().StopAllCoroutines();
 
                 }
 
@@ -113,7 +113,7 @@ public class Health : MonoBehaviour
         Rigidbody carRB = Car.GetComponent<Rigidbody>();
         carRB.AddForce((Vector3.up * 80000) + GetComponent<Rigidbody>().velocity);
         Car.GetComponentInChildren<BaseExplodeOnDeath>().Explode();
-        Destroy(Car, 5);
+        Destroy(Car, 10);
         for (int x = 0; x < 2; x++)
         {
             for (int z = 0; z < 2; z++)
@@ -121,7 +121,7 @@ public class Health : MonoBehaviour
                 GameObject Wheel = Instantiate(wheel, new Vector3(transform.position.x - 2.5f + (x * 5), transform.position.y + 1f, transform.position.z + .1f + (-1.1f * z)), Quaternion.identity);
                 Rigidbody wheelRB = Wheel.GetComponent<Rigidbody>();
                 wheelRB.AddForce(Random.onUnitSphere * 7500);
-                Destroy(Wheel, 5);
+                Destroy(Wheel, 10);
             }
         }
         pr.playerDeath(playerNum);
