@@ -93,8 +93,8 @@ public class Health : MonoBehaviour
 
                 if (GetComponentInChildren<Turret>() != null)
                 {
-                    Turret turret = GetComponentInChildren<Turret>();
-                    turret.enabled = false;
+                    GetComponentInChildren<Turret>().enabled = false;
+
 
                 }
 
