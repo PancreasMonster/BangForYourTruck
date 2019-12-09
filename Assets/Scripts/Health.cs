@@ -24,9 +24,9 @@ public class Health : MonoBehaviour
         {
            
 
-            GameObject hpBar = Instantiate(healthBarCanvas, new Vector3(transform.position.x, transform.position.y + 3.25f, transform.position.z), Quaternion.identity);
+            GameObject hpBar = Instantiate(healthBarCanvas, new Vector3(transform.position.x, transform.position.y + 8f, transform.position.z), Quaternion.identity);
             hpBar.GetComponent<FaceCamera>().Cam1();
-            GameObject hpBar2 = Instantiate(healthBarCanvas, new Vector3(transform.position.x, transform.position.y + 3.25f, transform.position.z), Quaternion.identity);
+            GameObject hpBar2 = Instantiate(healthBarCanvas, new Vector3(transform.position.x, transform.position.y + 8f, transform.position.z), Quaternion.identity);
             hpBar2.GetComponent<FaceCamera>().Cam2();
             hpBar.GetComponent<FaceCamera>().mbase = transform;
             hpBar2.GetComponent<FaceCamera>().mbase = transform;
