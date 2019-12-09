@@ -27,7 +27,7 @@ public class DominationZone : MonoBehaviour
         int redTeamUnits = 0;
         int blueTeamUnits = 0;
              
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, transform.localScale.x/2f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, transform.localScale.x * 6);
         foreach (Collider c in hitColliders)
         {
             if (c.gameObject.GetComponent<Health>() != null)
