@@ -105,7 +105,7 @@ public class Orbit : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(-1000, -1000, -1000);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                
         }
     }
