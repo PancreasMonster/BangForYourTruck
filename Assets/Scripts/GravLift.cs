@@ -22,6 +22,7 @@ public class GravLift : MonoBehaviour
     {
         if(other.transform.GetComponent<Rigidbody>() != null)
         {
+            GetComponent<AudioSource>().Play();
             other.transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.transform.GetComponent<Rigidbody>().AddForce(transform.forward * gravForce * (other.transform.GetComponent<Rigidbody>().mass/18));
         }
