@@ -51,11 +51,13 @@ public class Meteor : MonoBehaviour
                 h.health -= damage;
 
         }
-        Vector3 randCircle = Random.insideUnitCircle * 5;
+        Vector3 randCircle = Random.insideUnitCircle * 18;
         Vector3 randCircle2 = Random.insideUnitCircle * 5;
         int rand = Random.Range(0, powerUp.Count);
-        Instantiate(powerUp[rand], new Vector3(directionToFall.x + randCircle.x, directionToFall.y, directionToFall.z + randCircle.y), Quaternion.identity);
-        Instantiate(meteorResource, new Vector3(directionToFall.x + randCircle2.x, directionToFall.y, directionToFall.z + randCircle2.y), Quaternion.identity);
+        Debug.Log(rand);
+        GameObject clone = Instantiate(powerUp[rand], new Vector3(directionToFall.x + randCircle.x, directionToFall.y, directionToFall.z + randCircle.y), powerUp[rand].transform.rotation);
+        //  Instantiate(meteorResource, new Vector3(directionToFall.x + randCircle2.x, directionToFall.y, directionToFall.z + randCircle2.y), Quaternion.identity);
+        Debug.Log(clone.transform.name);
         Destroy(this.gameObject);
     }
 }

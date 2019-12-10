@@ -72,10 +72,14 @@ public class RearWheelDrive : MonoBehaviour {
                 WheelHit wh;
                 if (wheel.GetGroundHit(out wh))
                 {
-                    aud.pitch = wheel.rpm / maxSpeed;
+                    float audPitch = wheel.rpm / maxSpeed;
+                    audPitch = Mathf.Clamp(audPitch, -2f, 1.5f);
+                    aud.pitch = audPitch;
                 } else
                 {
-                    aud.pitch = (wheel.rpm / 2) / maxSpeed;
+                    float audPitch = (wheel.rpm / 2) / maxSpeed;
+                    audPitch = Mathf.Clamp(audPitch, -2f, 1.5f);
+                    aud.pitch = audPitch;
                 }
                 
                     }
