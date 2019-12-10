@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class DominationManager : MonoBehaviour
 {
-    public int redTeamPoints;
-    public int blueTeamPoints;
+    public float redTeamPoints;
+    public float blueTeamPoints;
     public Text blueText, redText, winText;
+    public Image redImage, blueImage;
     public int winAmount = 200;
     bool gameWon;
 
@@ -26,6 +27,8 @@ public class DominationManager : MonoBehaviour
         {
             blueText.text = "Blue Team: " + blueTeamPoints.ToString() + "/" + winAmount.ToString();
             redText.text = "Red Team: " + redTeamPoints.ToString() + "/" + winAmount.ToString();
+            redImage.fillAmount = redTeamPoints / winAmount;
+            blueImage.fillAmount = blueTeamPoints / winAmount;
         }
 
         if(blueTeamPoints > winAmount && !gameWon)
