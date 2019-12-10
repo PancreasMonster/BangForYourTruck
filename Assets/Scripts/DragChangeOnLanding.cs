@@ -7,14 +7,23 @@ public class DragChangeOnLanding : MonoBehaviour
     public float newDrag;
     public float newMass;
 
-    
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.layer == 14)
         {
             GetComponent<Rigidbody>().drag = newDrag;
             GetComponent<Rigidbody>().mass = newMass;
+
+
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        {
+            GetComponent<Rigidbody>().drag = 0;
 
 
         }
