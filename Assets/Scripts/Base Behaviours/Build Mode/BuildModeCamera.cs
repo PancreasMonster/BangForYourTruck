@@ -31,6 +31,7 @@ public class BuildModeCamera : MonoBehaviour
     public GameObject buildModeDpad;
     bool buildMode;
     public Vector3 origOffset_;
+    public float targetYOffset = 30;
 
     // Start is called before the first frame update
     void Start()
@@ -124,12 +125,12 @@ public class BuildModeCamera : MonoBehaviour
         offset = new Vector3(offset.x, verticalHeight, offset.z);
         transform.position = player.position + offset;
         offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;       
-        transform.LookAt(target.position);
+        transform.LookAt(new Vector3(target.position.x, target.position.y - targetYOffset, target.position.z));
         mainCam.fieldOfView = mainCamFoVBaseValue + (mainCamFoVScaleValue * (1.0f - ((verticalHeight-minYOffset)/minMaxOffset)));
         verticalHeight = Mathf.Clamp(verticalHeight, minYOffset, maxYOffset);
         if(verticalHeight >= minYOffset && verticalHeight <= maxYOffset)
         verticalHeight += -Input.GetAxisRaw("RVertical" + playerNum.ToString()) * verticalSpeed * Time.deltaTime;
-        target.localPosition = new Vector3(target.transform.localPosition.x, target.transform.localPosition.y, baseTargetRange + (scaleTargetRange * (verticalHeight / minMaxOffset))); 
+        target.localPosition = new Vector3(target.transform.localPosition.x, target.transform.localPosition.y, baseTargetRange - (scaleTargetRange * (1.0f - ((verticalHeight - minYOffset) / minMaxOffset)))); 
     }
 
     public void ToggleUIElements() {
