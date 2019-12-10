@@ -23,6 +23,7 @@ public class PowerHolder : MonoBehaviour
     void Update()
     {
         powerDisplay.fillAmount = powerAmount / maxPower;
+        powerDisplay.color = new Color(1, powerAmount / maxPower, powerAmount / maxPower, 1);
 
         if (regenDelay > 0)
             regenDelay -= Time.deltaTime;
