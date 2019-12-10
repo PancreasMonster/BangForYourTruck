@@ -711,6 +711,7 @@ Transform:
   - {fileID: 2872354843848183816}
   - {fileID: 5950566851757643242}
   - {fileID: 845915569953520537}
+  - {fileID: 7399232086762109377}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -894,6 +895,7 @@ MonoBehaviour:
   pc: {fileID: 0}
   firingPoint: {fileID: 5639179706481400195}
   discFiringPoint: {fileID: 7779873540668321222}
+  mineFiringPoint: {fileID: 0}
 --- !u!65 &6380914825200652616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1160,6 +1162,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &579338984958191594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7399232086762109377}
+  m_Layer: 8
+  m_Name: MineFire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7399232086762109377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579338984958191594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4, z: -3.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 446705935003971816}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &674333996676720386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4215,15 +4247,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c96a7a8fe203e214dbfc4f862306af6e, type: 3}
---- !u!4 &845915569953520537 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8229190387321794600, guid: c96a7a8fe203e214dbfc4f862306af6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8759148005591010225}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1806081353783269002 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6962217406842772795, guid: c96a7a8fe203e214dbfc4f862306af6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8759148005591010225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &845915569953520537 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8229190387321794600, guid: c96a7a8fe203e214dbfc4f862306af6e,
     type: 3}
   m_PrefabInstance: {fileID: 8759148005591010225}
   m_PrefabAsset: {fileID: 0}

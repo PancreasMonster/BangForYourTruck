@@ -20,9 +20,10 @@ public class GravLift : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "Player")
+        if(other.transform.GetComponent<Rigidbody>() != null)
         {
-           other.transform.GetComponent<Rigidbody>().AddForce(transform.forward * gravForce);
+            other.transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.transform.GetComponent<Rigidbody>().AddForce(transform.forward * gravForce * (other.transform.GetComponent<Rigidbody>().mass/18));
         }
     }
 }

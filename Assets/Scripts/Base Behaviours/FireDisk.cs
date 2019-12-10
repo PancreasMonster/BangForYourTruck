@@ -24,6 +24,7 @@ public class FireDisk : MonoBehaviour
     public PowerCosts pc;
     public Transform firingPoint;
     public Transform discFiringPoint;
+    public Transform mineFiringPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -98,8 +99,8 @@ public class FireDisk : MonoBehaviour
             {
                 if (ph.powerAmount >= pc.powerCosts[3])
                 {
-                    GameObject Disc = Instantiate(mine, firingPoint.position, mine.transform.rotation);
-                    Disc.GetComponent<Rigidbody>().AddForce((-transform.forward + transform.up).normalized * mineForce);
+                    GameObject Disc = Instantiate(mine, mineFiringPoint.position, mine.transform.rotation);
+                    Disc.GetComponent<Rigidbody>().AddForce((-transform.forward + transform.up).normalized * 10);
                     Disc.GetComponent<MineTrigger>().teamNum = GetComponent<Health>().playerNum;
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;

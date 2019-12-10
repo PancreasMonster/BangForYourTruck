@@ -23,7 +23,7 @@ public class ChangeLayer : MonoBehaviour
         Transform[] childrenT = GetComponentsInChildren<Transform>();
         foreach (Transform t in childrenT)
         {
-            t.gameObject.layer = 16;
+            t.gameObject.layer = 0;
         }
     }
 }

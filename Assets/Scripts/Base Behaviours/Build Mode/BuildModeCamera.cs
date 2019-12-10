@@ -30,10 +30,12 @@ public class BuildModeCamera : MonoBehaviour
     public GameObject driveModeWeapons;
     public GameObject buildModeDpad;
     bool buildMode;
+    public Vector3 origOffset_;
 
     // Start is called before the first frame update
     void Start()
     {
+        origOffset_ = offset;
         buildMode = false;
         verticalHeight = offset.y;
         minYOffset = verticalHeight + minVerticalHeight;
@@ -89,6 +91,7 @@ public class BuildModeCamera : MonoBehaviour
 
     public void changeToThis(WheelCollider[] w)
     {
+        offset = origOffset_;
         offset = Quaternion.AngleAxis(player.transform.rotation.eulerAngles.y, Vector3.up) * offset;
         wheels = w;      
         foreach (Transform t in wheelVisuals)
@@ -122,11 +125,11 @@ public class BuildModeCamera : MonoBehaviour
         transform.position = player.position + offset;
         offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;       
         transform.LookAt(target.position);
-        mainCam.fieldOfView = mainCamFoVBaseValue - (mainCamFoVScaleValue * (1.0f - (verticalHeight/minMaxOffset)));
+        mainCam.fieldOfView = mainCamFoVBaseValue + (mainCamFoVScaleValue * (1.0f - ((verticalHeight-minYOffset)/minMaxOffset)));
         verticalHeight = Mathf.Clamp(verticalHeight, minYOffset, maxYOffset);
         if(verticalHeight >= minYOffset && verticalHeight <= maxYOffset)
         verticalHeight += -Input.GetAxisRaw("RVertical" + playerNum.ToString()) * verticalSpeed * Time.deltaTime;
-        target.localPosition = new Vector3(0, 0, baseTargetRange + (scaleTargetRange * (verticalHeight / minMaxOffset))); 
+        target.localPosition = new Vector3(target.transform.localPosition.x, target.transform.localPosition.y, baseTargetRange + (scaleTargetRange * (verticalHeight / minMaxOffset))); 
     }
 
     public void ToggleUIElements() {
