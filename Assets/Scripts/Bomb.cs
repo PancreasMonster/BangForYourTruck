@@ -12,10 +12,12 @@ public class Bomb : MonoBehaviour
     Animation anim;
     AudioSource audio;
     Rigidbody rb;
+    ParticleSystem particles;
 
     // Start is called before the first frame update
     void Start()
     {
+        particles = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         StartCoroutine(ExplodeAfterTime());
         anim = GetComponent<Animation>();
@@ -38,6 +40,7 @@ public class Bomb : MonoBehaviour
         StopAllCoroutines();
         anim.Play();
         audio.Play();
+        particles.Play();
         Invoke("DamageAndForce",.1f);
         Invoke("DestroyThisGameObject",1f);
     }
