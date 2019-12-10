@@ -100,7 +100,7 @@ public class FireDisk : MonoBehaviour
                 if (ph.powerAmount >= pc.powerCosts[3])
                 {
                     GameObject Disc = Instantiate(mine, mineFiringPoint.position, mine.transform.rotation);
-                    Disc.GetComponent<Rigidbody>().AddForce((-transform.forward + transform.up).normalized * 10);
+                    Disc.GetComponent<Rigidbody>().AddForce((-transform.forward + transform.up).normalized * mineForce);
                     Disc.GetComponent<MineTrigger>().teamNum = GetComponent<Health>().playerNum;
                     if (Disc.GetComponent<ResourceCollection>() != null)
                         Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
