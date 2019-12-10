@@ -113,7 +113,7 @@ public class PropelSelf : MonoBehaviour
                 {
                     rb.velocity = Vector3.zero;
                     rb.AddForce(transform.forward * force /* * power */);
-                    if(orb.enabled == true)
+                   // if(orb.enabled == true)
 
                     StartCoroutine(BoostEffect());
                     triggerDown = false;
@@ -141,14 +141,14 @@ public class PropelSelf : MonoBehaviour
 
     IEnumerator Cooldown ()
     {
-        bgcd.gameObject.SetActive(true);
+        //bgcd.gameObject.SetActive(true);
         fillcd.fillAmount = 1;
         while (fillcd.fillAmount > 0)
         {
             fillcd.fillAmount -= Time.deltaTime / cooldownDelay;
             yield return null;
         }
-        bgcd.gameObject.SetActive(false);
+       // bgcd.gameObject.SetActive(false);
         coolingDown = false;
     }
 
