@@ -24,22 +24,25 @@ public class EnergyRefill : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PowerHolder>())
+        if (other.GetComponent<PowerHolder>() != null)
         {
-            PowerHolder ph = other.GetComponent<PowerHolder>();
-            ph.powerAmount = ph.maxPower;
-            ph.powerRegen += powerRegenIncrease;
-        }
-        if (respawn)
-        {
-            GetComponent<BoxCollider>().enabled = false;
-            child.gameObject.SetActive(false);
+            if (other.GetComponent<PowerHolder>())
+            {
+                PowerHolder ph = other.GetComponent<PowerHolder>();
+                ph.powerAmount = ph.maxPower;
+                ph.powerRegen += powerRegenIncrease;
+            }
+            if (respawn)
+            {
+                GetComponent<BoxCollider>().enabled = false;
+                child.gameObject.SetActive(false);
 
-            Invoke("Respawn", respawnTimer);
-        }
-        else
-        {
-            Destroy(this.gameObject);
+                Invoke("Respawn", respawnTimer);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
