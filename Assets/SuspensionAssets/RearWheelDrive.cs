@@ -96,11 +96,13 @@ public class RearWheelDrive : MonoBehaviour {
             if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0)
             {
                 wheel.brakeTorque = breakForce;
-                aud.Stop();
+               // aud.Stop();
+                aud.volume = Mathf.Lerp(aud.volume, 0, .2f * Time.deltaTime);
             } else
             {
-                if(!aud.isPlaying)
-                aud.Play();
+               // if (!aud.isPlaying)
+              //      aud.Play();
+                aud.volume = Mathf.Lerp(aud.volume, .65f, .4f * Time.deltaTime);
                 wheel.brakeTorque = 0;
             }
 
