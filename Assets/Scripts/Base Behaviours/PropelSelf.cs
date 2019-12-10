@@ -156,6 +156,7 @@ public class PropelSelf : MonoBehaviour
     {
         ps.Play();
         psChild.Play();
+        GetComponent<AudioSource>().pitch = .8f - (.2f * (1.0f - ((GetComponent<PowerHolder>().powerAmount - 40) / GetComponent<PowerHolder>().maxPower)));
         GetComponent<AudioSource>().Play();
         ChromaticAberration ChromAberr = null;
         PPV.profile.TryGetSettings(out ChromAberr);
