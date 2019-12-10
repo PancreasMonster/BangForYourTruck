@@ -12,12 +12,11 @@ public class Bomb : MonoBehaviour
     Animation anim;
     AudioSource audio;
     Rigidbody rb;
-    ParticleSystem particles;
+    public ParticleSystem particles;
 
     // Start is called before the first frame update
     void Start()
     {
-        particles = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         StartCoroutine(ExplodeAfterTime());
         anim = GetComponent<Animation>();
