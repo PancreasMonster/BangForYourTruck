@@ -35,29 +35,32 @@ public class Orbit : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("PadY" + playerNum.ToString()) && !death)
+        if (fo.timer < timeAllowance)
         {
-            Rigidbody rb = player.GetComponent<Rigidbody>();
-            rb.AddForce(Vector3.up * 22500);
-            rb.drag = setDrag;
-            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-            player.transform.rotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.y, 0);
-            player.GetComponent<RearWheelDrive>().enabled = false;            
-            player.GetComponent<BuildModeProtoMovement>().enabled = true;
-            player.GetComponent<BuildModeFire>().enabled = true;
-            
-          
-            foreach (WheelCollider w in wheels)
+            if (Input.GetButtonDown("PadY" + playerNum.ToString()) && !death)
             {
-                w.gameObject.SetActive(false);
+                Rigidbody rb = player.GetComponent<Rigidbody>();
+                rb.AddForce(Vector3.up * 22500);
+                rb.drag = setDrag;
+                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                player.transform.rotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.y, 0);
+                player.GetComponent<RearWheelDrive>().enabled = false;
+                player.GetComponent<BuildModeProtoMovement>().enabled = true;
+                player.GetComponent<BuildModeFire>().enabled = true;
+
+
+                foreach (WheelCollider w in wheels)
+                {
+                    w.gameObject.SetActive(false);
+                }
+                player.GetComponent<LineRenderer>().enabled = true;
+                player.GetComponent<FireDisk>().enabled = false;
+                hoverBox.GetComponent<BoxCollider>().enabled = true;
+                GetComponent<BuildModeCamera>().changeToThis(wheels);
+                GetComponent<BuildModeCamera>().enabled = true;
+                GetComponent<BuildModeCamera>().ToggleUIElements();
+                GetComponent<Orbit>().enabled = false;
             }
-            player.GetComponent<LineRenderer>().enabled = true;
-            player.GetComponent<FireDisk>().enabled = false;
-            hoverBox.GetComponent<BoxCollider>().enabled = true;
-            GetComponent<BuildModeCamera>().changeToThis(wheels);
-            GetComponent<BuildModeCamera>().enabled = true;
-            GetComponent<BuildModeCamera>().ToggleUIElements();
-            GetComponent<Orbit>().enabled = false;
         }
     }
 
