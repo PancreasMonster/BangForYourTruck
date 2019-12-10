@@ -69,7 +69,7 @@ public class Turret : AIBehaviours
                                 
                             } else
                             {
-                                Debug.Log(hit.transform.name);
+                               // Debug.Log(hit.transform.name);
                                 Debug.DrawLine(firingPoint.position, hit.point, Color.green);
                             }
                         }
@@ -82,7 +82,7 @@ public class Turret : AIBehaviours
                             {
                                 Debug.Log("Lost");
                                 currentTarget = null;
-                                Debug.Log(hit.transform.name);
+                               // Debug.Log(hit.transform.name);
                                 Debug.DrawLine(firingPoint.position, hit.point, Color.green);
                             }
                         }

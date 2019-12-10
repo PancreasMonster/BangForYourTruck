@@ -119,4 +119,9 @@ public class Orbit : MonoBehaviour
 
     
     }
+
+    public void rotateCamera (Vector3 direction)
+    {
+
+    }
 }

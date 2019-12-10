@@ -18,6 +18,7 @@ public class PropelSelf : MonoBehaviour
     RaycastHit hit;
     public LayerMask layer;
     public float limitingForce = .75f;
+    public Orbit orb;
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +113,8 @@ public class PropelSelf : MonoBehaviour
                 {
                     rb.velocity = Vector3.zero;
                     rb.AddForce(transform.forward * force /* * power */);
+                    if(orb.enabled == true)
+
                     StartCoroutine(BoostEffect());
                     triggerDown = false;
                     t = 0;
