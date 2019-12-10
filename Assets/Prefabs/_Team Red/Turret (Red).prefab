@@ -4799,8 +4799,9 @@ GameObject:
   - component: {fileID: 1890706696518687424}
   - component: {fileID: -308162840601131014}
   - component: {fileID: 3710444519502329352}
+  - component: {fileID: 6824592487254075384}
   m_Layer: 16
-  m_Name: Turret
+  m_Name: Turret (Red)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4874,6 +4875,8 @@ MonoBehaviour:
   hpBarHolder: {fileID: 0}
   hpBarHolder2: {fileID: 0}
   baseUI: {fileID: 0}
+  car: {fileID: 0}
+  wheel: {fileID: 0}
   mbase: 0
   pr: {fileID: 0}
 --- !u!114 &4577927902009068459
@@ -4919,6 +4922,7 @@ MonoBehaviour:
   oldVelocity: 0
   minimumForce: 0
   minimumDamage: 20
+  teamNum: 0
 --- !u!111 &3710444519502329352
 Animation:
   m_ObjectHideFlags: 0
@@ -4935,6 +4939,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &6824592487254075384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593902555177473991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b049a49a859d7c4abb74f72f34053da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newDrag: 15
 --- !u!114 &716712911891856118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5101,6 +5118,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3593902555177473990}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 2d4063a8f7992b948a2f345d348b458d,
+        type: 3}
+      propertyPath: m_Name
+      value: Flamethrower Unwrap
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2d4063a8f7992b948a2f345d348b458d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2d4063a8f7992b948a2f345d348b458d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5165,16 +5192,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.52371925
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2d4063a8f7992b948a2f345d348b458d,
-        type: 3}
-      propertyPath: m_Name
-      value: Flamethrower Unwrap
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2d4063a8f7992b948a2f345d348b458d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 2d4063a8f7992b948a2f345d348b458d,
         type: 3}
@@ -5297,6 +5314,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3593902555177473990}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 8883090a3eddade4dadddd59cc410f0a,
+        type: 3}
+      propertyPath: m_Name
+      value: Turret Building Unwrap
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 8883090a3eddade4dadddd59cc410f0a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8883090a3eddade4dadddd59cc410f0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5361,16 +5388,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8378725
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 8883090a3eddade4dadddd59cc410f0a,
-        type: 3}
-      propertyPath: m_Name
-      value: Turret Building Unwrap
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 8883090a3eddade4dadddd59cc410f0a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 8883090a3eddade4dadddd59cc410f0a,
         type: 3}
