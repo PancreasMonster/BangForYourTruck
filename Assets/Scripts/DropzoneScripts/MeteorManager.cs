@@ -20,6 +20,10 @@ public class MeteorManager : MonoBehaviour
     float lrWidthMax = 50;
     private bool start, stop, startLaser, stopLaser;
     private float origWidth;
+    float t;
+    float f;
+    float rand, rand2;
+    Vector3 origTextPos;
    // public AudioSource aud;
 
     // Start is called before the first frame update
@@ -30,12 +34,19 @@ public class MeteorManager : MonoBehaviour
         lr.startWidth = lrWidth;
         lr.endWidth = lrWidth;
         origWidth = lrWidth;
+        origTextPos = text.rectTransform.localPosition;
+        rand = Random.Range(3, 4.5f);
+        rand2 = Random.Range(1, 2.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
         text.text = ((int)timer).ToString();
+        text.color = new Color(1, timer / delayBetweenMeteorStrikes, timer / delayBetweenMeteorStrikes, 1);
+        t += Time.deltaTime * (1.0f - (timer / delayBetweenMeteorStrikes)) * 6 * rand;
+        f += Time.deltaTime * (1.0f - (timer / delayBetweenMeteorStrikes)) * 6 * rand2;
+        text.rectTransform.localPosition = new Vector3(origTextPos.x + ((1.0f - (timer / delayBetweenMeteorStrikes)) * rand2 * Mathf.Sin(t - rand)), origTextPos.y + ((1.0f - (timer / delayBetweenMeteorStrikes)) * rand * Mathf.Sin(f - rand2)), origTextPos.z);
         timer -= Time.deltaTime;
         SkyLaser();
     }
