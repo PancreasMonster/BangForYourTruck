@@ -13,7 +13,7 @@ public class TooltipToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadB" + GetComponent<Health>().playerNum.ToString())) {
+        if (Input.GetButtonDown("Back" + GetComponent<Health>().playerNum.ToString())) {
             if (active)
             {
                 tooltip.gameObject.SetActive(false);

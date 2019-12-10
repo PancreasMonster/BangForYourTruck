@@ -77,11 +77,11 @@ public class FireDisk : MonoBehaviour
                     ph.losePower(pc.powerCosts[2]);
                 } else
                 {
-                    triggerDown = false;
-                    t = 0;
-                    power = 0;
-                    fill.fillAmount = 0;
-                    bg.gameObject.SetActive(false);
+                //    triggerDown = false;
+                //    t = 0;
+                //    power = 0;
+               //     fill.fillAmount = 0;
+               //     bg.gameObject.SetActive(false);
                 }
           /*  } else
             {
@@ -116,20 +116,20 @@ public class FireDisk : MonoBehaviour
                 }
                 else
                 {
-                    triggerDown = false;
-                    t = 0;
-                    power = 0;
-                    fill.fillAmount = 0;
-                    bg.gameObject.SetActive(false);
+                  //  triggerDown = false;
+                 //   t = 0;
+                 //   power = 0;
+                //    fill.fillAmount = 0;
+                //    bg.gameObject.SetActive(false);
                 }
             }
             else
             {
-                triggerDown = false;
-                t = 0;
-                power = 0;
-                fill.fillAmount = 0;
-                bg.gameObject.SetActive(false);
+             //   triggerDown = false;
+             //   t = 0;
+            //    power = 0;
+            //    fill.fillAmount = 0;
+            //    bg.gameObject.SetActive(false);
             }
         }
 

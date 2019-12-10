@@ -46,7 +46,7 @@ public class PropelSelf : MonoBehaviour
 
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down * 5, out hit, 5, layer))
         {
-            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()))
+            if (Input.GetButtonDown("PadB" + GetComponent<Health>().playerNum.ToString()))
             {
                 if (!coolingDown)
                 {
@@ -107,7 +107,7 @@ public class PropelSelf : MonoBehaviour
             } 
         } else
         {
-            if (Input.GetButtonDown("PadX" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
+            if (Input.GetButtonDown("PadB" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
             {
                 if (ph.powerAmount >= pc.powerCosts[0])
                 {

@@ -65,7 +65,14 @@ public class RearWheelDrive : MonoBehaviour {
                 curve.extremumValue = .83333333f;
                 curve.asymptoteSlip = .5f;
                 curve.asymptoteValue = .75f;
-                curve.stiffness = .55f - (.2f * driftAmount);
+                if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
+                {
+                    curve.stiffness = .55f - (.2f * driftAmount);
+                }
+                else
+                {
+                    curve.stiffness = 1f;
+                }
                 wheel.sidewaysFriction = curve;
                 if (wheel.rpm > maxSpeed)
                     wheel.motorTorque = 0;
