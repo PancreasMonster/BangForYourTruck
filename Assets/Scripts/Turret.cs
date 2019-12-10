@@ -60,7 +60,7 @@ public class Turret : AIBehaviours
                 {
                     if (currentTarget.gameObject.tag == "Player")
                     {
-                        if (Physics.Raycast(firingPoint.position, (new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 0.9824486f, currentTarget.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
+                        if (Physics.Raycast(firingPoint.position, (new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 1.25f, currentTarget.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                         {
                             if (hit.transform.gameObject != currentTarget.gameObject)
                             {
@@ -120,7 +120,7 @@ public class Turret : AIBehaviours
                 {
                     if (t.gameObject.tag == "Player")
                     {
-                        if (Physics.Raycast(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
+                        if (Physics.Raycast(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                         {
                             if (hit.transform.gameObject == t.gameObject)
                             {
@@ -132,7 +132,7 @@ public class Turret : AIBehaviours
 
                             if (hit.transform.gameObject != t.gameObject)
                             {
-                                Debug.DrawRay(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 0.9824486f, t.transform.position.z) - firingPoint.position).normalized * hit.distance, Color.blue);
+                                Debug.DrawRay(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position).normalized * hit.distance, Color.blue);
                             }
 
                         }
@@ -185,7 +185,7 @@ public class Turret : AIBehaviours
     }
         IEnumerator FireBullet(GameObject t)
         {
-            Vector3 dir = t.transform.position - firingPoint.position;
+            Vector3 dir = new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position;
             dir.Normalize();
             cooldown = true;
             GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);

@@ -124,7 +124,7 @@ public class Health : MonoBehaviour
                 Destroy(Wheel, 10);
             }
         }
-        pr.playerDeath(playerNum);
+        pr.playerDeath(playerNum, Car.transform);
         //hpBarHolder.SetActive(false);
         yield return new WaitForSeconds(pr.deathTimer);
         dead = false;

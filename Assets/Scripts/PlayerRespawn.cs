@@ -39,10 +39,10 @@ public class PlayerRespawn : MonoBehaviour
     void Update()
     {
         if (player1.transform.position.y <= deathHeight.position.y && !player1Death)
-            StartCoroutine(FallPlayer1());
+            StartCoroutine(FallPlayer1(null));
 
         if (player2.transform.position.y <= deathHeight.position.y && !player2Death)
-            StartCoroutine(FallPlayer2());
+            StartCoroutine(FallPlayer2(null));
 
         if (player1Death)
         {
@@ -78,20 +78,21 @@ public class PlayerRespawn : MonoBehaviour
         }
     } */
 
-    public void playerDeath(int playerNum)
+    public void playerDeath(int playerNum, Transform carRB)
     {
         if (playerNum == 1)
-            StartCoroutine(FallPlayer1());
+            StartCoroutine(FallPlayer1(carRB));
         if (playerNum == 2)
-            StartCoroutine(FallPlayer2());
+            StartCoroutine(FallPlayer2(carRB));
     }
 
-    public IEnumerator FallPlayer1()
+    public IEnumerator FallPlayer1(Transform carRB)
     {
         player1.transform.position = new Vector3(0, -2000, 00);
         if (player1Cam.GetComponent<BuildModeCamera>().enabled == true)
             player1Cam.GetComponent<BuildModeCamera>().SwapMode();
         player1Cam.GetComponent<Orbit>().death = true;
+        player1Cam.GetComponent<Orbit>().carDeath = carRB;
         player1Timer = deathTimer;
         player1Death = true;
         yield return new WaitForSeconds(deathTimer);
@@ -106,12 +107,13 @@ public class PlayerRespawn : MonoBehaviour
         player1Text.text = "";
     }
 
-    public IEnumerator FallPlayer2()
+    public IEnumerator FallPlayer2(Transform carRB)
     {
         player2.transform.position = new Vector3(0, -2000, 00);
         if (player2Cam.GetComponent<BuildModeCamera>().enabled == true)
             player2Cam.GetComponent<BuildModeCamera>().SwapMode();
         player2Cam.GetComponent<Orbit>().death = true;
+        player2Cam.GetComponent<Orbit>().carDeath = carRB;
         player2Timer = deathTimer;
         player2Death = true;
         yield return new WaitForSeconds(deathTimer);

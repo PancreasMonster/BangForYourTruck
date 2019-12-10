@@ -6,7 +6,7 @@ public class Orbit : MonoBehaviour
 {
 
     public float turnSpeed = 4.0f;
-    public Transform player, hoverBox;
+    public Transform player, hoverBox, carDeath;
     public int playerNum;
     public float timeAllowance;
     public LayerMask layer;
@@ -106,8 +106,17 @@ public class Orbit : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-               
+            if (carDeath != null)
+            {
+                transform.position = carDeath.position + offset;
+                transform.LookAt(carDeath.position);
+            } else
+            {
+              
+            }
         }
+
+
+    
     }
 }
