@@ -5,6 +5,7 @@ using UnityEngine;
 public class DragChangeOnLanding : MonoBehaviour
 {
     public float newDrag;
+    public float newMass;
 
     
 
@@ -13,6 +14,8 @@ public class DragChangeOnLanding : MonoBehaviour
         if (collision.gameObject.layer == 14)
         {
             GetComponent<Rigidbody>().drag = newDrag;
+            GetComponent<Rigidbody>().mass = newMass;
+
 
         }
     }
