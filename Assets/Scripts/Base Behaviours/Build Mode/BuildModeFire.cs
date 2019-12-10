@@ -9,6 +9,8 @@ public class BuildModeFire : MonoBehaviour
     public Image bg, fill;
     public Text text;
     public List<GameObject> discSelection = new List<GameObject>();
+    public Image image;
+    public List<Sprite> icons = new List<Sprite>();
     public GameObject currentDisc;
     bool triggerDown = false, dpadTrigger = false, dpadLeft = false, dpadRight = false;
     public float velocity;
@@ -49,6 +51,7 @@ public class BuildModeFire : MonoBehaviour
     void Update()
     {
         text.text = rc.resourcesID[currentI];
+        image.sprite = icons[currentI];
 
         RenderArc();
         FindVelocity(aimTarget, fireAngle);

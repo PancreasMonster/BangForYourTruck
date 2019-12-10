@@ -44,8 +44,8 @@ public class MeteorManager : MonoBehaviour
     {
         text.text = ((int)timer).ToString();
         text.color = new Color(1, timer / delayBetweenMeteorStrikes, timer / delayBetweenMeteorStrikes, 1);
-        t += Time.deltaTime * (1.0f - (timer / delayBetweenMeteorStrikes)) * 6 * rand;
-        f += Time.deltaTime * (1.0f - (timer / delayBetweenMeteorStrikes)) * 6 * rand2;
+        t += Time.deltaTime * (1.0f - (timer / delayBetweenMeteorStrikes)) * 14 * rand;
+        f += Time.deltaTime * (1.0f - (timer / delayBetweenMeteorStrikes)) * 14 * rand2;
         text.rectTransform.localPosition = new Vector3(origTextPos.x + ((1.0f - (timer / delayBetweenMeteorStrikes)) * rand2 * Mathf.Sin(t - rand)), origTextPos.y + ((1.0f - (timer / delayBetweenMeteorStrikes)) * rand * Mathf.Sin(f - rand2)), origTextPos.z);
         timer -= Time.deltaTime;
         SkyLaser();
