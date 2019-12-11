@@ -24,11 +24,13 @@ public class MeteorManager : MonoBehaviour
     float f;
     float rand, rand2;
     Vector3 origTextPos;
+    AudioSource aud;
    // public AudioSource aud;
 
     // Start is called before the first frame update
     void Start()
     {
+        aud = GetComponent<AudioSource>();
         StartCoroutine(MeteorStrike());
         timer = delayBetweenMeteorStrikes;
         lr.startWidth = lrWidth;
@@ -92,10 +94,13 @@ public class MeteorManager : MonoBehaviour
         lr.SetPosition(0, spawnHeight);
         lr.SetPosition(1, new Vector3(dropZones[rand].transform.position.x, dropZones[rand].transform.position.y - 5f, dropZones[rand].transform.position.z));
         StartCoroutine(StartLaser());
-        yield return new WaitForSeconds(laserGap);
+        yield return new WaitForSeconds(laserGap - 2f);
+        aud.Play();
+        yield return new WaitForSeconds(2f);
         timer = delayBetweenMeteorStrikes;
         
         GameObject clone = Instantiate(meteor, spawnVector, Quaternion.identity);
+       
         clone.GetComponent<Meteor>().AssignTarget(dropZones[rand]);
         StartCoroutine(MeteorStrike());
     }

@@ -12,6 +12,7 @@ public class Meteor : MonoBehaviour
     public List<GameObject> powerUp = new List<GameObject>();
     public GameObject meteorResource;
     private bool timeToFall = false;
+    public GameObject ps;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +58,9 @@ public class Meteor : MonoBehaviour
        // Debug.Log(rand);
         GameObject clone = Instantiate(powerUp[rand], new Vector3(directionToFall.x + randCircle.x, directionToFall.y, directionToFall.z + randCircle.y), powerUp[rand].transform.rotation);
         //  Instantiate(meteorResource, new Vector3(directionToFall.x + randCircle2.x, directionToFall.y, directionToFall.z + randCircle2.y), Quaternion.identity);
-       // Debug.Log(clone.transform.name);
+        // Debug.Log(clone.transform.name);
+        Instantiate(ps, transform.position, ps.transform.rotation);
         Destroy(this.gameObject);
+        
     }
 }
