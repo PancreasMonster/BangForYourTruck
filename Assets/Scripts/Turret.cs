@@ -146,7 +146,7 @@ public class Turret : AIBehaviours
                                 Debug.Log("Found");
 
 
-                               // currentTarget = t;
+                                currentTarget = t;
                             }
 
                         }
@@ -163,8 +163,17 @@ public class Turret : AIBehaviours
             {
                 if (!cooldown && currentTarget != null)
                 {
-                    if(!mortarTurret)
-                        StartCoroutine(FireBullet(currentTarget));
+                    if (!mortarTurret)
+                    {
+                        if (currentTarget.gameObject.tag == "Player")
+                        {
+                            StartCoroutine(FireBullet(currentTarget));
+                        } else
+                        {
+                            StartCoroutine(FireBulletBuilding(currentTarget));
+                        }
+
+                    }
                     if(mortarTurret)
                         StartCoroutine(FireMortar());
                 } 
@@ -197,6 +206,21 @@ public class Turret : AIBehaviours
             yield return new WaitForSeconds(1);
             cooldown = false;
         }
+
+    IEnumerator FireBulletBuilding(GameObject t)
+    {
+        Vector3 dir = new Vector3(t.transform.position.x, t.transform.position.y, t.transform.position.z) - firingPoint.position;
+        dir.Normalize();
+        cooldown = true;
+        GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
+        clone.GetComponent<BananaMove>().dir = dir;
+        clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
+        if (currentTarget != null)
+            shootAudio.Play();
+        clone.GetComponent<BananaMove>().target = currentTarget;
+        yield return new WaitForSeconds(1);
+        cooldown = false;
+    }
 
     IEnumerator FireMortar()
     {

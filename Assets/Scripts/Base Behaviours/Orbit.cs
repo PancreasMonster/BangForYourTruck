@@ -25,6 +25,7 @@ public class Orbit : MonoBehaviour
     public bool death;
     public float lookOffsetY = 3;
     public float yLookAmount;
+    public AudioSource aud;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class Orbit : MonoBehaviour
                 rb.drag = setDrag;
                 rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 player.transform.rotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.y, 0);
+                aud.Stop();
                 player.GetComponent<RearWheelDrive>().enabled = false;
                 player.GetComponent<BuildModeProtoMovement>().enabled = true;
                 player.GetComponent<BuildModeFire>().enabled = true;

@@ -36,7 +36,7 @@ public class BuildModeCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        origOffset_ = offset;
+        //origOffset_ = offset;
         buildMode = false;
         verticalHeight = offset.y;
         minYOffset = verticalHeight + minVerticalHeight;
