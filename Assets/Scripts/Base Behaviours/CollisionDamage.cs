@@ -47,4 +47,16 @@ public class CollisionDamage : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       
+         if (other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().playerNum != teamNum)
+         {
+
+             float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
+             other.transform.GetComponent<Health>().health -= damage;
+            
+        }
+    }
 }
