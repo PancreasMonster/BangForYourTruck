@@ -58,7 +58,11 @@ public class BananaMove : MonoBehaviour
                 }
             }
         }
-        BroadcastMessage("SpawnParticle");
+
+        if (GetComponent<SpawnSplashDamageParticle>() != null)
+        {
+            BroadcastMessage("SpawnParticle");
+        }
         Destroy(this.gameObject);
     }
 }
