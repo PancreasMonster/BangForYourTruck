@@ -32,7 +32,7 @@ public class RearWheelDrive : MonoBehaviour {
 			{
 				var ws = GameObject.Instantiate (wheelShape);
 				ws.transform.parent = wheel.transform;
-                if (wheel.transform.localPosition.x > 0)
+                if (wheel.transform.localPosition.x < 0)
                     ws.transform.localScale = new Vector3(ws.transform.localScale.x * -1f, ws.transform.localScale.y, ws.transform.localScale.z);
 			}
 		}
@@ -61,10 +61,10 @@ public class RearWheelDrive : MonoBehaviour {
             if (wheel.transform.localPosition.z < 0) {
                 wheel.motorTorque = sumTorque;
                 WheelFrictionCurve curve = new WheelFrictionCurve();
-                curve.extremumSlip = 1.125f;
-                curve.extremumValue = .83333333f;
-                curve.asymptoteSlip = .5f;
-                curve.asymptoteValue = .75f;
+                curve.extremumSlip = 11.25f;
+                curve.extremumValue = 8.3333333f;
+                curve.asymptoteSlip = 5f;
+                curve.asymptoteValue = 7.5f;
                 if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
                 {
                     curve.stiffness = .55f - (.2f * driftAmount);
