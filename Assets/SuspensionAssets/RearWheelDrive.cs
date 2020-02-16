@@ -61,13 +61,13 @@ public class RearWheelDrive : MonoBehaviour {
             if (wheel.transform.localPosition.z < 0) {
                 wheel.motorTorque = sumTorque;
                 WheelFrictionCurve curve = new WheelFrictionCurve();
-                curve.extremumSlip = 11.25f;
-                curve.extremumValue = 8.3333333f;
-                curve.asymptoteSlip = 5f;
-                curve.asymptoteValue = 7.5f;
+                curve.extremumSlip = 11.25f * 80f;
+                curve.extremumValue = 8.3333333f * 80f;
+                curve.asymptoteSlip = 5f * 80f;
+                curve.asymptoteValue = 7.5f * 80f;
                 if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
                 {
-                    curve.stiffness = .55f - (.2f * driftAmount);
+                    curve.stiffness = .55f + (.2f * driftAmount);
                 }
                 else
                 {

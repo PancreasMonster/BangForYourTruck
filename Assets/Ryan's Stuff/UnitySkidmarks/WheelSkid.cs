@@ -95,7 +95,7 @@ public class WheelSkid : MonoBehaviour {
                         {
                             ps.Play();
                         }
-                        aud.volume = Mathf.Lerp(aud.volume, intensity - .3f, 1.5f * Time.deltaTime);
+                        aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
                         driftTimer += Time.deltaTime;
                     }
 
