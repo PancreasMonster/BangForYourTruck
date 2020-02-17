@@ -64,8 +64,10 @@ public class RearWheelDrive : MonoBehaviour {
                 else
                 {
                     wheel.steerAngle = angle - (angle * (wheel.rpm / maxSpeed));
-                    Debug.Log(wheel.steerAngle);
+                    
                 }
+
+                Debug.Log(wheel.steerAngle);
             }
 
             if (wheel.transform.localPosition.z < 0) {
