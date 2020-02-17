@@ -54,9 +54,19 @@ public class RearWheelDrive : MonoBehaviour {
 
         foreach (WheelCollider wheel in wheels)
 		{
-			// a simple car where front wheels steer while rear ones drive
-			if (wheel.transform.localPosition.z > 0)
-				wheel.steerAngle = angle;
+            // a simple car where front wheels steer while rear ones drive
+            if (wheel.transform.localPosition.z > 0) {
+
+                if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                {
+                    wheel.steerAngle = angle;
+                }
+                else
+                {
+                    wheel.steerAngle = angle - (angle * (wheel.rpm / maxSpeed));
+                    Debug.Log(wheel.steerAngle);
+                }
+            }
 
             if (wheel.transform.localPosition.z < 0) {
                 wheel.motorTorque = sumTorque;
