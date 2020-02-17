@@ -67,7 +67,6 @@ public class RearWheelDrive : MonoBehaviour {
                     
                 }
 
-                Debug.Log(wheel.steerAngle);
             }
 
             if (wheel.transform.localPosition.z < 0) {
