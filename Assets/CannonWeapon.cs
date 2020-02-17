@@ -58,7 +58,7 @@ public class CannonWeapon : MonoBehaviour
 
 
     void Firecannon() {
-        force = force * chargingTime/2;
+        force = force * (1 + chargingTime/2);
             if (ph.powerAmount >= pc.powerCosts[2])
             {
 
