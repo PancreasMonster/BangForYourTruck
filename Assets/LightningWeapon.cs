@@ -12,7 +12,7 @@ public class LightningWeapon : MonoBehaviour
     public float cooldownTime;
     float chargingTime;
     public float maxChargeTime;
-    public float force;
+    float force;
     float startForce;
     public Transform cannonFiringPoint;
     PowerHolder ph;
