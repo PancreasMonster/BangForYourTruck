@@ -159,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 4604199268768956528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2641.4277, y: 82.1, z: -7625.57}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 3}
   m_Children:
   - {fileID: 7718382213358955429}
   - {fileID: 6735223576779466213}
@@ -223,7 +223,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.29
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &93804109866722392
 Rigidbody:
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfdbd3c54becaa4fa62aff1a2c145e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnCollision: 1
   oldVelocity: 0
   minimumForce: 0
   minimumDamage: 5

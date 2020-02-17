@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionDamage : MonoBehaviour
 {
 
-
+    public bool destroyOnCollision;
     public float oldVelocity, minimumForce, minimumDamage = 20;
     public int teamNum;
     Rigidbody rb;
@@ -46,6 +46,12 @@ public class CollisionDamage : MonoBehaviour
                 coll.transform.GetComponent<Health>().health -= damage;
             }
         }
+
+        if (destroyOnCollision)
+        {
+            Destroy(this.gameObject);
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,7 +60,7 @@ public class CollisionDamage : MonoBehaviour
          if (other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().playerNum != teamNum)
          {
 
-             float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
+             float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 300));
              other.transform.GetComponent<Health>().health -= damage;
             
         }
