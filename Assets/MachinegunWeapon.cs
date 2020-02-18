@@ -12,10 +12,15 @@ public class MachinegunWeapon : MonoBehaviour
     public GameObject weaponProjectile;
     PowerHolder ph;
     public PowerCosts pc;
+    ParticleSystem particles1;
+    ParticleSystem particles2;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        particles1 = transform.Find("DiscFiringPoint").GetComponent<ParticleSystem>();
+        particles2 = transform.Find("DiscFiringPoint2").GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
     }
@@ -60,6 +65,7 @@ public class MachinegunWeapon : MonoBehaviour
                 Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
             if (Disc.GetComponent<Health>() != null)
                 Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+            particles1.Play();
             ph.losePower(pc.powerCosts[2]);
 
         }
@@ -82,6 +88,7 @@ public class MachinegunWeapon : MonoBehaviour
                 Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
             if (Disc.GetComponent<Health>() != null)
                 Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+            particles2.Play();
             ph.losePower(pc.powerCosts[2]);
 
         }
