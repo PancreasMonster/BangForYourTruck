@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MachinegunWeapon : MonoBehaviour
 {
+    public Animator anim;
     public float fireRate;
     public float force;
     public Transform discFiringPoint;
@@ -29,7 +30,7 @@ public class MachinegunWeapon : MonoBehaviour
             FireBullet();
             InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
             InvokeRepeating("FireBullet", fireRate, fireRate);
-
+            anim.SetBool("Spinning", true);
             // triggerDown = false;
             // t = 0;
             // power = 0;
@@ -42,6 +43,7 @@ public class MachinegunWeapon : MonoBehaviour
         if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()))
         {
             CancelInvoke();
+            anim.SetBool("Spinning", false);
         }
     }
 
@@ -64,6 +66,7 @@ public class MachinegunWeapon : MonoBehaviour
         else
         {
             CancelInvoke();
+            anim.SetBool("Spinning", false);
         }
     }
 
@@ -85,6 +88,7 @@ public class MachinegunWeapon : MonoBehaviour
         else
         {
             CancelInvoke();
+            anim.SetBool("Spinning", false);
         }
     }
 }
