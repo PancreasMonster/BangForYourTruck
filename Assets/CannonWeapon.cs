@@ -59,7 +59,7 @@ public class CannonWeapon : MonoBehaviour
 
     void Firecannon() {
         force = force * (1 + chargingTime/2);
-            if (ph.powerAmount >= pc.powerCosts[2])
+            if (ph.powerAmount >= pc.powerCosts[6])
             {
 
                 GameObject Disc = Instantiate(weaponProjectile, cannonFiringPoint.position, weaponProjectile.transform.rotation);
@@ -69,7 +69,7 @@ public class CannonWeapon : MonoBehaviour
                     Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
                 if (Disc.GetComponent<Health>() != null)
                     Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
-                ph.losePower(pc.powerCosts[2]);
+                ph.losePower(pc.powerCosts[6]);
                 force = startForce;
             chargingTime = 0f;
             charging = false;

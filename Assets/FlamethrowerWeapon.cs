@@ -69,7 +69,7 @@ public class FlamethrowerWeapon : MonoBehaviour
 
     void FireBullet2()
     {
-        if (ph.powerAmount >= pc.powerCosts[2])
+        if (ph.powerAmount >= pc.powerCosts[5])
         {
 
             GameObject Disc = Instantiate(weaponProjectile, discFiringPoint2.position, weaponProjectile.transform.rotation);
@@ -79,7 +79,7 @@ public class FlamethrowerWeapon : MonoBehaviour
                 Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
             if (Disc.GetComponent<Health>() != null)
                 Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
-            ph.losePower(pc.powerCosts[2]);
+            ph.losePower(pc.powerCosts[5]);
 
         }
         else
