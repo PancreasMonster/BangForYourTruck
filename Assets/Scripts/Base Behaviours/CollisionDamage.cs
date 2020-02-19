@@ -46,7 +46,7 @@ public class CollisionDamage : MonoBehaviour
                 coll.transform.GetComponent<Health>().health -= damage;
             }
 
-            if (cannonBall)
+            if (cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().playerNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 2000));
                 coll.transform.GetComponent<Health>().health -= damage;
