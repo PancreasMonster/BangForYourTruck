@@ -66,7 +66,8 @@ public class CannonWeapon : MonoBehaviour
                 Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
             if (GetComponent<LockOn>().target != null)
             {
-                Vector3 dir = GetComponent<LockOn>().target.transform.position - cannonFiringPoint.position;
+                Vector3 targetPos = GetComponent<LockOn>().target.transform.position;
+                Vector3 dir = new Vector3(targetPos.x, targetPos.y + 5f, targetPos.z) - cannonFiringPoint.position;
                 dir.Normalize();
                 Disc.GetComponent<Rigidbody>().AddForce(dir * force);
             }

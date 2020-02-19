@@ -38,7 +38,7 @@ public class Orbit : MonoBehaviour
     {
         if (fo.timer < timeAllowance)
         {
-            if (Input.GetButtonDown("PadY" + playerNum.ToString()) && !death)
+           /* if (Input.GetButtonDown("PadY" + playerNum.ToString()) && !death)
             {
                 Rigidbody rb = player.GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * 22500);
@@ -63,8 +63,8 @@ public class Orbit : MonoBehaviour
                 GetComponent<BuildModeCamera>().enabled = true;
                 GetComponent<BuildModeCamera>().ToggleUIElements();
                 GetComponent<Orbit>().enabled = false;
-            }
-        }
+            }*/
+        } 
     }
 
     void LateUpdate()

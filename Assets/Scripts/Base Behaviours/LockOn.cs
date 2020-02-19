@@ -9,6 +9,7 @@ public class LockOn : MonoBehaviour
     public GameObject target;
     public Image image;
     public Camera cam;
+    public float maxDistance = 100f;
     bool lockedOn;
 
     // Start is called before the first frame update
@@ -43,6 +44,7 @@ public class LockOn : MonoBehaviour
                 if (magDist < dist)
                 {
                     target = t;
+                    image.gameObject.SetActive(true);
                     dist = magDist;
                     StartCoroutine(targetAcquire());
                 }
@@ -52,6 +54,7 @@ public class LockOn : MonoBehaviour
         if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && target != null && lockedOn)
         {
             target = null;
+            image.gameObject.SetActive(false);
             lockedOn = false;
         } 
 
@@ -59,9 +62,11 @@ public class LockOn : MonoBehaviour
         {
             LockedOn();
             Vector3 dir = target.transform.position - transform.position;
-            if (Vector3.Dot(transform.forward, dir) < 0)
+            float magDist = Vector3.Distance(target.transform.position, transform.position);
+            if (Vector3.Dot(transform.forward, dir) < 0 || magDist > maxDistance)
             {
                 target = null;
+                image.gameObject.SetActive(false);
                 lockedOn = false;
             }
         }

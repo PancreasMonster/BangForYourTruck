@@ -64,22 +64,14 @@ public class PropelSelf : MonoBehaviour
                         }
                        // rb.AddForce(transform.forward * force /* * power */);
                         StartCoroutine(BoostEffect());
-                        triggerDown = false;
-                        t = 0;
-                        power = 0;
-                        fill.fillAmount = 0;
-                        bg.gameObject.SetActive(false);
+                        triggerDown = false;                       
                         coolingDown = true;
                         ph.losePower(pc.powerCosts[0]);
                         StartCoroutine(Cooldown());
                     }
                     else
                     {
-                        triggerDown = false;
-                        t = 0;
-                        power = 0;
-                        fill.fillAmount = 0;
-                        bg.gameObject.SetActive(false);
+                        triggerDown = false;                       
                         coolingDown = true;
                         StartCoroutine(Cooldown());
                     }
@@ -93,22 +85,14 @@ public class PropelSelf : MonoBehaviour
                         rb.angularVelocity = Vector3.zero;
                        // Debug.Log(dir);
                         StartCoroutine(BoostEffect());
-                        triggerDown = false;
-                        t = 0;
-                        power = 0;
-                        fill.fillAmount = 0;
-                        bg.gameObject.SetActive(false);
+                        triggerDown = false;                      
                         coolingDown = true;
                         ph.losePower(pc.powerCosts[0]);
                         StartCoroutine(Cooldown());
                     }
                     else
                     {
-                        triggerDown = false;
-                        t = 0;
-                        power = 0;
-                        fill.fillAmount = 0;
-                        bg.gameObject.SetActive(false);
+                        triggerDown = false;                      
                         coolingDown = true;
                         StartCoroutine(Cooldown());
                     }
@@ -134,22 +118,14 @@ public class PropelSelf : MonoBehaviour
                     // if(orb.enabled == true)
 
                     StartCoroutine(BoostEffect());
-                    triggerDown = false;
-                    t = 0;
-                    power = 0;
-                    fill.fillAmount = 0;
-                    bg.gameObject.SetActive(false);
+                    triggerDown = false;                  
                     coolingDown = true;
                     ph.losePower(pc.powerCosts[0]);
                     StartCoroutine(Cooldown());
                 }
                 else
                 {
-                    triggerDown = false;
-                    t = 0;
-                    power = 0;
-                    fill.fillAmount = 0;
-                    bg.gameObject.SetActive(false);
+                    triggerDown = false;                   
                     coolingDown = true;
                     StartCoroutine(Cooldown());
                 }
@@ -160,13 +136,14 @@ public class PropelSelf : MonoBehaviour
     IEnumerator Cooldown ()
     {
         //bgcd.gameObject.SetActive(true);
-        fillcd.fillAmount = 1;
-        while (fillcd.fillAmount > 0)
-        {
-            fillcd.fillAmount -= Time.deltaTime / cooldownDelay;
-            yield return null;
-        }
-       // bgcd.gameObject.SetActive(false);
+        // fillcd.fillAmount = 1;
+        // while (fillcd.fillAmount > 0)
+        //   {
+        //      fillcd.fillAmount -= Time.deltaTime / cooldownDelay;
+        //        yield return null;
+        //    }
+        // bgcd.gameObject.SetActive(false);
+        yield return new WaitForSeconds(cooldownDelay);
         coolingDown = false;
     }
 

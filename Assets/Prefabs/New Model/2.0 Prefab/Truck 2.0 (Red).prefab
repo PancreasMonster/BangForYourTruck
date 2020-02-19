@@ -9754,11 +9754,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.5, y: -3.05, z: 7.6500044}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4774931591024229914}
-  - {fileID: 4774931592068175379}
-  - {fileID: 4774931591386707329}
-  - {fileID: 4774931591863500981}
+  m_Children: []
   m_Father: {fileID: 4774931590751050910}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20482,7 +20478,7 @@ GameObject:
   - component: {fileID: 4774931590751050926}
   - component: {fileID: 4774931590751050927}
   m_Layer: 8
-  m_Name: RaiderBuggy (Red) 2.0
+  m_Name: Truck 2.0 (Red)
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20515,6 +20511,10 @@ Transform:
   - {fileID: 7265271820321299060}
   - {fileID: 1191864499733549052}
   - {fileID: 2049268278548620772}
+  - {fileID: 4774931591024229914}
+  - {fileID: 4774931592068175379}
+  - {fileID: 4774931591386707329}
+  - {fileID: 4774931591863500981}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -20711,8 +20711,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.81, y: 1.3520203, z: 4.0296307}
-  m_Center: {x: 0, y: 1.705225, z: -0.65864533}
+  m_Size: {x: 4.9917407, y: 4.288432, z: 14.346843}
+  m_Center: {x: 0.036356926, y: 2.280107, z: 2.3412476}
 --- !u!114 &4449708836412573530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21072,8 +21072,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.1
   force: 5000
-  discFiringPoint: {fileID: 179689121383298347}
-  discFiringPoint2: {fileID: 5126507292877648735}
+  AutoWeaponFiringPoint: {fileID: 0}
+  AutoWeaponFiringPoint2: {fileID: 0}
   weaponProjectile: {fileID: 8852492037446782765, guid: 4e863ebf384960d48b55fd61348a8f25,
     type: 3}
   pc: {fileID: 0}
@@ -21092,8 +21092,8 @@ MonoBehaviour:
   anim: {fileID: 6167210333268035639}
   fireRate: 0.2
   force: 2500
-  discFiringPoint: {fileID: 179689121383298347}
-  discFiringPoint2: {fileID: 5126507292877648735}
+  AutoWeaponFiringPoint: {fileID: 0}
+  AutoWeaponFiringPoint2: {fileID: 0}
   weaponProjectile: {fileID: 4604199268768956528, guid: 7c3b3b0df2ab2094eaa65386602cb2e8,
     type: 3}
   pc: {fileID: 0}
@@ -21143,11 +21143,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4774931591024229909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.5, y: -3.05, z: 7.6500044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2397528654790730341}
-  m_RootOrder: 0
+  m_Father: {fileID: 4774931590751050910}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &4774931591024229915
 WheelCollider:
@@ -21324,11 +21324,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4774931591386707328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9.349997}
+  m_LocalPosition: {x: -4.5, y: -3.05, z: -1.699992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2397528654790730341}
-  m_RootOrder: 2
+  m_Father: {fileID: 4774931590751050910}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &4774931591386707334
 WheelCollider:
@@ -21405,11 +21405,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4774931591863500980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: -9.349997}
+  m_LocalPosition: {x: 4.5, y: -3.05, z: -1.699992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2397528654790730341}
-  m_RootOrder: 3
+  m_Father: {fileID: 4774931590751050910}
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &4774931591863500986
 WheelCollider:
@@ -21486,11 +21486,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4774931592068175378}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: 0}
+  m_LocalPosition: {x: 4.5, y: -3.05, z: 7.6500044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2397528654790730341}
-  m_RootOrder: 1
+  m_Father: {fileID: 4774931590751050910}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &4774931592068175376
 WheelCollider:

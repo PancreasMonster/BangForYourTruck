@@ -63,7 +63,7 @@ public class RearWheelDrive : MonoBehaviour {
                 }
                 else
                 {
-                    wheel.steerAngle = angle - (angle * (wheel.rpm / maxSpeed));
+                    wheel.steerAngle = angle - ((angle/2) * (wheel.rpm / maxSpeed));
                     
                 }
 

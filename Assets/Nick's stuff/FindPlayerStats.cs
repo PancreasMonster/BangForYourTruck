@@ -20,7 +20,7 @@ public class FindPlayerStats : MonoBehaviour
 
 
         resourceText = transform.Find("Resources").GetComponent<Text>();
-        resourceIncomeText = transform.Find("Resources Income").GetComponent<Text>();
+        //resourceIncomeText = transform.Find("Resources Income").GetComponent<Text>();
         //hpBarFill = GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
         playerMaxHealth = player.GetComponent<Health>().maxHealth;
     }
