@@ -52,8 +52,17 @@ public class PropelSelf : MonoBehaviour
                 {
                     if (ph.powerAmount >= pc.powerCosts[0])
                     {
-                       
-                        rb.AddForce(transform.forward * force /* * power */);
+                        if (GetComponent<LockOn>().target != null)
+                        {
+                            Vector3 dir = GetComponent<LockOn>().target.transform.position - transform.position;
+                            dir.Normalize();
+                            rb.AddForce(dir * force /* * power */);
+                        }
+                        else
+                        {
+                            rb.AddForce(transform.forward * force /* * power */);
+                        }
+                       // rb.AddForce(transform.forward * force /* * power */);
                         StartCoroutine(BoostEffect());
                         triggerDown = false;
                         t = 0;
@@ -112,8 +121,17 @@ public class PropelSelf : MonoBehaviour
                 if (ph.powerAmount >= pc.powerCosts[0])
                 {
                     rb.velocity = Vector3.zero;
-                    rb.AddForce(transform.forward * force /* * power */);
-                   // if(orb.enabled == true)
+                    if (GetComponent<LockOn>().target != null)
+                    {
+                        Vector3 dir = GetComponent<LockOn>().target.transform.position - transform.position;
+                        dir.Normalize();
+                        rb.AddForce(dir * force /* * power */);
+                    }
+                    else
+                    {
+                        rb.AddForce(transform.forward * force /* * power */);
+                    }
+                    // if(orb.enabled == true)
 
                     StartCoroutine(BoostEffect());
                     triggerDown = false;

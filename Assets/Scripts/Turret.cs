@@ -143,7 +143,7 @@ public class Turret : AIBehaviours
                         {
                             if (hit.transform.gameObject == t.gameObject)
                             {
-                                Debug.Log("Found");
+                                //Debug.Log("Found");
 
 
                                 currentTarget = t;
