@@ -7,8 +7,8 @@ public class MachinegunWeapon : MonoBehaviour
     public Animator anim;
     public float fireRate;
     public float force;
-    public Transform discFiringPoint;
-    public Transform discFiringPoint2;
+    public Transform AutoWeaponFiringPoint;
+    public Transform AutoWeaponFiringPoint2;
     public GameObject weaponProjectile;
     PowerHolder ph;
     public PowerCosts pc;
@@ -19,10 +19,11 @@ public class MachinegunWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        particles1 = transform.Find("DiscFiringPoint").GetComponent<ParticleSystem>();
-        particles2 = transform.Find("DiscFiringPoint2").GetComponent<ParticleSystem>();
-        ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
+
+        particles1 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint").GetComponent<ParticleSystem>();
+        particles2 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint2").GetComponent<ParticleSystem>();
+        ph = GetComponent<PowerHolder>();
     }
 
     // Update is called once per frame
@@ -58,7 +59,7 @@ public class MachinegunWeapon : MonoBehaviour
         if (ph.powerAmount >= pc.powerCosts[2])
         {
 
-            GameObject Disc = Instantiate(weaponProjectile, discFiringPoint.position, weaponProjectile.transform.rotation);
+            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, weaponProjectile.transform.rotation);
             Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
             Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
             if (Disc.GetComponent<ResourceCollection>() != null)
@@ -81,7 +82,7 @@ public class MachinegunWeapon : MonoBehaviour
         if (ph.powerAmount >= pc.powerCosts[2])
         {
 
-            GameObject Disc = Instantiate(weaponProjectile, discFiringPoint2.position, weaponProjectile.transform.rotation);
+            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, weaponProjectile.transform.rotation);
             Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
             Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
             if (Disc.GetComponent<ResourceCollection>() != null)

@@ -31,8 +31,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857435810533523716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1042.5004, y: 2.9658115, z: -140.33936}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 3}
   m_Children:
   - {fileID: 6854034697948670673}
   - {fileID: 5685822677420966222}
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfdbd3c54becaa4fa62aff1a2c145e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cannonBall: 0
   destroyOnCollision: 1
   oldVelocity: 0
   minimumForce: 0
@@ -366,7 +367,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

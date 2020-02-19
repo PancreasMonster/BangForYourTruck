@@ -12,7 +12,7 @@ public class FindPlayerStats : MonoBehaviour
 
     Text resourceText;
     Text resourceIncomeText;
-    Image hpBarFill;
+    public Image hpBarFill;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,7 @@ public class FindPlayerStats : MonoBehaviour
 
         resourceText = transform.Find("Resources").GetComponent<Text>();
         resourceIncomeText = transform.Find("Resources Income").GetComponent<Text>();
-        hpBarFill = GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
+        //hpBarFill = GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
         playerMaxHealth = player.GetComponent<Health>().maxHealth;
     }
 
