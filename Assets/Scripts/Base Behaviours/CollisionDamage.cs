@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CollisionDamage : MonoBehaviour
 {
+    public float reductionFactor;
     public bool cannonBall;
     public bool destroyOnCollision;
-    public float oldVelocity, minimumForce, minimumDamage = 20;
+    public float oldVelocity, minimumForce, minimumDamage, maximumDamage;
     public int teamNum;
+
+    public float velocityDamage;
+    public float damageToDeal;
+
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +31,28 @@ public class CollisionDamage : MonoBehaviour
     void FixedUpdate()
     {
         oldVelocity = rb.velocity.sqrMagnitude;
+        velocityDamage = oldVelocity / reductionFactor;
+        if (minimumDamage > velocityDamage)
+        {
+            damageToDeal = minimumDamage;
 
+        }
+        else
+        {
+            damageToDeal = velocityDamage;
+
+        }
+
+        if (velocityDamage > maximumDamage)
+        {
+            damageToDeal = maximumDamage;
+
+        }
+        else
+        {
+            damageToDeal = velocityDamage;
+
+        }
     }
 
     void OnCollisionEnter(Collision coll)
@@ -66,9 +92,19 @@ public class CollisionDamage : MonoBehaviour
          if (other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().playerNum != teamNum)
          {
 
-             float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 300));
-             other.transform.GetComponent<Health>().health -= damage;
-            
+             float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / reductionFactor));
+            if (damage >= maximumDamage)
+            {
+
+                other.transform.GetComponent<Health>().health -= maximumDamage;
+
+
+
+            }
+            else
+            {
+                other.transform.GetComponent<Health>().health -= damage;
+            }
         }
     }
 }
