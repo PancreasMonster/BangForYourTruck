@@ -22,6 +22,7 @@ public class FlipOver : MonoBehaviour
     public float timerAllowance = .4f;
     bool delay;
     public bool turnDelay;
+    public bool fakeGravity;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class FlipOver : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
         {
             if (!delay)
                 if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down, out hit2, 5, layer))
@@ -53,13 +55,30 @@ public class FlipOver : MonoBehaviour
                 }
         }
 
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 10, layer) && !turnDelay)
+        if (fakeGravity)
         {
-            timer = 0;
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 10, layer) && !turnDelay)
+            {
+                timer = 0;
+                rigidbody.AddForce(75f * -transform.up, ForceMode.Acceleration);
+            }
+            else
+            {
+                timer += Time.deltaTime;
+                rigidbody.AddForce(75f * -Vector3.up, ForceMode.Acceleration);
+            }
         } else
         {
-            timer += Time.deltaTime;
-            
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 10, layer) && !turnDelay)
+            {
+                timer = 0;
+                
+            }
+            else
+            {
+                timer += Time.deltaTime;
+               
+            }
         }
 
         
@@ -72,6 +91,7 @@ public class FlipOver : MonoBehaviour
                 rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
             rigidbody.AddTorque(cam.transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
             rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
+            
         }     
 
     }
