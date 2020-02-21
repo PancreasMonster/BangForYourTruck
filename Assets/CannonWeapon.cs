@@ -15,10 +15,12 @@ public class CannonWeapon : MonoBehaviour
     public GameObject weaponProjectile;
     PowerHolder ph;
     public PowerCosts pc;
+    ParticleSystem particle;
 
     // Start is called before the first frame update
     void Start()
     {
+        particle = cannonFiringPoint.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
         startForce = force;
@@ -46,7 +48,6 @@ public class CannonWeapon : MonoBehaviour
         if (chargingTime >= maxChargeTime)
         {
             Firecannon();
-
         }
 
         if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
@@ -64,6 +65,8 @@ public class CannonWeapon : MonoBehaviour
 
                 GameObject Disc = Instantiate(weaponProjectile, cannonFiringPoint.position, weaponProjectile.transform.rotation);
                 Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
+                particle.Play();
+
             if (GetComponent<LockOn>().target != null)
             {
                 Vector3 targetPos = GetComponent<LockOn>().target.transform.position;
@@ -83,8 +86,8 @@ public class CannonWeapon : MonoBehaviour
                 force = startForce;
             chargingTime = 0f;
             charging = false;
-            onCooldown = true;
-            Invoke("Cooldown", cooldownTime);
+            //onCooldown = true;
+            //Invoke("Cooldown", cooldownTime);
             }
         }
 
