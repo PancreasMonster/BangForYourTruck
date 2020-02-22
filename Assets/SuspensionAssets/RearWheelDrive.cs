@@ -9,6 +9,7 @@ public class RearWheelDrive : MonoBehaviour {
 	public float maxTorque = 300;
 	public GameObject wheelShape;
     public float sumTorque, forwardTorque, backwardTorque, breakForce;
+    public float forwardMomentum, backwardsMomentum, currBreakForce;
     public float maxSpeed = 800; // max speed of the vehicle, warning: raising this too high will cause problems
     bool accelerating, decelerating;   
     Rigidbody rigidbody;
@@ -50,7 +51,37 @@ public class RearWheelDrive : MonoBehaviour {
         forwardTorque = maxTorque * Input.GetAxisRaw("RightTrigger" + GetComponent<Health>().playerNum.ToString());
         backwardTorque = maxTorque * -Input.GetAxisRaw("LeftTrigger" + GetComponent<Health>().playerNum.ToString());
         sumTorque = forwardTorque + backwardTorque;
-      
+
+        if (forwardTorque > 0 && backwardTorque == 0)
+        {
+            if (forwardMomentum < 2)
+            {
+                forwardMomentum += 3 * Time.deltaTime;
+            }
+        }
+        else
+        {
+            if (forwardMomentum > 0)
+            {
+                forwardMomentum -= 10 * Time.deltaTime;
+            }
+        }
+
+        if (backwardTorque < 0 && forwardTorque == 0)
+        {
+            if (backwardsMomentum < 2)
+            {
+                backwardsMomentum += 3 * Time.deltaTime;
+            }
+        }
+        else
+        {
+            if (backwardsMomentum > 0)
+            {
+                backwardsMomentum -= 10 * Time.deltaTime;
+            }
+        }
+
 
         foreach (WheelCollider wheel in wheels)
 		{
@@ -69,8 +100,12 @@ public class RearWheelDrive : MonoBehaviour {
 
             }
 
+           
+
             if (wheel.transform.localPosition.z < 0) {
-                wheel.motorTorque = sumTorque;
+               
+                    wheel.motorTorque = sumTorque;
+                
                 WheelFrictionCurve curve = new WheelFrictionCurve();
                 curve.extremumSlip = 11.25f * 80f;
                 curve.extremumValue = 8.3333333f * 80f;
@@ -114,7 +149,19 @@ public class RearWheelDrive : MonoBehaviour {
                // if (!aud.isPlaying)
               //      aud.Play();
                 aud.volume = Mathf.Lerp(aud.volume, .65f, .4f * Time.deltaTime);
-                wheel.brakeTorque = 0;
+                if (backwardTorque < 0 && forwardTorque == 0 && forwardMomentum > 0)
+                {
+                    wheel.brakeTorque = breakForce;
+                    currBreakForce = breakForce;
+                }
+                else if ((backwardTorque == 0 && forwardTorque > 0 && backwardsMomentum > 0))
+                {
+                    wheel.brakeTorque = breakForce;
+                }
+                else
+                {
+                    wheel.brakeTorque = 0;
+                }
             }
 
             if(Input.GetButton("PadB" + GetComponent<Health>().playerNum.ToString())) //handbrake, trying to get it to work
