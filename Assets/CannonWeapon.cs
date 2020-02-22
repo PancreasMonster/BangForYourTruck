@@ -34,30 +34,31 @@ public class CannonWeapon : MonoBehaviour
     {
         if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()))
         {
-            if (!onCooldown)
-            {
-                //begin charging
-                charging = true;
-                chargingTime = 0f;
-            }
-
-
-        }
-
-        if (charging == true) {
-            chargingTime += Time.deltaTime;
-        }
-
-        if (chargingTime >= maxChargeTime)
-        {
-            Firecannon();
-        }
-
-        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
-        {
+            //if (!onCooldown)
+            //{
+            //begin charging
+            // charging = true;
+            // chargingTime = 0f;
+            //}
             Firecannon();
 
         }
+
+        //if (charging == true) {
+        //  chargingTime += Time.deltaTime;
+        //}
+
+        //if (chargingTime >= maxChargeTime)
+        //{
+            //Firecannon();
+
+        //}
+
+        //if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
+        //{
+        //  Firecannon();
+
+        //}
     }
 
 
