@@ -14,7 +14,6 @@ public class RearWheelDrive : MonoBehaviour {
     Rigidbody rigidbody;
     WheelHit hit, hit2, hit3, hit4;
     public AudioSource aud;
-    public float setTorque = 500;
   
 
     // here we find all the WheelColliders down in the hierarchy
@@ -71,7 +70,7 @@ public class RearWheelDrive : MonoBehaviour {
             }
 
             if (wheel.transform.localPosition.z < 0) {
-                wheel.motorTorque = sumTorque + setTorque;
+                wheel.motorTorque = sumTorque;
                 WheelFrictionCurve curve = new WheelFrictionCurve();
                 curve.extremumSlip = 11.25f * 80f;
                 curve.extremumValue = 8.3333333f * 80f;
@@ -105,7 +104,7 @@ public class RearWheelDrive : MonoBehaviour {
 
            //  wheel.
 
-            if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && setTorque == 0)
+            if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0)
             {
                 wheel.brakeTorque = breakForce;
                // aud.Stop();
