@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlamethrowerWeapon : MonoBehaviour
 {
+    public GameObject model;
     public float fireRate;
     public float force;
     public Transform AutoWeaponFiringPoint;
@@ -17,6 +18,9 @@ public class FlamethrowerWeapon : MonoBehaviour
     {
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
+
+        model.SetActive(true);
+
     }
 
     // Update is called once per frame

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CannonWeapon : MonoBehaviour
 {
+    public GameObject model;
     bool charging;
     bool onCooldown;
     public float cooldownTime;
@@ -20,6 +21,8 @@ public class CannonWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        model.SetActive(true);
+
         particle = cannonFiringPoint.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();

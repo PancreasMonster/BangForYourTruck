@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MachinegunWeapon : MonoBehaviour
 {
+    public GameObject model;
     public Animator anim;
     public float fireRate;
     public float force;
@@ -20,6 +21,7 @@ public class MachinegunWeapon : MonoBehaviour
     void Start()
     {
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
+        model.SetActive(true);
 
         particles1 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint").GetComponent<ParticleSystem>();
         particles2 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint2").GetComponent<ParticleSystem>();
