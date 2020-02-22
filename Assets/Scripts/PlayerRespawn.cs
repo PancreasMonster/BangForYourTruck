@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    public float deathTimer = 5;
+    public float deathTimer = 3;
 
     public GameObject player1;
     public GameObject player1Cam;
@@ -64,10 +64,10 @@ public class PlayerRespawn : MonoBehaviour
         if (player2.transform.position.y <= deathHeight.position.y && !player2Death)
             StartCoroutine(FallPlayer2(null));
 
-        if (player3.transform.position.y <= deathHeight.position.y && !player2Death)
+        if (player3.transform.position.y <= deathHeight.position.y && !player3Death)
             StartCoroutine(FallPlayer3(null));
 
-        if (player4.transform.position.y <= deathHeight.position.y && !player2Death)
+        if (player4.transform.position.y <= deathHeight.position.y && !player4Death)
             StartCoroutine(FallPlayer4(null));
 
         if (player1Death)
@@ -205,8 +205,8 @@ public class PlayerRespawn : MonoBehaviour
         player4.transform.position = player4StartPos;
         player4.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player4.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        player4.transform.rotation = origPlayer2Rot;
-        player4.GetComponent<FlagHolder>().FallOff();
+        player4.transform.rotation = origPlayer4Rot;
+        //player4.GetComponent<FlagHolder>().FallOff();
         player4.GetComponent<Health>().health = player4.GetComponent<Health>().maxHealth;
         player4Death = false;
        // player4Text.text = "";

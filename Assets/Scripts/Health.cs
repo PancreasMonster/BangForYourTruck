@@ -112,7 +112,7 @@ public class Health : MonoBehaviour
         GameObject Car = Instantiate(car, transform.position, transform.rotation);
         Rigidbody carRB = Car.GetComponent<Rigidbody>();
         carRB.AddForce((Vector3.up * 80000) + GetComponent<Rigidbody>().velocity);
-        Car.GetComponentInChildren<BaseExplodeOnDeath>().Explode();
+        //Car.GetComponentInChildren<BaseExplodeOnDeath>().Explode();
         Destroy(Car, 10);
         for (int x = 0; x < 2; x++)
         {
