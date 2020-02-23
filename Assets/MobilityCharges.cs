@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class MobilityCharges : MonoBehaviour
 {
-    int currentCharges;
+    public int currentCharges;
 
     bool charge1;
     public float charge1Time = 0f;
+    public SpriteRenderer light1;
 
     bool charge2;
     public float charge2Time = 0f;
+    public SpriteRenderer light2;
 
 
     bool charge3;
     public float charge3Time = 0f;
+    public SpriteRenderer light3;
 
     public float currentDriftMultiplier;
 
@@ -27,6 +30,8 @@ public class MobilityCharges : MonoBehaviour
         charge1 = true;
         charge2 = true;
         charge3 = true;
+
+        
 
         currentCharges = 3;
     }
@@ -53,6 +58,7 @@ public class MobilityCharges : MonoBehaviour
         {
             charge1 = true;
             currentCharges++;
+            light1.color = Color.green;
             charge1Time = 0f;
         }
 
@@ -66,6 +72,7 @@ public class MobilityCharges : MonoBehaviour
         {
             charge2 = true;
             currentCharges++;
+            light2.color = Color.green;
             charge2Time = 0f;
         }
 
@@ -79,6 +86,7 @@ public class MobilityCharges : MonoBehaviour
         {
             charge3 = true;
             currentCharges++;
+            light3.color = Color.green;
             charge3Time = 0f;
         }
     }
@@ -103,18 +111,21 @@ public class MobilityCharges : MonoBehaviour
         if (charge1 == true)
         {
             charge1 = false;
+            light1.color = Color.red;
             return;
         }
 
         if (charge2 == true)
         {
             charge2 = false;
+            light2.color = Color.red;
             return;
         }
 
         if (charge3 == true)
         {
             charge3 = false;
+            light3.color = Color.red;
             return;
         }
     }

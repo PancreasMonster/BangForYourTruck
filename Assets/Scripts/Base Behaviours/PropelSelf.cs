@@ -19,10 +19,12 @@ public class PropelSelf : MonoBehaviour
     public LayerMask layer;
     public float limitingForce = .75f;
     public Orbit orb;
+    MobilityCharges mobCharges;
 
     // Start is called before the first frame update
     void Start()
     {
+        mobCharges = GetComponent<MobilityCharges>();
         rb = GetComponent<Rigidbody>();
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
@@ -50,7 +52,7 @@ public class PropelSelf : MonoBehaviour
             {
                 if (!coolingDown)
                 {
-                    if (ph.powerAmount >= pc.powerCosts[0])
+                    if (mobCharges.currentCharges > 0)
                     {
                         if (GetComponent<LockOn>().target != null)
                         {
@@ -66,7 +68,7 @@ public class PropelSelf : MonoBehaviour
                         StartCoroutine(BoostEffect());
                         triggerDown = false;                       
                         coolingDown = true;
-                        ph.losePower(pc.powerCosts[0]);
+                        mobCharges.UseCharge();
                         StartCoroutine(Cooldown());
                     }
                     else
@@ -77,7 +79,7 @@ public class PropelSelf : MonoBehaviour
                     }
                 }
                 else {
-                    if (ph.powerAmount >= pc.powerCosts[0])
+                    if (mobCharges.currentCharges > 0)
                     {
                         Vector3 dir = (8 * transform.forward) + (7 * transform.up);
                         dir.Normalize();
@@ -87,7 +89,7 @@ public class PropelSelf : MonoBehaviour
                         StartCoroutine(BoostEffect());
                         triggerDown = false;                      
                         coolingDown = true;
-                        ph.losePower(pc.powerCosts[0]);
+                        mobCharges.UseCharge();
                         StartCoroutine(Cooldown());
                     }
                     else
@@ -102,7 +104,7 @@ public class PropelSelf : MonoBehaviour
         {
             if (Input.GetButtonDown("PadB" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
             {
-                if (ph.powerAmount >= pc.powerCosts[0])
+                if (mobCharges.currentCharges > 0)
                 {
                     rb.velocity = Vector3.zero;
                     if (GetComponent<LockOn>().target != null)
@@ -120,7 +122,7 @@ public class PropelSelf : MonoBehaviour
                     StartCoroutine(BoostEffect());
                     triggerDown = false;                  
                     coolingDown = true;
-                    ph.losePower(pc.powerCosts[0]);
+                    mobCharges.UseCharge();
                     StartCoroutine(Cooldown());
                 }
                 else

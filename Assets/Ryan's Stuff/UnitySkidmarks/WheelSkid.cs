@@ -33,11 +33,14 @@ public class WheelSkid : MonoBehaviour {
     float driftTimer;
     public PostProcessVolume PPV;
     ChromaticAberration ChromAberr = null;
-    
 
-	// #### UNITY INTERNAL METHODS ####
+    public bool firstWheel;
+    public MobilityCharges mobCharges;
+    public float driftMultiplierOffset;
 
-	protected void Awake() {
+    // #### UNITY INTERNAL METHODS ####
+
+    protected void Awake() {
 		wheelCollider = GetComponent<WheelCollider>();
         if(sound)
         PPV.profile.TryGetSettings(out ChromAberr);
@@ -71,8 +74,19 @@ public class WheelSkid : MonoBehaviour {
 
 			skidTotal += wheelSpin;
 
-			// Skid if we should
-			if (skidTotal >= SKID_FX_SPEED) {
+            if (firstWheel)
+            {
+                if (skidTotal / driftMultiplierOffset > 1)
+                {
+                    mobCharges.currentDriftMultiplier = 1;
+                }
+
+                mobCharges.currentDriftMultiplier = skidTotal / driftMultiplierOffset;
+            }
+
+
+            // Skid if we should
+            if (skidTotal >= SKID_FX_SPEED) {
 				float intensity = Mathf.Clamp01(skidTotal / MAX_SKID_INTENSITY);
 
                 

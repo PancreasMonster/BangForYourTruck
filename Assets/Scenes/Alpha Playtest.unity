@@ -1147,6 +1147,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 320, y: 320.00006, z: 5.000001}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!212 &455165087 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 706994569779709798, guid: cc018b919a2f61f46a3f1fe088148194,
+    type: 3}
+  m_PrefabInstance: {fileID: 2692034413974640476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &466203103 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5069446146252471775, guid: cc018b919a2f61f46a3f1fe088148194,
@@ -1171,11 +1177,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCharges: 0
   charge1Time: 0
+  light1: {fileID: 0}
   charge2Time: 0
+  light2: {fileID: 0}
   charge3Time: 0
+  light3: {fileID: 0}
   currentDriftMultiplier: 0
   maxDriftMultiplier: 1
+--- !u!114 &466203107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+    type: 3}
+  m_PrefabInstance: {fileID: 1111863011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466203103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &466203117 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8024708779026575049, guid: cc018b919a2f61f46a3f1fe088148194,
@@ -1856,6 +1878,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 320, y: 320.00006, z: 5.000001}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!212 &908762688 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5357650725666325784, guid: cc018b919a2f61f46a3f1fe088148194,
+    type: 3}
+  m_PrefabInstance: {fileID: 2692034413974640476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &921172527
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,12 +2572,12 @@ PrefabInstance:
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 19.257507
+      value: 19.257505
       objectReference: {fileID: 0}
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.851852
+      value: 1.8518518
       objectReference: {fileID: 0}
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -2564,12 +2592,12 @@ PrefabInstance:
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 19.667763
+      value: 19.667765
       objectReference: {fileID: 0}
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518518
+      value: 1.851852
       objectReference: {fileID: 0}
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -2636,6 +2664,16 @@ PrefabInstance:
       propertyPath: skidmarksController
       value: 
       objectReference: {fileID: 1312861668}
+    - target: {fileID: 8538612450627795489, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: firstWheel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538612450627795489, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: mobCharges
+      value: 
+      objectReference: {fileID: 466203107}
     - target: {fileID: 3336064764939779397, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: PPV
@@ -7806,6 +7844,12 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!212 &1269642754 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4223252164968869361, guid: cc018b919a2f61f46a3f1fe088148194,
+    type: 3}
+  m_PrefabInstance: {fileID: 2692034413974640476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1296062908 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2655450467612926002, guid: e2c7e8f4cae4d9e42a6624b9373688c8,
@@ -8074,11 +8118,11 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1733981961}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1384526927
+--- !u!114 &1384526927 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+    type: 3}
+  m_PrefabInstance: {fileID: 1733981961}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384526925}
   m_Enabled: 1
@@ -8086,11 +8130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge1Time: 0
-  charge2Time: 0
-  charge3Time: 0
-  currentDriftMultiplier: 0
-  maxDriftMultiplier: 1
 --- !u!114 &1384526939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7729516770130546572, guid: 9043886a3a4aeaa4a8479fba23b02e38,
@@ -9394,17 +9433,17 @@ PrefabInstance:
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 346.6467
+      value: 346.64682
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 19.25815
+      value: 19.258154
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518519
+      value: 1.8518516
       objectReference: {fileID: 0}
     - target: {fileID: 4774931592068175376, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -9464,7 +9503,7 @@ PrefabInstance:
     - target: {fileID: 4774931591863500986, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518517
+      value: 1.8518518
       objectReference: {fileID: 0}
     - target: {fileID: 1189645944545246797, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -9486,6 +9525,16 @@ PrefabInstance:
       propertyPath: skidmarksController
       value: 
       objectReference: {fileID: 1312861668}
+    - target: {fileID: 8243419492428651364, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: firstWheel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243419492428651364, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: mobCharges
+      value: 
+      objectReference: {fileID: 1384526927}
     - target: {fileID: 3050530865444985856, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: PPV
@@ -15354,11 +15403,11 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6247115921050699280}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1509198659540736651
+--- !u!114 &1509198659540736651 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+    type: 3}
+  m_PrefabInstance: {fileID: 6247115921050699280}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509198659540736650}
   m_Enabled: 1
@@ -15366,11 +15415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge1Time: 0
-  charge2Time: 0
-  charge3Time: 0
-  currentDriftMultiplier: 0
-  maxDriftMultiplier: 1
 --- !u!4 &1509198659540736654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4774931590751050910, guid: 9043886a3a4aeaa4a8479fba23b02e38,
@@ -15671,6 +15715,21 @@ PrefabInstance:
       propertyPath: skidmarksController
       value: 
       objectReference: {fileID: 1312861668}
+    - target: {fileID: 8538612450627795489, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: firstWheel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538612450627795489, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: mobCharges
+      value: 
+      objectReference: {fileID: 7135475736127482501}
+    - target: {fileID: 8538612450627795489, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: driftMultiplierOffset
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3336064764939779397, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: PPV
@@ -15861,6 +15920,11 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7097389037434962770, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5750459654774514881, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -15881,11 +15945,21 @@ PrefabInstance:
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7097389037434962770, guid: cc018b919a2f61f46a3f1fe088148194,
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: light1
+      value: 
+      objectReference: {fileID: 908762688}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: light2
+      value: 
+      objectReference: {fileID: 1269642754}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: light3
+      value: 
+      objectReference: {fileID: 455165087}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc018b919a2f61f46a3f1fe088148194, type: 3}
 --- !u!114 &4465024740886858140 stripped
@@ -16166,17 +16240,17 @@ PrefabInstance:
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 346.64584
+      value: 346.64575
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 19.258102
+      value: 19.258099
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.851852
+      value: 1.8518519
       objectReference: {fileID: 0}
     - target: {fileID: 4774931592068175376, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -16216,7 +16290,7 @@ PrefabInstance:
     - target: {fileID: 4774931591386707334, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518518
+      value: 1.8518517
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591863500986, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -16231,12 +16305,12 @@ PrefabInstance:
     - target: {fileID: 4774931591863500986, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 25.7419
+      value: 25.741898
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591863500986, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518519
+      value: 1.8518518
       objectReference: {fileID: 0}
     - target: {fileID: 1189645944545246797, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -16258,6 +16332,16 @@ PrefabInstance:
       propertyPath: skidmarksController
       value: 
       objectReference: {fileID: 1312861668}
+    - target: {fileID: 8243419492428651364, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: firstWheel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243419492428651364, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: mobCharges
+      value: 
+      objectReference: {fileID: 1509198659540736651}
     - target: {fileID: 3050530865444985856, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: PPV
@@ -16441,6 +16525,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2692034413974640476}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7135475736127482501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+    type: 3}
+  m_PrefabInstance: {fileID: 2692034413974640476}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135475736127482499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7135475736127482503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5069446146252471771, guid: cc018b919a2f61f46a3f1fe088148194,
@@ -16466,23 +16562,6 @@ MonoBehaviour:
   image: {fileID: 138716895}
   cam: {fileID: 1448812725}
   maxDistance: 100
---- !u!114 &7135475736127482524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7135475736127482499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charge1Time: 0
-  charge2Time: 0
-  charge3Time: 0
-  currentDriftMultiplier: 0
-  maxDriftMultiplier: 1
 --- !u!4 &7377099201809089862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4844958036759138842, guid: cc018b919a2f61f46a3f1fe088148194,
