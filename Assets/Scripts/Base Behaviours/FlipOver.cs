@@ -141,9 +141,9 @@ public class FlipOver : MonoBehaviour
                 }
                 else
                 {
-                    rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(cam.transform.forward * rollAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(cam.transform.up * horAngle * angForce, ForceMode.Force);
+                    rigidbody.AddTorque(transform.right * vertAngle * angForce, ForceMode.Force);
+                    rigidbody.AddTorque(transform.forward * rollAngle * angForce, ForceMode.Force);
+                    rigidbody.AddTorque(transform.up * horAngle * angForce, ForceMode.Force);
                 }
             }
             
