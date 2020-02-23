@@ -10,6 +10,7 @@ public class LockOn : MonoBehaviour
     public Image image;
     public Camera cam;
     public float maxDistance = 100f;
+    public Orbit camTarget;
     bool lockedOn;
 
     // Start is called before the first frame update
@@ -58,7 +59,7 @@ public class LockOn : MonoBehaviour
             lockedOn = false;
         } 
 
-        if (target != null)
+        /*if (target != null)
         {
             LockedOn();
             Vector3 dir = target.transform.position - transform.position;
@@ -69,7 +70,7 @@ public class LockOn : MonoBehaviour
                 image.gameObject.SetActive(false);
                 lockedOn = false;
             }
-        }
+        }*/
     }
 
     void LockedOn ()
