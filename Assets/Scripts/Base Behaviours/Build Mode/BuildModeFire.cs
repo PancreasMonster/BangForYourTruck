@@ -50,8 +50,8 @@ public class BuildModeFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = rc.resourcesID[currentI];
-        image.sprite = icons[currentI];
+       // text.text = rc.resourcesID[currentI];
+      //  image.sprite = icons[currentI];
 
         RenderArc();
         FindVelocity(aimTarget, fireAngle);

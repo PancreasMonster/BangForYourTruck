@@ -23,6 +23,8 @@ public class FlipOver : MonoBehaviour
     bool delay;
     public bool turnDelay;
     public bool fakeGravity;
+    public bool camDependent;
+    public bool XtoRoll;
 
     // Start is called before the first frame update
     void Start()
@@ -85,12 +87,66 @@ public class FlipOver : MonoBehaviour
 
         if (timer > timerAllowance)
         {
-            float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
-            float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
-            if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
-                rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
-            rigidbody.AddTorque(cam.transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
-            rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
+            
+
+            if (XtoRoll)
+            {
+                float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
+                float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
+                if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
+                    rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
+                if (camDependent)
+                {
+
+                    rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
+                    if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                    {
+                        rigidbody.AddTorque(cam.transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
+                    }
+                    else
+                    {
+                        rigidbody.AddTorque(cam.transform.up * horAngle * angForce, ForceMode.Force);
+
+                    }
+                }
+                else
+                {
+                    rigidbody.AddTorque(transform.right * vertAngle * angForce, ForceMode.Force);
+                    if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                    {
+                        rigidbody.AddTorque(transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
+                    }
+                    else
+                    {
+                        rigidbody.AddTorque(transform.up * horAngle * angForce, ForceMode.Force);
+
+                    }
+                }
+            }
+            else
+            {
+               
+
+                float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
+                float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
+                float rollAngle = Input.GetAxisRaw("RightTrigger" + h.playerNum.ToString()) - Input.GetAxisRaw("LeftTrigger" + h.playerNum.ToString());
+                if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
+                    rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
+                if (camDependent)
+                {
+                    rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
+                    rigidbody.AddTorque(cam.transform.forward * rollAngle * angForce, ForceMode.Force);
+                    rigidbody.AddTorque(cam.transform.up * horAngle * angForce, ForceMode.Force);
+
+                }
+                else
+                {
+                    rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
+                    rigidbody.AddTorque(cam.transform.forward * rollAngle * angForce, ForceMode.Force);
+                    rigidbody.AddTorque(cam.transform.up * horAngle * angForce, ForceMode.Force);
+                }
+            }
+            
             
         }     
 

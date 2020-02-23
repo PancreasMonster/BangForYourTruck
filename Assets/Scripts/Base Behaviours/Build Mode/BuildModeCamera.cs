@@ -100,8 +100,8 @@ public class BuildModeCamera : MonoBehaviour
             t.gameObject.SetActive(true);
             
         }
-        driveModeWeapons.SetActive(false);
-        buildModeDpad.SetActive(true);
+       // driveModeWeapons.SetActive(false);
+       // buildModeDpad.SetActive(true);
     }
 
     private void changeFromThis()
@@ -115,8 +115,8 @@ public class BuildModeCamera : MonoBehaviour
 
         offset = origOffset;
         mainCam.fieldOfView = origCamFOV;
-        driveModeWeapons.SetActive(true);
-        buildModeDpad.SetActive(false);
+      //  driveModeWeapons.SetActive(true);
+      //  buildModeDpad.SetActive(false);
     }
 
     // Update is called once per frame
