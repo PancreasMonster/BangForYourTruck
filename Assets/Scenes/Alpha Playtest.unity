@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1204,6 +1204,21 @@ MonoBehaviour:
   light3: {fileID: 0}
   currentDriftMultiplier: 0
   maxDriftMultiplier: 1
+--- !u!114 &466203106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466203103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ce426362393484d802c88de93b6dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTags: 0
+  teamTag: {fileID: 3393869045288616348, guid: 5ffe0c5deb4cdbd43a8babe63db1b66c, type: 3}
+  dropForce: 2000
 --- !u!114 &466203107 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
@@ -2536,6 +2551,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3444234850770696130, guid: 8d03b3abb5da1f146a04b078658fa9dc,
         type: 3}
+    - target: {fileID: 7744942836975459902, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: teamNum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4182367980122119761, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: powerDisplay
@@ -8100,7 +8120,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 257847
+    m_Bits: 782135
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8192,6 +8212,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1384526928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384526925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ce426362393484d802c88de93b6dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTags: 0
+  teamTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
+  dropForce: 2000
 --- !u!114 &1384526939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7729516770130546572, guid: 9043886a3a4aeaa4a8479fba23b02e38,
@@ -8966,7 +9001,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 257847
+    m_Bits: 782135
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -9448,6 +9483,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8709392785721603688, guid: 5b88b26a0257d81428532812a81bf473,
         type: 3}
+    - target: {fileID: 8026026875190574971, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: teamNum
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4473056389727371028, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: powerDisplay
@@ -10000,6 +10040,11 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4742906540745019898, guid: 4b616b0a160aad44a9cd3daae4101a7d,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 782135
+      objectReference: {fileID: 0}
     - target: {fileID: 4742906541963177659, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -10034,6 +10079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BackGroundColor.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742906541963177659, guid: 4b616b0a160aad44a9cd3daae4101a7d,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 778039
       objectReference: {fileID: 0}
     - target: {fileID: 4742906541965024728, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
@@ -15548,6 +15598,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1509198659540736652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509198659540736650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ce426362393484d802c88de93b6dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTags: 0
+  teamTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
+  dropForce: 2000
 --- !u!4 &1509198659540736654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4774931590751050910, guid: 9043886a3a4aeaa4a8479fba23b02e38,
@@ -15714,6 +15779,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3444234850770696130, guid: 8d03b3abb5da1f146a04b078658fa9dc,
         type: 3}
+    - target: {fileID: 7744942836975459902, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: teamNum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4182367980122119761, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: powerDisplay
@@ -16104,11 +16174,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8150022984419029819, guid: cc018b919a2f61f46a3f1fe088148194,
-        type: 3}
-      propertyPath: layer.m_Bits
-      value: 16384
-      objectReference: {fileID: 0}
     - target: {fileID: 5750459654774514881, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -16128,6 +16193,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150022984419029819, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: layer.m_Bits
+      value: 16384
       objectReference: {fileID: 0}
     - target: {fileID: 5382118235940067965, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -16379,6 +16449,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8709392785721603688, guid: 5b88b26a0257d81428532812a81bf473,
         type: 3}
+    - target: {fileID: 8026026875190574971, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: teamNum
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4473056389727371028, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: powerDisplay
@@ -16754,6 +16829,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2692034413974640476}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7135475736127482500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135475736127482499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ce426362393484d802c88de93b6dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTags: 0
+  teamTag: {fileID: 3393869045288616348, guid: 5ffe0c5deb4cdbd43a8babe63db1b66c, type: 3}
+  dropForce: 2000
 --- !u!114 &7135475736127482501 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
