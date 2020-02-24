@@ -54,7 +54,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857435810533523716}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -126,12 +126,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfdbd3c54becaa4fa62aff1a2c145e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reductionFactor: 0
   cannonBall: 0
   destroyOnCollision: 1
   oldVelocity: 0
   minimumForce: 0
-  minimumDamage: 5
+  minimumDamage: 10
+  maximumDamage: 0
   teamNum: 2
+  velocityDamage: 0
+  damageToDeal: 0
 --- !u!114 &4898210189559334999
 MonoBehaviour:
   m_ObjectHideFlags: 0

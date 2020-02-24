@@ -21,7 +21,7 @@ public class MobilityCharges : MonoBehaviour
 
     public float currentDriftMultiplier;
 
-    float rechargeTime = 3f;
+    public float rechargeTime = 3f;
     public float maxDriftMultiplier;
 
     // Start is called before the first frame update

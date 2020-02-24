@@ -59,20 +59,20 @@ public class CollisionDamage : MonoBehaviour
     {
         if (GetComponent<Health>() != null)
         {
-            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().playerNum != GetComponent<Health>().playerNum)
+            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != GetComponent<Health>().playerNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
                 coll.transform.GetComponent<Health>().health -= damage;
             }
         } else 
         {
-            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().playerNum != teamNum)
+            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
                 coll.transform.GetComponent<Health>().health -= damage;
             }
 
-            if (cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().playerNum != teamNum)
+            if (cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 2000));
                 coll.transform.GetComponent<Health>().health -= damage;
@@ -89,7 +89,7 @@ public class CollisionDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
        
-         if (other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().playerNum != teamNum)
+         if (other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().teamNum != teamNum)
          {
 
              float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / reductionFactor));

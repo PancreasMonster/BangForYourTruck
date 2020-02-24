@@ -64,7 +64,7 @@ public class MachinegunWeapon : MonoBehaviour
         {
 
             GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, weaponProjectile.transform.rotation);
-            Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
+            Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
             if (GetComponent<LockOn>().target != null)
             {
                 Vector3 dir = GetComponent<LockOn>().target.transform.position - AutoWeaponFiringPoint.position;
@@ -96,7 +96,7 @@ public class MachinegunWeapon : MonoBehaviour
         {
 
             GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, weaponProjectile.transform.rotation);
-            Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
+            Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
             if (GetComponent<LockOn>().target != null)
             {
                 Vector3 dir = GetComponent<LockOn>().target.transform.position - AutoWeaponFiringPoint.position;

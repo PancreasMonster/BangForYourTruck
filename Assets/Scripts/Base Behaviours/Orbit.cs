@@ -26,12 +26,14 @@ public class Orbit : MonoBehaviour
     public float lookOffsetY = 3;
     public float yLookAmount;
     public AudioSource aud;
+    public LockOn lockOnScript;
 
     void Start()
     {
         //offset = new Vector3(0, 10, -26);
         origPos = offset;
         wheels = player.GetComponentsInChildren<WheelCollider>();
+        lockOnScript = player.GetComponent<LockOn>();
     }
 
     private void Update()
@@ -78,6 +80,55 @@ public class Orbit : MonoBehaviour
                 lockedBehind = !lockedBehind;
                 offset = transform.position - player.transform.position;
             }
+            if (lockOnScript.target == null)
+            {
+                if (lockedBehind)
+                {
+
+
+                    if (fo.timer > timeAllowance)
+                    {
+                        if (!disorient)
+                        {
+                            jumpOffset = transform.position - player.transform.position;
+                            disorient = true;
+                        }
+
+                        transform.position = player.position + jumpOffset;
+                        jumpOffset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * jumpOffset;
+                        transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.position.z));
+                    }
+                    else
+                    {
+                        transform.position = new Vector3(player.TransformPoint(origPos).x, player.position.y + offset.y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.TransformPoint(origPos).z);
+                        disorient = false;
+                    }
+
+                    transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                }
+
+                if (!lockedBehind)
+                {
+                    transform.position = player.position + offset;
+                    offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;
+                    transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.position.z));
+                }
+            }
+            else
+            {
+                if (carDeath != null)
+                {
+                    transform.position = carDeath.position + offset;
+                    transform.LookAt(carDeath.position);
+                }
+                else
+                {
+
+                }
+            }
+        }
+        else
+        {
             if (lockedBehind)
             {
 
@@ -92,7 +143,8 @@ public class Orbit : MonoBehaviour
 
                     transform.position = player.position + jumpOffset;
                     jumpOffset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * jumpOffset;
-                    transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.position.z));
+                    transform.LookAt(lockOnScript.target.transform.position);
+                    Debug.Log(lockOnScript.target.transform.position);
                 }
                 else
                 {
@@ -107,24 +159,27 @@ public class Orbit : MonoBehaviour
             {
                 transform.position = player.position + offset;
                 offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;
-                transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.position.z));
+                transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+            }
+
+            else
+            {
+                if (carDeath != null)
+                {
+                    transform.position = carDeath.position + offset;
+                    transform.LookAt(carDeath.position);
+                }
+                else
+                {
+
+                }
             }
         }
-        else
-        {
-            if (carDeath != null)
-            {
-                transform.position = carDeath.position + offset;
-                transform.LookAt(carDeath.position);
-            } else
-            {
-              
-            }
-        }
+    }
 
 
     
-    }
+    
 
     public void rotateCamera (Vector3 direction)
     {

@@ -38,7 +38,7 @@ public class LockOn : MonoBehaviour
                 }
             }
 
-            float dist = 100;
+            float dist = maxDistance;
             foreach (GameObject t in detectedTargets)
             {
                 float magDist = Vector3.Distance(t.transform.position, transform.position);
@@ -57,7 +57,12 @@ public class LockOn : MonoBehaviour
             target = null;
             image.gameObject.SetActive(false);
             lockedOn = false;
-        } 
+        }
+
+        if (target != null)
+        {
+            LockedOn();
+        }
 
         /*if (target != null)
         {
@@ -81,6 +86,7 @@ public class LockOn : MonoBehaviour
     IEnumerator targetAcquire ()
     {
         yield return null;
+        Debug.Log("ImageUI");
         lockedOn = true;
     }
 }

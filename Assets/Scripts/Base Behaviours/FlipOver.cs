@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlipOver : MonoBehaviour
 {
-    RaycastHit hit, hit2;
+    RaycastHit hit, hit2, hit3, hit4;
     public LayerMask layer;
     public float force, angForce;
     [Range(0,1)]
@@ -48,11 +48,29 @@ public class FlipOver : MonoBehaviour
                 {
                     if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
                     {
-                        StartCoroutine(JumpDelay());
-                        rigidbody.AddForce(Vector3.up * force);
-                        rigidbody.angularVelocity = Vector3.zero;
+                        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.up, out hit3, 5, layer))
+                        {
+                            StartCoroutine(JumpDelay());
+                            rigidbody.AddForce(-transform.up * force);
+                            rigidbody.angularVelocity = Vector3.zero;
+                        }
+                        else
+                        {
+                            StartCoroutine(JumpDelay());
+                            rigidbody.AddForce(transform.up * force);
+                            rigidbody.angularVelocity = Vector3.zero;
+                        }
                         
                       //  Debug.Log("Hit");
+                    }
+                } else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit4, 5, layer)) {
+                    if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
+                    {
+                        StartCoroutine(JumpDelay());
+                        rigidbody.AddForce(transform.up * force);
+                        rigidbody.angularVelocity = Vector3.zero;
+
+                        //  Debug.Log("Hit");
                     }
                 }
         }
