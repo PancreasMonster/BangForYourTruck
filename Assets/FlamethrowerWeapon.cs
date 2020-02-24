@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlamethrowerWeapon : MonoBehaviour
 {
+    public float lockOnRange;
     public GameObject model;
     public float fireRate;
     public float force;
@@ -16,6 +17,7 @@ public class FlamethrowerWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<LockOn>().maxDistance = lockOnRange;
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
 

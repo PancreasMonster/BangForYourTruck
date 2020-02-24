@@ -30598,6 +30598,8 @@ MonoBehaviour:
   timerAllowance: 0.1
   turnDelay: 0
   fakeGravity: 0
+  camDependent: 0
+  XtoRoll: 0
 --- !u!120 &1342025856496443614
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -30713,6 +30715,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6329c7f10d8de84489e75cd96bd8677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adjustSpeed: 1
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
   turnSpeed: 120
   moveSpeed: 100000
 --- !u!114 &570582422383910229
@@ -30919,9 +30925,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a8ace07e517b24d853100dceae0139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnRange: 100
   model: {fileID: 5834193860009420716}
   fireRate: 0.1
-  force: 5000
+  force: 20000
   AutoWeaponFiringPoint: {fileID: 0}
   AutoWeaponFiringPoint2: {fileID: 0}
   weaponProjectile: {fileID: 8852492037446782765, guid: 4e863ebf384960d48b55fd61348a8f25,
@@ -30939,6 +30946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c850dc2bf8fda4381fc1c1890c7b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnRange: 150
   model: {fileID: 3213030325883518695}
   anim: {fileID: 6167210333268035639}
   fireRate: 0.2
@@ -30960,10 +30968,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0943a42e436484580bbfbf56787cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arcOffset: 0
+  lockOnRange: 300
   model: {fileID: 2399819634050193173}
-  cooldownTime: 1
-  maxChargeTime: 2
-  force: 30000
+  cooldownTime: 0.3
+  maxChargeTime: 1
+  force: 60000
   cannonFiringPoint: {fileID: 8026026875101739266}
   weaponProjectile: {fileID: 6353310826429478889, guid: 92607df5758e4224e8113ab5c068cb5a,
     type: 3}

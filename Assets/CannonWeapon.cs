@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CannonWeapon : MonoBehaviour
 {
+    public float arcOffset;
+    public float lockOnRange;
     public GameObject model;
     bool charging;
     bool onCooldown;
@@ -21,6 +23,7 @@ public class CannonWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<LockOn>().maxDistance = lockOnRange;
         model.SetActive(true);
 
         particle = cannonFiringPoint.GetComponent<ParticleSystem>();
@@ -34,31 +37,32 @@ public class CannonWeapon : MonoBehaviour
     {
         if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()))
         {
-            //if (!onCooldown)
-            //{
+            if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
+            {
             //begin charging
-            // charging = true;
-            // chargingTime = 0f;
-            //}
+             charging = true;
+             chargingTime = 0f;
+            }
+            //Firecannon();
+
+        }
+
+        if (charging == true) {
+          chargingTime += Time.deltaTime;
+        }
+
+        if (chargingTime >= maxChargeTime)
+        {
+            chargingTime = maxChargeTime;
             Firecannon();
 
         }
 
-        //if (charging == true) {
-        //  chargingTime += Time.deltaTime;
-        //}
+        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
+        {
+          Firecannon();
 
-        //if (chargingTime >= maxChargeTime)
-        //{
-            //Firecannon();
-
-        //}
-
-        //if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
-        //{
-        //  Firecannon();
-
-        //}
+        }
     }
 
 
@@ -66,7 +70,7 @@ public class CannonWeapon : MonoBehaviour
         force = force * (1 + chargingTime/2);
             if (ph.powerAmount >= pc.powerCosts[6])
             {
-
+                arcOffset = chargingTime * 10f;
                 GameObject Disc = Instantiate(weaponProjectile, cannonFiringPoint.position, weaponProjectile.transform.rotation);
                 Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().playerNum;
                 particle.Play();
@@ -74,7 +78,7 @@ public class CannonWeapon : MonoBehaviour
             if (GetComponent<LockOn>().target != null)
             {
                 Vector3 targetPos = GetComponent<LockOn>().target.transform.position;
-                Vector3 dir = new Vector3(targetPos.x, targetPos.y + 5f, targetPos.z) - cannonFiringPoint.position;
+                Vector3 dir = new Vector3(targetPos.x, targetPos.y + arcOffset, targetPos.z) - cannonFiringPoint.position;
                 dir.Normalize();
                 Disc.GetComponent<Rigidbody>().AddForce(dir * force);
             }

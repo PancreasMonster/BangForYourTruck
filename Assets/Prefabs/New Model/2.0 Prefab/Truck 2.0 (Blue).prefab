@@ -40818,9 +40818,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a8ace07e517b24d853100dceae0139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnRange: 100
   model: {fileID: 8098441126899974588}
   fireRate: 0.1
-  force: 5000
+  force: 20000
   AutoWeaponFiringPoint: {fileID: 0}
   AutoWeaponFiringPoint2: {fileID: 0}
   weaponProjectile: {fileID: 8852492037446782765, guid: 4e863ebf384960d48b55fd61348a8f25,
@@ -40838,6 +40839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c850dc2bf8fda4381fc1c1890c7b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnRange: 150
   model: {fileID: 2922632320156442530}
   anim: {fileID: 5877172834556930418}
   fireRate: 0.2
@@ -40859,10 +40861,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0943a42e436484580bbfbf56787cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arcOffset: 0
+  lockOnRange: 300
   model: {fileID: 9109576707173367362}
-  cooldownTime: 1
-  maxChargeTime: 2
-  force: 30000
+  cooldownTime: 0.3
+  maxChargeTime: 1
+  force: 60000
   cannonFiringPoint: {fileID: 7744942837031327815}
   weaponProjectile: {fileID: 6353310826429478889, guid: 92607df5758e4224e8113ab5c068cb5a,
     type: 3}
@@ -133440,7 +133444,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: eb5d2da4997bfc345ab814a0432cae06,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: eb5d2da4997bfc345ab814a0432cae06,
         type: 3}
