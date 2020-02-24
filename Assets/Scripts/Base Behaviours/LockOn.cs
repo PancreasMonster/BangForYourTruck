@@ -11,6 +11,7 @@ public class LockOn : MonoBehaviour
     public Camera cam;
     public float maxDistance = 100f;
     public Orbit camTarget;
+    public FollowObject pivotCamera;
     bool lockedOn;
 
     // Start is called before the first frame update
@@ -30,11 +31,11 @@ public class LockOn : MonoBehaviour
             {
                 Vector3 dir = t.transform.position - transform.position;
                 dir.Normalize();
-                Debug.Log(Vector3.Dot(transform.forward, dir));
+                //Debug.Log(Vector3.Dot(transform.forward, dir));
                 if (Vector3.Dot(transform.forward, dir) > 0)
                 {
                     detectedTargets.Add(t);
-                    Debug.Log(t.transform.name);
+                 //   Debug.Log(t.transform.name);
                 }
             }
 
@@ -45,6 +46,7 @@ public class LockOn : MonoBehaviour
                 if (magDist < dist)
                 {
                     target = t;
+                    pivotCamera.target = t;
                     image.gameObject.SetActive(true);
                     dist = magDist;
                     StartCoroutine(targetAcquire());
@@ -55,6 +57,7 @@ public class LockOn : MonoBehaviour
         if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && target != null && lockedOn)
         {
             target = null;
+            pivotCamera.target = null;
             image.gameObject.SetActive(false);
             lockedOn = false;
         }
@@ -62,6 +65,14 @@ public class LockOn : MonoBehaviour
         if (target != null)
         {
             LockedOn();
+            float magDist = Vector3.Distance(target.transform.position, transform.position);
+            if (magDist > 1500)
+            {
+                target = null;
+                pivotCamera.target = null;
+                image.gameObject.SetActive(false);
+                lockedOn = false;
+            }
         }
 
         /*if (target != null)
@@ -86,7 +97,6 @@ public class LockOn : MonoBehaviour
     IEnumerator targetAcquire ()
     {
         yield return null;
-        Debug.Log("ImageUI");
         lockedOn = true;
     }
 }

@@ -27,6 +27,7 @@ public class Orbit : MonoBehaviour
     public float yLookAmount;
     public AudioSource aud;
     public LockOn lockOnScript;
+    public GameObject lockOnParent;
 
     void Start()
     {
@@ -71,17 +72,18 @@ public class Orbit : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!death)
+        if (lockOnScript.target == null)
         {
-            Vector3 dir = player.position - transform.position;
-            dir.Normalize();
-            if (Input.GetButtonDown("RightStick" + player.GetComponent<Health>().playerNum.ToString()))
+            if (!death)
             {
-                lockedBehind = !lockedBehind;
-                offset = transform.position - player.transform.position;
-            }
-            if (lockOnScript.target == null)
-            {
+                Vector3 dir = player.position - transform.position;
+                dir.Normalize();
+                if (Input.GetButtonDown("RightStick" + player.GetComponent<Health>().playerNum.ToString()))
+                {
+                    lockedBehind = !lockedBehind;
+                    offset = transform.position - player.transform.position;
+                }
+
                 if (lockedBehind)
                 {
 
@@ -126,42 +128,13 @@ public class Orbit : MonoBehaviour
 
                 }
             }
-        }
-        else
+        } else
         {
-            if (lockedBehind)
+            if (!death)
             {
-
-
-                if (fo.timer > timeAllowance)
-                {
-                    if (!disorient)
-                    {
-                        jumpOffset = transform.position - player.transform.position;
-                        disorient = true;
-                    }
-
-                    transform.position = player.position + jumpOffset;
-                    jumpOffset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * jumpOffset;
-                    transform.LookAt(lockOnScript.target.transform.position);
-                    Debug.Log(lockOnScript.target.transform.position);
-                }
-                else
-                {
-                    transform.position = new Vector3(player.TransformPoint(origPos).x, player.position.y + offset.y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.TransformPoint(origPos).z);
-                    disorient = false;
-                }
-
-                transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                transform.position = lockOnParent.transform.position;
+                transform.LookAt(lockOnScript.target.transform.position);
             }
-
-            if (!lockedBehind)
-            {
-                transform.position = player.position + offset;
-                offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;
-                transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
-            }
-
             else
             {
                 if (carDeath != null)
@@ -175,11 +148,9 @@ public class Orbit : MonoBehaviour
                 }
             }
         }
+
+    
     }
-
-
-    
-    
 
     public void rotateCamera (Vector3 direction)
     {
