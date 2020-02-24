@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 
     public float health, maxHealth, currentHealth;
     public int playerNum;
+    public int teamNum;
     public GameObject healthBarCanvas, hpBarHolder, hpBarHolder2, baseUI, car, wheel;
     Image hpBarFill, hpBarFill2;
     public bool mbase;

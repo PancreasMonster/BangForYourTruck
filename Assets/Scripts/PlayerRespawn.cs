@@ -130,7 +130,8 @@ public class PlayerRespawn : MonoBehaviour
 
     public IEnumerator FallPlayer1(Transform carRB)
     {
-        player1.transform.position = new Vector3(0, -2000, 00);
+        player1.GetComponent<TagHolder>().dropTags();
+        player1.transform.position = new Vector3(0, -2000, 00);        
         if (player1Cam.GetComponent<BuildModeCamera>().enabled == true)
             player1Cam.GetComponent<BuildModeCamera>().SwapMode();
         player1Cam.GetComponent<Orbit>().death = true;
@@ -151,7 +152,8 @@ public class PlayerRespawn : MonoBehaviour
 
     public IEnumerator FallPlayer2(Transform carRB)
     {
-        player2.transform.position = new Vector3(0, -2000, 00);
+        player2.GetComponent<TagHolder>().dropTags();
+        player2.transform.position = new Vector3(0, -2000, 00);       
         if (player2Cam.GetComponent<BuildModeCamera>().enabled == true)
             player2Cam.GetComponent<BuildModeCamera>().SwapMode();
         player2Cam.GetComponent<Orbit>().death = true;
@@ -172,7 +174,8 @@ public class PlayerRespawn : MonoBehaviour
 
     public IEnumerator FallPlayer3(Transform carRB)
     {
-        player3.transform.position = new Vector3(0, -2000, 00);
+        player3.GetComponent<TagHolder>().dropTags();
+        player3.transform.position = new Vector3(0, -2000, 00);       
         if (player3Cam.GetComponent<BuildModeCamera>().enabled == true)
             player3Cam.GetComponent<BuildModeCamera>().SwapMode();
         player3Cam.GetComponent<Orbit>().death = true;
@@ -193,7 +196,9 @@ public class PlayerRespawn : MonoBehaviour
 
     public IEnumerator FallPlayer4(Transform carRB)
     {
+        player4.GetComponent<TagHolder>().dropTags();
         player4.transform.position = new Vector3(0, -2000, 00);
+       
         if (player4Cam.GetComponent<BuildModeCamera>().enabled == true)
             player4Cam.GetComponent<BuildModeCamera>().SwapMode();
         player4Cam.GetComponent<Orbit>().death = true;
