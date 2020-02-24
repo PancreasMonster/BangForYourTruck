@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3393869045288616348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -147.6, y: 19.6, z: -382.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 6637615363083535838}
   m_Father: {fileID: 0}
@@ -90,6 +90,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -3641069265909341148, guid: 8586c4ac32adb444cab8138bc4149364, type: 3}
+--- !u!111 &6992878556621411076
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658043347593066445}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 030589936e3bea14cbe4e270593710f1, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 030589936e3bea14cbe4e270593710f1, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &5664644290318784511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,7 +116,7 @@ PrefabInstance:
     - target: {fileID: 2655450467612926002, guid: e2c7e8f4cae4d9e42a6624b9373688c8,
         type: 3}
       propertyPath: m_Name
-      value: Blue Spawn Zone
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 2655450467612926002, guid: e2c7e8f4cae4d9e42a6624b9373688c8,
         type: 3}

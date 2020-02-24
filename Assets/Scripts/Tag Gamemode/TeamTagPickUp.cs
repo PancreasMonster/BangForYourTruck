@@ -31,7 +31,7 @@ public class TeamTagPickUp : MonoBehaviour
                     if (t.currentTags < 3)
                     {
                         collected = true;
-                        t.currentTags++;
+                        t.AddTag();
                         Destroy(this.gameObject);
                     }
                 }
