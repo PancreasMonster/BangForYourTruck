@@ -32,8 +32,12 @@ public class BuildModeFire : MonoBehaviour
     float g;
     float radianAngle;
     Vector3 targetOriginalPos;
+    public float targetZDistance;
+    public float maxTargetDistance = 6;
+    public float targetMovespeed = 3;
+    public float turnSpeed = 270;
 
-    
+
 
     void Start()
     {
@@ -57,13 +61,24 @@ public class BuildModeFire : MonoBehaviour
 
         if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
+          //  aimTarget.transform.position = transform.position + targetOriginalPos;
+         //   targetOriginalPos = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + GetComponent<Health>().playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * targetOriginalPos;
             RenderArc();
-            //aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, 4 - (8 * (1.0f - ((verticalHeight - minYOffset) / minMaxOffset))));
+            if(Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) < 0 && targetZDistance < maxTargetDistance)
+            {
+                targetZDistance += targetMovespeed * Time.deltaTime;
+            } else if (Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) > 0 && targetZDistance > 0)
+            {
+                targetZDistance -= targetMovespeed * Time.deltaTime;
+            }
+            aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, targetOriginalPos.z + targetZDistance);
         }
 
         FindVelocity(aimTarget, fireAngle);
         if (Input.GetButtonUp("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
+            targetZDistance = 0;
+            lr.positionCount = 0;
             if (ammo[currentI] > 0)
             {
                 cooldown = true;
@@ -82,6 +97,7 @@ public class BuildModeFire : MonoBehaviour
                 Rigidbody unitRB = clone.GetComponent<Rigidbody>();
                 unitRB.velocity = BallisticVel(aimTarget, fireAngle);
                 ammo[currentI]--;
+                
             }
         }
 

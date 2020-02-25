@@ -44,11 +44,11 @@ public class FlipOver : MonoBehaviour
         
         {
             if (!delay)
-                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down, out hit2, 5, layer))
+                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, out hit2, 7.5f, layer))
                 {
                     if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
                     {
-                        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.up, out hit3, 5, layer))
+                        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.up, out hit3, 7.5f, layer))
                         {
                             StartCoroutine(JumpDelay());
                             rigidbody.AddForce(-transform.up * force);
@@ -57,13 +57,13 @@ public class FlipOver : MonoBehaviour
                         else
                         {
                             StartCoroutine(JumpDelay());
-                            rigidbody.AddForce(transform.up * force);
+                            rigidbody.AddForce(Vector3.up * force);
                             rigidbody.angularVelocity = Vector3.zero;
                         }
                         
                       //  Debug.Log("Hit");
                     }
-                } else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit4, 5, layer)) {
+                } else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer)) {
                     if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
                     {
                         StartCoroutine(JumpDelay());
@@ -77,7 +77,7 @@ public class FlipOver : MonoBehaviour
 
         if (fakeGravity)
         {
-            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 10, layer) && !turnDelay)
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit, 10, layer) && !turnDelay)
             {
                 timer = 0;
                 rigidbody.AddForce(75f * -transform.up, ForceMode.Acceleration);

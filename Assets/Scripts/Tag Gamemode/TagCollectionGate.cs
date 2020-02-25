@@ -7,6 +7,7 @@ public class TagCollectionGate : MonoBehaviour
     public List<PlayerBank> playerBanks = new List<PlayerBank>();
     public bool redTeam, blueTeam;
     public TagCollectionManager tagCollectionManager;
+    public int gateTeamNum;
    
 
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class TagCollectionGate : MonoBehaviour
     {
         if(blueTeam)
         {
-            if(col.transform.tag == "Player")
+            if(col.transform.tag == "Player" && col.GetComponent<Health>().teamNum == gateTeamNum)
             {
                 TagHolder TH = col.GetComponent<TagHolder>();
                 if(TH.currentTags > 0)
@@ -48,7 +49,7 @@ public class TagCollectionGate : MonoBehaviour
             }
         } else if (redTeam)
         {
-            if (col.transform.tag == "Player")
+            if (col.transform.tag == "Player" && col.GetComponent<Health>().teamNum == gateTeamNum)
             {
                 TagHolder TH = col.GetComponent<TagHolder>();
                 if (TH.currentTags > 0)
