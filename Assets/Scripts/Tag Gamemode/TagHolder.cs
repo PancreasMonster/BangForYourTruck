@@ -8,6 +8,7 @@ public class TagHolder : MonoBehaviour
     public GameObject teamTag;
     public float dropForce = 2000;
     GameObject tagHolder;
+    ParticleSystem particles;
 
 
 
@@ -15,7 +16,7 @@ public class TagHolder : MonoBehaviour
     void Start()
     {
         tagHolder = transform.Find("KillTag Holder").gameObject;
-
+        particles = transform.Find("Item Pickup Particle").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -30,18 +31,19 @@ public class TagHolder : MonoBehaviour
         if (currentTags == 1) {
             tagHolder.transform.GetChild(0).gameObject.SetActive(true);
             tagHolder.GetComponent<AudioSource>().Play();
+            particles.Play();
         }
 
         if (currentTags == 2) {
             tagHolder.transform.GetChild(1).gameObject.SetActive(true);
             tagHolder.GetComponent<AudioSource>().Play();
-
+            particles.Play();
         }
 
         if (currentTags == 3) {
             tagHolder.transform.GetChild(2).gameObject.SetActive(true);
             tagHolder.GetComponent<AudioSource>().Play();
-
+            particles.Play();
         }
     }
 
