@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
         currentHealth = health;
         if (!mbase)
         {
-           
+
 
             GameObject hpBar = Instantiate(healthBarCanvas, new Vector3(transform.position.x, transform.position.y + 8f, transform.position.z), Quaternion.identity);
             hpBar.GetComponent<FaceCamera>().Cam1();
@@ -89,7 +89,7 @@ public class Health : MonoBehaviour
                     BroadcastMessage("Explode");
 
 
-                    
+
                 }
 
                 if (GetComponentInChildren<Turret>() != null)
@@ -108,7 +108,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public IEnumerator deadTime ()
+    public IEnumerator deadTime()
     {
         GameObject Car = Instantiate(car, transform.position, transform.rotation);
         Rigidbody carRB = Car.GetComponent<Rigidbody>();
@@ -129,7 +129,17 @@ public class Health : MonoBehaviour
         //hpBarHolder.SetActive(false);
         yield return new WaitForSeconds(pr.deathTimer);
         dead = false;
-        
+
         //hpBarHolder.SetActive(true);
+    }
+
+    void OnParticleCollision(GameObject particles)
+    {
+
+
+        float damagePerParticle = particles.GetComponent<TurretParticleDamage>().damageToDeal;
+
+
+        health -= damagePerParticle;
     }
 }
