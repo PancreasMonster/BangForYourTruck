@@ -28,6 +28,7 @@ public class NeutralTagPickUp : MonoBehaviour
                 if (t.currentTags < 3)
                 {
                     collected = true;
+                    t.AddTag();
                     t.currentTags++;
                     Destroy(this.gameObject);
                 }

@@ -8,7 +8,7 @@ public class TagCollectionManager : MonoBehaviour
 {
     public Text blueText, redText, winText;
     public Image redImage, blueImage;
-    public int blueTeamTokens, redTeamTokens, gameWinningAmount = 30;
+    public float blueTeamTokens, redTeamTokens, gameWinningAmount = 30;
     bool gameWon;
 
     // Start is called before the first frame update
