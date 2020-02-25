@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class BuildModeFire : MonoBehaviour
 {
-    LineRenderer lr;
-    public Image bg, fill;
+    
     public Text text;
     public List<GameObject> discSelection = new List<GameObject>();
+    public List<int> ammo = new List<int>();
     public Image image;
     public List<Sprite> icons = new List<Sprite>();
     public GameObject currentDisc;
@@ -25,27 +25,24 @@ public class BuildModeFire : MonoBehaviour
     ResourceCosts rc;
     PowerHolder ph;
     public PowerCosts pc;
+
     [Range (1, 50)]
     public int resolution;
-
+    LineRenderer lr;
     float g;
     float radianAngle;
+    Vector3 targetOriginalPos;
 
-     void Awake()
-    {
-        
-    }
-    // Start is called before the first frame update
+    
 
     void Start()
     {
-        currentDisc = discSelection[0];
-        rh = GetComponent<ResourceHolder>();
-        rc = GameObject.Find("ResourceCost").GetComponent<ResourceCosts>();
+        currentDisc = discSelection[0];       
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics.gravity.y);
+        targetOriginalPos = aimTarget.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -54,27 +51,38 @@ public class BuildModeFire : MonoBehaviour
         // text.text = rc.resourcesID[currentI];
         //  image.sprite = icons[currentI];
         if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        {
+            aimTarget.transform.localPosition = targetOriginalPos;
+        }  
+
+        if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        {
             RenderArc();
+            aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, 4 - (8 * (1.0f - ((verticalHeight - minYOffset) / minMaxOffset))));
+        }
+
         FindVelocity(aimTarget, fireAngle);
         if (Input.GetButtonUp("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
-            cooldown = true;
-            StartCoroutine(Cooldown());
-            GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
-            if (clone.GetComponent<ResourceCollection>() != null)
-                clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
-            if (clone.GetComponent<Health>() != null)
-                clone.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
-            if (clone.GetComponent<Bomb>() != null)
+            if (ammo[currentI] > 0)
             {
-                StopAllCoroutines();
-                cooldown = false;
-            }
+                cooldown = true;
+                StartCoroutine(Cooldown());
+                GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
+                if (clone.GetComponent<ResourceCollection>() != null)
+                    clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
+                if (clone.GetComponent<Health>() != null)
+                    clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
+                if (clone.GetComponent<Bomb>() != null)
+                {
+                    StopAllCoroutines();
+                    cooldown = false;
+                }
 
-            Rigidbody unitRB = clone.GetComponent<Rigidbody>();
-            unitRB.velocity = BallisticVel(aimTarget, fireAngle);
-            rh.resourceAmount -= rc.resourceCosts[currentI];
-            ph.losePower(pc.powerCosts[1]);
+                Rigidbody unitRB = clone.GetComponent<Rigidbody>();
+                unitRB.velocity = BallisticVel(aimTarget, fireAngle);
+                ammo[currentI]--;
+            }
         }
 
         if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) < 0 && !dpadTrigger)
