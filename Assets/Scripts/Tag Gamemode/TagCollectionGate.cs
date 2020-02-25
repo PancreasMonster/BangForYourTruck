@@ -36,7 +36,8 @@ public class TagCollectionGate : MonoBehaviour
                     {
                         pb.tagsInBank += TH.currentTags;
                     }
-                    TH.currentTags = 0;                   
+                    TH.currentTags = 0;
+                    TH.EmptyTags();
                 }
             } else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
             {
@@ -60,6 +61,7 @@ public class TagCollectionGate : MonoBehaviour
                         pb.tagsInBank += TH.currentTags;
                     }
                     TH.currentTags = 0;
+                    TH.EmptyTags();
                 }
             }
             else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 1)

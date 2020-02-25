@@ -38,6 +38,7 @@ public class QuickEjectTags : MonoBehaviour
 
     IEnumerator TagEject (int ejectTime)
     {
+        TH.EmptyTags();
         yield return new WaitForSeconds(ejectTime/3f);
         GameObject Tag = Instantiate(tag, tagFiringPoint.position, tag.transform.rotation);
         Tag.GetComponent<Rigidbody>().AddForce((transform.forward + transform.up).normalized * tagForce);
