@@ -13,7 +13,7 @@ public class TurretParticleDamage : MonoBehaviour
         if (other.gameObject.GetComponent<Health>() != null && other.gameObject.GetComponent<Health>().teamNum != GetComponent<Health>().teamNum)
         {
 
-            //other.gameObject.GetComponent<Health>().health -= damageToDeal;
+            other.gameObject.GetComponent<Health>().health -= damageToDeal;
         }
     }
 }

@@ -4781,10 +4781,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfdbd3c54becaa4fa62aff1a2c145e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reductionFactor: 0
+  cannonBall: 0
+  destroyOnCollision: 0
   oldVelocity: 0
   minimumForce: 0
   minimumDamage: 20
+  maximumDamage: 0
   teamNum: 0
+  velocityDamage: 0
+  damageToDeal: 0
 --- !u!114 &1649246966653922642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4835,6 +4841,7 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   playerNum: 0
+  teamNum: 0
   healthBarCanvas: {fileID: 4105945699236562807, guid: 7639f25d764cf3a4bbc5d3499d915439,
     type: 3}
   hpBarHolder: {fileID: 0}
@@ -4978,16 +4985,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5943942836313356370}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 964fa4a2d66df5549a78aefd19c008b0,
-        type: 3}
-      propertyPath: m_Name
-      value: Raider Mining Outpost
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 964fa4a2d66df5549a78aefd19c008b0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 964fa4a2d66df5549a78aefd19c008b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5041,6 +5038,16 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 964fa4a2d66df5549a78aefd19c008b0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 964fa4a2d66df5549a78aefd19c008b0,
+        type: 3}
+      propertyPath: m_Name
+      value: Raider Mining Outpost
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 964fa4a2d66df5549a78aefd19c008b0,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5150,12 +5157,17 @@ PrefabInstance:
     - target: {fileID: 1035590340929009075, guid: 62638cb1d7c574746ad0b5b69cffd27a,
         type: 3}
       propertyPath: m_Radius
-      value: 0.6722397
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1035590340929009075, guid: 62638cb1d7c574746ad0b5b69cffd27a,
         type: 3}
       propertyPath: m_Center.x
-      value: 0.1722397
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035590340929009075, guid: 62638cb1d7c574746ad0b5b69cffd27a,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 2799264227412118367, guid: 62638cb1d7c574746ad0b5b69cffd27a,
         type: 3}
@@ -5200,11 +5212,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5943942836313356370}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: f41012521c595264c973b06077a7033c,
-        type: 3}
-      propertyPath: m_Name
-      value: Raider Mining Outpost Unwrap
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f41012521c595264c973b06077a7033c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5259,6 +5266,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f41012521c595264c973b06077a7033c,
+        type: 3}
+      propertyPath: m_Name
+      value: Raider Mining Outpost Unwrap
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: f41012521c595264c973b06077a7033c,
         type: 3}

@@ -5674,8 +5674,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6722397
-  m_Center: {x: 0.1722397, y: 0, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!54 &6929236290573370486
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5732,10 +5732,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfdbd3c54becaa4fa62aff1a2c145e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reductionFactor: 0
+  cannonBall: 0
+  destroyOnCollision: 0
   oldVelocity: 0
   minimumForce: 0
   minimumDamage: 20
+  maximumDamage: 0
   teamNum: 0
+  velocityDamage: 0
+  damageToDeal: 0
 --- !u!114 &7594859811633905917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5772,6 +5778,7 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   playerNum: 0
+  teamNum: 0
   healthBarCanvas: {fileID: 4105945699236562807, guid: 7639f25d764cf3a4bbc5d3499d915439,
     type: 3}
   hpBarHolder: {fileID: 0}
