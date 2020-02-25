@@ -23,7 +23,7 @@ public class LockOn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && target == null)
+        if (Input.GetButtonDown("PadY" + GetComponent<Health>().playerNum.ToString()) && target == null)
         {
            // Debug.Log("Found");
             List<GameObject> detectedTargets = new List<GameObject>();
@@ -54,7 +54,7 @@ public class LockOn : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && target != null && lockedOn)
+        if (Input.GetButtonDown("PadY" + GetComponent<Health>().playerNum.ToString()) && target != null && lockedOn)
         {
             target = null;
             pivotCamera.target = null;

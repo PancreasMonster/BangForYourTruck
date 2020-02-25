@@ -30687,6 +30687,7 @@ GameObject:
   - component: {fileID: 1038743839555045944}
   - component: {fileID: 403038621535647321}
   - component: {fileID: 3444730222054763133}
+  - component: {fileID: 1100815002925653983}
   m_Layer: 8
   m_Name: Truck 2.0 (Red)
   m_TagString: Player
@@ -31400,6 +31401,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagsInBank: 0
+--- !u!114 &1100815002925653983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774931590751050906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54890884e25c85b4893463ad66ba12f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: {fileID: 3393869045288616348, guid: 5ffe0c5deb4cdbd43a8babe63db1b66c, type: 3}
+  tagFiringPoint: {fileID: 734814913621652981}
+  tagForce: 200
 --- !u!1 &4774931591024229909
 GameObject:
   m_ObjectHideFlags: 0
@@ -80709,7 +80725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6629860747194746048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.299998, y: -2.5600004, z: 1.9499922}
+  m_LocalPosition: {x: -3.299998, y: 1.17, z: 12.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2397528654906180105}
@@ -110675,18 +110691,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fe03da36bb61a454fa9fd5d57ea379b5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb5d2da4997bfc345ab814a0432cae06, type: 3}
---- !u!1 &5834193860009420716 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: eb5d2da4997bfc345ab814a0432cae06,
-    type: 3}
-  m_PrefabInstance: {fileID: 2582486121119170213}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7398395762158507455 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: eb5d2da4997bfc345ab814a0432cae06,
-    type: 3}
-  m_PrefabInstance: {fileID: 2582486121119170213}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1347682445755009539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3559316477958878374, guid: eb5d2da4997bfc345ab814a0432cae06,
@@ -110699,6 +110703,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2582486121119170213}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7398395762158507455 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: eb5d2da4997bfc345ab814a0432cae06,
+    type: 3}
+  m_PrefabInstance: {fileID: 2582486121119170213}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5834193860009420716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: eb5d2da4997bfc345ab814a0432cae06,
+    type: 3}
+  m_PrefabInstance: {fileID: 2582486121119170213}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5939177157629480476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110706,6 +110722,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2049268278548620772}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -110775,16 +110801,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: -0.2523
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
         type: 3}

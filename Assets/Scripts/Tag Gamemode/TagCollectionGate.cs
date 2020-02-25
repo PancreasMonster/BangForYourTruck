@@ -61,7 +61,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.currentTags = 0;
                 }
             }
-            else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
+            else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 1)
             {
                 Destroy(col.gameObject);
                 tagCollectionManager.redTeamTokens++;

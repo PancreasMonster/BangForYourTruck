@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 2999050523824450038}
   - component: {fileID: 7234779370706612995}
   - component: {fileID: 8610236998705940366}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: RedTeamTag
   m_TagString: TeamTag
   m_Icon: {fileID: 0}
@@ -76,7 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8306f767f5cf44549a450e1b49c4457d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagTeamNum: 0
+  tagTeamNum: 2
+  collectionDelayTime: 0.75
 --- !u!135 &7234779370706612995
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -121,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 7334954885509112900, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
         type: 3}
       propertyPath: m_Layer
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6021778086295475799, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
         type: 3}

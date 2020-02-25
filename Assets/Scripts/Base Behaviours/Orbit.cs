@@ -37,11 +37,11 @@ public class Orbit : MonoBehaviour
         lockOnScript = player.GetComponent<LockOn>();
     }
 
-    private void Update()
+   /* private void Update()
     {
         if (fo.timer < timeAllowance)
         {
-            if (Input.GetButtonDown("PadY" + playerNum.ToString()) && !death)
+            if (Input.GetButtonDown("PadLB" + playerNum.ToString()) && !death)
             {
                 Rigidbody rb = player.GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * 22500);
@@ -66,11 +66,11 @@ public class Orbit : MonoBehaviour
                 GetComponent<BuildModeCamera>().enabled = true;
                 GetComponent<BuildModeCamera>().ToggleUIElements();
                 GetComponent<Orbit>().enabled = false;
-            }
+            } 
         } 
-    }
+    } */
 
-    void LateUpdate()
+    void Update()
     {
         if (lockOnScript.target == null)
         {
@@ -87,7 +87,7 @@ public class Orbit : MonoBehaviour
                 if (lockedBehind)
                 {
 
-
+                    
                     if (fo.timer > timeAllowance)
                     {
                         if (!disorient)
@@ -98,7 +98,7 @@ public class Orbit : MonoBehaviour
 
                         transform.position = player.position + jumpOffset;
                         jumpOffset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * jumpOffset;
-                        transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.position.z));
+                        transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.position.z));
                     }
                     else
                     {

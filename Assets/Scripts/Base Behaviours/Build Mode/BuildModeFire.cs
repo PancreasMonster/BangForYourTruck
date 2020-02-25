@@ -36,6 +36,7 @@ public class BuildModeFire : MonoBehaviour
         
     }
     // Start is called before the first frame update
+
     void Start()
     {
         currentDisc = discSelection[0];
@@ -50,36 +51,30 @@ public class BuildModeFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // text.text = rc.resourcesID[currentI];
-      //  image.sprite = icons[currentI];
-
-        RenderArc();
+        // text.text = rc.resourcesID[currentI];
+        //  image.sprite = icons[currentI];
+        if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+            RenderArc();
         FindVelocity(aimTarget, fireAngle);
-        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        if (Input.GetButtonUp("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
-            if (rh.resourceAmount >= rc.resourceCosts[currentI])
+            cooldown = true;
+            StartCoroutine(Cooldown());
+            GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
+            if (clone.GetComponent<ResourceCollection>() != null)
+                clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
+            if (clone.GetComponent<Health>() != null)
+                clone.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+            if (clone.GetComponent<Bomb>() != null)
             {
-                if (ph.powerAmount >= pc.powerCosts[1])
-                {
-                    cooldown = true;
-                    StartCoroutine(Cooldown());
-                    GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
-                    if (clone.GetComponent<ResourceCollection>() != null)
-                        clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
-                    if (clone.GetComponent<Health>() != null)
-                        clone.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
-                    if (clone.GetComponent<Bomb>() != null)
-                    {
-                        StopAllCoroutines();
-                        cooldown = false;
-                    }
-                        
-                    Rigidbody unitRB = clone.GetComponent<Rigidbody>();
-                    unitRB.velocity = BallisticVel(aimTarget, fireAngle);
-                    rh.resourceAmount -= rc.resourceCosts[currentI];
-                    ph.losePower(pc.powerCosts[1]);
-                }
+                StopAllCoroutines();
+                cooldown = false;
             }
+
+            Rigidbody unitRB = clone.GetComponent<Rigidbody>();
+            unitRB.velocity = BallisticVel(aimTarget, fireAngle);
+            rh.resourceAmount -= rc.resourceCosts[currentI];
+            ph.losePower(pc.powerCosts[1]);
         }
 
         if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) < 0 && !dpadTrigger)

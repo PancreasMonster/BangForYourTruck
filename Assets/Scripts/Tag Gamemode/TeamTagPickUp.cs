@@ -6,11 +6,13 @@ public class TeamTagPickUp : MonoBehaviour
 {
     public float tagTeamNum;
     bool collected;
+    public float collectionDelayTime = .75f;
 
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<Rigidbody>().AddForce(Random.insideUnitSphere * 500);
+        StartCoroutine(CollectionDelayInitialisation());
     }
 
     // Update is called once per frame
@@ -42,5 +44,11 @@ public class TeamTagPickUp : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator CollectionDelayInitialisation ()
+    {
+        yield return new WaitForSeconds(collectionDelayTime);
+        this.gameObject.layer = 19;       
     }
 }
