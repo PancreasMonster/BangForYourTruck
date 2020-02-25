@@ -58,7 +58,7 @@ public class BuildModeFire : MonoBehaviour
         if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
             RenderArc();
-            aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, 4 - (8 * (1.0f - ((verticalHeight - minYOffset) / minMaxOffset))));
+            //aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, 4 - (8 * (1.0f - ((verticalHeight - minYOffset) / minMaxOffset))));
         }
 
         FindVelocity(aimTarget, fireAngle);

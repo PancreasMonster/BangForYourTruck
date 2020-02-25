@@ -21,10 +21,13 @@ public class Turret : AIBehaviours
     List<GameObject> targets = new List<GameObject>();
     public AudioSource shootAudio;
 
+    ParticleSystem turretParticles;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(EnemyCheck());
+        turretParticles = transform.Find("Projectile Particle System").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -167,7 +170,8 @@ public class Turret : AIBehaviours
                     {
                         if (currentTarget.gameObject.tag == "Player")
                         {
-                            StartCoroutine(FireBullet(currentTarget));
+                            //StartCoroutine(FireBullet(currentTarget));
+                            FireParticles(currentTarget);
                         } else
                         {
                             StartCoroutine(FireBulletBuilding(currentTarget));
@@ -179,6 +183,7 @@ public class Turret : AIBehaviours
                 } 
                 yield return new WaitForSeconds(fireRate);
             }
+            StopParticles();
             currentTarget = null;
             targets.Clear();
             yield return new WaitForSeconds(tickRate);
@@ -192,17 +197,30 @@ public class Turret : AIBehaviours
         }
 
     }
-        IEnumerator FireBullet(GameObject t)
+    void FireParticles(GameObject t)
+    {
+        Vector3 dir = new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position;
+        dir.Normalize();
+        turretParticles.Play();
+    }
+
+    void StopParticles()
+    {
+        turretParticles.Stop();
+    }
+
+    IEnumerator FireBullet(GameObject t)
         {
             Vector3 dir = new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position;
             dir.Normalize();
             cooldown = true;
-            GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
-            clone.GetComponent<BananaMove>().dir = dir;
-            clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
-        if (currentTarget != null)
-            shootAudio.Play();
-            clone.GetComponent<BananaMove>().target = currentTarget;
+            turretParticles.Play();
+            //GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
+            //clone.GetComponent<BananaMove>().dir = dir;
+            //clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
+            //if (currentTarget != null)
+            //shootAudio.Play();
+            //clone.GetComponent<BananaMove>().target = currentTarget;
             yield return new WaitForSeconds(1);
             cooldown = false;
         }
@@ -212,12 +230,13 @@ public class Turret : AIBehaviours
         Vector3 dir = new Vector3(t.transform.position.x, t.transform.position.y, t.transform.position.z) - firingPoint.position;
         dir.Normalize();
         cooldown = true;
-        GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
-        clone.GetComponent<BananaMove>().dir = dir;
-        clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
-        if (currentTarget != null)
-            shootAudio.Play();
-        clone.GetComponent<BananaMove>().target = currentTarget;
+        turretParticles.Play();
+        //GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
+        //clone.GetComponent<BananaMove>().dir = dir;
+        //clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
+        //if (currentTarget != null)
+        //shootAudio.Play();
+        //clone.GetComponent<BananaMove>().target = currentTarget;
         yield return new WaitForSeconds(1);
         cooldown = false;
     }
