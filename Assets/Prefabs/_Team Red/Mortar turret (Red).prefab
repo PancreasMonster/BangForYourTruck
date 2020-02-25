@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 310607744628758536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.33532715, y: 1.7075143, z: 403.8183}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children:
   - {fileID: 4698719887176345949}
   - {fileID: 4698719887907276283}
@@ -87,6 +87,7 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   playerNum: 2
+  teamNum: 0
   healthBarCanvas: {fileID: 4105945699236562807, guid: 7639f25d764cf3a4bbc5d3499d915439,
     type: 3}
   hpBarHolder: {fileID: 0}
@@ -144,7 +145,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310607744628758536}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 498caa7801fea6a42a10effaf644cbfe, type: 2}
   m_Animations:
@@ -506,15 +507,16 @@ MonoBehaviour:
   targetDist: 5
   fireRate: 2
   tickRate: 0.25
-  range: 280
-  shootAngle: 45
-  mortarSpeed: 1
+  range: 1150
+  shootAngle: 1
+  mortarSpeed: 5
   currentTarget: {fileID: 0}
   ctDir: {fileID: 0}
   banana: {fileID: 2293599272440342419, guid: 0d2387caed74da74ca5d6c9909701a8e, type: 3}
   firingPoint: {fileID: 1577963696841602064}
   mortarTurret: 1
   shootAudio: {fileID: 6755321990604100749}
+  rotationSpeed: 2.5
 --- !u!1 &8605935850309446966
 GameObject:
   m_ObjectHideFlags: 0

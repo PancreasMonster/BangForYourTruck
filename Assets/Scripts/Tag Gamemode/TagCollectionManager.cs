@@ -50,5 +50,10 @@ public class TagCollectionManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 100), ((int)(1.0f / Time.smoothDeltaTime)).ToString());
+    }
 }
 

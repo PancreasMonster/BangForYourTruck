@@ -15,7 +15,7 @@ public class BananaMove : MonoBehaviour
     public Vector3 dir;
     public int team;
     public float speed = 5;
-    public float range = 10;
+    public float range = 50;
     public float maxDamage = 20;
 
    
@@ -23,8 +23,7 @@ public class BananaMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dir != null)
-        rb.AddForce(dir * speed);
+        
         // = Vector3.MoveTowards(transform.position, dir, 1f);
         
 
@@ -44,7 +43,7 @@ public class BananaMove : MonoBehaviour
         {
             if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
             {
-                if (c.gameObject.GetComponent<Health>().playerNum != team)
+                if (c.gameObject.GetComponent<Health>().teamNum != team)
                 {
                     if (Vector3.Distance(transform.position, c.transform.position) > range / 2f) {
                         c.GetComponent<Health>().health -= maxDamage / 2f;

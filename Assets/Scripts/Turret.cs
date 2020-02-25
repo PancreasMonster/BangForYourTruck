@@ -20,6 +20,7 @@ public class Turret : AIBehaviours
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
     public AudioSource shootAudio;
+    public float rotationSpeed = 2.5f;
 
     ParticleSystem turretParticles;
 
@@ -27,7 +28,7 @@ public class Turret : AIBehaviours
     void Start()
     {
         StartCoroutine(EnemyCheck());
-        turretParticles = transform.Find("Projectile Particle System").GetComponent<ParticleSystem>();
+      //  turretParticles = transform.Find("Projectile Particle System").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -40,7 +41,7 @@ public class Turret : AIBehaviours
             {
                 Vector3 dir = ctDir.transform.position - transform.position;
                 dir.Normalize();
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), 5 * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y + 90, dir.z)), rotationSpeed * Time.deltaTime);
             }
         }
 
@@ -103,7 +104,7 @@ public class Turret : AIBehaviours
         {
             if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
             {
-                if (c.gameObject.GetComponent<Health>().playerNum != GetComponentInParent<Health>().playerNum)
+                if (c.gameObject.GetComponent<Health>().teamNum != GetComponentInParent<Health>().teamNum)
                 {
                     targets.Add(c.gameObject);
                 }
@@ -171,7 +172,7 @@ public class Turret : AIBehaviours
                         if (currentTarget.gameObject.tag == "Player")
                         {
                             //StartCoroutine(FireBullet(currentTarget));
-                            FireParticles(currentTarget);
+                           // FireParticles(currentTarget);
                         } else
                         {
                             StartCoroutine(FireBulletBuilding(currentTarget));
@@ -183,7 +184,7 @@ public class Turret : AIBehaviours
                 } 
                 yield return new WaitForSeconds(fireRate);
             }
-            StopParticles();
+           // StopParticles();
             currentTarget = null;
             targets.Clear();
             yield return new WaitForSeconds(tickRate);
@@ -197,7 +198,8 @@ public class Turret : AIBehaviours
         }
 
     }
-    void FireParticles(GameObject t)
+
+   /* void FireParticles(GameObject t)
     {
         Vector3 dir = new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position;
         dir.Normalize();
@@ -207,7 +209,7 @@ public class Turret : AIBehaviours
     void StopParticles()
     {
         turretParticles.Stop();
-    }
+    } */
 
     IEnumerator FireBullet(GameObject t)
         {
@@ -246,7 +248,7 @@ public class Turret : AIBehaviours
         GameObject clone = Instantiate(banana, firingPoint.position, Quaternion.identity);
         Rigidbody unitRB = clone.GetComponent<Rigidbody>();
         unitRB.velocity = BallisticVel(currentTarget.transform, shootAngle);
-        clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().playerNum;
+        clone.GetComponent<BananaMove>().team = GetComponentInParent<Health>().teamNum;
         if (currentTarget != null)
             shootAudio.Play();
         yield return new WaitForSeconds(1);
