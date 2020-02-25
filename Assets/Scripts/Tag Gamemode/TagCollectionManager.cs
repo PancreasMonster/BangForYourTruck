@@ -27,7 +27,7 @@ public class TagCollectionManager : MonoBehaviour
             blueImage.fillAmount = blueTeamTokens / gameWinningAmount;
         }
 
-        if (blueTeamTokens > gameWinningAmount && !gameWon)
+        if (blueTeamTokens >= gameWinningAmount && !gameWon)
         {
             gameWon = true;
             blueText.text = "";
@@ -35,7 +35,7 @@ public class TagCollectionManager : MonoBehaviour
             winText.text = "Blue Team Has Won!";
             StartCoroutine(sceneReload());
         }
-        else if (redTeamTokens > gameWinningAmount && !gameWon)
+        else if (redTeamTokens >= gameWinningAmount && !gameWon)
         {
             gameWon = true;
             blueText.text = "";
