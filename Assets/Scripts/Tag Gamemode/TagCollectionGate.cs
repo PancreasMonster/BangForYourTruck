@@ -8,12 +8,12 @@ public class TagCollectionGate : MonoBehaviour
     public bool redTeam, blueTeam;
     public TagCollectionManager tagCollectionManager;
     public int gateTeamNum;
-   
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,6 +35,7 @@ public class TagCollectionGate : MonoBehaviour
                     foreach (PlayerBank pb in playerBanks)
                     {
                         pb.tagsInBank += TH.currentTags;
+                        audio.Play();
                     }
                     TH.currentTags = 0;
                     TH.EmptyTags();
@@ -59,6 +60,7 @@ public class TagCollectionGate : MonoBehaviour
                     foreach (PlayerBank pb in playerBanks)
                     {
                         pb.tagsInBank += TH.currentTags;
+                        audio.Play();
                     }
                     TH.currentTags = 0;
                     TH.EmptyTags();

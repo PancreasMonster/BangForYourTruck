@@ -8,11 +8,12 @@ public class PurchaseGate : MonoBehaviour
     public int ammoType;
     public int ammoAddition;
     public int teamGateNum;
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class PurchaseGate : MonoBehaviour
                 {
                     col.GetComponent<BuildModeFire>().ammo[ammoType] += ammoAddition;
                     PB.tagsInBank -= price;
+                    audio.Play();
                 }
             }
         }

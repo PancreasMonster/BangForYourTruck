@@ -6,12 +6,12 @@ public class WeaponSelectionGate : MonoBehaviour
 {
     public bool flameThrower, machineGun, cannonGun;
     public int teamGateNum;
-
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,9 +54,9 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<CannonWeapon>().enabled = true;
                     col.GetComponent<CannonWeapon>().model.SetActive(true);
                 }
-                
-                    
-                
+
+
+                audio.Play();
             }
         }
     }

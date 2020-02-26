@@ -30,7 +30,7 @@ public class FindPlayerStats : MonoBehaviour
     {
         playerHealth = player.GetComponent<Health>().health;
 
-        resourceText.text = " = " + ((int)player.GetComponent<ResourceHolder>().resourceAmount).ToString();
+        resourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
         //resourceIncomeText = player.GetComponent<Resources(New)>().resourceIncomeAmount.ToString();
         hpBarFill.fillAmount = playerHealth / 100;
 
