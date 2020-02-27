@@ -66,11 +66,11 @@ public class CollisionDamage : MonoBehaviour
             }
         } else 
         {
-           /* if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
+            if (!cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
                 coll.transform.GetComponent<Health>().health -= damage;
-            } */
+            } 
 
             if (cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
