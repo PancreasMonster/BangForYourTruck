@@ -14,6 +14,21 @@ public class TagCollectionGate : MonoBehaviour
     void Start()
     {
         audio = GetComponent<AudioSource>();
+        tagCollectionManager = GameObject.Find("TagCollectionManager").GetComponent<TagCollectionManager>();
+        if (redTeam)
+        {
+            for (int i = 0; i < playerBanks.Count; i++)
+            {
+                playerBanks[i] = GameObject.Find("New Trucks").transform.Find("RedTeam").transform.Find("Player" + (i + 1).ToString()).GetComponent<PlayerBank>();
+            }
+        }
+        else if (blueTeam)
+        {
+            for (int i = 0; i < playerBanks.Count; i++)
+            {
+                playerBanks[i] = GameObject.Find("New Trucks").transform.Find("BlueTeam").transform.Find("Player" + (i + 1).ToString()).GetComponent<PlayerBank>();
+            }
+        }
     }
 
     // Update is called once per frame
