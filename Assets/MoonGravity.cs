@@ -16,7 +16,7 @@ public class MoonGravity : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         foreach (GameObject t in targets)
         {
@@ -25,7 +25,7 @@ public class MoonGravity : MonoBehaviour
             Vector3 directionOfGravity = new Vector3(objectPosition.x - centerOfGravity.x, objectPosition.y - centerOfGravity.y,
                                                         objectPosition.y - centerOfGravity.y).normalized;
             float relativeDistance = directionOfGravity.magnitude;
-            rb.AddForce(directionOfGravity * (force / relativeDistance), ForceMode.Force);
+            rb.AddForce(-directionOfGravity * (force / Mathf.Sqrt(relativeDistance)), ForceMode.Acceleration);
         }
     }
 }
