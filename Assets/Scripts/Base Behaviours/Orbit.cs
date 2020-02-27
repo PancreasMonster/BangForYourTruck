@@ -81,7 +81,8 @@ public class Orbit : MonoBehaviour
                 if (Input.GetButtonDown("RightStick" + player.GetComponent<Health>().playerNum.ToString()))
                 {
                     lockedBehind = !lockedBehind;
-                    offset = transform.position - player.transform.position;
+                    offset = origPos;
+                    offset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * offset;
                 }
 
                 if (lockedBehind)
@@ -92,7 +93,8 @@ public class Orbit : MonoBehaviour
                     {
                         if (!disorient)
                         {
-                            jumpOffset = transform.position - player.transform.position;
+                            jumpOffset = origPos;
+                            jumpOffset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * jumpOffset;
                             disorient = true;
                         }
 
@@ -102,7 +104,7 @@ public class Orbit : MonoBehaviour
                     }
                     else
                     {
-                        transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.TransformPoint(origPos).z);
+                        transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.TransformPoint(origPos).z);
                         disorient = false;
                     }
 
