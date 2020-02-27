@@ -7,12 +7,15 @@ public class MoonGravity : MonoBehaviour
     GameObject[] targets;
     Vector3 centerOfGravity;
     public float force;
+    public float maxDistance;
+    float relativeForce;
 
     // Start is called before the first frame update
     void Start()
     {
         centerOfGravity = this.gameObject.transform.position;
         targets = GameObject.FindGameObjectsWithTag("Player");
+        relativeForce = force * transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -20,12 +23,18 @@ public class MoonGravity : MonoBehaviour
     {
         foreach (GameObject t in targets)
         {
+            float currentDistance = Vector3.Distance(transform.position, t.transform.position);
             Vector3 objectPosition = t.gameObject.transform.position;
             Rigidbody rb = t.GetComponent<Rigidbody>();
-            Vector3 directionOfGravity = new Vector3(objectPosition.x - centerOfGravity.x, objectPosition.y - centerOfGravity.y,
-                                                        objectPosition.y - centerOfGravity.y).normalized;
+            Vector3 directionOfGravity = t.transform.position - transform.position;
+            directionOfGravity.Normalize();
             float relativeDistance = directionOfGravity.magnitude;
-            rb.AddForce(-directionOfGravity * (force / Mathf.Sqrt(relativeDistance)), ForceMode.Acceleration);
+            if (currentDistance < maxDistance)
+            {
+                rb.AddForce(-directionOfGravity * (relativeForce * (1 - (currentDistance / maxDistance))), ForceMode.Acceleration);
+                Debug.Log("Pulling");
+            }
+            
         }
     }
 }
