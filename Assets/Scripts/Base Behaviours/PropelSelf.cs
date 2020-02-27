@@ -20,6 +20,7 @@ public class PropelSelf : MonoBehaviour
     public float limitingForce = .75f;
     public Orbit orb;
     MobilityCharges mobCharges;
+    public float targetBoostMaxDistance = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -109,9 +110,15 @@ public class PropelSelf : MonoBehaviour
                     rb.velocity = Vector3.zero;
                     if (GetComponent<LockOn>().target != null)
                     {
-                        Vector3 dir = GetComponent<LockOn>().target.transform.position - transform.position;
-                        dir.Normalize();
-                        rb.AddForce(dir * force /* * power */);
+                        if (Vector3.Distance(GetComponent<LockOn>().target.transform.position, transform.position) < targetBoostMaxDistance)
+                        {
+                            Vector3 dir = GetComponent<LockOn>().target.transform.position - transform.position;
+                            dir.Normalize();
+                            rb.AddForce(dir * force /* * power */);
+                        } else
+                        {
+                            rb.AddForce(transform.forward * force /* * power */);
+                        }
                     }
                     else
                     {

@@ -102,7 +102,7 @@ public class Orbit : MonoBehaviour
                     }
                     else
                     {
-                        transform.position = new Vector3(player.TransformPoint(origPos).x, player.position.y + offset.y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.TransformPoint(origPos).z);
+                        transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * yLookAmount), player.TransformPoint(origPos).z);
                         disorient = false;
                     }
 
