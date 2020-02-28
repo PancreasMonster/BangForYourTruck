@@ -104,17 +104,17 @@ public class RearWheelDrive : MonoBehaviour {
             if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
             {
                
-            curve.extremumSlip = 10;
+            curve.extremumSlip = 17.5f;
             curve.extremumValue = 10;
-            curve.asymptoteSlip = 10;
+            curve.asymptoteSlip = 20;
             curve.asymptoteValue = 10;
             curve.stiffness = .55f + (.2f * driftAmount);
             }
             else
             {
-                curve.extremumSlip = 5;
+                curve.extremumSlip = 10;
                 curve.extremumValue = 10;
-                curve.asymptoteSlip = 6;
+                curve.asymptoteSlip = 10;
                 curve.asymptoteValue = 10;                
                 curve.stiffness = 1f;
             }

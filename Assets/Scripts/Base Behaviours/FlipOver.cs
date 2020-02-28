@@ -57,6 +57,7 @@ public class FlipOver : MonoBehaviour
                         else
                         {
                             StartCoroutine(JumpDelay());
+                          
                             rigidbody.AddForce(Vector3.up * force);
                             rigidbody.angularVelocity = Vector3.zero;
                         }
