@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -23615,11 +23615,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 836400467}
-    - target: {fileID: 4248154438827789398, guid: a1f06895354e18b41802a8d084a45582,
-        type: 3}
-      propertyPath: playerNum
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7747642754453277753, guid: a1f06895354e18b41802a8d084a45582,
         type: 3}
       propertyPath: powerDisplay
@@ -23705,16 +23700,6 @@ PrefabInstance:
       propertyPath: PPV
       value: 
       objectReference: {fileID: 1968495450}
-    - target: {fileID: 1717459035473407926, guid: a1f06895354e18b41802a8d084a45582,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1717459035473407921, guid: a1f06895354e18b41802a8d084a45582,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1717459035745586486, guid: a1f06895354e18b41802a8d084a45582,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
@@ -23734,6 +23719,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ForceAppPointDistance
       value: 5.0341396
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248154438827789398, guid: a1f06895354e18b41802a8d084a45582,
+        type: 3}
+      propertyPath: playerNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717459035473407926, guid: a1f06895354e18b41802a8d084a45582,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717459035473407921, guid: a1f06895354e18b41802a8d084a45582,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1717459036790531389, guid: a1f06895354e18b41802a8d084a45582,
         type: 3}
@@ -32253,96 +32253,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8351855769407480284, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3e0a8e4cf01813640aafbeee70123628, type: 2}
-    - target: {fileID: 8351855768610782140, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3e0a8e4cf01813640aafbeee70123628, type: 2}
-    - target: {fileID: 8721453939834656089, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 8721453939834656089, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4242491077023231055, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 4242491077023231055, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 6049232804070429675, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 6049232804070429675, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 247429269980985362, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 247429269980985362, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1563954074000023267, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 1563954074000023267, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 6329484220982686295, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 6329484220982686295, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2920147211332717919, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 2920147211332717919, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 7024788242233956687, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: force
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 7024788242233956687, guid: 7a2a8fa2653e4024999e8d73236a291d,
-        type: 3}
-      propertyPath: maxDistance
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a2a8fa2653e4024999e8d73236a291d, type: 3}
 --- !u!1 &1961550392 stripped
@@ -35823,17 +35733,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 14.31144
       objectReference: {fileID: 0}
-    - target: {fileID: 4899377860619498814, guid: 98e37775a0301734fa7ceddc68fe831a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4389642431365411012, guid: 98e37775a0301734fa7ceddc68fe831a,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 823453533345074304, guid: e04043f26dd89c34bb0f4d4a02a5758b,
         type: 3}
+    - target: {fileID: 4899377860619498814, guid: 98e37775a0301734fa7ceddc68fe831a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98e37775a0301734fa7ceddc68fe831a, type: 3}
 --- !u!1 &7135475736127482499 stripped
