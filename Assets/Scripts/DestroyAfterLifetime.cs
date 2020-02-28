@@ -16,6 +16,7 @@ public class DestroyAfterLifetime : MonoBehaviour
 
     private void DestroyThisGameObject()
     {
+        Debug.Log("Destroy");
         Destroy(this.gameObject);
     }
 }
