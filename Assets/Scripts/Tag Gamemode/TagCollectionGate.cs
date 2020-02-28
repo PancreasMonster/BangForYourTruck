@@ -15,20 +15,8 @@ public class TagCollectionGate : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         tagCollectionManager = GameObject.Find("TagCollectionManager").GetComponent<TagCollectionManager>();
-        if (redTeam)
-        {
-            for (int i = 0; i < playerBanks.Count; i++)
-            {
-                playerBanks[i] = GameObject.Find("New Trucks").transform.Find("RedTeam").transform.Find("Player" + (i + 1).ToString()).GetComponent<PlayerBank>();
-            }
-        }
-        else if (blueTeam)
-        {
-            for (int i = 0; i < playerBanks.Count; i++)
-            {
-                playerBanks[i] = GameObject.Find("New Trucks").transform.Find("BlueTeam").transform.Find("Player" + (i + 1).ToString()).GetComponent<PlayerBank>();
-            }
-        }
+        StartCoroutine(AssignPBs());
+        
     }
 
     // Update is called once per frame
@@ -89,6 +77,25 @@ public class TagCollectionGate : MonoBehaviour
                 {
                     pb.tagsInBank++;
                 }
+            }
+        }
+    }
+
+    IEnumerator AssignPBs ()
+    {
+        yield return null;
+        if (redTeam)
+        {
+            for (int i = 0; i < playerBanks.Count; i++)
+            {
+                playerBanks[i] = GameObject.Find("New Trucks").transform.Find("RedTeam").transform.Find("Player" + (i + 1).ToString()).GetComponent<PlayerBank>();
+            }
+        }
+        else if (blueTeam)
+        {
+            for (int i = 0; i < playerBanks.Count; i++)
+            {
+                playerBanks[i] = GameObject.Find("New Trucks").transform.Find("BlueTeam").transform.Find("Player" + (i + 1).ToString()).GetComponent<PlayerBank>();
             }
         }
     }
