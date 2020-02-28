@@ -5,6 +5,7 @@ using UnityEngine;
 public class NeutralTagPickUp : MonoBehaviour
 {
     bool collected;
+    public GameObject spawner;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class NeutralTagPickUp : MonoBehaviour
                     collected = true;
                     t.AddTag();
                     t.currentTags++;
+                    spawner.GetComponent<NeutralTagSpawner>().collected = false;
                     Destroy(this.gameObject);
                 }
             }

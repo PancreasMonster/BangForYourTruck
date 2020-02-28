@@ -45,14 +45,7 @@ public class PlayerRespawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player1StartPos = new Vector3(player1.transform.position.x, player1.transform.position.y, player1.transform.position.z);
-        player2StartPos = new Vector3(player2.transform.position.x, player2.transform.position.y, player2.transform.position.z);
-        player3StartPos = new Vector3(player3.transform.position.x, player3.transform.position.y, player3.transform.position.z);
-        player4StartPos = new Vector3(player4.transform.position.x, player4.transform.position.y, player4.transform.position.z);
-        origPlayer1Rot = player1.transform.rotation;
-        origPlayer2Rot = player2.transform.rotation;
-        origPlayer3Rot = player3.transform.rotation;
-        origPlayer4Rot = player4.transform.rotation;
+        StartCoroutine(SpawnAssign());   
     }
 
     // Update is called once per frame
@@ -217,5 +210,17 @@ public class PlayerRespawn : MonoBehaviour
        // player4Text.text = "";
     }
 
+    IEnumerator SpawnAssign ()
+    {
+        yield return null;
+        player1StartPos = new Vector3(player1.transform.position.x, player1.transform.position.y, player1.transform.position.z);
+        player2StartPos = new Vector3(player2.transform.position.x, player2.transform.position.y, player2.transform.position.z);
+        player3StartPos = new Vector3(player3.transform.position.x, player3.transform.position.y, player3.transform.position.z);
+        player4StartPos = new Vector3(player4.transform.position.x, player4.transform.position.y, player4.transform.position.z);
+        origPlayer1Rot = player1.transform.rotation;
+        origPlayer2Rot = player2.transform.rotation;
+        origPlayer3Rot = player3.transform.rotation;
+        origPlayer4Rot = player4.transform.rotation;
+    }
 
 }

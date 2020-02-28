@@ -78,7 +78,7 @@ public class TagCollectionGate : MonoBehaviour
                     pb.tagsInBank++;
                 }
             }
-        }
+        } 
     }
 
     IEnumerator AssignPBs ()

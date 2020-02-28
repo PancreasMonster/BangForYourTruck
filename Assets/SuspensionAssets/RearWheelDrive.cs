@@ -63,7 +63,7 @@ public class RearWheelDrive : MonoBehaviour {
         {
             if (forwardMomentum > 0)
             {
-                forwardMomentum -= 10 * Time.deltaTime;
+                forwardMomentum -= 6 * Time.deltaTime;
             }
         }
 
@@ -78,7 +78,7 @@ public class RearWheelDrive : MonoBehaviour {
         {
             if (backwardsMomentum > 0)
             {
-                backwardsMomentum -= 10 * Time.deltaTime;
+                backwardsMomentum -= 6 * Time.deltaTime;
             }
         }
 
@@ -100,26 +100,42 @@ public class RearWheelDrive : MonoBehaviour {
 
             }
 
+            WheelFrictionCurve curve = new WheelFrictionCurve();
+            if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
+            {
+               
+            curve.extremumSlip = 10;
+            curve.extremumValue = 10;
+            curve.asymptoteSlip = 10;
+            curve.asymptoteValue = 10;
+            curve.stiffness = .55f + (.2f * driftAmount);
+            }
+            else
+            {
+                curve.extremumSlip = 5;
+                curve.extremumValue = 10;
+                curve.asymptoteSlip = 6;
+                curve.asymptoteValue = 10;                
+                curve.stiffness = 1f;
+            }
            
+
 
             if (wheel.transform.localPosition.z < 0) {
                
                     wheel.motorTorque = sumTorque;
-                
-                WheelFrictionCurve curve = new WheelFrictionCurve();
-                curve.extremumSlip = 11.25f * 80f;
-                curve.extremumValue = 8.3333333f * 80f;
-                curve.asymptoteSlip = 5f * 80f;
-                curve.asymptoteValue = 7.5f * 80f;
                 if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
                 {
+
+                    
                     curve.stiffness = .55f + (.2f * driftAmount);
                 }
                 else
                 {
+                   
                     curve.stiffness = 1f;
                 }
-                wheel.sidewaysFriction = curve;
+
                 if (wheel.rpm > maxSpeed)
                     wheel.motorTorque = 0;
                 WheelHit wh;
@@ -137,7 +153,9 @@ public class RearWheelDrive : MonoBehaviour {
                 
                     }
 
-           //  wheel.
+            wheel.sidewaysFriction = curve;
+
+            //  wheel.
 
             if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0)
             {

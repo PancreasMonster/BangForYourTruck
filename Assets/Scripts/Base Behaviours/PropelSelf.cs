@@ -47,7 +47,7 @@ public class PropelSelf : MonoBehaviour
              fill.fillAmount = power;
          } */
 
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Vector3.down * 5, out hit, 5, layer))
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up * 5, out hit, 5, layer))
         {
             if (Input.GetButtonDown("PadB" + GetComponent<Health>().playerNum.ToString()))
             {
