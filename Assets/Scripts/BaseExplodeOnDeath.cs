@@ -9,6 +9,7 @@ public class BaseExplodeOnDeath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -19,12 +20,16 @@ public class BaseExplodeOnDeath : MonoBehaviour
 
     public void Explode()
     {
-        for (int i = 0; i < particles.Length; i++)
+
+        StartCoroutine("Explosions");
+        /*for (int i = 0; i < particles.Length; i++)
         {
             particles[i].Play();
             //Debug.Log("Exploded");
             if(GetComponent<AudioSource>() != null)
             GetComponent<AudioSource>().Play();
-        }
+        }*/
     }
+
+    
 }
