@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+    public int teamNum;
+    public bool EMP;
+    public float EMPDuration;
     public float bombDelay; //how many seconds it takes for the bomb to explode
     public float maxRange; //the furthest distance away in which objects get effected by the explosion
     public float force; //the force exerted on objects in the explosion effect
@@ -21,19 +24,48 @@ public class Bomb : MonoBehaviour
         StartCoroutine(ExplodeAfterTime());
         anim = GetComponent<Animation>();
         audio = GetComponent<AudioSource>();
-       
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Explode();
+        if (!EMP)
+        {
+            DamageExplosion();
+        }
+        else
+        {
+            EMPExplosion();
+        }
+        
 
         rb.constraints = RigidbodyConstraints.FreezePositionX |
                             RigidbodyConstraints.FreezePositionY |
                             RigidbodyConstraints.FreezePositionZ;
     }
 
-    void Explode()
+    void EMPExplosion()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units
+        foreach (Collider c in hitColliders)
+        {
+            if (c.GetComponent<Health>() == true)
+            {
+                if (c.GetComponent<Health>().teamNum != teamNum)
+                {
+                    c.GetComponent<RearWheelDrive>().maxSpeed = 0f;
+                    c.GetComponent<RearWheelDrive>().EMPDuration(EMPDuration);
+                }               
+            }           
+        }
+
+        StopAllCoroutines();
+        audio.Play();
+        particles.Play();
+        Invoke("DestroyThisGameObject", 1f);
+    }
+
+    void DamageExplosion()
     {
         
         StopAllCoroutines();

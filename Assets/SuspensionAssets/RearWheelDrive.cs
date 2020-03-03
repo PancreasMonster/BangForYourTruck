@@ -10,6 +10,7 @@ public class RearWheelDrive : MonoBehaviour {
 	public GameObject wheelShape;
     public float sumTorque, forwardTorque, backwardTorque, breakForce;
     public float forwardMomentum, backwardsMomentum, currBreakForce;
+    float startingMaxSpeed;
     public float maxSpeed = 800; // max speed of the vehicle, warning: raising this too high will cause problems
     bool accelerating, decelerating;   
     Rigidbody rigidbody;
@@ -20,7 +21,7 @@ public class RearWheelDrive : MonoBehaviour {
     // here we find all the WheelColliders down in the hierarchy
     public void Start()
 	{
-
+        startingMaxSpeed = maxSpeed;
         rigidbody = GetComponent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelCollider>();
 
@@ -205,5 +206,15 @@ public class RearWheelDrive : MonoBehaviour {
 		}
 
         
+    }
+
+    public void EMPDuration(float f)
+    {
+        Invoke("ReturnToMaxSpeed",f);
+    }
+
+    void ReturnToMaxSpeed()
+    {
+        maxSpeed = startingMaxSpeed;
     }
 }

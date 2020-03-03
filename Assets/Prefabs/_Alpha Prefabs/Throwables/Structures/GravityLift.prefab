@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 655881878873809759}
   - component: {fileID: 655881878873809756}
   - component: {fileID: 5270275024558910064}
+  - component: {fileID: 4890734341971781131}
+  - component: {fileID: -3970239065140285629}
   m_Layer: 0
   m_Name: GravityLift
   m_TagString: Untagged
@@ -26,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655881878873809757}
-  m_LocalRotation: {x: -0.25010118, y: 0, z: 0, w: 0.9682197}
+  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: -994.3, y: 5.6, z: -449.9}
-  m_LocalScale: {x: 18.491, y: 36.982, z: 59.1712}
+  m_LocalScale: {x: 9, y: 18, z: 30}
   m_Children:
   - {fileID: 1739654068685986209}
   - {fileID: 1411582256912246230}
@@ -36,7 +38,7 @@ Transform:
   - {fileID: 2487369112674480857}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -28.967001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!65 &655881878873809759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62,7 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0421b4d3a05985419b2e227136370be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravForce: 150000
+  gravForce: 300000
+  startUpTime: 3
 --- !u!82 &5270275024558910064
 AudioSource:
   m_ObjectHideFlags: 0
@@ -159,6 +162,48 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &4890734341971781131
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655881878873809757}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &-3970239065140285629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655881878873809757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2babf000d4c9f2b43a18b9fa5cb00138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 1
+--- !u!135 &1969161660446130727
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487369112674250489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: -0.12, z: 0.17}
 --- !u!1001 &2487369112674347101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,6 +214,10 @@ PrefabInstance:
     - target: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
       propertyPath: m_Name
       value: Afterburner
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,10 +275,20 @@ PrefabInstance:
       propertyPath: InitialModule.startSpeed.scalar
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
     - {fileID: 13500000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
+--- !u!1 &2487369112674250489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821,
+    type: 3}
+  m_PrefabInstance: {fileID: 2487369112674347101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2487369112674480857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: d8c41be67f41aa545ae053b0b927f821,
