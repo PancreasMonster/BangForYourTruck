@@ -70,6 +70,7 @@ public class PropelSelf : MonoBehaviour
                         triggerDown = false;                       
                         coolingDown = true;
                         mobCharges.UseCharge();
+                        BroadcastMessage("ExhaustParticlesPlay");
                         StartCoroutine(Cooldown());
                     }
                     else
@@ -91,6 +92,7 @@ public class PropelSelf : MonoBehaviour
                         triggerDown = false;                      
                         coolingDown = true;
                         mobCharges.UseCharge();
+                        BroadcastMessage("ExhaustParticlesPlay");
                         StartCoroutine(Cooldown());
                     }
                     else
@@ -130,6 +132,7 @@ public class PropelSelf : MonoBehaviour
                     triggerDown = false;                  
                     coolingDown = true;
                     mobCharges.UseCharge();
+                    BroadcastMessage("ExhaustParticlesPlay");
                     StartCoroutine(Cooldown());
                 }
                 else
