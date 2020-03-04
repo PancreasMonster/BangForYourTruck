@@ -14,7 +14,7 @@ public class MobilityCharges : MonoBehaviour
     public float charge2Time = 0f;
     public SpriteRenderer light2;
 
-
+    public AudioSource audio;
     bool charge3;
     public float charge3Time = 0f;
     public SpriteRenderer light3;
@@ -58,6 +58,8 @@ public class MobilityCharges : MonoBehaviour
         {
             charge1 = true;
             currentCharges++;
+            audio.pitch = .9f;
+            audio.Play();
             light1.color = Color.green;
             charge1Time = 0f;
         }
@@ -72,6 +74,8 @@ public class MobilityCharges : MonoBehaviour
         {
             charge2 = true;
             currentCharges++;
+            audio.pitch = .95f;
+            audio.Play();
             light2.color = Color.green;
             charge2Time = 0f;
         }
@@ -86,8 +90,55 @@ public class MobilityCharges : MonoBehaviour
         {
             charge3 = true;
             currentCharges++;
+            audio.pitch = 1f;
+            audio.Play();
             light3.color = Color.green;
             charge3Time = 0f;
+        }
+
+        if (charge1Time >= rechargeTime/2)
+        {            
+            light1.color = Color.yellow;            
+        }
+
+        if (charge2Time >= rechargeTime / 2)
+        {
+            light2.color = Color.yellow;
+        }
+
+        if (charge3Time >= rechargeTime / 2)
+        {
+            light3.color = Color.yellow;
+        }
+
+        if (charge1Time >= (rechargeTime * .25f))
+        {
+            light1.color = new Color(1.0f, 0.64f, 0.0f);
+        }
+
+        if (charge2Time >= (rechargeTime * .25f))
+        {
+            light1.color = new Color(1.0f, 0.64f, 0.0f);
+        }
+
+        if (charge3Time >= (rechargeTime * .25f))
+        {
+            light1.color = new Color(1.0f, 0.64f, 0.0f);
+        }
+
+        if (charge1Time >= (rechargeTime * .75f))
+        {
+            light1.color = new Color(.64f, 1f, 0.0f);
+        }
+
+        if (charge2Time >= (rechargeTime * .75f))
+        {
+            light1.color = new Color(.64f, 1f, 0.0f);
+        }
+
+        if (charge3Time >= (rechargeTime * .75f))
+        {
+            light1.color = new Color(.64f, 1f, 0.0f);
         }
     }
 
