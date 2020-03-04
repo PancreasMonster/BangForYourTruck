@@ -15,7 +15,7 @@ public class CameraLerp : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, followCam.position, positionLerpSpeed * Time.deltaTime); 
         transform.rotation = Quaternion.Slerp(transform.rotation, followCam.rotation, rotationLerpSpeed * Time.deltaTime);

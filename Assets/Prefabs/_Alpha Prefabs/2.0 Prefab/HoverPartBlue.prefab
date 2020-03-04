@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6376020574058139546}
   - component: {fileID: 1377063494282025394}
   m_Layer: 0
-  m_Name: HoverPart
+  m_Name: HoverPartBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelTarget: {fileID: 0}
+  ps: {fileID: 0}
 --- !u!1 &6376020574541614725
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +245,22 @@ PrefabInstance:
     - target: {fileID: 19800000, guid: a2ab7d7672843754dbbf4952853056c6, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key2.a
       value: 0.09803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: a2ab7d7672843754dbbf4952853056c6, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: a2ab7d7672843754dbbf4952853056c6, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: a2ab7d7672843754dbbf4952853056c6, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.2262168
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: a2ab7d7672843754dbbf4952853056c6, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a2ab7d7672843754dbbf4952853056c6, type: 3}
       propertyPath: m_Enabled

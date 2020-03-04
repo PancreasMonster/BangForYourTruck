@@ -8,7 +8,7 @@ public class ExhaustParticles : MonoBehaviour
 
     public void ExhaustParticlesPlay()
     {
-        for (int z = 0; z < 2; z++)
+        for (int z = 0; z < 4; z++)
         {
             transform.GetChild(z).GetComponent<ParticleSystem>().Play();
         }

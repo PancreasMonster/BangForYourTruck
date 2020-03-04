@@ -81,7 +81,7 @@ public class FPSController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) || runAxis != 0)
         {
-            speed *= 5.0f;
+            speed *= 2.0f;
         }
 
         if (Input.GetKey(KeyCode.E))
