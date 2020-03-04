@@ -16,7 +16,8 @@ public class RearWheelDrive : MonoBehaviour {
     Rigidbody rigidbody;
     WheelHit hit, hit2, hit3, hit4;
     public AudioSource aud;
-  
+    public float sidewaySlipEx, sidewaySlipAS;
+
 
     // here we find all the WheelColliders down in the hierarchy
     public void Start()
@@ -105,19 +106,28 @@ public class RearWheelDrive : MonoBehaviour {
             if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
             {
                
-            curve.extremumSlip = 17.5f;
+            curve.extremumSlip = 30f;
             curve.extremumValue = 10;
-            curve.asymptoteSlip = 20;
+            curve.asymptoteSlip = 30f;
             curve.asymptoteValue = 10;
-            curve.stiffness = .55f + (.2f * driftAmount);
+            curve.stiffness = 1f;
+                maxAngle = 30;
+                sidewaySlipAS = 6;
+                sidewaySlipEx = 6;
             }
             else
             {
-                curve.extremumSlip = 10;
+                if (sidewaySlipAS > 3)
+                {
+                    sidewaySlipAS -= 1 * Time.deltaTime;
+                    sidewaySlipEx -= 1 * Time.deltaTime;
+                }
+                curve.extremumSlip = sidewaySlipAS;
                 curve.extremumValue = 10;
-                curve.asymptoteSlip = 10;
+                curve.asymptoteSlip = sidewaySlipEx;
                 curve.asymptoteValue = 10;                
                 curve.stiffness = 1f;
+                maxAngle = 15;
             }
            
 
@@ -129,12 +139,12 @@ public class RearWheelDrive : MonoBehaviour {
                 {
 
                     
-                    curve.stiffness = .55f + (.2f * driftAmount);
+                    curve.stiffness = .55f + (.4f * driftAmount);
                 }
                 else
                 {
                    
-                    curve.stiffness = 1f;
+                    curve.stiffness = 1.25f;
                 }
 
                 if (wheel.rpm > maxSpeed)

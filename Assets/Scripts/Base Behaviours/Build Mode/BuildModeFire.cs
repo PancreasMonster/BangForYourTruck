@@ -84,6 +84,7 @@ public class BuildModeFire : MonoBehaviour
                 cooldown = true;
                 StartCoroutine(Cooldown());
                 GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
+                clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
                 if (clone.GetComponent<ResourceCollection>() != null)
                     clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
                 if (clone.GetComponent<Health>() != null)
