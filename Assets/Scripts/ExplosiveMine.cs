@@ -4,21 +4,7 @@ using UnityEngine;
 
 public class ExplosiveMine : MonoBehaviour
 {
-    Rigidbody rb;
-    public float thrust;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        //rb.AddForce(0, thrust, 0, ForceMode.Impulse);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
    
 
