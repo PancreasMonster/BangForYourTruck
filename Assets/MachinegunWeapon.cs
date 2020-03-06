@@ -63,7 +63,7 @@ public class MachinegunWeapon : MonoBehaviour
         if (ph.powerAmount >= pc.powerCosts[2])
         {
 
-            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, weaponProjectile.transform.rotation);
+            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, AutoWeaponFiringPoint.transform.rotation);
             Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
             if (GetComponent<LockOn>().target != null)
             {
@@ -95,7 +95,7 @@ public class MachinegunWeapon : MonoBehaviour
         if (ph.powerAmount >= pc.powerCosts[2])
         {
 
-            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, weaponProjectile.transform.rotation);
+            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, AutoWeaponFiringPoint2.transform.rotation);
             Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
             if (GetComponent<LockOn>().target != null)
             {
