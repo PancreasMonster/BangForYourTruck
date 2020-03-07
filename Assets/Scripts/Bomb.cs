@@ -6,6 +6,7 @@ public class Bomb : MonoBehaviour
 {
     public int teamNum;
     public bool EMP;
+    public bool artillery;
     public float EMPDuration;
     public float bombDelay; //how many seconds it takes for the bomb to explode
     public float maxRange; //the furthest distance away in which objects get effected by the explosion
@@ -56,7 +57,13 @@ public class Bomb : MonoBehaviour
                     c.GetComponent<RearWheelDrive>().maxSpeed = 0f;
                     c.GetComponent<RearWheelDrive>().EMPDuration(EMPDuration);
                 }               
-            }           
+            }
+            if (artillery)
+            TurnOffParticles();
+        }
+        if (!artillery)
+        {
+            anim.Play();
         }
 
         StopAllCoroutines();
@@ -67,16 +74,6 @@ public class Bomb : MonoBehaviour
 
     void DamageExplosion()
     {
-        
-        StopAllCoroutines();
-        anim.Play();
-        audio.Play();
-        particles.Play();
-        Invoke("DamageAndForce",.1f);
-        Invoke("DestroyThisGameObject",1f);
-    }
-
-    void DamageAndForce() {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units
         foreach (Collider c in hitColliders)
         {
@@ -88,7 +85,38 @@ public class Bomb : MonoBehaviour
             if (h != null)
                 h.health -= damage;
         }
+
+        if (artillery)
+        {
+            TurnOffParticles();
+        }
+        if (!artillery)
+        {
+            anim.Play();
+        }
+
+
+        StopAllCoroutines();
+        audio.Play();
+        particles.Play();        
+        Invoke("DestroyThisGameObject",1f);
     }
+
+    /*void DamageAndForce() {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units
+        foreach (Collider c in hitColliders)
+        {
+            Rigidbody rb = c.GetComponent<Rigidbody>();
+            if (rb != null)
+                rb.AddExplosionForce(force * rb.mass, transform.position, maxRange);
+
+            Health h = c.GetComponent<Health>();
+            if (h != null)
+                h.health -= damage;
+        }
+        if (artillery)
+        TurnOffParticles();
+    }*/
 
     IEnumerator ExplodeAfterTime ()
     {
@@ -111,6 +139,12 @@ public class Bomb : MonoBehaviour
         anim.Play();
         audio.Play();
         Invoke("DestroyThisGameObject", 1f);
+    }
+
+    void TurnOffParticles()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        Debug.Log("Turned off");
     }
 
     void DestroyThisGameObject()
