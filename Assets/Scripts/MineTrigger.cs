@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class MineTrigger : MonoBehaviour
 {
-    public GameObject bomb;
     public int teamNum;
     public float primeTime = 1.5f;
     bool primed = false, triggered = false;
     public float lifeTime = 15f;
+    ParticleSystem particles;
+    AudioSource audio;
+    
+
+    public float maxRange; //the furthest distance away in which objects get effected by the explosion
+    public float force; //the force exerted on objects in the explosion effect
+    public float damage; //damage done by the explosion
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+        particles = GetComponent<ParticleSystem>();
         StartCoroutine(setPrime());
         Destroy(this.gameObject, lifeTime);
     }
@@ -32,17 +40,33 @@ public class MineTrigger : MonoBehaviour
             {
                 Debug.Log("HIT Player");
                 triggered = true;
-                Trigger();
+                DamageExplosion();
             }
         }
     }
 
-       void Trigger() {
-        Instantiate(bomb, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), transform.rotation);
-            GetComponentInParent<ExplosiveMine>().DestroyThisGameObject();
+       
+
+    void DamageExplosion()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, maxRange); //gets an array of all the colliders within maxRange units
+        foreach (Collider c in hitColliders)
+        {
+            Rigidbody rb = c.GetComponent<Rigidbody>();
+            if (rb != null)
+                rb.AddExplosionForce(force * rb.mass, transform.position, maxRange);
+
+            Health h = c.GetComponent<Health>();
+            if (h != null)
+                h.health -= damage;
+        }
+        particles.Play();
+        audio.Play();
+        transform.GetChild(0).gameObject.SetActive(false);
+        Destroy(this.gameObject, 2f);
     }
 
-    IEnumerator setPrime ()
+        IEnumerator setPrime ()
     {
         yield return new WaitForSeconds(primeTime);
         primed = true;

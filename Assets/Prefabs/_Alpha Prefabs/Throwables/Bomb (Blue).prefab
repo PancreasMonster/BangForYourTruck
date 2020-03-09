@@ -79,6 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d7d5048bcb5144094ab8c3b212356f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamNum: 1
+  EMP: 0
+  artillery: 0
+  EMPDuration: 0
   bombDelay: 4
   maxRange: 20
   force: 7500
@@ -5102,11 +5106,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2882771185483001469}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b2bfaf29d6e6bda409a414a37f54c9d8,
-        type: 3}
-      propertyPath: m_Name
-      value: Bomb (model)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b2bfaf29d6e6bda409a414a37f54c9d8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5177,6 +5176,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b2bfaf29d6e6bda409a414a37f54c9d8,
+        type: 3}
+      propertyPath: m_Name
+      value: Bomb (model)
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: b2bfaf29d6e6bda409a414a37f54c9d8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5197,11 +5201,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2882771185483001469}
     m_Modifications:
-    - target: {fileID: 8187084487360860843, guid: 806f0b49f3c825b47b6bdecb6cd3b669,
-        type: 3}
-      propertyPath: m_Name
-      value: Bomb Fuse Particle
-      objectReference: {fileID: 0}
     - target: {fileID: 225431013747591364, guid: 806f0b49f3c825b47b6bdecb6cd3b669,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5256,6 +5255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187084487360860843, guid: 806f0b49f3c825b47b6bdecb6cd3b669,
+        type: 3}
+      propertyPath: m_Name
+      value: Bomb Fuse Particle
       objectReference: {fileID: 0}
     - target: {fileID: 3967945792784819832, guid: 806f0b49f3c825b47b6bdecb6cd3b669,
         type: 3}

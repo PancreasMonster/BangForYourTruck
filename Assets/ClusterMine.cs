@@ -9,16 +9,15 @@ public class ClusterMine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //SpawnMines();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("r"))
+        /*if (Input.GetKeyDown("r"))
         {
             SpawnMines();
-        }
+        }*/
     }
 
     void SpawnMines()
@@ -66,7 +65,6 @@ public class ClusterMine : MonoBehaviour
                 firedMine.GetComponent<Rigidbody>().AddForce((Vector3.up) * force * 1.5f, ForceMode.Impulse);
             }
         }
-        //transform.GetChild(0).DetachChildren();
         Destroy(this.gameObject);
     }
 
