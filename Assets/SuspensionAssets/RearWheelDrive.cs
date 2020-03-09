@@ -133,8 +133,15 @@ public class RearWheelDrive : MonoBehaviour {
 
 
             if (wheel.transform.localPosition.z < 0) {
-               
+
+                if (GetComponent<FlipOver>().timer <= .15f)
+                {
                     wheel.motorTorque = sumTorque;
+                } else
+                {
+                    wheel.motorTorque = 0;
+                    wheel.brakeTorque = breakForce;
+                }
                 if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
                 {
 

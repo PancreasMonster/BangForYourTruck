@@ -89,16 +89,16 @@ public class FlamethrowerWeapon : MonoBehaviour
 
             GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, weaponProjectile.transform.rotation);
             Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
-            if (GetComponent<LockOn>().target != null)
+           /* if (GetComponent<LockOn>().target != null)
             {
                 Vector3 dir = GetComponent<LockOn>().target.transform.position - AutoWeaponFiringPoint.position;
                 dir.Normalize();
                 Disc.GetComponent<Rigidbody>().AddForce(dir * force);
             }
             else
-            {
+            { */
                 Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
-            }
+            //}
             if (Disc.GetComponent<ResourceCollection>() != null)
                 Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
             if (Disc.GetComponent<Health>() != null)
