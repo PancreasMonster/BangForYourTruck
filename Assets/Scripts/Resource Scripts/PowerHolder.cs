@@ -9,7 +9,7 @@ public class PowerHolder : MonoBehaviour
     public Image powerDisplay;
     public float powerAmount, maxPower, powerRegen;
     float regenDelay;
-
+    public float regenDelayTime;
     bool infinitePower;
     public float infinitePowerTime;
 
@@ -28,7 +28,7 @@ public class PowerHolder : MonoBehaviour
         if (regenDelay > 0)
             regenDelay -= Time.deltaTime;
 
-        if (powerAmount < maxPower && regenDelay <= 0)
+        if (powerAmount < maxPower && regenDelay <= regenDelayTime)
         {
             powerAmount += powerRegen * Time.deltaTime;
         }
@@ -69,6 +69,6 @@ public class PowerHolder : MonoBehaviour
     public void losePower (float loss)
     {
         powerAmount -= loss;
-        regenDelay = 2;
+        regenDelay = regenDelayTime;
     }
 }
