@@ -4,41 +4,51 @@ using UnityEngine;
 
 public class BlackHole : MonoBehaviour
 {
+    bool activated;
     Rigidbody rb;
+    public float timeActive = 0f;
+    public float rangeMultiplier;
     public float duration;
     public float strength;
     public float range;
     float explosiveRadius = 100f;
     public float damage;
     public float explosiveForce;
+    MoonGravity gravity;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gravity = GetComponent<MoonGravity>();
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        if (activated)
+        {
+            timeActive += Time.deltaTime;
+            range = Mathf.Max(range * ((timeActive / duration) * rangeMultiplier), range);
+            GetComponent<MoonGravity>().maxDistance = range;
+        }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<MoonGravity>().enabled = true;
         GetComponent<MoonGravity>().force = strength;
-        GetComponent<MoonGravity>().maxDistance = range;
         rb.constraints = RigidbodyConstraints.FreezePositionX |
                          RigidbodyConstraints.FreezePositionY |
                          RigidbodyConstraints.FreezePositionZ;
-
+        activated = true;
         Invoke("ExplodingFinish", duration);
     }
 
     void ExplodingFinish()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosiveRadius);
-        GetComponent<MoonGravity>().enabled = false;
+        gravity.enabled = false;
         foreach (Collider c in hitColliders)
         {
             Rigidbody rb = c.GetComponent<Rigidbody>();

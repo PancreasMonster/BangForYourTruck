@@ -14,10 +14,10 @@ public class ClusterMine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown("r"))
+        if (Input.GetKeyDown("r"))
         {
             SpawnMines();
-        }*/
+        }
     }
 
     void SpawnMines()
