@@ -26,6 +26,7 @@ public class FlipOver : MonoBehaviour
     public bool camDependent;
     public bool XtoRoll;
     public List<WheelCollider> wheels = new List<WheelCollider>();
+    public bool autoRollCorrection = true;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +67,11 @@ public class FlipOver : MonoBehaviour
                     {
                         ApplyLinearStabilityForces(rigidbody, wheelPoints);
                     }
-                    //ApplyAngularStabilityForces(rigidbody, hit2.normal);
+                    if (autoRollCorrection)
+                    {
+                        if (Vector3.Dot(transform.up, hit2.normal) < .5f)
+                            ApplyAngularStabilityForces(rigidbody, hit2.normal);
+                    }
 
                     if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
                     {
@@ -217,7 +222,7 @@ public class FlipOver : MonoBehaviour
             float angle = Vector3.SignedAngle(rigidbody.transform.up, averageColliderSurfaceNormal, rigidbody.transform.forward);
 
             //Angular stability only uses roll - Using multiple axis becomes unpredictable 
-            Vector3 torqueAmount = Mathf.Sign(angle) * rigidbody.transform.forward * angularStabilityForce * Time.fixedDeltaTime;
+            Vector3 torqueAmount = Mathf.Sign(angle) * rigidbody.transform.forward * angForce * 2f * Time.fixedDeltaTime;
 
             rigidbody.AddTorque(torqueAmount, ForceMode.Acceleration);
         }

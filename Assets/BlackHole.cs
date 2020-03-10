@@ -10,7 +10,8 @@ public class BlackHole : MonoBehaviour
     public float rangeMultiplier;
     public float duration;
     public float strength;
-    public float range;
+    public float maxRange = 2400, minRange = 800;
+    float range;
     float explosiveRadius = 100f;
     public float damage;
     public float explosiveForce;
@@ -29,7 +30,7 @@ public class BlackHole : MonoBehaviour
         if (activated)
         {
             timeActive += Time.deltaTime;
-            range = Mathf.Max(range * ((timeActive / duration) * rangeMultiplier), range);
+            range = Mathf.Max(maxRange * ((timeActive / duration)), minRange);
             GetComponent<MoonGravity>().maxDistance = range;
         }
     }

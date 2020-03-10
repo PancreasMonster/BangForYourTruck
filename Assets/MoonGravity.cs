@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoonGravity : MonoBehaviour
 {
-    GameObject[] targets;
+    public List<GameObject> targets = new List<GameObject>();
     Vector3 centerOfGravity;
     public float force;
     public float maxDistance;
@@ -14,7 +14,10 @@ public class MoonGravity : MonoBehaviour
     void Start()
     {
         centerOfGravity = this.gameObject.transform.position;
-        targets = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] playerTargets = GameObject.FindGameObjectsWithTag("Player");
+        targets.AddRange(playerTargets);
+        GameObject[] mineTargets = GameObject.FindGameObjectsWithTag("Mine");
+        targets.AddRange(mineTargets);
         relativeForce = force * transform.localScale.x;
     }
 

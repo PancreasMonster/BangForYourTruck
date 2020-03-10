@@ -5,6 +5,7 @@ using UnityEngine;
 public class MineTrigger : MonoBehaviour
 {
     public int teamNum;
+    GameObject[] blackholeTargets;
     public float primeTime = 1.5f;
     bool primed = false, triggered = false;
     public float lifeTime = 15f;
@@ -23,6 +24,11 @@ public class MineTrigger : MonoBehaviour
         particles = GetComponent<ParticleSystem>();
         StartCoroutine(setPrime());
         Destroy(this.gameObject, lifeTime);
+        blackholeTargets = GameObject.FindGameObjectsWithTag("BlackHole");
+        foreach(GameObject b in blackholeTargets)
+        {
+            b.GetComponent<MoonGravity>().targets.Add(this.gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +42,7 @@ public class MineTrigger : MonoBehaviour
         if (primed)
         {
 
-            if (other.gameObject.GetComponent<Health>() != null && other.gameObject.GetComponent<Health>().playerNum != teamNum && !triggered)
+            if (other.gameObject.GetComponent<Health>() != null && other.gameObject.GetComponent<Health>().teamNum != teamNum && !triggered)
             {
                 Debug.Log("HIT Player");
                 triggered = true;

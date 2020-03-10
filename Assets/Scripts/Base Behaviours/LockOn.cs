@@ -23,7 +23,7 @@ public class LockOn : MonoBehaviour
         for(int i = 0; i < targets.Count; i++)
         {
             GameObject imageClone = Instantiate(targetImage, transform.position, Quaternion.identity);
-            imageClone.transform.parent = targetImagesParent.transform;
+            imageClone.transform.SetParent(targetImagesParent.transform, false);
             images.Add(imageClone.GetComponent<Image>());
         }
     }

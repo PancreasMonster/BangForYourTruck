@@ -16,7 +16,7 @@ public class FollowObject : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y + yOffset, parentObject.transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(parentObject.transform.position.x, parentObject.transform.position.y + yOffset, parentObject.transform.position.z), 60 * Time.deltaTime);
         if(target != null)
         transform.LookAt(target.transform);
     }

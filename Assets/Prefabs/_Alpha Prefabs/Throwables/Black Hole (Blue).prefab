@@ -4909,7 +4909,7 @@ GameObject:
   - component: {fileID: 8761527181346353672}
   m_Layer: 9
   m_Name: Black Hole (Blue)
-  m_TagString: Untagged
+  m_TagString: BlackHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4959,7 +4959,8 @@ MonoBehaviour:
   rangeMultiplier: 3
   duration: 5
   strength: 150
-  range: 400
+  maxRange: 800
+  minRange: 400
   damage: 30
   explosiveForce: 10000
 --- !u!114 &5316140195681125289
@@ -4974,6 +4975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca662129c34726841a66ce8cdf4617ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targets: []
   force: 0
   maxDistance: 0
 --- !u!114 &4630877953107407745
