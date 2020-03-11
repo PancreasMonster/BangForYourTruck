@@ -134,8 +134,8 @@ public class Orbit : MonoBehaviour
         {
             if (!death)
             {
-                transform.position = lockOnParent.transform.position;
-                transform.LookAt(lockOnScript.target.transform.position);
+                transform.position = Vector3.Lerp(transform.position, lockOnParent.transform.position, 60 * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lockOnParent.transform.rotation, 60 * Time.deltaTime);
             }
             else
             {

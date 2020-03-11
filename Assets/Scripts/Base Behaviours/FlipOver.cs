@@ -75,7 +75,7 @@ public class FlipOver : MonoBehaviour
 
                     if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
                     {
-                        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.up, out hit3, 7.5f, layer))
+                        if (Vector3.Dot(transform.up, hit2.normal) < .2f)
                         {
                             StartCoroutine(FlipWithRollingForce(rigidbody, hit2.normal));
                             //StartCoroutine(JumpDelay());
