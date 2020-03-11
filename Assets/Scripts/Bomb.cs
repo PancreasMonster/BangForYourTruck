@@ -69,6 +69,7 @@ public class Bomb : MonoBehaviour
         StopAllCoroutines();
         audio.Play();
         particles.Play();
+        this.gameObject.layer = 10;
         Invoke("DestroyThisGameObject", 1f);
     }
 
@@ -98,7 +99,8 @@ public class Bomb : MonoBehaviour
 
         StopAllCoroutines();
         audio.Play();
-        particles.Play();        
+        particles.Play();
+        this.gameObject.layer = 10;
         Invoke("DestroyThisGameObject",1f);
     }
 

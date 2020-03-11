@@ -37,7 +37,7 @@ public class MineTrigger : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (primed)
         {
@@ -46,7 +46,7 @@ public class MineTrigger : MonoBehaviour
             {
                 Debug.Log("HIT Player");
                 triggered = true;
-                DamageExplosion();
+                Invoke("DamageExplosion", .15f);
             }
         }
     }
