@@ -69,7 +69,8 @@ public class FlipOver : MonoBehaviour
                     }
                     if (autoRollCorrection)
                     {
-                        if (Vector3.Dot(transform.up, hit2.normal) < .5f)
+                        float dotProduct = Vector3.Dot(transform.up, hit2.normal);
+                        if (dotProduct > 0 && dotProduct < .5f)
                             ApplyAngularStabilityForces(rigidbody, hit2.normal);
                     }
 
@@ -79,7 +80,7 @@ public class FlipOver : MonoBehaviour
                         {
                             StartCoroutine(FlipWithRollingForce(rigidbody, hit2.normal));
                             //StartCoroutine(JumpDelay());
-                            rigidbody.AddForce(Vector3.up * force * .5f);
+                            rigidbody.AddForce(Vector3.up * force * .65f);
                             rigidbody.angularVelocity = Vector3.zero;
                         }
                         else
