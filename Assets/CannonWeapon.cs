@@ -75,21 +75,11 @@ public class CannonWeapon : MonoBehaviour
                 Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
                 particle.Play();
 
-          /*  if (GetComponent<LockOn>().target != null)
-            {
-                Vector3 targetPos = GetComponent<LockOn>().target.transform.position;
-                Vector3 dir = new Vector3(targetPos.x, targetPos.y + arcOffset, targetPos.z) - cannonFiringPoint.position;
-                dir.Normalize();
-                Disc.GetComponent<Rigidbody>().AddForce(dir * force);
-            }
-            else
-            { */
+       
                 Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
-           // }
-                if (Disc.GetComponent<ResourceCollection>() != null)
-                    Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
-                if (Disc.GetComponent<Health>() != null)
-                    Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+
+                Disc.GetComponent<CollisionDamage>().damageSource = this.gameObject;
+
                 ph.losePower(pc.powerCosts[6]);
                 force = startForce;
             chargingTime = 0f;

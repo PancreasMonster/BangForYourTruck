@@ -9,9 +9,10 @@ public class CollisionDamage : MonoBehaviour
     public bool destroyOnCollision;
     public float oldVelocity, minimumForce, minimumDamage, maximumDamage;
     public int teamNum;
-
+    public GameObject damageSource; //the source of this GameObject ie. the player that instantiated the 'bullet' 
     public float velocityDamage;
     public float damageToDeal;
+    public bool player;
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -25,7 +26,8 @@ public class CollisionDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (player)
+            damageSource = this.gameObject;
     }
 
     void FixedUpdate()
@@ -62,20 +64,20 @@ public class CollisionDamage : MonoBehaviour
             if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != GetComponent<Health>().playerNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
-                coll.transform.GetComponent<Health>().health -= damage;
+                coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damage, Vector3.zero);
             }
         } else 
         {
             if (!cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
-                coll.transform.GetComponent<Health>().health -= damage;
+                coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damage, Vector3.zero);
             } 
 
             if (cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 2000));
-                coll.transform.GetComponent<Health>().health -= damage;
+                coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damage, Vector3.zero);
                 Debug.Log("Hit");
             }
         }
@@ -97,14 +99,14 @@ public class CollisionDamage : MonoBehaviour
             if (damage >= maximumDamage)
             {
 
-                other.transform.GetComponent<Health>().health -= maximumDamage;
+                other.transform.GetComponent<Health>().TakeDamage(null, damageSource, maximumDamage, Vector3.zero);
 
 
 
             }
             else
             {
-                other.transform.GetComponent<Health>().health -= damage;
+                other.transform.GetComponent<Health>().TakeDamage(null, damageSource, maximumDamage, Vector3.zero);
             }
         }
     }

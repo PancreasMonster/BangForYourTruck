@@ -59,20 +59,18 @@ public class FlamethrowerWeapon : MonoBehaviour
 
             GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, weaponProjectile.transform.rotation);
             Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
-            if (GetComponent<LockOn>().target != null)
-            {
-                Vector3 dir = GetComponent<LockOn>().target.transform.position - AutoWeaponFiringPoint.position;
-                dir.Normalize();
-                Disc.GetComponent<Rigidbody>().AddForce(dir * force);
-            }
-            else
-            {
-                Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
-            }
-            if (Disc.GetComponent<ResourceCollection>() != null)
-                Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
-            if (Disc.GetComponent<Health>() != null)
-                Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+            /* if (GetComponent<LockOn>().target != null)
+             {
+                 Vector3 dir = GetComponent<LockOn>().target.transform.position - AutoWeaponFiringPoint.position;
+                 dir.Normalize();
+                 Disc.GetComponent<Rigidbody>().AddForce(dir * force);
+             }
+             else
+             { */
+            Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+            //}
+
+            Disc.GetComponent<CollisionDamage>().damageSource = this.gameObject;
             ph.losePower(pc.powerCosts[2]);
 
         }
@@ -99,10 +97,8 @@ public class FlamethrowerWeapon : MonoBehaviour
             { */
                 Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
             //}
-            if (Disc.GetComponent<ResourceCollection>() != null)
-                Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
-            if (Disc.GetComponent<Health>() != null)
-                Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+
+            Disc.GetComponent<CollisionDamage>().damageSource = this.gameObject;
             ph.losePower(pc.powerCosts[5]);
 
         }

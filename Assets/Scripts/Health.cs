@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     public bool mbase;
     bool dead;
     public PlayerRespawn pr;
+    public GameObject damageText;
 
     // Start is called before the first frame update
     void Start()
@@ -51,18 +52,7 @@ public class Health : MonoBehaviour
             if (health > maxHealth)
             {
                 health = maxHealth;
-            }
-
-            if (currentHealth > health)
-            {
-                GetComponent<FlagHolder>().DropFlag();
-                currentHealth = health;
-            }
-
-            if (currentHealth < health)
-            {
-                currentHealth = health;
-            }
+            }         
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -71,39 +61,67 @@ public class Health : MonoBehaviour
         //hpBarFill.fillAmount = health / maxHealth;
         if (health <= 0 && !dead)
         {
-            dead = true;
-            if (mbase)
+            
+        }
+    }
+
+    public void TakeDamage(string playerSourceString, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)
+    {
+        if (dead)
+            return;
+
+        if(health - damageTaken <= 0)
+            Death();
+       
+
+        //Instantiates the damage text mesh on the players position
+        GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
+
+        //The text is equal to the damage taken
+        damageTextGameObject.GetComponentInChildren<TextMesh>().text = ((int)damageTaken).ToString();
+
+        //Makes the text mesh face the player 
+        damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
+
+        //Deals the damage to the player's health
+        health -= damageTaken;
+    }
+
+    public void Death()
+    {
+        health = 0;
+        dead = true;
+        if (mbase)
+        {
+            //Destroy(baseUI);
+            StartCoroutine(deadTime());
+        }
+
+        if (!mbase)
+        {
+            Destroy(this.gameObject, 5);
+            Destroy(hpBarHolder);
+            Destroy(hpBarHolder2);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (GetComponentInChildren<ExplodeOnDeath>() != null)
             {
-                //Destroy(baseUI);
-                StartCoroutine(deadTime());
+                BroadcastMessage("Explode");
+
+
+
             }
 
-            if (!mbase)
+            if (GetComponentInChildren<Turret>() != null)
             {
-                Destroy(this.gameObject, 5);
-                Destroy(hpBarHolder);
-                Destroy(hpBarHolder2);
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                if (GetComponentInChildren<ExplodeOnDeath>() != null)
-                {
-                    BroadcastMessage("Explode");
+                GetComponentInChildren<Turret>().enabled = false;
+                GetComponentInChildren<Turret>().StopAllCoroutines();
 
+            }
 
+            if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
+            {
+                BroadcastMessage("Explode");
 
-                }
-
-                if (GetComponentInChildren<Turret>() != null)
-                {
-                    GetComponentInChildren<Turret>().enabled = false;
-                    GetComponentInChildren<Turret>().StopAllCoroutines();
-
-                }
-
-                if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
-                {
-                    BroadcastMessage("Explode");
-
-                }
             }
         }
     }

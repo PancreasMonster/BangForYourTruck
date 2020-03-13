@@ -55102,8 +55102,10 @@ MonoBehaviour:
   minimumDamage: 20
   maximumDamage: 0
   teamNum: 0
+  damageSource: {fileID: 0}
   velocityDamage: 0
   damageToDeal: 0
+  player: 1
 --- !u!114 &4774931590751050907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55156,6 +55158,8 @@ MonoBehaviour:
   wheel: {fileID: 8723195822683896792, guid: 5b199426c5bfca64fad7849121bdeccb, type: 3}
   mbase: 1
   pr: {fileID: 0}
+  damageText: {fileID: 870646884539076592, guid: 9e2afd4b5bcf5904bac415b3edb26a27,
+    type: 3}
 --- !u!114 &1189645944545246797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55299,6 +55303,7 @@ MonoBehaviour:
   camDependent: 0
   XtoRoll: 0
   wheels: []
+  autoRollCorrection: 1
 --- !u!120 &1342025856496443614
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -63,23 +63,16 @@ public class MachinegunWeapon : MonoBehaviour
         if (ph.powerAmount >= pc.powerCosts[2])
         {
 
-            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, AutoWeaponFiringPoint.transform.rotation);
-            Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
-           /*if (GetComponent<LockOn>().target != null)
-            {
-                Vector3 dir = GetComponent<LockOn>().target.transform.position - AutoWeaponFiringPoint.position;
-                dir.Normalize();
-                Disc.GetComponent<Rigidbody>().AddForce(dir * force);
-            }
-            else
-            {*/
-                Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
-           // }
-            if (Disc.GetComponent<ResourceCollection>() != null)
-                Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
-            if (Disc.GetComponent<Health>() != null)
-                Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+            GameObject Bullet = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, AutoWeaponFiringPoint.transform.rotation);
+
+            Bullet.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
+
+            Bullet.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+
+            Bullet.GetComponent<CollisionDamage>().damageSource = this.gameObject;
+         
             particles1.Play();
+
             ph.losePower(pc.powerCosts[2]);
 
         }
@@ -95,23 +88,16 @@ public class MachinegunWeapon : MonoBehaviour
         if (ph.powerAmount >= pc.powerCosts[2])
         {
 
-            GameObject Disc = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, AutoWeaponFiringPoint2.transform.rotation);
-            Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
-            if (GetComponent<LockOn>().target != null)
-            {
-                Vector3 dir = GetComponent<LockOn>().target.transform.position - AutoWeaponFiringPoint.position;
-                dir.Normalize();
-                Disc.GetComponent<Rigidbody>().AddForce(dir * force);
-            }
-            else
-            {
-                Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
-            }
-            if (Disc.GetComponent<ResourceCollection>() != null)
-                Disc.GetComponent<ResourceCollection>().mbase = this.gameObject;
-            if (Disc.GetComponent<Health>() != null)
-                Disc.GetComponent<Health>().playerNum = GetComponent<Health>().playerNum;
+            GameObject Bullet = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, AutoWeaponFiringPoint2.transform.rotation);
+
+            Bullet.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
+
+            Bullet.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+
+            Bullet.GetComponent<CollisionDamage>().damageSource = this.gameObject;
+
             particles2.Play();
+
             ph.losePower(pc.powerCosts[2]);
 
         }
