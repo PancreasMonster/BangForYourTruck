@@ -35,7 +35,6 @@ public class MoonGravity : MonoBehaviour
             if (currentDistance < maxDistance)
             {
                 rb.AddForce(-directionOfGravity * (relativeForce * (1 - (currentDistance / maxDistance))), ForceMode.Acceleration);
-                Debug.Log("Pulling");
             }
             
         }

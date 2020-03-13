@@ -36,6 +36,11 @@ public class BuildModeFire : MonoBehaviour
     public float maxTargetDistance = 6;
     public float targetMovespeed = 3;
     public float turnSpeed = 270;
+    [Header("RangeSelection")]
+    public List<float> ranges = new List<float>();
+    public int currentRange = 1;
+    public bool forwardRange = true, backwardRange = true;
+    public float rangeDelay;
 
 
 
@@ -61,15 +66,25 @@ public class BuildModeFire : MonoBehaviour
 
         if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
-          //  aimTarget.transform.position = transform.position + targetOriginalPos;
-         //   targetOriginalPos = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + GetComponent<Health>().playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * targetOriginalPos;
+         
             RenderArc();
-            if(Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) < 0 && targetZDistance < maxTargetDistance)
+            targetZDistance = ranges[currentRange];
+
+            if(Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) < 0 && currentRange < ranges.Count - 1 && forwardRange)
             {
-                targetZDistance += targetMovespeed * Time.deltaTime;
-            } else if (Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) > 0 && targetZDistance > 0)
+                backwardRange = true;
+                forwardRange = false;
+                currentRange++;
+
+                StartCoroutine(resetRangeBools(0));
+            }
+            else if (Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) > 0 && currentRange > 0 && backwardRange)
             {
-                targetZDistance -= targetMovespeed * Time.deltaTime;
+                forwardRange = true;
+                backwardRange = false;
+                currentRange--;
+
+                StartCoroutine(resetRangeBools(1));
             }
             aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, targetOriginalPos.z + targetZDistance);
         }
@@ -91,7 +106,7 @@ public class BuildModeFire : MonoBehaviour
                     clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
                 if (clone.GetComponent<Bomb>() != null)
                 {
-                    StopAllCoroutines();
+                   // StopAllCoroutines();
                     cooldown = false;
                 }
 
@@ -176,11 +191,21 @@ public class BuildModeFire : MonoBehaviour
     //calculates each point of the array 
     Vector3 CalculateArcPoint (float t, float maxDistance)
     {
-        float z = t * maxDistance;
-        float y = z * Mathf.Tan(radianAngle) - ((g * z * z) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
-        Vector3 arcRot = new Vector3(0, y, z);
-        transform.TransformPoint(arcRot);
-        return arcRot;
+        if (targetZDistance >= 0)
+        {
+            float z = t * maxDistance;
+            float y = z * Mathf.Tan(radianAngle) - ((g * z * z) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
+            Vector3 arcRot = new Vector3(0, y, z);
+            transform.TransformPoint(arcRot);
+            return arcRot;
+        } else
+        {
+            float z = t * maxDistance;
+            float y = z * Mathf.Tan(radianAngle) - ((g * z * z) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
+            Vector3 arcRot = new Vector3(0, y, -z);
+            transform.TransformPoint(arcRot);
+            return arcRot;
+        }
     }
 
     public Vector3 BallisticVel(Transform target, float angle)
@@ -206,5 +231,20 @@ public class BuildModeFire : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownDelay);
         cooldown = false;
+    }
+
+    IEnumerator resetRangeBools (int i)
+    {
+        if (i == 0)
+        {
+            forwardRange = false;
+            yield return new WaitForSeconds(rangeDelay);
+            forwardRange = true;
+        } else
+        {
+            backwardRange = false;
+            yield return new WaitForSeconds(rangeDelay);
+            backwardRange = true;
+        }
     }
 }
