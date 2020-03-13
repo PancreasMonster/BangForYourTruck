@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     bool dead;
     public PlayerRespawn pr;
     public GameObject damageText;
+    public int damageTextLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -59,10 +60,7 @@ public class Health : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         //hpBarFill.fillAmount = health / maxHealth;
-        if (health <= 0 && !dead)
-        {
-            
-        }
+        
     }
 
     public void TakeDamage(string playerSourceString, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)
@@ -79,6 +77,13 @@ public class Health : MonoBehaviour
 
         //The text is equal to the damage taken
         damageTextGameObject.GetComponentInChildren<TextMesh>().text = ((int)damageTaken).ToString();
+
+        //Changes the layer of the text so only the opposite team can see it
+        damageTextGameObject.gameObject.layer = damageTextLayer;
+        foreach (Transform t in damageTextGameObject.transform)
+        {
+            t.gameObject.layer = damageTextLayer;
+        }
 
         //Makes the text mesh face the player 
         damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
