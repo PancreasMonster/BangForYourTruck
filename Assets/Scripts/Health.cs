@@ -68,10 +68,6 @@ public class Health : MonoBehaviour
         if (dead)
             return;
 
-        if(health - damageTaken <= 0)
-            Death();
-       
-
         //Instantiates the damage text mesh on the players position
         GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
 
@@ -90,6 +86,9 @@ public class Health : MonoBehaviour
 
         //Deals the damage to the player's health
         health -= damageTaken;
+
+        if (health - damageTaken <= 0)
+            Death();
     }
 
     public void Death()

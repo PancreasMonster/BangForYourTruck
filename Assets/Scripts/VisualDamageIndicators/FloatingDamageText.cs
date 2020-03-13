@@ -16,13 +16,13 @@ public class FloatingDamageText : MonoBehaviour
     void Start()
     {
         origScale = transform.localScale; //Get the local scale on instantiation 
-        randomXSpeed = Random.Range(0, 15);
-        randomZSpeed = Random.Range(0, 15);
+        randomXSpeed = Random.Range(-15, 15);
+        randomZSpeed = Random.Range(-15, 15);
 
         randomColor = new Color(
-        Random.Range(0f, 1f),
-        Random.Range(0f, 1f),
-        Random.Range(0f, 1f),
+        Random.Range(.5f, 1f),
+        Random.Range(0f, .1f),
+        Random.Range(.5f, 1f),
         1
         );
     }
@@ -33,6 +33,6 @@ public class FloatingDamageText : MonoBehaviour
         textMesh.color = randomColor;
         transform.position += new Vector3(randomXSpeed * Time.deltaTime, riseSpeed * Time.deltaTime, randomZSpeed * Time.deltaTime);
         transform.localScale = Vector3.Lerp(transform.localScale, origScale / origScaleAmount, 2 * Time.deltaTime);
-        randomColor.a = Mathf.Lerp(1, 0, 4 * Time.deltaTime);
+        randomColor.a = Mathf.Lerp(randomColor.a, 0, 1 * Time.deltaTime);
     }
 }

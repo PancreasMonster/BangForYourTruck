@@ -33,6 +33,11 @@ public class NeutralTagPickUp : MonoBehaviour
                     t.currentTags++;
                     spawner.GetComponent<NeutralTagSpawner>().collected = false;
                     Destroy(this.gameObject);
+                } else
+                {
+                    collected = true;
+                    spawner.GetComponent<NeutralTagSpawner>().collected = false;
+                    Destroy(this.gameObject);
                 }
             }
         }
