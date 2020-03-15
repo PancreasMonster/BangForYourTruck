@@ -8,9 +8,10 @@ public class ShotgunBullet : MonoBehaviour
     public GameObject damageSource; //the source of this GameObject ie. the player that instantiated the 'bullet' 
     public float damageToDeal;
     public float maxDamage;
+    float startingBulletLifeTime;
     public float bulletLifetime;
     //public float growthOverTime;
-    public float damageFallOffOvertTime;
+    public float damageFallOffOverTime;
 
     public bool player;
 
@@ -18,8 +19,8 @@ public class ShotgunBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<DestroyAfterLifetime>().lifetime = bulletLifetime;
-        damageToDeal = maxDamage;
+        startingBulletLifeTime = bulletLifetime;
+        
 
         if (player)
             damageSource = this.gameObject;
@@ -30,12 +31,13 @@ public class ShotgunBullet : MonoBehaviour
     {
 
         bulletLifetime -= Time.deltaTime;
+
         if (bulletLifetime <= 0f)
         {
             Destroy(this.gameObject);
         }
 
-        damageToDeal = damageToDeal - (Time.deltaTime * damageFallOffOvertTime);
+        damageToDeal = maxDamage - ((startingBulletLifeTime - bulletLifetime) * damageFallOffOverTime);
         
     }
 

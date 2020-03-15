@@ -52,6 +52,8 @@ public class ShotgunWeapon : MonoBehaviour
         {
 
             GameObject Bullet = Instantiate(weaponProjectile, ShotgunWeaponFiringPoint.position, ShotgunWeaponFiringPoint.transform.rotation);
+            Bullet.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
+            Bullet.GetComponent<Rigidbody>().angularVelocity = GetComponent<Rigidbody>().angularVelocity;
 
             Bullet.GetComponent<ShotgunBullet>().teamNum = GetComponent<Health>().teamNum;
 
@@ -61,7 +63,7 @@ public class ShotgunWeapon : MonoBehaviour
 
             particles1.Play();
 
-            ph.losePower(pc.powerCosts[2]);
+            ph.losePower(pc.powerCosts[5]);
 
             rightFiredLast = true;
             Debug.Log("right fired");
@@ -74,6 +76,8 @@ public class ShotgunWeapon : MonoBehaviour
         {
 
             GameObject Bullet = Instantiate(weaponProjectile, ShotgunWeaponFiringPoint2.position, ShotgunWeaponFiringPoint2.transform.rotation);
+            Bullet.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
+            Bullet.GetComponent<Rigidbody>().angularVelocity = GetComponent<Rigidbody>().angularVelocity;
 
             Bullet.GetComponent<ShotgunBullet>().teamNum = GetComponent<Health>().teamNum;
 
@@ -83,7 +87,7 @@ public class ShotgunWeapon : MonoBehaviour
 
             particles2.Play();
 
-            ph.losePower(pc.powerCosts[2]);
+            ph.losePower(pc.powerCosts[5]);
 
             rightFiredLast = false;
             Debug.Log("left fired");
