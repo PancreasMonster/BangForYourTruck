@@ -60,7 +60,10 @@ public class Health : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         //hpBarFill.fillAmount = health / maxHealth;
-        
+
+        if (health <= 0)
+            Death();
+
     }
 
     public void TakeDamage(string playerSourceString, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)

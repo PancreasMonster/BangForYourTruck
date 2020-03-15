@@ -94,7 +94,7 @@ public class BuildModeFire : MonoBehaviour
         {
             targetZDistance = 0;
             lr.positionCount = 0;
-            if (ammo[currentI] > 0)
+           /* if (ammo[currentI] > 0)
             {
                 cooldown = true;
                 StartCoroutine(Cooldown());
@@ -114,6 +114,30 @@ public class BuildModeFire : MonoBehaviour
                 unitRB.velocity = BallisticVel(aimTarget, fireAngle);
                 ammo[currentI]--;
                 
+            }*/
+        }
+
+        if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        {
+            if (ammo[currentI] > 0)
+            {
+                cooldown = true;
+                StartCoroutine(Cooldown());
+                GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
+                clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
+                if (clone.GetComponent<ResourceCollection>() != null)
+                    clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
+                if (clone.GetComponent<Health>() != null)
+                    clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
+                if (clone.GetComponent<Bomb>() != null)
+                {
+                    // StopAllCoroutines();
+                    cooldown = false;
+                }
+
+                Rigidbody unitRB = clone.GetComponent<Rigidbody>();
+                unitRB.velocity = BallisticVel(aimTarget, fireAngle);
+                ammo[currentI]--;
             }
         }
 

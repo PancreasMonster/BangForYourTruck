@@ -100,11 +100,18 @@ public class Orbit : MonoBehaviour
 
                         transform.position = player.position + jumpOffset;
                         jumpOffset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * jumpOffset;
-                        transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.position.z));
+                        if (!Input.GetButton("PadLB" + playerNum.ToString()))
+                            transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.position.z));
+                        else
+                            transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
                     }
                     else
                     {
-                        transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.TransformPoint(origPos).z);
+                        if (!Input.GetButton("PadLB" + playerNum.ToString()))
+                            transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.TransformPoint(origPos).z);
+                        else
+                            transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+
                         disorient = false;
                     }
 
@@ -115,7 +122,10 @@ public class Orbit : MonoBehaviour
                 {
                     transform.position = player.position + offset;
                     offset = Quaternion.AngleAxis(Input.GetAxisRaw("RHorizontal" + playerNum.ToString()) * turnSpeed * Time.deltaTime, Vector3.up) * offset;
-                    transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.position.z));
+                    if (!Input.GetButton("PadLB" + playerNum.ToString()))
+                        transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.position.z));
+                    else
+                        transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
                 }
             }
             else
