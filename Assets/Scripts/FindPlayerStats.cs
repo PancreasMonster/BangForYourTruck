@@ -19,7 +19,7 @@ public class FindPlayerStats : MonoBehaviour
     {
 
 
-        throwablesText = transform.Find("ThrowablesText").GetComponent<Text>();
+        throwablesText = transform.Find("ThrowablesStats").transform.Find("ThrowablesText").GetComponent<Text>();
         resourceText = transform.Find("Resources").GetComponent<Text>();
         //resourceIncomeText = transform.Find("Resources Income").GetComponent<Text>();
         //hpBarFill = GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
