@@ -143,6 +143,7 @@ MonoBehaviour:
   flameThrower: 0
   machineGun: 0
   cannonGun: 1
+  shotgun: 0
   teamGateNum: 2
 --- !u!65 &156423408906577496
 BoxCollider:
@@ -719,6 +720,22 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!111 &7787279481172370868
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494262094840142697}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c52ba0370f8efca4d91243c26819ef65, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: c52ba0370f8efca4d91243c26819ef65, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &620711550334682765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,6 +1666,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 8734156915171998723, guid: 6f4899f176fc4294e8ccd5617f29c0d6, type: 3}
+--- !u!111 &4740786488127407784
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115044595862701852}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c52ba0370f8efca4d91243c26819ef65, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: c52ba0370f8efca4d91243c26819ef65, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1176870697543938811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,6 +1787,7 @@ GameObject:
   - component: {fileID: 7231094859696058426}
   - component: {fileID: 643824359730856019}
   - component: {fileID: 4243661634319457316}
+  - component: {fileID: 3342548506457696495}
   m_Layer: 14
   m_Name: Base 3
   m_TagString: Untagged
@@ -1835,6 +1869,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 823453533345074304, guid: be739f6c2c4cb30488a308823a849914, type: 3}
+--- !u!111 &3342548506457696495
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898740871443541820}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c52ba0370f8efca4d91243c26819ef65, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: c52ba0370f8efca4d91243c26819ef65, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1967845209548368349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,6 +2260,7 @@ MonoBehaviour:
   flameThrower: 1
   machineGun: 0
   cannonGun: 0
+  shotgun: 0
   teamGateNum: 2
 --- !u!65 &1982417003109090381
 BoxCollider:
@@ -3910,6 +3961,7 @@ MonoBehaviour:
   flameThrower: 0
   machineGun: 1
   cannonGun: 0
+  shotgun: 0
   teamGateNum: 1
 --- !u!65 &4243661635043408241
 BoxCollider:
@@ -4441,6 +4493,7 @@ MonoBehaviour:
   flameThrower: 0
   machineGun: 1
   cannonGun: 0
+  shotgun: 0
   teamGateNum: 2
 --- !u!65 &4407573494585078260
 BoxCollider:
@@ -6436,6 +6489,7 @@ MonoBehaviour:
   flameThrower: 0
   machineGun: 0
   cannonGun: 1
+  shotgun: 0
   teamGateNum: 1
 --- !u!65 &7540129715591495307
 BoxCollider:
@@ -7028,6 +7082,7 @@ MonoBehaviour:
   flameThrower: 1
   machineGun: 0
   cannonGun: 0
+  shotgun: 0
   teamGateNum: 1
 --- !u!65 &8199350880823370580
 BoxCollider:
@@ -45283,6 +45338,18 @@ PrefabInstance:
 --- !u!4 &2679600250768252691 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3240609022788519422, guid: 568f2f7c0e93cea4f9eeb1aac29e8c3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 709086625906989805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &494262094840142697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1084477207109796228, guid: 568f2f7c0e93cea4f9eeb1aac29e8c3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 709086625906989805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1115044595862701852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 481394371820199409, guid: 568f2f7c0e93cea4f9eeb1aac29e8c3c,
     type: 3}
   m_PrefabInstance: {fileID: 709086625906989805}
   m_PrefabAsset: {fileID: 0}
