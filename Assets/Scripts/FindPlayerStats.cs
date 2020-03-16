@@ -30,8 +30,8 @@ public class FindPlayerStats : MonoBehaviour
     void FixedUpdate()
     {
         playerHealth = player.GetComponent<Health>().health;
-        throwablesText.text = player.GetComponent<BuildModeFire>().currentDisc.transform.name.ToString();
-        resourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
+        //throwablesText.text = player.GetComponent<BuildModeFire>().currentDisc.transform.name.ToString();
+       // resourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
         //resourceIncomeText = player.GetComponent<Resources(New)>().resourceIncomeAmount.ToString();
         hpBarFill.fillAmount = playerHealth / 100;
 
