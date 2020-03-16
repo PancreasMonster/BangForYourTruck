@@ -10,7 +10,6 @@ public class ShotgunBullet : MonoBehaviour
     public float maxDamage;
     float startingBulletLifeTime;
     public float bulletLifetime;
-    //public float growthOverTime;
     public float damageFallOffOverTime;
 
     public bool player;
@@ -19,6 +18,7 @@ public class ShotgunBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<AudioSource>().Play();
         startingBulletLifeTime = bulletLifetime;
         
 
