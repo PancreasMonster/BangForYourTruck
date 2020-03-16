@@ -119,19 +119,20 @@ public class BuildModeFire : MonoBehaviour
 
         if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
         {
+            targetZDistance = 0;
+            lr.positionCount = 0;
             if (ammo[currentI] > 0)
             {
                 cooldown = true;
                 StartCoroutine(Cooldown());
-                GameObject clone = Instantiate(currentDisc, firingPoint.position, Quaternion.identity);
-                clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
+                GameObject clone = Instantiate(currentDisc, firingPoint.position, currentDisc.transform.rotation);
+               // clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
                 if (clone.GetComponent<ResourceCollection>() != null)
                     clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
                 if (clone.GetComponent<Health>() != null)
                     clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
                 if (clone.GetComponent<Bomb>() != null)
-                {
-                    // StopAllCoroutines();
+                {                 
                     cooldown = false;
                 }
 

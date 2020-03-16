@@ -78,7 +78,7 @@ public class CollisionDamage : MonoBehaviour
             {
                 float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 2000));
                 coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damage, Vector3.zero);
-                Debug.Log("Hit");
+               // Debug.Log("Hit");
             }
         }
 

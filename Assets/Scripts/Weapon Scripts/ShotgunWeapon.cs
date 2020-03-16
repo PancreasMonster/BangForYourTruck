@@ -66,7 +66,7 @@ public class ShotgunWeapon : MonoBehaviour
             ph.losePower(pc.powerCosts[5]);
 
             rightFiredLast = true;
-            Debug.Log("right fired");
+            //Debug.Log("right fired");
         }
     }
 
@@ -90,7 +90,7 @@ public class ShotgunWeapon : MonoBehaviour
             ph.losePower(pc.powerCosts[5]);
 
             rightFiredLast = false;
-            Debug.Log("left fired");
+          //  Debug.Log("left fired");
 
         }
     }

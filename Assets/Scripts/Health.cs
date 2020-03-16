@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!mbase)
+        if (!mbase && !dead)
         {
             hpBarFill.fillAmount = health / maxHealth;
             hpBarFill2.fillAmount = health / maxHealth;
@@ -61,7 +61,7 @@ public class Health : MonoBehaviour
 
         //hpBarFill.fillAmount = health / maxHealth;
 
-        if (health <= 0)
+        if (health <= 0 && !dead)
             Death();
 
     }
