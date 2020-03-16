@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponSelectionGate : MonoBehaviour
 {
-    public bool flameThrower, machineGun, cannonGun;
+    public bool flameThrower, machineGun, cannonGun, shotgun;
     public int teamGateNum;
     AudioSource audio;
 
@@ -34,6 +34,8 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().enabled = false;
                     col.GetComponent<CannonWeapon>().model.SetActive(false);
+                    col.GetComponent<ShotgunWeapon>().enabled = false;
+                    col.GetComponent<ShotgunWeapon>().model.SetActive(false);
 
                 }
                 else if (machineGun)
@@ -44,6 +46,8 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(true);
                     col.GetComponent<CannonWeapon>().enabled = false;
                     col.GetComponent<CannonWeapon>().model.SetActive(false);
+                    col.GetComponent<ShotgunWeapon>().enabled = false;
+                    col.GetComponent<ShotgunWeapon>().model.SetActive(false);
                 }
                 else if (cannonGun)
                 {
@@ -53,8 +57,21 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().enabled = true;
                     col.GetComponent<CannonWeapon>().model.SetActive(true);
+                    col.GetComponent<ShotgunWeapon>().enabled = false;
+                    col.GetComponent<ShotgunWeapon>().model.SetActive(false);
                 }
 
+                else if (shotgun)
+                {
+                    col.GetComponent<FlamethrowerWeapon>().enabled = false;
+                    col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
+                    col.GetComponent<MachinegunWeapon>().enabled = false;
+                    col.GetComponent<MachinegunWeapon>().model.SetActive(false);
+                    col.GetComponent<CannonWeapon>().enabled = true;
+                    col.GetComponent<CannonWeapon>().model.SetActive(true);
+                    col.GetComponent<ShotgunWeapon>().enabled = true;
+                    col.GetComponent<ShotgunWeapon>().model.SetActive(true);
+                }
 
                 audio.Play();
             }
