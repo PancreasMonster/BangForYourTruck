@@ -33,6 +33,8 @@ public class WheelSkid : MonoBehaviour {
     float driftTimer;
     public PostProcessVolume PPV;
     ChromaticAberration ChromAberr = null;
+    public float intensity;
+    public int playerNum;
 
     public bool firstWheel;
     public MobilityCharges mobCharges;
@@ -87,7 +89,7 @@ public class WheelSkid : MonoBehaviour {
 
             // Skid if we should
             if (skidTotal >= SKID_FX_SPEED) {
-				float intensity = Mathf.Clamp01(skidTotal / MAX_SKID_INTENSITY);
+				intensity = Mathf.Clamp01(skidTotal / MAX_SKID_INTENSITY);
 
                 
 
@@ -107,7 +109,10 @@ public class WheelSkid : MonoBehaviour {
                         aud.Play();
                         foreach(ParticleSystem ps in particleSystems)
                         {
-                            ps.Play();
+                            if (Input.GetButton("PadX" + playerNum.ToString()))
+                                ps.Play();
+                            else
+                                ps.Stop();
                         }
                         aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
                         driftTimer += Time.deltaTime;

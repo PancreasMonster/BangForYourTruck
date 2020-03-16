@@ -27,6 +27,7 @@ public class FlipOver : MonoBehaviour
     public bool XtoRoll;
     public List<WheelCollider> wheels = new List<WheelCollider>();
     public bool autoRollCorrection = true;
+    public bool Grounded;
 
     // Start is called before the first frame update
     void Start()
@@ -125,7 +126,7 @@ public class FlipOver : MonoBehaviour
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up, out hit, 7, layer) && !turnDelay)
             {
                 timer = 0;
-
+               
             }
             else
             {
@@ -138,7 +139,7 @@ public class FlipOver : MonoBehaviour
 
         if (timer > timerAllowance)
         {
-
+           
 
             if (XtoRoll)
             {
