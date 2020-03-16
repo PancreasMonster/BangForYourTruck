@@ -10,6 +10,7 @@ public class FindPlayerStats : MonoBehaviour
     float playerHealth;
     float playerMaxHealth;
 
+    Text throwablesText;
     Text resourceText;
     Text resourceIncomeText;
     public Image hpBarFill;
@@ -18,7 +19,7 @@ public class FindPlayerStats : MonoBehaviour
     {
 
 
-
+        throwablesText = transform.Find("ThrowablesText").GetComponent<Text>();
         resourceText = transform.Find("Resources").GetComponent<Text>();
         //resourceIncomeText = transform.Find("Resources Income").GetComponent<Text>();
         //hpBarFill = GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
@@ -26,17 +27,17 @@ public class FindPlayerStats : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         playerHealth = player.GetComponent<Health>().health;
-
+        throwablesText.text = player.GetComponent<BuildModeFire>().currentDisc.transform.name.ToString();
         resourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
         //resourceIncomeText = player.GetComponent<Resources(New)>().resourceIncomeAmount.ToString();
         hpBarFill.fillAmount = playerHealth / 100;
 
         if (playerHealth <= 0)
         {
-         //   Destroy(this.gameObject);
+         //   Show Killed By Text
         }
     }
 }
