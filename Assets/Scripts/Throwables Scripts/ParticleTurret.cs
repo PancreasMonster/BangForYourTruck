@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LaserTurret : AIBehaviours
+public class ParticleTurret : AIBehaviours
 {
     public LayerMask layer, laserLayer;
     public float targetDist = 5;
@@ -18,22 +18,24 @@ public class LaserTurret : AIBehaviours
     public AudioSource shootAudio;
     public float rotationSpeed = 2.5f;
 
-    ParticleSystem turretParticles;
+    public ParticleSystem ps;
+    public List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
     public LineRenderer lr;
 
     void Start()
     {
-       StartCoroutine(EnemyCheck());       
+        StartCoroutine(EnemyCheck());
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (ctDir != null)
         {
-           
-            
+
+
             if (Vector3.Distance(transform.position, ctDir.transform.position) < range)
             {
                 Vector3 dir = ctDir.transform.position - transform.position;
@@ -44,46 +46,48 @@ public class LaserTurret : AIBehaviours
 
         if (currentTarget != null)
         {
-            
+
             float magDist = Vector3.Distance(transform.position, currentTarget.transform.position);
             if (magDist > range)
             {
                 currentTarget = null;
             }
-            
-                lr.SetPosition(0, firingPoint.position);
-                RaycastHit hit;
-                if (Physics.Raycast(firingPoint.position, firingPoint.transform.forward, out hit, 10000, laserLayer))
-                {
-                    lr.SetPosition(1, hit.point);
-                }
-                else
-                {
-                    lr.SetPosition(1, firingPoint.position);
-                }
-           
+
+            lr.SetPosition(0, firingPoint.position);
+            RaycastHit hit;
+            if (Physics.Raycast(firingPoint.position, firingPoint.transform.forward, out hit, 10000, laserLayer))
+            {
+                lr.SetPosition(1, hit.point);
+            }
+            else
+            {
+                lr.SetPosition(1, firingPoint.position);
+            }
+
 
             RaycastHit hit2;
             if (currentTarget != null)
             {
-                    
+
                 if (Physics.Raycast(firingPoint.position, (currentTarget.transform.position - firingPoint.position).normalized, out hit2, range, layer))
                 {
-                    
+
                     if (hit2.transform.gameObject != currentTarget.gameObject)
-                    {                           
+                    {
                         currentTarget = null;
                     }
                 }
-                    
-            }  
-        } else
+
+            }
+        }
+        else
         {
             lr.positionCount = 0;
+            ps.Stop();
         }
     }
 
-  
+
 
     public IEnumerator EnemyCheck()
     {
@@ -109,41 +113,41 @@ public class LaserTurret : AIBehaviours
                 ctDir = t;
                 dist = Vector3.Distance(t.transform.position, transform.position);
                 RaycastHit hit;
-               
-                    if (t.gameObject.tag == "Player")
+
+                if (t.gameObject.tag == "Player")
+                {
+                    if (Physics.Raycast(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y, t.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
                     {
-                        if (Physics.Raycast(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y, t.transform.position.z) - firingPoint.position).normalized, out hit, range, layer))
+                        if (hit.transform.gameObject == t.gameObject)
                         {
-                            if (hit.transform.gameObject == t.gameObject)
-                            {
-                                Debug.Log(hit.transform.name);
+                            Debug.Log(hit.transform.name);
 
                             lr.positionCount = 2;
                             currentTarget = t;
-                            }
-
-                            if (hit.transform.gameObject != t.gameObject)
-                            {
-                                Debug.DrawRay(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position).normalized * hit.distance, Color.blue);
-                            }
-
                         }
-                    }
-                    else
-                    {
-                        if (Physics.Raycast(firingPoint.position, (t.transform.position - firingPoint.position).normalized, out hit, range, layer))
+
+                        if (hit.transform.gameObject != t.gameObject)
                         {
-                            if (hit.transform.gameObject == t.gameObject)
-                            {
-                                //Debug.Log("Found");
-
-
-                                currentTarget = t;
-                            }
-
+                            Debug.DrawRay(firingPoint.position, (new Vector3(t.transform.position.x, t.transform.position.y + 1.25f, t.transform.position.z) - firingPoint.position).normalized * hit.distance, Color.blue);
                         }
+
                     }
-                
+                }
+                else
+                {
+                    if (Physics.Raycast(firingPoint.position, (t.transform.position - firingPoint.position).normalized, out hit, range, layer))
+                    {
+                        if (hit.transform.gameObject == t.gameObject)
+                        {
+                            //Debug.Log("Found");
+
+
+                            currentTarget = t;
+                        }
+
+                    }
+                }
+
             }
         }
         if (targets.Count > 0 && currentTarget != null && currentTarget.GetComponent<Health>() != null)
@@ -152,19 +156,19 @@ public class LaserTurret : AIBehaviours
             {
 
                 FireLaser(currentTarget);
-                
+
                 yield return null;
             }
-            
+
             currentTarget = null;
             targets.Clear();
-            yield return new WaitForSeconds(1/tickRate);
+            yield return new WaitForSeconds(1 / tickRate);
 
             StartCoroutine(EnemyCheck());
         }
         else
         {
-            yield return new WaitForSeconds(1/tickRate);
+            yield return new WaitForSeconds(1 / tickRate);
 
             StartCoroutine(EnemyCheck());
 
@@ -175,25 +179,44 @@ public class LaserTurret : AIBehaviours
 
     public void FireLaser(GameObject t)
     {
+        Vector3 dir = t.transform.position - firingPoint.position;
+        dir.Normalize();
         
-        
-        RaycastHit hit;
-        if (Physics.Raycast(firingPoint.position, firingPoint.transform.forward, out hit, range, layer))
+        if(Vector3.Dot(dir, firingPoint.transform.forward) > .8f)
         {
-            Debug.Log("Lasering " + hit.transform.name);
-            Debug.DrawLine(firingPoint.position, hit.point);
-            if (hit.transform.gameObject == t.gameObject)
-            {
-                t.GetComponent<Health>().TakeDamage(null, this.gameObject, damage * Time.deltaTime, Vector3.zero);
-
-            }
-           
+           if(!ps.isPlaying)
+            ps.Play();
+        } else
+        {
+            ps.Stop();
         }
+
+       
     }
 
-   
+    void OnParticleCollision(GameObject other)
+    {
+        if(other.gameObject != this.gameObject && other.GetComponent<Health>())
+        other.GetComponent<Health>().TakeDamage(null, this.gameObject, damage, Vector3.zero);
 
- 
+        int numCollisionEvents = ps.GetCollisionEvents(other, collisionEvents);
+
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        int i = 0;
+
+        while (i < numCollisionEvents)
+        {
+            if (rb)
+            {
+                Vector3 pos = collisionEvents[i].intersection;
+                Vector3 force = collisionEvents[i].velocity * 10;
+                rb.AddForce(force);
+            }
+            i++;
+        }
+    } 
+
+
 
 }
 

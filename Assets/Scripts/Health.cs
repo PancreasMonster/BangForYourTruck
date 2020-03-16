@@ -158,13 +158,5 @@ public class Health : MonoBehaviour
         //hpBarHolder.SetActive(true);
     }
 
-    void OnParticleCollision(GameObject particles)
-    {
-
-
-        float damagePerParticle = particles.GetComponent<TurretParticleDamage>().damageToDeal;
-
-
-        health -= damagePerParticle;
-    }
+    
 }
