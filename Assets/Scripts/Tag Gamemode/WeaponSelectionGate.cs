@@ -67,8 +67,8 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
                     col.GetComponent<MachinegunWeapon>().enabled = false;
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
-                    col.GetComponent<CannonWeapon>().enabled = true;
-                    col.GetComponent<CannonWeapon>().model.SetActive(true);
+                    col.GetComponent<CannonWeapon>().enabled = false;
+                    col.GetComponent<CannonWeapon>().model.SetActive(false);
                     col.GetComponent<ShotgunWeapon>().enabled = true;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(true);
                 }
