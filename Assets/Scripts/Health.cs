@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
 
-    public float health, maxHealth, currentHealth;
+    public float health, maxHealth;
     public int playerNum;
     public int teamNum;
     public GameObject healthBarCanvas, hpBarHolder, hpBarHolder2, baseUI, car, wheel;
@@ -17,12 +17,16 @@ public class Health : MonoBehaviour
     public PlayerRespawn pr;
     public GameObject damageText;
     public int damageTextLayer;
+    public KillManager km;
+    public float killerTimer;
+    public float killMaxTime = 15;
+    public GameObject damageSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        km = GameObject.Find("KillManager").GetComponent<KillManager>();
         maxHealth = health;
-        currentHealth = health;
         if (!mbase)
         {
 
@@ -43,6 +47,15 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(killerTimer > 0)
+        {
+            killerTimer -= Time.deltaTime;
+        } else
+        {
+            damageSource = null;
+        }
+
+
         if (!mbase && !dead)
         {
             hpBarFill.fillAmount = health / maxHealth;
@@ -68,8 +81,12 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(string playerSourceString, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)
     {
+        //If dead, stop code here
         if (dead)
             return;
+
+        killerTimer = killMaxTime;
+        damageSource = playerSourceGameObject;
 
         //Instantiates the damage text mesh on the players position
         GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
@@ -96,6 +113,7 @@ public class Health : MonoBehaviour
 
     public void Death()
     {
+        km.KillTracked(damageSource, this.gameObject);
         health = 0;
         dead = true;
         if (mbase)
