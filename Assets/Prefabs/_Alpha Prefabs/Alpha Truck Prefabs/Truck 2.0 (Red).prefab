@@ -55172,7 +55172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 0
-  currentHealth: 0
   playerNum: 1
   teamNum: 0
   healthBarCanvas: {fileID: 0}
@@ -55186,6 +55185,10 @@ MonoBehaviour:
   damageText: {fileID: 870646884539076592, guid: 9e2afd4b5bcf5904bac415b3edb26a27,
     type: 3}
   damageTextLayer: 12
+  km: {fileID: 0}
+  killerTimer: 0
+  killMaxTime: 15
+  damageSource: {fileID: 0}
 --- !u!114 &1189645944545246797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56732,7 +56735,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 100
+      scalar: 120
       minScalar: 50
       maxCurve:
         serializedVersion: 2
@@ -66782,7 +66785,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 100
+      scalar: 120
       minScalar: 50
       maxCurve:
         serializedVersion: 2
@@ -111295,16 +111298,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2049268278548620772}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -111374,6 +111367,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: -0.2523
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
         type: 3}
