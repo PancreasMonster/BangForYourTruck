@@ -10,12 +10,15 @@ public class StuntChecker : MonoBehaviour
     Health h;
     public WheelSkid ws;
     public float driftIntensity = 2;
+    public float stuntStringHoldTime = 1;
 
     [System.NonSerialized]
     public float score = 0;
     List<Stunt> stunts = new List<Stunt>();
     List<Stunt> doneStunts = new List<Stunt>();
     bool drifting;
+    bool driftHold, jumpHold, flipHold;
+    bool driftDisplay, jumpDisplay, flipDisplay;
     float driftDist;
     float driftScore;
     float endDriftTime;//Time during which drifting counts even if the vehicle is not actually drifting
@@ -89,25 +92,38 @@ public class StuntChecker : MonoBehaviour
     {
         endDriftTime = fo.timer < fo.timerAllowance ? ws.intensity > driftIntensity ? StuntManager.driftConnectDelayStatic : Mathf.Max(0, endDriftTime - Time.timeScale) : 0;
         drifting = endDriftTime > 0;
+        Vector3 localVelocity = tr.InverseTransformDirection(rb.velocity);
 
-        if (drifting && Input.GetButton("PadX" + h.playerNum.ToString()))
+        if (drifting && Input.GetButton("PadX" + h.playerNum.ToString()) && localVelocity.z > 20)
         {
-            
+            if(driftDisplay)
+            {
+                score += driftScore;
+                driftDist = 0;
+                driftScore = 0;
+                driftString = "";
+                driftDisplay = false;
+            }
+            driftHold = true;
             driftScore += (StuntManager.driftScoreRateStatic * Mathf.Abs(rb.velocity.x)) * Time.timeScale;
             driftDist += rb.velocity.magnitude * Time.fixedDeltaTime;
-            driftString = "Drift: " + driftDist.ToString("n0") + " m";
+            driftString = "Drift: " + driftDist.ToString("n0") + " m ";
 
-          /*  if (engine)
-            {
-                engine.boost += (StuntManager.driftBoostAddStatic * Mathf.Abs(vp.localVelocity.x)) * Time.timeScale * 0.0002f;
-            } */
-        }
-        else
+            /*  if (engine)
+              {
+                  engine.boost += (StuntManager.driftBoostAddStatic * Mathf.Abs(vp.localVelocity.x)) * Time.timeScale * 0.0002f;
+              } */
+        }      
+        else if (!driftHold)
         {
             score += driftScore;
             driftDist = 0;
             driftScore = 0;
             driftString = "";
+        }
+        else
+        {
+            StartCoroutine(driftHoldActivation());
         }
     }
 
@@ -115,6 +131,22 @@ public class StuntChecker : MonoBehaviour
     {
         if (fo.timer > fo.timerAllowance)
         {
+            if(jumpDisplay)
+            {
+                score += (jumpDist + jumpTime) * StuntManager.jumpScoreRateStatic;
+
+                /* if (engine)
+                 {
+                     engine.boost += (jumpDist + jumpTime) * StuntManager.jumpBoostAddStatic * Time.timeScale * 0.01f * TimeMaster.inverseFixedTimeFactor;
+                 } */
+
+                jumpStart = tr.position;
+                jumpDist = 0;
+                jumpTime = 0;
+                jumpString = "";
+                jumpDisplay = false;
+            }
+            jumpHold = true;
             jumpDist = Vector3.Distance(jumpStart, tr.position);
             jumpTime += Time.fixedDeltaTime;
             jumpString = "Jump: " + jumpDist.ToString("n0") + " m";
@@ -124,7 +156,7 @@ public class StuntChecker : MonoBehaviour
                 engine.boost += StuntManager.jumpBoostAddStatic * Time.timeScale * 0.01f * TimeMaster.inverseFixedTimeFactor;
             } */
         }
-        else
+        else if (!jumpHold)
         {
             score += (jumpDist + jumpTime) * StuntManager.jumpScoreRateStatic;
 
@@ -138,12 +170,36 @@ public class StuntChecker : MonoBehaviour
             jumpTime = 0;
             jumpString = "";
         }
+        else
+        {
+            StartCoroutine(jumpHoldActivation());
+        }
     }
 
     void DetectFlips()
     {
         if (fo.timer > fo.timerAllowance)
         {
+            if(flipDisplay)
+            {
+                //Add stunt points to the score
+                foreach (Stunt curStunt in stunts)
+                {
+                    score += curStunt.progress * Mathf.Rad2Deg * curStunt.scoreRate * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold) * curStunt.multiplier;
+
+                    //Add boost to the engine
+                    /* if (engine)
+                     {
+                         engine.boost += curStunt.progress * Mathf.Rad2Deg * curStunt.boostAdd * curStunt.multiplier * 0.01f;
+                     } */
+                }
+
+                stunts.Clear();
+                doneStunts.Clear();
+                flipString = "";
+                flipDisplay = false;
+            }
+            flipHold = true;
             //Check to see if vehicle is performing a stunt and add it to the stunts list
             foreach (Stunt curStunt in StuntManager.stuntsStatic)
             {
@@ -204,7 +260,7 @@ public class StuntChecker : MonoBehaviour
                 flipString = string.IsNullOrEmpty(flipString) ? curDoneStunt2.name + stuntCount : flipString + " + " + curDoneStunt2.name + stuntCount;
             }
         }
-        else
+        else if (!flipHold)
         {
             //Add stunt points to the score
             foreach (Stunt curStunt in stunts)
@@ -212,15 +268,44 @@ public class StuntChecker : MonoBehaviour
                 score += curStunt.progress * Mathf.Rad2Deg * curStunt.scoreRate * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold) * curStunt.multiplier;
 
                 //Add boost to the engine
-               /* if (engine)
-                {
-                    engine.boost += curStunt.progress * Mathf.Rad2Deg * curStunt.boostAdd * curStunt.multiplier * 0.01f;
-                } */
+                /* if (engine)
+                 {
+                     engine.boost += curStunt.progress * Mathf.Rad2Deg * curStunt.boostAdd * curStunt.multiplier * 0.01f;
+                 } */
             }
 
             stunts.Clear();
             doneStunts.Clear();
             flipString = "";
         }
+        else
+        {
+            StartCoroutine(flipHoldActivation());
+        }
     }
+
+    IEnumerator driftHoldActivation ()
+    {
+        driftDisplay = true;
+        yield return new WaitForSeconds(stuntStringHoldTime);
+        driftHold = false;
+        driftDisplay = false;
+    }
+
+    IEnumerator jumpHoldActivation()
+    {
+        jumpDisplay = true;
+        yield return new WaitForSeconds(stuntStringHoldTime);
+        jumpHold = false;
+        jumpDisplay = false;
+    }
+
+    IEnumerator flipHoldActivation()
+    {
+        flipDisplay = true;
+        yield return new WaitForSeconds(stuntStringHoldTime);
+        flipHold = false;
+        flipDisplay = false;
+    }
+
 }

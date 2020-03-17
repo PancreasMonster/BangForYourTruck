@@ -110,8 +110,9 @@ public class Orbit : MonoBehaviour
                         if (!Input.GetButton("PadLB" + playerNum.ToString()))
                             transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y + (Input.GetAxisRaw("RVertical" + playerNum.ToString()) * -yLookAmount), player.TransformPoint(origPos).z);
                         else
-                            transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                            transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y, player.TransformPoint(origPos).z);
 
+                        transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
                         disorient = false;
                     }
 

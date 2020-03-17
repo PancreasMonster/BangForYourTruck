@@ -1976,6 +1976,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5006512735995542859}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 51b8052c2f3e6234486e67ef7ca6dc31,
+        type: 3}
+      propertyPath: m_Name
+      value: Arena Dome Test 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 51b8052c2f3e6234486e67ef7ca6dc31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 51b8052c2f3e6234486e67ef7ca6dc31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2045,16 +2055,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.6759878
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 51b8052c2f3e6234486e67ef7ca6dc31,
-        type: 3}
-      propertyPath: m_Name
-      value: Arena Dome Test 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 51b8052c2f3e6234486e67ef7ca6dc31,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 51b8052c2f3e6234486e67ef7ca6dc31,
         type: 3}
@@ -6512,6 +6512,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 495828874}
     m_Modifications:
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Name
+      value: Ramp 1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8477732314429498292, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6581,16 +6591,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Name
-      value: Ramp 1 Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6611701290620642683, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
@@ -8386,6 +8386,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1296062912}
     m_Modifications:
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Name
+      value: Ramp 1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8477732314429498292, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8455,16 +8465,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Name
-      value: Ramp 1 Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6611701290620642683, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
@@ -9366,7 +9366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   driftScoreRate: 0.1
-  driftConnectDelay: 0.1
+  driftConnectDelay: 30
   driftBoostAdd: 0.1
   jumpScoreRate: 0.01
   jumpBoostAdd: 0.1
@@ -9375,7 +9375,7 @@ MonoBehaviour:
     rotationAxis: {x: 0, y: 0, z: -1}
     precision: 0.8
     scoreRate: 20
-    multiplier: 1
+    multiplier: 3
     angleThreshold: 300
     boostAdd: 0.1
   - name: Barrel Roll Left
@@ -13337,6 +13337,11 @@ PrefabInstance:
       propertyPath: ws
       value: 
       objectReference: {fileID: 2060735769}
+    - target: {fileID: 4739849652119864620, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: stuntStringHoldTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc018b919a2f61f46a3f1fe088148194, type: 3}
 --- !u!114 &1111863012 stripped
@@ -13917,6 +13922,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 495828874}
     m_Modifications:
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Name
+      value: Ramp 1 Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8477732314429498292, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13986,16 +14001,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.060000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Name
-      value: Ramp 1 Variant (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6611701290620642683, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
@@ -19842,6 +19847,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1296062912}
     m_Modifications:
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Name
+      value: Ramp 1 Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8477732314429498292, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19911,16 +19926,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.060000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Name
-      value: Ramp 1 Variant (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6611701290620642683, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
@@ -21671,6 +21676,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 495828874}
     m_Modifications:
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Name
+      value: Ramp 1 Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8477732314429498292, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21740,16 +21755,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Name
-      value: Ramp 1 Variant (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6611701290620642683, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
@@ -24335,6 +24340,11 @@ PrefabInstance:
       propertyPath: ws
       value: 
       objectReference: {fileID: 1805847096}
+    - target: {fileID: 4980263867702900039, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: stuntStringHoldTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8243419492428651364, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: PPV
@@ -33260,6 +33270,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1296062912}
     m_Modifications:
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Name
+      value: Ramp 1 Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8477732314429498292, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33329,16 +33349,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.060000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Name
-      value: Ramp 1 Variant (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899262492552548775, guid: 929e9772e7968e7498c8374a7ec4c18f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6611701290620642683, guid: 929e9772e7968e7498c8374a7ec4c18f,
         type: 3}
@@ -41921,6 +41931,11 @@ PrefabInstance:
       propertyPath: ws
       value: 
       objectReference: {fileID: 1155198977}
+    - target: {fileID: 4739849652119864620, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: stuntStringHoldTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1458705425465810991, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -42495,6 +42510,11 @@ PrefabInstance:
       propertyPath: ws
       value: 
       objectReference: {fileID: 1670213486}
+    - target: {fileID: 4980263867702900039, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: stuntStringHoldTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8243419492428651364, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: PPV
