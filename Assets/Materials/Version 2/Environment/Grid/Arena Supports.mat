@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Supports
+  m_Name: Arena Supports
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 6
+  m_ShaderKeywords: _EMISSION _NORMALMAP _RECEIVE_SHADOWS_OFF
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2050
@@ -20,26 +20,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_5761985C:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_5E9DC883:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_8508C881:
-        m_Texture: {fileID: 2800000, guid: a17d3edc6dbadc34197198832bfa291b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_93A5D24D:
-        m_Texture: {fileID: 2800000, guid: 230ea9e6d4f254d43a700272c3ba79b6, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_E73E0C57:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 79193f7eb72f0cf49b2220258fb4b3a1, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -69,17 +49,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1A01187E: 0
-    - Vector1_277FF665: 0.5
-    - Vector1_3C334E6C: 0.2
-    - Vector1_84726FE: 0
-    - Vector1_8B87D16B: 0
-    - Vector1_93D8C370: 1
-    - Vector1_ACD1E370: 0.25
-    - Vector1_B20190E: 1
-    - Vector1_B439D15C: 1
-    - Vector1_CE08F08A: 0
-    - Vector1_FA8CF296: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -102,16 +71,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_464DED25: {r: 1, g: 1, b: 1, a: 0}
-    - Color_5DE2E5C: {r: 0, g: 1, b: 0.031915903, a: 0}
-    - Color_DCF8E055: {r: 0, g: 0, b: 0, a: 0}
-    - Color_E5FF2DBD: {r: 0.992313, g: 1, b: 0, a: 0}
-    - Color_EED75798: {r: 1, g: 1, b: 1, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 0, b: 0.015686275, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
---- !u!114 &5684339866558303370
+--- !u!114 &244494254821947351
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
