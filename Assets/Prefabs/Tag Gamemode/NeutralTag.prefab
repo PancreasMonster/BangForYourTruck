@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024d329a4281df042972d32c305665ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
 --- !u!135 &1178227623581914654
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -112,6 +113,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1281539916578647926}
     m_Modifications:
+    - target: {fileID: 7334954885509112900, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
+        type: 3}
+      propertyPath: m_Name
+      value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334954885509112900, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334954885509112900, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6021778086295475799, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -182,32 +198,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 7334954885509112900, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
+    - target: {fileID: 9076486730698936472, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
         type: 3}
-      propertyPath: m_Name
-      value: Model
-      objectReference: {fileID: 0}
-    - target: {fileID: 7334954885509112900, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
-        type: 3}
-      propertyPath: m_Layer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7334954885509112900, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 11f7efdb5c5441545959e4491b8eee29, type: 2}
     - target: {fileID: 3371685378285153377, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -951608786083511892, guid: d1499d574f7b52b42b0d47c7d4a0f96c,
         type: 3}
-    - target: {fileID: 9076486730698936472, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 11f7efdb5c5441545959e4491b8eee29, type: 2}
     - target: {fileID: 3881974378174529835, guid: d318cc5c3fd536b4d9d93ac39e4203ac,
         type: 3}
       propertyPath: m_IsActive
@@ -234,11 +235,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3918871464446276252}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: d1499d574f7b52b42b0d47c7d4a0f96c,
-        type: 3}
-      propertyPath: m_Name
-      value: coin
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d1499d574f7b52b42b0d47c7d4a0f96c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -293,6 +289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d1499d574f7b52b42b0d47c7d4a0f96c,
+        type: 3}
+      propertyPath: m_Name
+      value: coin
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: d1499d574f7b52b42b0d47c7d4a0f96c,
         type: 3}
