@@ -8,9 +8,7 @@ public class CrowdSection : MonoBehaviour
     public List<GameObject> crowdSections = new List<GameObject>();
 
     public AudioSpectrumData ASD;
-    float maxScale = 1;
     public int bandNum;
-    bool start = false;
 
     // Use this for initialization
     void Start()
