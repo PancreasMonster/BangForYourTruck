@@ -25596,11 +25596,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ASD: {fileID: 1050451123}
   bandNum: 5
-  glowAmplitude: 100
-  origMatColor: {r: 0, g: 0, b: 0, a: 0}
+  initialGlow: 1
+  glowAmplitude: 2
+  origMatColor: {r: 1, g: 0, b: 0.99296904, a: 0}
   matColor: {r: 0, g: 0, b: 0, a: 0}
-  baseColorValue: 0
-  baseColorValueFadeSpeed: 30
+  baseColorValueFadeSpeed: 10
+  colors:
+  - {r: 0.87843144, g: 0, b: 0.87843144, a: 0}
+  - {r: 0, g: 0, b: 0.87843144, a: 0}
+  - {r: 0, g: 0.87843144, b: 0.87843144, a: 0}
+  - {r: 0, g: 0.87843144, b: 0, a: 0}
+  - {r: 0.87843144, g: 0.87843144, b: 0, a: 0}
+  - {r: 0.87843144, g: 0, b: 0.003921569, a: 0}
+  - {r: 0.87843144, g: 0, b: 0.87843144, a: 0}
+  currentIndex: 0
+  changeColourTime: 20
 --- !u!1001 &1754645604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41123,6 +41133,11 @@ PrefabInstance:
       propertyPath: m_Animation
       value: 
       objectReference: {fileID: 7400000, guid: bf53316931aaead4382263b1b23f04c4, type: 2}
+    - target: {fileID: 8788060734613834730, guid: 98e37775a0301734fa7ceddc68fe831a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7321725187219730590, guid: 98e37775a0301734fa7ceddc68fe831a,
         type: 3}
       propertyPath: m_LocalPosition.y

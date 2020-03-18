@@ -6,29 +6,41 @@ public class GridFloorBeatVisualiser : MonoBehaviour
 {
     public AudioSpectrumData ASD;
     public int bandNum;
+    public float initialGlow;
     public float glowAmplitude;
     Material mat;
     public Color origMatColor, matColor;
-    Texture2D t2d;
-    public float baseColorValue;
+    float baseColorValue;
     public float baseColorValueFadeSpeed;
+
+    [Header("Colour Lerp")]
+    public Color[] colors;
+
+    public int currentIndex = 0;
+    private int nextIndex;
+
+    public float changeColourTime = 2.0f;
+
+    private float lastChange = 0.0f;
+    private float timer = 0.0f;
 
     // Use this for initialization
     void Start()
     {
         mat = GetComponent<Renderer>().material;
-        origMatColor = GetComponent<Renderer>().material.color;
 
         //to this object
         AudioProcessor processor = FindObjectOfType<AudioProcessor>();
         processor.onBeat.AddListener(onOnbeatDetected);
         processor.onSpectrum.AddListener(onSpectrum);
+
+        nextIndex = (currentIndex + 1) % colors.Length;
     }
     // Update is called once per frame
 
     void onOnbeatDetected()
     {
-        baseColorValue = 1;
+        baseColorValue = 2;
         Debug.Log("Beat");
     }
 
@@ -47,12 +59,24 @@ public class GridFloorBeatVisualiser : MonoBehaviour
 
     void Update()
     {
-        if(baseColorValue > 0)
+
+        timer += Time.deltaTime;
+
+        if (timer > changeColourTime)
+        {
+            currentIndex = (currentIndex + 1) % colors.Length;
+            nextIndex = (currentIndex + 1) % colors.Length;
+            timer = 0.0f;
+
+        }
+        origMatColor = Color.Lerp(colors[currentIndex], colors[nextIndex], timer / changeColourTime);
+
+        if (baseColorValue > 0)
         {
             baseColorValue = Mathf.Lerp(baseColorValue, 0, baseColorValueFadeSpeed * Time.deltaTime);
         }
-        matColor = new Color(baseColorValue, baseColorValue, baseColorValue, origMatColor.a);
-        mat.SetColor("_BaseColor", matColor);
+        //matColor = new Color(baseColorValue, baseColorValue, baseColorValue, origMatColor.a);
+        mat.SetColor("_EmissionColor", origMatColor * (initialGlow + (glowAmplitude * baseColorValue)));
         
     }
 }
