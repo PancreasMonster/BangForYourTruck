@@ -13,7 +13,7 @@ public class PurchaseGate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TextMesh text = transform.Find("Text").GetComponent<TextMesh>();
+        TextMesh text = transform.parent.GetComponentInChildren<TextMesh>();
         text.text = text.text + "Cost: " + price.ToString();
         audio = GetComponent<AudioSource>();
     }
