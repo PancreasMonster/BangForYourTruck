@@ -18,7 +18,6 @@ public class ShotgunBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<AudioSource>().Play();
         startingBulletLifeTime = bulletLifetime;
         
 
@@ -45,7 +44,7 @@ public class ShotgunBullet : MonoBehaviour
     {
         if (other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().teamNum != teamNum)
         {
-            other.transform.GetComponent<Health>().TakeDamage(null, damageSource, damageToDeal, Vector3.zero);
+            other.transform.GetComponent<Health>().TakeDamage("Shotgunned", damageSource, damageToDeal, Vector3.zero);
         }
     }
 }
