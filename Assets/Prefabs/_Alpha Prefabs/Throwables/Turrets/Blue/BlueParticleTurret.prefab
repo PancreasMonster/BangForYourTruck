@@ -155,7 +155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 0
-  currentHealth: 0
   playerNum: 1
   teamNum: 1
   healthBarCanvas: {fileID: 4105945699236562807, guid: 7639f25d764cf3a4bbc5d3499d915439,
@@ -170,6 +169,10 @@ MonoBehaviour:
   damageText: {fileID: 870646884539076592, guid: 9e2afd4b5bcf5904bac415b3edb26a27,
     type: 3}
   damageTextLayer: 0
+  km: {fileID: 0}
+  killerTimer: 0
+  killMaxTime: 15
+  damageSource: {fileID: 0}
 --- !u!1 &4925868558212265575
 GameObject:
   m_ObjectHideFlags: 0
@@ -4923,7 +4926,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 591bada79a5ac31489a6ad4f295a680b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
