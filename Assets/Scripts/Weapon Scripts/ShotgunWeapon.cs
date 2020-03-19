@@ -11,8 +11,14 @@ public class ShotgunWeapon : MonoBehaviour
     public GameObject weaponProjectile;
     PowerHolder ph;
     public PowerCosts pc;
-    ParticleSystem particles1;
-    ParticleSystem particles2;
+    ParticleSystem buckshotParticles1;
+    ParticleSystem emptyShells1;
+    Animation rightShotgunAnim;
+    ParticleSystem buckshotParticles2;
+    ParticleSystem emptyShells2;
+    Animation leftShotgunAnim;
+
+
 
     bool rightFiredLast;
 
@@ -21,10 +27,16 @@ public class ShotgunWeapon : MonoBehaviour
     {
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
         model.SetActive(true);
+        GameObject leftShotGun = model.transform.Find("Shotgun Left").gameObject;
+        GameObject rightShotGun = model.transform.Find("Shotgun Right").gameObject;
+        leftShotgunAnim = leftShotGun.GetComponent<Animation>();
+        rightShotgunAnim = rightShotGun.GetComponent<Animation>();
+        emptyShells1 = rightShotGun.GetComponent<ParticleSystem>();
+        emptyShells2 = leftShotGun.GetComponent<ParticleSystem>();
         ShotgunWeaponFiringPoint = transform.Find("Trails and firing points").transform.Find("ShotgunWeaponFiringPoint").transform;
         ShotgunWeaponFiringPoint2 = transform.Find("Trails and firing points").transform.Find("ShotgunWeaponFiringPoint2").transform;
-        particles1 = ShotgunWeaponFiringPoint.gameObject.GetComponent<ParticleSystem>();
-        particles2 = ShotgunWeaponFiringPoint2.gameObject.GetComponent<ParticleSystem>();
+        buckshotParticles1 = ShotgunWeaponFiringPoint.gameObject.GetComponent<ParticleSystem>();
+        buckshotParticles2 = ShotgunWeaponFiringPoint2.gameObject.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
     }
 
@@ -36,7 +48,7 @@ public class ShotgunWeapon : MonoBehaviour
             if (!rightFiredLast)
             {
 
-                FireBullet();
+                FireBullet1();
             }
             else
             {
@@ -46,7 +58,7 @@ public class ShotgunWeapon : MonoBehaviour
         }
     }
 
-    void FireBullet()
+    void FireBullet1()
     {
         if (ph.powerAmount >= pc.powerCosts[5])
         {
@@ -61,8 +73,9 @@ public class ShotgunWeapon : MonoBehaviour
 
             Bullet.GetComponent<ShotgunBullet>().damageSource = this.gameObject;
 
-            particles1.Play();
-
+            buckshotParticles1.Play();
+            emptyShells1.Play();
+            leftShotgunAnim.Play();
             ph.losePower(pc.powerCosts[5]);
 
             rightFiredLast = true;
@@ -85,8 +98,9 @@ public class ShotgunWeapon : MonoBehaviour
 
             Bullet.GetComponent<ShotgunBullet>().damageSource = this.gameObject;
 
-            particles2.Play();
-
+            buckshotParticles2.Play();
+            emptyShells2.Play();
+            rightShotgunAnim.Play();
             ph.losePower(pc.powerCosts[5]);
 
             rightFiredLast = false;
