@@ -13,13 +13,14 @@ public class ShotgunBullet : MonoBehaviour
     public float damageFallOffOverTime;
 
     public bool player;
-
+    bool active;
 
     // Start is called before the first frame update
     void Start()
     {
+        active = true;
         startingBulletLifeTime = bulletLifetime;
-        
+        Destroy(this.gameObject, 1f);   
 
         if (player)
             damageSource = this.gameObject;
@@ -31,13 +32,20 @@ public class ShotgunBullet : MonoBehaviour
 
         bulletLifetime -= Time.deltaTime;
 
-        if (bulletLifetime <= 0f)
+        if (bulletLifetime <= 0f && active)
         {
-            Destroy(this.gameObject);
+            active = false;
+            GetComponent<BoxCollider>().enabled = false;
         }
 
         damageToDeal = maxDamage - ((startingBulletLifeTime - bulletLifetime) * damageFallOffOverTime);
         
+    }
+
+    void OnCollisionEnter (Collision other)
+    {
+        GetComponent<BoxCollider>().enabled = false;
+
     }
 
     private void OnTriggerEnter(Collider other)
