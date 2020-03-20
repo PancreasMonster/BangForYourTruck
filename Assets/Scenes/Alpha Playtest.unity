@@ -2509,7 +2509,7 @@ PrefabInstance:
     - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
         type: 3}
       propertyPath: droneCheckDistance
-      value: 1000
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
         type: 3}
@@ -2536,6 +2536,16 @@ PrefabInstance:
       propertyPath: players.Array.data[3]
       value: 
       objectReference: {fileID: 1384526926}
+    - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: droneCol
+      value: 
+      objectReference: {fileID: 164176486}
+    - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: backOffDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1906972867625351712, guid: e6222b5c3cbc9d6418c3aec45a819b19,
         type: 3}
       propertyPath: m_TargetTexture
@@ -2561,6 +2571,41 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9020103374880410377, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1684.0059
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020103374880410377, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 374.90723
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020103374880410377, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1003.8887
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020103374880410377, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 51.649414
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020103374880410377, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 293.42773
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020103374880410377, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 86.91699
+      objectReference: {fileID: 0}
+    - target: {fileID: 258565052174782640, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6222b5c3cbc9d6418c3aec45a819b19, type: 3}
 --- !u!4 &164176484 stripped
@@ -2581,6 +2626,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457db2fee9963b749979ee159608c22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &164176486 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 9020103374880410377, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+    type: 3}
+  m_PrefabInstance: {fileID: 164176483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &168157729
 PrefabInstance:
   m_ObjectHideFlags: 0

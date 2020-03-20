@@ -10,13 +10,21 @@ public class DroneScript : MonoBehaviour
 
     Vector3 nextWaypoint;
 
+    Rigidbody rb;
+
     public float arriveDistance;
+
+    public float followDistance = 100;
+
+    public float backOffDistance;
 
     public float droneSpeed;
 
     public float droneCheckDistance;
 
     public float rotationSpeed = 5;
+
+    public Collider droneCol;
 
     public void OnDrawGizmos()
     {
@@ -29,18 +37,13 @@ public class DroneScript : MonoBehaviour
 
     public void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     public void FixedUpdate()
     {
         nextWaypoint = dwp.NextWaypoint();
-        if (Vector3.Distance(transform.position, nextWaypoint) < arriveDistance)
-        {
-            dwp.AdvanceToNext();
-        }
-
-        transform.position = Vector3.MoveTowards(transform.position, nextWaypoint, droneSpeed * Time.deltaTime);
+        
 
         float maxDistance = droneCheckDistance;
         int index = -1;
@@ -55,15 +58,38 @@ public class DroneScript : MonoBehaviour
         }
 
 
-        if (index > -1)
+        if (index > -1 && droneCol.bounds.Contains(players[index].position))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(players[index].position - transform.position), rotationSpeed * Time.deltaTime);
             Debug.DrawRay(transform.position, transform.forward * 1000, Color.red);
+
+            Vector3 dir = players[index].position - transform.position;
+            dir.Normalize();
+
+            if (maxDistance > followDistance)
+                rb.AddForce(dir * droneSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            else if(maxDistance < backOffDistance)
+            {
+                rb.AddForce(-dir * droneSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            }
         }
         else
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(nextWaypoint - transform.position), rotationSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, nextWaypoint) < arriveDistance)
+            {
+                dwp.AdvanceToNext();
+            }
+
+            Vector3 dir = nextWaypoint - transform.position;
+            dir.Normalize();
+
+            rb.AddForce(dir * droneSpeed * Time.deltaTime, ForceMode.VelocityChange);
+
         }
+
+       
     }
 
 }

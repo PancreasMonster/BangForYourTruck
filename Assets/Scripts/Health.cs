@@ -22,12 +22,13 @@ public class Health : MonoBehaviour
     public float killMaxTime = 15;
     public GameObject damageSource;
 
+
     // Start is called before the first frame update
     void Start()
     {
         km = GameObject.Find("KillManager").GetComponent<KillManager>();
         maxHealth = health;
-        if (!mbase)
+       /* if (!mbase)
         {
 
 
@@ -41,7 +42,7 @@ public class Health : MonoBehaviour
             hpBarHolder2 = hpBar2;
             hpBarFill = hpBar.GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
             hpBarFill2 = hpBar2.GetComponentInChildren<PrototypeHexMapScript>().gameObject.GetComponent<Image>();
-        }
+        } */
     }
 
     // Update is called once per frame
