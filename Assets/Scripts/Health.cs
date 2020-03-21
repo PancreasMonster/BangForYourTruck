@@ -57,11 +57,6 @@ public class Health : MonoBehaviour
         }
 
 
-        if (!mbase && !dead)
-        {
-            hpBarFill.fillAmount = health / maxHealth;
-            hpBarFill2.fillAmount = health / maxHealth;
-        }
         if (mbase)
         {
             if (health > maxHealth)

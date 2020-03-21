@@ -13,14 +13,17 @@ public class CollisionDamage : MonoBehaviour
     public float velocityDamage;
     public float damageToDeal;
     public bool player;
+    Health thisHealth;
 
-    Rigidbody rb;
+    public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
+        if (!player)
         rb = GetComponent<Rigidbody>();
         oldVelocity = rb.velocity.sqrMagnitude;
         minimumForce *= minimumForce;
+        thisHealth = GetComponentInParent<Health>();
     }
 
     // Update is called once per frame
@@ -59,12 +62,21 @@ public class CollisionDamage : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        if (GetComponent<Health>() != null)
+        if (thisHealth != null)
         {
-            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != GetComponent<Health>().playerNum)
+            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != thisHealth.playerNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
-                coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damage, Vector3.zero);
+                damage = Mathf.RoundToInt(Mathf.Min(thisHealth.health, damage));
+                coll.transform.GetComponent<Health>().TakeDamage(null, transform.parent.gameObject, damage, Vector3.zero);
+                Debug.Log("Hit");
+            } 
+            else if (coll.transform.GetComponentInParent<Health>() != null && coll.transform.GetComponentInParent<Health>().teamNum != thisHealth.playerNum)
+            {
+                float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
+                damage = Mathf.RoundToInt(Mathf.Min(thisHealth.health, damage));
+                coll.transform.GetComponentInParent<Health>().TakeDamage(null, transform.parent.gameObject, damage, Vector3.zero);
+                Debug.Log("Hit");
             }
         } else 
         {
