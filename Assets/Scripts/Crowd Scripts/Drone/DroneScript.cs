@@ -24,6 +24,10 @@ public class DroneScript : MonoBehaviour
 
     public float rotationSpeed = 5;
 
+    public float heightAbovePlayer;
+
+    public float riseSpeed;
+
     public Collider droneCol;
 
     public void OnDrawGizmos()
@@ -71,6 +75,11 @@ public class DroneScript : MonoBehaviour
             else if(maxDistance < backOffDistance)
             {
                 rb.AddForce(-dir * droneSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            }
+
+            if((transform.position.y - players[index].position.y) < heightAbovePlayer)
+            {
+                rb.AddForce(Vector3.up * riseSpeed * (heightAbovePlayer/(transform.position.y - players[index].position.y)) * Time.deltaTime, ForceMode.VelocityChange);
             }
         }
         else

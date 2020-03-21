@@ -2504,7 +2504,7 @@ PrefabInstance:
     - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
         type: 3}
       propertyPath: droneSpeed
-      value: 75
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
         type: 3}
@@ -2545,6 +2545,21 @@ PrefabInstance:
         type: 3}
       propertyPath: backOffDistance
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: heightAbovePlayer
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: riseSpeed
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244046613315101228, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1906972867625351712, guid: e6222b5c3cbc9d6418c3aec45a819b19,
         type: 3}
@@ -2605,6 +2620,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 258565052174782640, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+        type: 3}
+      propertyPath: m_Drag
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6222b5c3cbc9d6418c3aec45a819b19, type: 3}
@@ -9536,7 +9556,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661182495}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 4209082728f9c424dbaa17f6dc46bf9f, type: 2}
   m_Animations:

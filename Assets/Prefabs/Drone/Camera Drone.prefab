@@ -377,13 +377,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2911016419371406976}
-  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: 0, y: 0.68, z: -0.96}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.49, z: 0.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1277632899264529661}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1906972867625351712
 Camera:
   m_ObjectHideFlags: 0
@@ -408,8 +408,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 25
+  far clip plane: 100000
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -727,6 +727,8 @@ MonoBehaviour:
   droneSpeed: 0
   droneCheckDistance: 0
   rotationSpeed: 5
+  heightAbovePlayer: 0
+  riseSpeed: 0
   droneCol: {fileID: 0}
 --- !u!65 &8641693531037832323
 BoxCollider:
