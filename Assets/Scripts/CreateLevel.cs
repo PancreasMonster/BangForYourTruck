@@ -6,6 +6,7 @@ public class CreateLevel : MonoBehaviour
 {
     public List<GameObject> levels = new List<GameObject>();
     int i;
+    public RotateAroundLevel ral;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class CreateLevel : MonoBehaviour
 
     public void activateLevel (int levelIndex)
     {
-        levels[levelIndex].SetActive(true);       
+        levels[levelIndex].SetActive(true);
+        ral.level = levels[levelIndex].transform;
     }
 }

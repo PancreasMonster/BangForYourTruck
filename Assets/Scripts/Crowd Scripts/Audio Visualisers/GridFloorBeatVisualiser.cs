@@ -41,7 +41,6 @@ public class GridFloorBeatVisualiser : MonoBehaviour
     void onOnbeatDetected()
     {
         baseColorValue = 2;
-        Debug.Log("Beat");
     }
 
     void onSpectrum(float[] spectrum)

@@ -6,23 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class TagCollectionManager : MonoBehaviour
 {
-    public Text blueText, redText, winText;
-    public Image redImage, blueImage;
+    public Text winText;
+    public Image redImage, blueImage, winPanelImage;
     public float blueTeamTokens, redTeamTokens, gameWinningAmount = 30;
-    bool gameWon;
+    bool gameWon, allowSceneChange;
+    public Camera winCam;
+    public RotateAroundLevel ral;
+    public List<GameObject> canvasToDisable = new List<GameObject>();
+    VictoryDisplayStats vds;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        vds = GetComponent<VictoryDisplayStats>();
     }
 
     void Update()
     {
         if (!gameWon)
         {
-            blueText.text = "Blue Team: " + blueTeamTokens.ToString() + "/" + gameWinningAmount.ToString();
-            redText.text = "Red Team: " + redTeamTokens.ToString() + "/" + gameWinningAmount.ToString();
             redImage.fillAmount = redTeamTokens / gameWinningAmount;
             blueImage.fillAmount = blueTeamTokens / gameWinningAmount;
         }
@@ -30,26 +33,45 @@ public class TagCollectionManager : MonoBehaviour
         if (blueTeamTokens >= gameWinningAmount && !gameWon)
         {
             gameWon = true;
-            blueText.text = "";
-            redText.text = "";
             winText.text = "Blue Team Has Won!";
-            StartCoroutine(sceneReload());
+            StartCoroutine(Victory("Blue Team Has Won!"));
         }
         else if (redTeamTokens >= gameWinningAmount && !gameWon)
         {
             gameWon = true;
-            blueText.text = "";
-            redText.text = "";
             winText.text = "Red Team Has Won!";
-            StartCoroutine(sceneReload());
+            StartCoroutine(Victory("Red Team Has Won!"));
+        }
+
+        if(allowSceneChange)
+        { 
+            for (int i = 0; i < 4; i++)
+            {
+                if (Input.GetButtonDown("PadA" + (i+1).ToString()))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
+                else if (Input.GetButtonDown("PadB" + (i + 1).ToString()))
+                {
+                    SceneManager.LoadScene("0_MainMenu");
+                }
+            }
         }
     }
 
-    IEnumerator sceneReload()
+    IEnumerator Victory(string victoryText)
     {
+        winPanelImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(5);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        foreach(GameObject g in canvasToDisable)
+        {
+            g.SetActive(false);
+        }
+        allowSceneChange = true;
+        winCam.enabled = true;
+        ral.enabled = true;
+        vds.StartDisplayEndScreenStats(victoryText);
+    }  
 
     void OnGUI()
     {
