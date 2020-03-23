@@ -8,21 +8,28 @@ public class MobilityCharges : MonoBehaviour
 
     bool charge1;
     public float charge1Time = 0f;
-    public SpriteRenderer light1;
+    public GameObject light1;
 
     bool charge2;
     public float charge2Time = 0f;
-    public SpriteRenderer light2;
+    public GameObject light2;
 
     public AudioSource audio;
     bool charge3;
     public float charge3Time = 0f;
-    public SpriteRenderer light3;
+    public GameObject light3;
 
     public float currentDriftMultiplier;
 
     public float rechargeTime = 3f;
     public float maxDriftMultiplier;
+
+    SpriteRenderer sprite1;
+    ParticleSystem particles1;
+    SpriteRenderer sprite2;
+    ParticleSystem particles2;
+    SpriteRenderer sprite3;
+    ParticleSystem particles3;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +38,13 @@ public class MobilityCharges : MonoBehaviour
         charge2 = true;
         charge3 = true;
 
-        
+        sprite1 = light1.GetComponent<SpriteRenderer>();
+        sprite2 = light2.GetComponent<SpriteRenderer>();    
+        sprite3 = light3.GetComponent<SpriteRenderer>();
+
+        particles1 = light1.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        particles2 = light2.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        particles3 = light3.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
 
         currentCharges = 3;
     }
@@ -60,7 +73,8 @@ public class MobilityCharges : MonoBehaviour
             currentCharges++;
             audio.pitch = .9f;
             audio.Play();
-            light1.color = Color.green;
+            particles1.Play();
+            sprite1.color = Color.green;
             charge1Time = 0f;
         }
 
@@ -76,7 +90,8 @@ public class MobilityCharges : MonoBehaviour
             currentCharges++;
             audio.pitch = .95f;
             audio.Play();
-            light2.color = Color.green;
+            particles2.Play();
+            sprite2.color = Color.green;
             charge2Time = 0f;
         }
 
@@ -92,53 +107,54 @@ public class MobilityCharges : MonoBehaviour
             currentCharges++;
             audio.pitch = 1f;
             audio.Play();
-            light3.color = Color.green;
+            particles3.Play();
+            sprite3.color = Color.green;
             charge3Time = 0f;
         }
 
         if (charge1Time >= rechargeTime/2)
         {            
-            light1.color = Color.yellow;            
+            sprite1.color = Color.yellow;            
         }
 
         if (charge2Time >= rechargeTime / 2)
         {
-            light2.color = Color.yellow;
+            sprite2.color = Color.yellow;
         }
 
         if (charge3Time >= rechargeTime / 2)
         {
-            light3.color = Color.yellow;
+            sprite3.color = Color.yellow;
         }
 
         if (charge1Time >= (rechargeTime * .25f))
         {
-            light1.color = new Color(1.0f, 0.64f, 0.0f);
+            sprite1.color = new Color(1.0f, 0.64f, 0.0f);
         }
 
         if (charge2Time >= (rechargeTime * .25f))
         {
-            light1.color = new Color(1.0f, 0.64f, 0.0f);
+            sprite2.color = new Color(1.0f, 0.64f, 0.0f);
         }
 
         if (charge3Time >= (rechargeTime * .25f))
         {
-            light1.color = new Color(1.0f, 0.64f, 0.0f);
+            sprite3.color = new Color(1.0f, 0.64f, 0.0f);
         }
 
         if (charge1Time >= (rechargeTime * .75f))
         {
-            light1.color = new Color(.64f, 1f, 0.0f);
+            sprite1.color = new Color(.64f, 1f, 0.0f);
         }
 
         if (charge2Time >= (rechargeTime * .75f))
         {
-            light1.color = new Color(.64f, 1f, 0.0f);
+            sprite2.color = new Color(.64f, 1f, 0.0f);
         }
 
         if (charge3Time >= (rechargeTime * .75f))
         {
-            light1.color = new Color(.64f, 1f, 0.0f);
+            sprite3.color = new Color(.64f, 1f, 0.0f);
         }
     }
 
@@ -162,21 +178,21 @@ public class MobilityCharges : MonoBehaviour
         if (charge1 == true)
         {
             charge1 = false;
-            light1.color = Color.red;
+            sprite1.color = Color.red;
             return;
         }
 
         if (charge2 == true)
         {
             charge2 = false;
-            light2.color = Color.red;
+            sprite2.color = Color.red;
             return;
         }
 
         if (charge3 == true)
         {
             charge3 = false;
-            light3.color = Color.red;
+            sprite3.color = Color.red;
             return;
         }
     }
