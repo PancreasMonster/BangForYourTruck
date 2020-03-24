@@ -6,19 +6,7 @@ public class ClusterMine : MonoBehaviour
 {
     public GameObject mine;
     public float force;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("r"))
-        {
-            SpawnMines();
-        }
-    }
+   
 
     void SpawnMines()
     {
@@ -70,6 +58,7 @@ public class ClusterMine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer == 14)
         SpawnMines();
     }
 }
