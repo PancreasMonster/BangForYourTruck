@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 5495250707203342271}
   - component: {fileID: 6944092682781051176}
   - component: {fileID: 205191978016449919}
-  - component: {fileID: 1810155548918020105}
+  - component: {fileID: 2315095934756978939}
   - component: {fileID: 8389943188596803588}
   - component: {fileID: 171478574501761227}
   m_Layer: 0
@@ -241,7 +241,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1810155548918020105
+--- !u!114 &2315095934756978939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,19 +250,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4355220002059288919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cfdbd3c54becaa4fa62aff1a2c145e6, type: 3}
+  m_Script: {fileID: 11500000, guid: ed000d7bb8bfb8941b52a3494b8eeb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reductionFactor: 3600
-  cannonBall: 1
+  reductionFactor: 0
   destroyOnCollision: 0
   oldVelocity: 0
   minimumForce: 0
-  minimumDamage: 5
-  maximumDamage: 30
-  teamNum: 1
+  minimumDamage: 20
+  maximumDamage: 100
+  teamNum: 0
+  damageSource: {fileID: 0}
   velocityDamage: 0
   damageToDeal: 0
+  cannonAirDamageTimer: 0
+  rb: {fileID: 0}
 --- !u!114 &8389943188596803588
 MonoBehaviour:
   m_ObjectHideFlags: 0

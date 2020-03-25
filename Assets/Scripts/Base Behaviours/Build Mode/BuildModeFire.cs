@@ -125,7 +125,7 @@ public class BuildModeFire : MonoBehaviour
             {
                 cooldown = true;
                 StartCoroutine(Cooldown());
-                GameObject clone = Instantiate(currentDisc, firingPoint.position, currentDisc.transform.rotation);
+                GameObject clone = Instantiate(currentDisc, firingPoint.position, transform.rotation);
                // clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
                 if (clone.GetComponent<ResourceCollection>() != null)
                     clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
@@ -135,6 +135,8 @@ public class BuildModeFire : MonoBehaviour
                 {                 
                     cooldown = false;
                 }
+                if (clone.GetComponent<Missile>() != null)
+                    clone.GetComponent<Missile>().teamNum = GetComponent<Health>().teamNum;
 
                 Rigidbody unitRB = clone.GetComponent<Rigidbody>();
                 unitRB.velocity = BallisticVel(aimTarget, fireAngle);

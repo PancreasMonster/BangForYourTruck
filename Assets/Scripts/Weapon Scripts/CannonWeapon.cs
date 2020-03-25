@@ -72,13 +72,13 @@ public class CannonWeapon : MonoBehaviour
             {
                 arcOffset = chargingTime * 10f;
                 GameObject Disc = Instantiate(weaponProjectile, cannonFiringPoint.position, weaponProjectile.transform.rotation);
-                Disc.GetComponent<CollisionDamage>().teamNum = GetComponent<Health>().teamNum;
+                Disc.GetComponent<CannonBallScript>().teamNum = GetComponent<Health>().teamNum;
                 particle.Play();
 
        
                 Disc.GetComponent<Rigidbody>().AddForce(transform.forward * force);
 
-                Disc.GetComponent<CollisionDamage>().damageSource = this.gameObject;
+                Disc.GetComponent<CannonBallScript>().damageSource = this.gameObject;
 
                 ph.losePower(pc.powerCosts[6]);
                 force = startForce;
