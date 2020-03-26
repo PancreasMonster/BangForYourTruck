@@ -35,10 +35,20 @@ public class StuntChecker : MonoBehaviour
     public string flipString;//String indicating flips
     [System.NonSerialized]
     public string stuntString;//String containing all stunts
+    public string currentStunt;
     Vector3 localAngularVel;
+    int teamNum;
+
+    [Header("Concussive Flip")]
+    public float concussiveRange;
+    [Range(-1,1)]
+    public float concussiveRadius;
+    public float concussiveForce;
+    public float concussiveForceDamage;
 
     void Start()
     {
+        teamNum = GetComponent<Health>().teamNum;
         tr = transform;
         rb = GetComponent<Rigidbody>();
         fo = GetComponent<FlipOver>();
@@ -246,6 +256,7 @@ public class StuntChecker : MonoBehaviour
 
                     if (!stuntDoneExists)
                     {
+                        currentStunt = curStunt2.name;
                         doneStunts.Add(curStunt2);
                     }
                 }
@@ -253,6 +264,7 @@ public class StuntChecker : MonoBehaviour
 
             string stuntCount = "";
             flipString = "";
+            
 
             foreach (Stunt curDoneStunt2 in doneStunts)
             {
@@ -281,6 +293,8 @@ public class StuntChecker : MonoBehaviour
         else
         {
             StartCoroutine(flipHoldActivation());
+            FlipEffect(currentStunt);
+            currentStunt = "";
         }
     }
 
@@ -306,6 +320,52 @@ public class StuntChecker : MonoBehaviour
         yield return new WaitForSeconds(stuntStringHoldTime);
         flipHold = false;
         flipDisplay = false;
+    }
+
+    public void FlipEffect(string flipName)
+    {
+        if(flipName == "Forward Flip" || flipName == "Backward Flip")
+        {
+            FlipConcussiveForce();
+        } else if (flipName == "Barrel Roll Right" || flipName == "Barrel Roll Left")
+        {
+
+        } else if (flipName == "Spin Right" || flipName == "Spin Left")
+        {
+
+        }
+    }
+
+    private void FlipConcussiveForce ()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, concussiveRange);
+        List<Transform> targets = new List<Transform>();
+        foreach (Collider c in hitColliders)
+        {
+            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
+            {
+                if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
+                {
+                    targets.Add(c.transform);
+                }
+            }
+        }
+
+        foreach (Transform t in targets)
+        {
+            Vector3 dir = t.position - transform.position;
+            dir.Normalize();
+            if (Vector3.Dot(transform.forward, dir) > concussiveRadius)
+            {
+                Rigidbody rb = t.GetComponent<Rigidbody>();
+                if (rb != null)
+                    rb.AddExplosionForce(concussiveForce * rb.mass, transform.position, concussiveRange);
+
+                Health h = t.GetComponent<Health>();
+                if (h != null)
+                    h.TakeDamage("Power Slammed", this.gameObject, concussiveForceDamage, Vector3.zero);
+            }
+        }
     }
 
 }
