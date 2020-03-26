@@ -30,6 +30,8 @@ public class DroneScript : MonoBehaviour
 
     public Collider droneCol;
 
+    public bool onlyFollowWaypoints; 
+
     public void OnDrawGizmos()
     {
         if (isActiveAndEnabled && Application.isPlaying)
@@ -62,7 +64,7 @@ public class DroneScript : MonoBehaviour
         }
 
 
-        if (index > -1 && droneCol.bounds.Contains(players[index].position))
+        if (index > -1 && droneCol.bounds.Contains(players[index].position) && !onlyFollowWaypoints)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(players[index].position - transform.position), rotationSpeed * Time.deltaTime);
             Debug.DrawRay(transform.position, transform.forward * 1000, Color.red);
