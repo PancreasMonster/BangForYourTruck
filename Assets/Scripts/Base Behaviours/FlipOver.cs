@@ -28,6 +28,8 @@ public class FlipOver : MonoBehaviour
     public List<WheelCollider> wheels = new List<WheelCollider>();
     public bool autoRollCorrection = true;
     public bool Grounded;
+    public int wheelsOnGround;
+    public bool crashing;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,11 @@ public class FlipOver : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (wheelsOnGround > 0)
+        {
+            crashing = false;
+        }
 
         {
             if (!delay)
@@ -63,7 +70,7 @@ public class FlipOver : MonoBehaviour
                             wheelPoints.Add(wheels[i].transform);
                         }
                     }
-
+                    wheelsOnGround = wheelsGrounded;
                     if (wheelsGrounded < 3 && wheelsGrounded > 0)
                     {
                         ApplyLinearStabilityForces(rigidbody, wheelPoints);
@@ -114,6 +121,7 @@ public class FlipOver : MonoBehaviour
             {
                 timer = 0;
                 rigidbody.AddForce(75f * -transform.up, ForceMode.Acceleration);
+               
             }
             else
             {
@@ -227,6 +235,16 @@ public class FlipOver : MonoBehaviour
             Vector3 torqueAmount = Mathf.Sign(angle) * rigidbody.transform.forward * angForce * 2f * Time.fixedDeltaTime;
 
             rigidbody.AddTorque(torqueAmount, ForceMode.Acceleration);
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.contacts.Length > 0 && wheelsOnGround == 0)
+        {
+
+            crashing = true;   
+            
         }
     }
 

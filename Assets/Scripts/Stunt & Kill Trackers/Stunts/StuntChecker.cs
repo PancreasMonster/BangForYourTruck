@@ -49,7 +49,7 @@ public class StuntChecker : MonoBehaviour
     {
         localAngularVel = tr.InverseTransformDirection(rb.angularVelocity);
         //Detect drifts
-        if (detectDrift)
+        if (detectDrift && !fo.crashing)
         {
             DetectDrift();
         }
@@ -62,7 +62,7 @@ public class StuntChecker : MonoBehaviour
         }
 
         //Detect jumps
-        if (detectJump)
+        if (detectJump && !fo.crashing)
         {
             DetectJump();
         }
@@ -74,7 +74,7 @@ public class StuntChecker : MonoBehaviour
         }
 
         //Detect flips
-        if (detectFlips)
+        if (detectFlips && !fo.crashing)
         {
             DetectFlips();
         }
@@ -85,7 +85,7 @@ public class StuntChecker : MonoBehaviour
         }
 
         //Combine strings into final stunt string
-        stuntString = driftString + jumpString + (string.IsNullOrEmpty(flipString) || string.IsNullOrEmpty(jumpString) ? "" : " + ") + flipString;
+        stuntString = fo.crashing ? "Crashed" : driftString + jumpString + (string.IsNullOrEmpty(flipString) || string.IsNullOrEmpty(jumpString) ? "" : " + ") + flipString;
     }
 
     void DetectDrift()
@@ -147,7 +147,7 @@ public class StuntChecker : MonoBehaviour
                 jumpDisplay = false;
             }
             jumpHold = true;
-            jumpDist = Vector3.Distance(jumpStart, tr.position);
+            jumpDist = Vector3.Distance(jumpStart, tr.position) / 10;
             jumpTime += Time.fixedDeltaTime;
             jumpString = "Jump: " + jumpDist.ToString("n0") + " m";
 
