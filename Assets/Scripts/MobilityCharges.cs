@@ -6,16 +6,16 @@ public class MobilityCharges : MonoBehaviour
 {
     public int currentCharges;
 
-    bool charge1;
+    public bool charge1;
     public float charge1Time = 0f;
     public GameObject light1;
 
-    bool charge2;
+    public bool charge2;
     public float charge2Time = 0f;
     public GameObject light2;
 
-    public AudioSource audio;
-    bool charge3;
+    public AudioSource aud;
+    public bool charge3;
     public float charge3Time = 0f;
     public GameObject light3;
 
@@ -34,10 +34,6 @@ public class MobilityCharges : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        charge1 = true;
-        charge2 = true;
-        charge3 = true;
-
         sprite1 = light1.GetComponent<SpriteRenderer>();
         sprite2 = light2.GetComponent<SpriteRenderer>();    
         sprite3 = light3.GetComponent<SpriteRenderer>();
@@ -71,8 +67,8 @@ public class MobilityCharges : MonoBehaviour
         {
             charge1 = true;
             currentCharges++;
-            audio.pitch = .9f;
-            audio.Play();
+            aud.pitch = .9f;
+            aud.Play();
             particles1.Play();
             sprite1.color = Color.green;
             charge1Time = 0f;
@@ -88,8 +84,8 @@ public class MobilityCharges : MonoBehaviour
         {
             charge2 = true;
             currentCharges++;
-            audio.pitch = .95f;
-            audio.Play();
+            aud.pitch = .95f;
+            aud.Play();
             particles2.Play();
             sprite2.color = Color.green;
             charge2Time = 0f;
@@ -105,8 +101,8 @@ public class MobilityCharges : MonoBehaviour
         {
             charge3 = true;
             currentCharges++;
-            audio.pitch = 1f;
-            audio.Play();
+            aud.pitch = 1f;
+            aud.Play();
             particles3.Play();
             sprite3.color = Color.green;
             charge3Time = 0f;

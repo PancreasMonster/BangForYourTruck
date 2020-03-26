@@ -2972,6 +2972,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140838416}
   m_CullTransparentMesh: 0
+--- !u!82 &152635892 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5065871591026424685, guid: cc018b919a2f61f46a3f1fe088148194,
+    type: 3}
+  m_PrefabInstance: {fileID: 1111863011}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &156471444
 GameObject:
   m_ObjectHideFlags: 0
@@ -4174,6 +4180,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 471672559365913039, guid: c9ee3422424de054caad2493e5e9ba90,
     type: 3}
   m_PrefabInstance: {fileID: 1461328628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &231518093 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5065871591026424685, guid: cc018b919a2f61f46a3f1fe088148194,
+    type: 3}
+  m_PrefabInstance: {fileID: 2692034413974640476}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &233395468 stripped
 GameObject:
@@ -7913,29 +7925,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1111863011}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &466203105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466203103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCharges: 0
-  charge1Time: 0
-  light1: {fileID: 0}
-  charge2Time: 0
-  light2: {fileID: 0}
-  audio: {fileID: 0}
-  charge3Time: 0
-  light3: {fileID: 0}
-  currentDriftMultiplier: 0
-  rechargeTime: 3
-  maxDriftMultiplier: 1
 --- !u!114 &466203107 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
@@ -16545,6 +16534,31 @@ PrefabInstance:
       propertyPath: rechargeTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: charge1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: charge2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: charge3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: aud
+      value: 
+      objectReference: {fileID: 152635892}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8024708779026575049, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: cam
@@ -16811,12 +16825,12 @@ PrefabInstance:
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 15.462293
+      value: 15.462295
       objectReference: {fileID: 0}
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518517
+      value: 1.8518518
       objectReference: {fileID: 0}
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -16921,17 +16935,17 @@ PrefabInstance:
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 353.46442
+      value: 353.46436
       objectReference: {fileID: 0}
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 15.709529
+      value: 15.709528
       objectReference: {fileID: 0}
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518518
+      value: 1.8518519
       objectReference: {fileID: 0}
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -26541,7 +26555,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1733981961}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384526925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
   m_Name: 
@@ -32584,6 +32598,26 @@ PrefabInstance:
       propertyPath: rechargeTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: charge1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: charge2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: charge3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7729516770130546572, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: cam
@@ -32807,12 +32841,12 @@ PrefabInstance:
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 15.462181
+      value: 15.46218
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518519
+      value: 1.8518517
       objectReference: {fileID: 0}
     - target: {fileID: 4774931591024229915, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -32842,17 +32876,17 @@ PrefabInstance:
     - target: {fileID: 4774931592068175376, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 353.46085
+      value: 353.4609
       objectReference: {fileID: 0}
     - target: {fileID: 4774931592068175376, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 15.709371
+      value: 15.709373
       objectReference: {fileID: 0}
     - target: {fileID: 4774931592068175376, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_SuspensionDistance
-      value: 1.8518519
+      value: 1.8518518
       objectReference: {fileID: 0}
     - target: {fileID: 4774931592068175376, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -50809,7 +50843,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6247115921050699280}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509198659540736650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
   m_Name: 
@@ -50959,6 +50993,31 @@ PrefabInstance:
         type: 3}
       propertyPath: rechargeTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: charge1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: charge2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: charge3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: aud
+      value: 
+      objectReference: {fileID: 231518093}
+    - target: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8024708779026575049, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -51231,7 +51290,7 @@ PrefabInstance:
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.768811
+      value: 5.7688117
       objectReference: {fileID: 0}
     - target: {fileID: 5069446145979326302, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -51301,7 +51360,7 @@ PrefabInstance:
     - target: {fileID: 5069446146695173315, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.768811
+      value: 5.7688117
       objectReference: {fileID: 0}
     - target: {fileID: 5069446146695173315, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -51351,7 +51410,7 @@ PrefabInstance:
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.768811
+      value: 5.7688117
       objectReference: {fileID: 0}
     - target: {fileID: 5069446147049502549, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -51401,7 +51460,7 @@ PrefabInstance:
     - target: {fileID: 5069446147287327231, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.768811
+      value: 5.7688117
       objectReference: {fileID: 0}
     - target: {fileID: 5069446147287327231, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -52585,6 +52644,26 @@ PrefabInstance:
         type: 3}
       propertyPath: rechargeTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: charge1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: charge2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: charge3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7729516770130546572, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}

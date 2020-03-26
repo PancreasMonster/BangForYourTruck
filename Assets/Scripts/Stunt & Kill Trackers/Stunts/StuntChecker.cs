@@ -8,6 +8,7 @@ public class StuntChecker : MonoBehaviour
     Rigidbody rb;
     FlipOver fo;
     Health h;
+    MobilityCharges mc;
     public WheelSkid ws;
     public float driftIntensity = 2;
     public float stuntStringHoldTime = 1;
@@ -53,6 +54,7 @@ public class StuntChecker : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         fo = GetComponent<FlipOver>();
         h = GetComponent<Health>();
+        mc = GetComponent<MobilityCharges>();
     }
 
     void FixedUpdate()
@@ -293,6 +295,7 @@ public class StuntChecker : MonoBehaviour
         else
         {
             StartCoroutine(flipHoldActivation());
+            if(!fo.crashing)
             FlipEffect(currentStunt);
             currentStunt = "";
         }
@@ -332,7 +335,7 @@ public class StuntChecker : MonoBehaviour
 
         } else if (flipName == "Spin Right" || flipName == "Spin Left")
         {
-
+            GainMobilityCharge();
         }
     }
 
@@ -368,4 +371,20 @@ public class StuntChecker : MonoBehaviour
         }
     }
 
+    private void GainMobilityCharge ()
+    {
+        if(!mc.charge1)
+        {
+            mc.charge1Time = mc.rechargeTime;
+            Debug.Log("mc1");
+        } else if (!mc.charge2)
+        {
+            mc.charge2Time = mc.rechargeTime;
+            Debug.Log("mc2");
+        } else if (!mc.charge3)
+        {
+            mc.charge3Time = mc.rechargeTime;
+            Debug.Log("mc3");
+        }
+    }
 }
