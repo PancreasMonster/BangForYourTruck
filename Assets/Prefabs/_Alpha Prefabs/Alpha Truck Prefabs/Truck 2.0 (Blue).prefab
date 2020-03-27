@@ -79340,6 +79340,7 @@ GameObject:
   - component: {fileID: 31966199669190416}
   - component: {fileID: 5616173171901482586}
   - component: {fileID: 7287950041337084639}
+  - component: {fileID: 1701291863046434287}
   m_Layer: 8
   m_Name: Truck 2.0 (Blue)
   m_TagString: Player
@@ -80046,11 +80047,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCharges: 0
+  charge1: 0
   charge1Time: 0
   light1: {fileID: 3543417141042721381}
+  charge2: 0
   charge2Time: 0
   light2: {fileID: 2336319248952830216}
-  audio: {fileID: 5065871591026424685}
+  aud: {fileID: 0}
+  charge3: 0
   charge3Time: 0
   light3: {fileID: 856007775731989268}
   currentDriftMultiplier: 0
@@ -80123,6 +80127,24 @@ MonoBehaviour:
   camTarget: {fileID: 0}
   pivotCamera: {fileID: 0}
   carFront: {fileID: 1183761883923713024}
+--- !u!114 &1701291863046434287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5069446146252471775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09085f1204b16347aae1936a7cf4830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserRechargeTime: 60
+  orbitalLaser: {fileID: 5644544636786008093, guid: ccc3070893d871948bad218318976903,
+    type: 3}
+  currentOrbitalLaser: {fileID: 0}
+  zPosBehind: 30
+  laserHeight: 15
 --- !u!1 &5069446146695173317
 GameObject:
   m_ObjectHideFlags: 0
@@ -153884,6 +153906,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6958474376812839677, guid: eb5d2da4997bfc345ab814a0432cae06,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: eb5d2da4997bfc345ab814a0432cae06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -153964,11 +153991,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 347f20b673a339143b60163c6476c456, type: 2}
-    - target: {fileID: 6958474376812839677, guid: eb5d2da4997bfc345ab814a0432cae06,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb5d2da4997bfc345ab814a0432cae06, type: 3}
 --- !u!4 &3878514952182461094 stripped
@@ -154002,6 +154024,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1759159466206807201}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -154071,16 +154103,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: -0.2523
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 2d0d8a6a56b83c248a1e95620d6ed091,
         type: 3}
@@ -154905,6 +154927,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5069446146252471771}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 2294316ff311dd84eb42384256164867,
+        type: 3}
+      propertyPath: m_Name
+      value: Suspension
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2294316ff311dd84eb42384256164867,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2294316ff311dd84eb42384256164867,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -154974,16 +155006,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2294316ff311dd84eb42384256164867,
-        type: 3}
-      propertyPath: m_Name
-      value: Suspension
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2294316ff311dd84eb42384256164867,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7652166935273604410, guid: 2294316ff311dd84eb42384256164867,
         type: 3}
