@@ -109,7 +109,7 @@ public class PropelSelf : MonoBehaviour
             {
                 if (mobCharges.currentCharges > 0)
                 {
-                    rb.velocity = Vector3.zero;
+                    //rb.velocity = Vector3.zero;
                     if (GetComponent<LockOn>().target != null)
                     {
                         if (Vector3.Distance(GetComponent<LockOn>().target.transform.position, transform.position) < targetBoostMaxDistance)
