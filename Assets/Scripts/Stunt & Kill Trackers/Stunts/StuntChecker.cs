@@ -49,6 +49,7 @@ public class StuntChecker : MonoBehaviour
     public float maxScoreExplosion; //at what score does the explosion reach Max Damage;
     public int flipScore;
     bool landStunt = true;
+    bool canSlam = true;
 
     void Start()
     {
@@ -96,6 +97,7 @@ public class StuntChecker : MonoBehaviour
         else
         {
             stunts.Clear();
+            flipScore = 0;
             flipString = "";
         }
 
@@ -190,10 +192,10 @@ public class StuntChecker : MonoBehaviour
                 //Add stunt points to the score
                 foreach (Stunt curStunt in stunts)
                 {
-                   // score += curStunt.score;
-                  //  flipScore = Mathf.RoundToInt(score);
+                    // score += curStunt.score;
+                    //  flipScore = Mathf.RoundToInt(score);
+                    //flipScore += curStunt.score;
 
-                    
                 }
 
                 score += flipScore;
@@ -203,8 +205,10 @@ public class StuntChecker : MonoBehaviour
                 flipDisplay = false;
             }
 
-            flipHold = true;
+            if(!flipHold)
             flipScore = 0;
+            flipHold = true;
+            canSlam = true;
             landStunt = true;
 
             //Check to see if vehicle is performing a stunt and add it to the stunts list
@@ -218,6 +222,7 @@ public class StuntChecker : MonoBehaviour
                     {
                         if (curStunt.name == checkStunt.name)
                         {
+                           // flipScore += checkStunt.score;
                             stuntExists = true;
                             break;
                         }
@@ -225,6 +230,7 @@ public class StuntChecker : MonoBehaviour
 
                     if (!stuntExists)
                     {
+                        
                         stunts.Add(new Stunt(curStunt));
                     }
                 }
@@ -241,11 +247,14 @@ public class StuntChecker : MonoBehaviour
                 if (curStunt2.progress * Mathf.Rad2Deg >= curStunt2.angleThreshold)
                 {
                     bool stuntDoneExists = false;
+                    
 
                     foreach (Stunt curDoneStunt in doneStunts)
                     {
+                       
                         if (curDoneStunt == curStunt2)
                         {
+                            
                             stuntDoneExists = true;
                             break;
                         }
@@ -253,6 +262,7 @@ public class StuntChecker : MonoBehaviour
 
                     if (!stuntDoneExists)
                     {
+                        
                         currentStunt = curStunt2.name;
                         doneStunts.Add(curStunt2);
                     }
@@ -275,9 +285,10 @@ public class StuntChecker : MonoBehaviour
             //Add stunt points to the score
             foreach (Stunt curStunt in doneStunts)
             {
-                score += curStunt.score;
+                
+                score += flipScore;
             }
-
+            
             stunts.Clear();
             doneStunts.Clear();
             flipString = "";
@@ -285,16 +296,15 @@ public class StuntChecker : MonoBehaviour
         else
         {
             StartCoroutine(flipHoldActivation());
-            if (landStunt)
+
+            if (!fo.crashing && canSlam)
             {
                 foreach (Stunt curStunt in doneStunts)
                 {
-                    flipScore += curStunt.score;
+                    flipScore += curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold);
                 }
-                landStunt = false;
-            }
-            if (!fo.crashing)
                 FlipConcussiveForce(flipScore);
+            }
             currentStunt = "";
         }
     }
@@ -331,6 +341,7 @@ public class StuntChecker : MonoBehaviour
 
     private void FlipConcussiveForce (int currFlipScore)
     {
+        canSlam = false;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, concussiveRange);
         List<Transform> targets = new List<Transform>();
         float slamDamage = concussiveForceDamage * (currFlipScore / maxScoreExplosion);
