@@ -54,21 +54,10 @@ public class OrbitalLaser : MonoBehaviour
     {
         if (laserActivate)
         {
-             nextWaypoint = NextWaypoint();
 
-             Vector3 dir = nextWaypoint - transform.position;
-             dir.Normalize();
-
-             transform.Translate(dir * laserSpeed * Time.deltaTime);
-
-             if (Vector3.Distance(transform.position, nextWaypoint) < arriveDistance)
-             {
-                 AdvanceToNext();
-             } 
-
-            /*Vector3 dir = followPlayer.position - transform.position;
+            Vector3 dir = followPlayer.position - transform.position;
             dir.Normalize();
-            transform.Translate(dir * laserSpeed * Time.deltaTime);*/
+            transform.Translate(dir * laserSpeed * Time.deltaTime);
 
         }
     }
