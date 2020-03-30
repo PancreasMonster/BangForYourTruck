@@ -7,6 +7,7 @@ public class CannonWeapon : MonoBehaviour
     public float arcOffset;
     public float lockOnRange;
     public GameObject model;
+    public GameObject engineModel;
     bool charging;
     bool onCooldown;
     public float cooldownTime;
@@ -25,6 +26,7 @@ public class CannonWeapon : MonoBehaviour
     {
         GetComponent<LockOn>().maxDistance = lockOnRange;
         model.SetActive(true);
+        engineModel.SetActive(true);
 
         particle = cannonFiringPoint.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();

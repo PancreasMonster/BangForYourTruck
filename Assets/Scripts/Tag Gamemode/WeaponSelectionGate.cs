@@ -34,6 +34,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().enabled = false;
                     col.GetComponent<CannonWeapon>().model.SetActive(false);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
                     col.GetComponent<ShotgunWeapon>().enabled = false;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(false);
 
@@ -46,6 +47,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(true);
                     col.GetComponent<CannonWeapon>().enabled = false;
                     col.GetComponent<CannonWeapon>().model.SetActive(false);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
                     col.GetComponent<ShotgunWeapon>().enabled = false;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(false);
                 }
@@ -57,6 +59,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().enabled = true;
                     col.GetComponent<CannonWeapon>().model.SetActive(true);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(true);
                     col.GetComponent<ShotgunWeapon>().enabled = false;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(false);
                 }
@@ -69,6 +72,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().enabled = false;
                     col.GetComponent<CannonWeapon>().model.SetActive(false);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
                     col.GetComponent<ShotgunWeapon>().enabled = true;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(true);
                 }

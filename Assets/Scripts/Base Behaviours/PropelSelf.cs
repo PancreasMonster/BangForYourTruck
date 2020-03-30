@@ -21,6 +21,7 @@ public class PropelSelf : MonoBehaviour
     public Orbit orb;
     MobilityCharges mobCharges;
     public float targetBoostMaxDistance = 100;
+    public Animation anim;
 
     // Start is called before the first frame update
     void Start()
@@ -86,8 +87,9 @@ public class PropelSelf : MonoBehaviour
                         Vector3 dir = (8 * transform.forward) + (7 * transform.up);
                         dir.Normalize();
                         rb.AddForce(dir * force * limitingForce /* * power */);
-                        rb.angularVelocity = Vector3.zero;
-                       // Debug.Log(dir);
+                        //rb.angularVelocity = Vector3.zero;
+                        // Debug.Log(dir);
+                        anim.Play();
                         StartCoroutine(BoostEffect());
                         triggerDown = false;                      
                         coolingDown = true;

@@ -14,8 +14,11 @@ public class MachinegunWeapon : MonoBehaviour
     public GameObject weaponProjectile;
     PowerHolder ph;
     public PowerCosts pc;
-    ParticleSystem particles1;
-    ParticleSystem particles2;
+    ParticleSystem bulletParticles1;
+    public ParticleSystem shellsParticles1;
+    public ParticleSystem bulletParticles2;
+    ParticleSystem shellsParticles2;
+
 
 
     // Start is called before the first frame update
@@ -25,8 +28,8 @@ public class MachinegunWeapon : MonoBehaviour
         GetComponent<LockOn>().maxDistance = lockOnRange;
         model.SetActive(true);
 
-        particles1 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint").GetComponent<ParticleSystem>();
-        particles2 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint2").GetComponent<ParticleSystem>();
+        bulletParticles1 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint").GetComponent<ParticleSystem>();
+        bulletParticles2 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint2").GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
     }
 
@@ -38,6 +41,8 @@ public class MachinegunWeapon : MonoBehaviour
 
 
             FireBullet();
+            shellsParticles1.Play();
+            shellsParticles2.Play();
             InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
             InvokeRepeating("FireBullet", fireRate, fireRate);
             anim.SetBool("Spinning", true);
@@ -53,6 +58,8 @@ public class MachinegunWeapon : MonoBehaviour
         if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()))
         {
             CancelInvoke();
+            shellsParticles1.Stop();
+            shellsParticles2.Stop();
             anim.SetBool("Spinning", false);
         }
     }
@@ -71,7 +78,7 @@ public class MachinegunWeapon : MonoBehaviour
 
             Bullet.GetComponent<CollisionDamage>().damageSource = this.gameObject;
          
-            particles1.Play();
+            bulletParticles1.Play();
 
             ph.losePower(pc.powerCosts[2]);
 
@@ -79,6 +86,8 @@ public class MachinegunWeapon : MonoBehaviour
         else
         {
             CancelInvoke();
+            shellsParticles1.Stop();
+            shellsParticles2.Stop();
             anim.SetBool("Spinning", false);
         }
     }
@@ -96,7 +105,7 @@ public class MachinegunWeapon : MonoBehaviour
 
             Bullet.GetComponent<CollisionDamage>().damageSource = this.gameObject;
 
-            particles2.Play();
+            bulletParticles2.Play();
 
             ph.losePower(pc.powerCosts[2]);
 
@@ -104,6 +113,8 @@ public class MachinegunWeapon : MonoBehaviour
         else
         {
             CancelInvoke();
+            shellsParticles1.Stop();
+            shellsParticles2.Stop();
             anim.SetBool("Spinning", false);
         }
     }
