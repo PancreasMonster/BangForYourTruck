@@ -37,7 +37,26 @@ public class DroneScript : MonoBehaviour
     [FMODUnity.EventRef]
     public string closeUpDialogue;
 
+    [FMODUnity.EventRef]
+    public string deathDialogue;
+
+    [FMODUnity.EventRef]
+    public string whatHappenedDialogue;
+
+    [FMODUnity.EventRef]
+    public string respawnDialogue;
+
     bool sayCloseUpDialogue = true;
+
+    bool dead = false;
+
+    bool checkForCorpse = false;
+
+    Vector3 spawnPoint;
+
+    public GameObject droneDeathPrefab;
+
+    Transform droneCorpse;
 
     public void OnDrawGizmos()
     {
@@ -52,6 +71,7 @@ public class DroneScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         StartCoroutine(OnlyFollowWayPoints());
+        spawnPoint = transform.position;
     }
 
     public void FixedUpdate()
@@ -121,8 +141,7 @@ public class DroneScript : MonoBehaviour
 
             Vector3 spinRotateAmount = Vector3.Cross(transform.up, Vector3.up);
 
-            rb.angularVelocity = rotateAmount * rotationSpeed;
-            rb.angularVelocity = spinRotateAmount * rotationSpeed;
+            rb.angularVelocity = (rotateAmount + spinRotateAmount) * rotationSpeed;
 
             if (Vector3.Distance(transform.position, nextWaypoint) < arriveDistance)
             {
@@ -136,6 +155,14 @@ public class DroneScript : MonoBehaviour
 
         }
 
+        if(!dead && checkForCorpse)
+        {
+            if(Vector3.Distance(transform.position, droneCorpse.position) < droneCheckDistance / 4)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(whatHappenedDialogue);
+                checkForCorpse = false;
+            }
+        }
        
     }
 
@@ -153,4 +180,37 @@ public class DroneScript : MonoBehaviour
         StartCoroutine(OnlyFollowWayPoints());
     }
 
+    public void DeathTrigger ()
+    {
+        StartCoroutine(DroneDeath());
+    }
+
+    IEnumerator DroneDeath()
+    {
+        if(droneCorpse)
+        {
+            Destroy(droneCorpse);
+            droneCorpse = null;
+        }
+        dead = true;
+        FMODUnity.RuntimeManager.PlayOneShot(deathDialogue);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        GetComponent<BoxCollider>().enabled = false;
+        GameObject droneDeathBody = Instantiate(droneDeathPrefab, transform.position, droneDeathPrefab.transform.rotation);
+        droneCorpse = droneDeathBody.transform;
+        yield return new WaitForSeconds(30);
+        rb.position = spawnPoint;
+        FMODUnity.RuntimeManager.PlayOneShot(respawnDialogue);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<Health>().health = GetComponent<Health>().maxHealth;
+        dead = false;
+        checkForCorpse = true;
+    }
 }

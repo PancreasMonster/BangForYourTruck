@@ -732,6 +732,8 @@ MonoBehaviour:
   droneCol: {fileID: 0}
   stateTime: 20
   closeUpDialogue: event:/Drone Voice/Closer Look
+  dead: 0
+  spawnPoint: {fileID: 0}
 --- !u!65 &8641693531037832323
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -768,13 +770,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8377632932773893842}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34586655caa8129448857388951ce7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
+  health: 100
+  maxHealth: 100
   playerNum: 0
   teamNum: 0
   healthBarCanvas: {fileID: 0}
@@ -785,9 +787,12 @@ MonoBehaviour:
   wheel: {fileID: 0}
   mbase: 0
   pr: {fileID: 0}
-  damageText: {fileID: 0}
+  damageText: {fileID: 870646884539076592, guid: 9e2afd4b5bcf5904bac415b3edb26a27,
+    type: 3}
   damageTextLayer: 0
   km: {fileID: 0}
   killerTimer: 0
   killMaxTime: 15
   damageSource: {fileID: 0}
+  drone: 1
+  dronePainSound: event:/Drone Voice/Pain

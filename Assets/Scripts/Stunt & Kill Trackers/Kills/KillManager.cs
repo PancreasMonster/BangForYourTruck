@@ -26,11 +26,11 @@ public class KillManager : MonoBehaviour
         
     }
 
-    public void KillTracked (GameObject killer, GameObject victim)
+    public void KillTracked (GameObject killer, GameObject victim, string damageString)
     {
         deaths[victim.GetComponent<Health>().playerNum - 1]++;
         kills[killer.GetComponent<Health>().playerNum - 1]++;
-        TA.PlayerKill(killer, victim);
+        TA.PlayerKill(killer, victim, damageString);
     }
 
 }

@@ -42,9 +42,12 @@ public class TextAnnouncement : MonoBehaviour
         }
     }
 
-    public void PlayerKill (GameObject killer, GameObject victim)
+    public void PlayerKill (GameObject killer, GameObject victim, string damageString)
     {
-        announcementText.text = killer.transform.name + " has killed " + victim.transform.name;
+        if(damageString != null)
+            announcementText.text = killer.transform.name + damageString + victim.transform.name;
+        else
+            announcementText.text = killer.transform.name + " has killed " + victim.transform.name;
         announcementTextColor.a = 1;
         imageColor.a = 1;
         delayTimer = 5;

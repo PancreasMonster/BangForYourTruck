@@ -22,6 +22,12 @@ public class Health : MonoBehaviour
     public float killMaxTime = 15;
     public GameObject damageSource;
     public bool drone;
+    string damageString;
+
+    [FMODUnity.EventRef]
+    public string dronePainSound;
+
+    bool dronePainCooldown = true;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +60,7 @@ public class Health : MonoBehaviour
         } else
         {
             damageSource = null;
+            damageString = null;
         }
 
 
@@ -83,6 +90,7 @@ public class Health : MonoBehaviour
 
         killerTimer = killMaxTime;
         damageSource = playerSourceGameObject;
+        damageString = playerSourceString;
 
         //Instantiates the damage text mesh on the players position
         GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
@@ -103,22 +111,39 @@ public class Health : MonoBehaviour
         //Deals the damage to the player's health
         health -= damageTaken;
 
+        if (drone && dronePainCooldown)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(dronePainSound);
+            dronePainCooldown = false;
+            StartCoroutine(DronePainCooldown());
+        }
+
         if (health - damageTaken <= 0)
             Death();
     }
 
     public void Death()
     {
-        km.KillTracked(damageSource, this.gameObject);
+       
         health = 0;
         dead = true;
         if (mbase)
         {
+            if (damageSource != this.gameObject)
+            {
+                km.KillTracked(damageSource, this.gameObject, damageString);
+            }
+            
             //Destroy(baseUI);
             StartCoroutine(deadTime());
         }
 
-        if (!mbase)
+        if(drone)
+        {
+            GetComponent<DroneScript>().DeathTrigger();
+        }
+
+        if (!mbase && !drone)
         {
             Destroy(this.gameObject, 5);
             Destroy(hpBarHolder);
@@ -172,5 +197,10 @@ public class Health : MonoBehaviour
         //hpBarHolder.SetActive(true);
     }
 
+    IEnumerator DronePainCooldown ()
+    {
+        yield return new WaitForSeconds(8);
+        dronePainCooldown = true;
+    }
     
 }
