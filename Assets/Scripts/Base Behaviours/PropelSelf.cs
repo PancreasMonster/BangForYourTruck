@@ -66,7 +66,10 @@ public class PropelSelf : MonoBehaviour
                         {
                             rb.AddForce(transform.forward * force /* * power */);
                         }
-                       // rb.AddForce(transform.forward * force /* * power */);
+                        // rb.AddForce(transform.forward * force /* * power */);
+                        anim.Play();
+                        Debug.Log("Boosted");
+
                         StartCoroutine(BoostEffect());
                         triggerDown = false;                       
                         coolingDown = true;
@@ -90,6 +93,8 @@ public class PropelSelf : MonoBehaviour
                         //rb.angularVelocity = Vector3.zero;
                         // Debug.Log(dir);
                         anim.Play();
+                        Debug.Log("Boosted");
+
                         StartCoroutine(BoostEffect());
                         triggerDown = false;                      
                         coolingDown = true;
