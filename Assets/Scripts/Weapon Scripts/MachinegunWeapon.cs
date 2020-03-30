@@ -16,8 +16,8 @@ public class MachinegunWeapon : MonoBehaviour
     public PowerCosts pc;
     ParticleSystem bulletParticles1;
     public ParticleSystem shellsParticles1;
-    public ParticleSystem bulletParticles2;
-    ParticleSystem shellsParticles2;
+    ParticleSystem bulletParticles2;
+    public ParticleSystem shellsParticles2;
 
 
 
