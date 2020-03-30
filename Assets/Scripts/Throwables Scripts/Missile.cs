@@ -54,7 +54,7 @@ public class Missile : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRange);
         foreach (Collider c in hitColliders)
         {
-            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
+            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject && c.transform.tag != "Drone")
             {
                 if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
                 {
