@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     public float killerTimer;
     public float killMaxTime = 15;
     public GameObject damageSource;
-
+    public bool drone;
 
     // Start is called before the first frame update
     void Start()
