@@ -53,7 +53,7 @@ public class StuntChecker : MonoBehaviour
     public int flipScore;
     bool landStunt = true;
     bool canSlam = true;
-    public float randomAnnouncment;
+    public float randomAnnouncmentChance;
 
     void Start()
     {
@@ -101,6 +101,7 @@ public class StuntChecker : MonoBehaviour
         else
         {
             stunts.Clear();
+            doneStunts.Clear();
             flipScore = 0;
             flipString = "";
         }
@@ -307,16 +308,14 @@ public class StuntChecker : MonoBehaviour
                 {
                     flipScore += curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold);
                 }
-                float rand = Random.Range(0f, 1f);
-                Debug.Log(rand);
-                if (rand > randomAnnouncment && flipScore >= maxScoreExplosion)
+                float rand = Random.Range(0f, 1f);             
+                if (rand > randomAnnouncmentChance && flipScore >= maxScoreExplosion)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);
-                    
+                    FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);                   
                 }
                 FlipConcussiveForce(flipScore);
                 
-            }
+            } 
             currentStunt = "";
         }
     }

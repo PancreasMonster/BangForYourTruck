@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class TagCollectionManager : MonoBehaviour
 {
+    [FMODUnity.EventRef]
+    public string redWinSound;
+
+    [FMODUnity.EventRef]
+    public string blueWinSound;
+
     public Text winText;
     public Image redImage, blueImage, winPanelImage;
     public float blueTeamTokens, redTeamTokens, gameWinningAmount = 30;
@@ -35,12 +41,14 @@ public class TagCollectionManager : MonoBehaviour
             gameWon = true;
             winText.text = "Blue Team Has Won!";
             StartCoroutine(Victory("Blue Team Has Won!"));
+            FMODUnity.RuntimeManager.PlayOneShot(blueWinSound);
         }
         else if (redTeamTokens >= gameWinningAmount && !gameWon)
         {
             gameWon = true;
             winText.text = "Red Team Has Won!";
             StartCoroutine(Victory("Red Team Has Won!"));
+            FMODUnity.RuntimeManager.PlayOneShot(redWinSound);
         }
 
         if(allowSceneChange)

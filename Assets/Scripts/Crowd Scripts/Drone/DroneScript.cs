@@ -66,7 +66,25 @@ public class DroneScript : MonoBehaviour
 
         if (index > -1 && droneCol.bounds.Contains(players[index].position) && !onlyFollowWaypoints)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(players[index].position - transform.position), rotationSpeed * Time.deltaTime);
+            Vector3 lookDir = players[index].position - rb.position;
+
+            lookDir.Normalize();
+
+            Vector3 spinRotateAmount = Vector3.Cross(transform.up, Vector3.up);
+
+            Vector3 rotateAmount = Vector3.Cross(transform.forward, lookDir);
+
+
+            rb.angularVelocity = (rotateAmount + spinRotateAmount) * rotationSpeed;
+            //if (Vector3.Dot(lookDir, transform.forward) < .95f)
+           // {
+          //      rb.angularVelocity = rotateAmount * rotationSpeed;
+          //  }
+         //   else
+          //  {
+          //      rb.angularVelocity = spinRotateAmount * rotationSpeed * .5f;
+          //  }
+
             Debug.DrawRay(transform.position, transform.forward * 1000, Color.red);
 
             Vector3 dir = players[index].position - transform.position;
@@ -81,12 +99,21 @@ public class DroneScript : MonoBehaviour
 
             if((transform.position.y - players[index].position.y) < heightAbovePlayer)
             {
-                rb.AddForce(Vector3.up * riseSpeed * (heightAbovePlayer/(transform.position.y - players[index].position.y)) * Time.deltaTime, ForceMode.VelocityChange);
+                rb.AddForce(Vector3.up * riseSpeed * (heightAbovePlayer/Mathf.Abs(transform.position.y - players[index].position.y)) * Time.deltaTime, ForceMode.VelocityChange);
             }
         }
         else
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(nextWaypoint - transform.position), rotationSpeed * Time.deltaTime);
+            Vector3 lookDir = nextWaypoint - rb.position;
+
+            lookDir.Normalize();
+
+            Vector3 rotateAmount = Vector3.Cross(transform.forward, lookDir);
+
+            Vector3 spinRotateAmount = Vector3.Cross(transform.up, Vector3.up);
+
+            rb.angularVelocity = rotateAmount * rotationSpeed;
+            rb.angularVelocity = spinRotateAmount * rotationSpeed;
 
             if (Vector3.Distance(transform.position, nextWaypoint) < arriveDistance)
             {
