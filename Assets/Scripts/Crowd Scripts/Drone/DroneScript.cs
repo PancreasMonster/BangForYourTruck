@@ -30,7 +30,14 @@ public class DroneScript : MonoBehaviour
 
     public Collider droneCol;
 
-    public bool onlyFollowWaypoints; 
+    bool onlyFollowWaypoints;
+
+    public float stateTime;
+
+    [FMODUnity.EventRef]
+    public string closeUpDialogue;
+
+    bool sayCloseUpDialogue = true;
 
     public void OnDrawGizmos()
     {
@@ -44,6 +51,7 @@ public class DroneScript : MonoBehaviour
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
+        StartCoroutine(OnlyFollowWayPoints());
     }
 
     public void FixedUpdate()
@@ -66,6 +74,12 @@ public class DroneScript : MonoBehaviour
 
         if (index > -1 && droneCol.bounds.Contains(players[index].position) && !onlyFollowWaypoints)
         {
+            if(sayCloseUpDialogue)
+            {
+                sayCloseUpDialogue = false;
+                FMODUnity.RuntimeManager.PlayOneShot(closeUpDialogue);
+            }
+
             Vector3 lookDir = players[index].position - rb.position;
 
             lookDir.Normalize();
@@ -76,14 +90,7 @@ public class DroneScript : MonoBehaviour
 
 
             rb.angularVelocity = (rotateAmount + spinRotateAmount) * rotationSpeed;
-            //if (Vector3.Dot(lookDir, transform.forward) < .95f)
-           // {
-          //      rb.angularVelocity = rotateAmount * rotationSpeed;
-          //  }
-         //   else
-          //  {
-          //      rb.angularVelocity = spinRotateAmount * rotationSpeed * .5f;
-          //  }
+            
 
             Debug.DrawRay(transform.position, transform.forward * 1000, Color.red);
 
@@ -104,6 +111,8 @@ public class DroneScript : MonoBehaviour
         }
         else
         {
+            sayCloseUpDialogue = true;
+
             Vector3 lookDir = nextWaypoint - rb.position;
 
             lookDir.Normalize();
@@ -128,6 +137,20 @@ public class DroneScript : MonoBehaviour
         }
 
        
+    }
+
+    IEnumerator OnlyFollowWayPoints ()
+    {
+        onlyFollowWaypoints = true;
+        yield return new WaitForSeconds(stateTime);
+        StartCoroutine(AllowPlayerFollow());
+    }
+
+    IEnumerator AllowPlayerFollow ()
+    {
+        onlyFollowWaypoints = false;
+        yield return new WaitForSeconds(stateTime);
+        StartCoroutine(OnlyFollowWayPoints());
     }
 
 }
