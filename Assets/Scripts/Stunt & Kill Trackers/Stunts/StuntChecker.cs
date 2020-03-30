@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StuntChecker : MonoBehaviour
 {
+    [FMODUnity.EventRef]
+    public string flipSound;
+
     Transform tr;
     Rigidbody rb;
     FlipOver fo;
@@ -50,6 +53,7 @@ public class StuntChecker : MonoBehaviour
     public int flipScore;
     bool landStunt = true;
     bool canSlam = true;
+    public float randomAnnouncment;
 
     void Start()
     {
@@ -303,7 +307,15 @@ public class StuntChecker : MonoBehaviour
                 {
                     flipScore += curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold);
                 }
+                float rand = Random.Range(0f, 1f);
+                Debug.Log(rand);
+                if (rand > randomAnnouncment && flipScore >= maxScoreExplosion)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);
+                    
+                }
                 FlipConcussiveForce(flipScore);
+                
             }
             currentStunt = "";
         }

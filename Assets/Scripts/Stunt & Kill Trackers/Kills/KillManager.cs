@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class KillManager : MonoBehaviour
 {
+
+    [FMODUnity.EventRef]
+    public string startSound;
+
     public List<GameObject> players = new List<GameObject>();
     public List<int> kills = new List<int>();
     public List<int> deaths = new List<int>();
@@ -13,7 +17,7 @@ public class KillManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        FMODUnity.RuntimeManager.PlayOneShot(startSound, players[0].transform.position);
     }
 
     // Update is called once per frame
