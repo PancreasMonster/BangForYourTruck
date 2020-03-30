@@ -16,7 +16,7 @@ public class Bomb : MonoBehaviour
     Animation anim;
     AudioSource audio;
     Rigidbody rb;
-    public ParticleSystem particles;
+    public GameObject particles;
 
     // Start is called before the first frame update
     void Start()
@@ -67,8 +67,9 @@ public class Bomb : MonoBehaviour
         }
 
         StopAllCoroutines();
-        audio.Play();
-        particles.Play();
+        //audio.Play();
+        Instantiate(particles, transform.position, transform.rotation);
+        //particles.Play();
         this.gameObject.layer = 10;
         Invoke("DestroyThisGameObject", 1f);
     }
@@ -98,8 +99,9 @@ public class Bomb : MonoBehaviour
 
 
         StopAllCoroutines();
-        audio.Play();
-        particles.Play();
+        //audio.Play();
+        Instantiate(particles, transform.position, transform.rotation);
+        //particles.Play();
         this.gameObject.layer = 10;
         Invoke("DestroyThisGameObject",1f);
     }
