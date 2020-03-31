@@ -63,6 +63,7 @@ public class CannonWeapon : MonoBehaviour
         if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
         {
           Firecannon();
+          model.GetComponent<Animation>().Play();
 
         }
     }
