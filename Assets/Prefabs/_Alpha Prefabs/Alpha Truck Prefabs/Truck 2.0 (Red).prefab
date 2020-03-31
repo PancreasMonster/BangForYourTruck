@@ -74417,22 +74417,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d57a66ac6b849a41ac61f41d1feb9a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipSound: 
+  flipSound: event:/Drone Voice/Awesome2D
   ws: {fileID: 0}
   driftIntensity: 0.975
   stuntStringHoldTime: 1
   detectDrift: 1
-  detectJump: 1
+  detectJump: 0
   detectFlips: 1
   driftString: 
   jumpString: 
   flipString: 
   currentStunt: 
-  concussiveRange: 0
-  concussiveRadius: 0
-  concussiveForce: 0
-  concussiveForceDamage: 0
-  maxScoreExplosion: 0
+  concussiveRange: 500
+  concussiveRadius: 0.3
+  concussiveForce: 12500
+  concussiveForcePS: {fileID: 3503507293657210370, guid: bf3508a6cd7f6fe40affe91b5fdaab69,
+    type: 3}
+  concussiveForceDamage: 25
+  maxScoreExplosion: 200
   flipScore: 0
   randomAnnouncmentChance: 0
 --- !u!114 &4774931590751050904
@@ -135901,16 +135903,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2049268278548620772}
     m_Modifications:
-    - target: {fileID: 2303136974021355676, guid: 01469b7237042494985375548787169f,
-        type: 3}
-      propertyPath: m_Name
-      value: Shotguns (Red)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303136974021355676, guid: 01469b7237042494985375548787169f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3003121642425195151, guid: 01469b7237042494985375548787169f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -135980,6 +135972,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303136974021355676, guid: 01469b7237042494985375548787169f,
+        type: 3}
+      propertyPath: m_Name
+      value: Shotguns (Red)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303136974021355676, guid: 01469b7237042494985375548787169f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8154987910579422482, guid: 01469b7237042494985375548787169f,
         type: 3}

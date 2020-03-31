@@ -48,6 +48,7 @@ public class StuntChecker : MonoBehaviour
     [Range(-1,1)]
     public float concussiveRadius;
     public float concussiveForce;
+    public GameObject concussiveForcePS;
     public float concussiveForceDamage;
     public float maxScoreExplosion; //at what score does the explosion reach Max Damage;
     public int flipScore;
@@ -313,6 +314,7 @@ public class StuntChecker : MonoBehaviour
                 {
                     FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);                   
                 }
+                if(currentStunt != "")
                 FlipConcussiveForce(flipScore);
                 
             } 
@@ -385,6 +387,9 @@ public class StuntChecker : MonoBehaviour
                     h.TakeDamage("Power Slammed", this.gameObject, concussiveForceDamage, Vector3.zero);
            // }
         }
+
+        GameObject flipPS = Instantiate(concussiveForcePS, new Vector3 (transform.position.x, transform.position.y  - 4f, transform.position.z), concussiveForcePS.transform.rotation);
+        Destroy(flipPS, 3);
     }
 
     private void GainMobilityCharge ()
