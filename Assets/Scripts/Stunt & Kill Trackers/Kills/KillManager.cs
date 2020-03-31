@@ -22,7 +22,7 @@ public class KillManager : MonoBehaviour
     public List<int> killSpree = new List<int>();
     public int killSpreeNum = 3;
 
-    public TextAnnouncement TA;
+    public KillFeed kf;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +47,7 @@ public class KillManager : MonoBehaviour
         DoubleKillDialougeActivation(killNum);
         killSpreeDialougeActivation(killNum);
         StartCoroutine(DoubleKillDialougeBool(killNum));
-        TA.PlayerKill(killer, victim, damageString);
+        kf.KillAnnouncement(killer, victim, damageString);
     }
 
     private void DoubleKillDialougeActivation (int i)
@@ -60,7 +60,7 @@ public class KillManager : MonoBehaviour
 
     private void killSpreeDialougeActivation(int i)
     {
-        if (killSpree[i] > killSpreeNum)
+        if (killSpree[i] >= killSpreeNum)
         {
             FMODUnity.RuntimeManager.PlayOneShot(killSpreeDialouge);
         }
