@@ -32,7 +32,7 @@ MonoBehaviour:
   Path: event:/Drone Voice/Killing Spree
   guid: 3f369ca527da4d40a22b70d9518ab5e9
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -175,12 +175,12 @@ MonoBehaviour:
   Path: event:/Drone Voice/What Happened to This Guy
   guid: a593f3232fed1942b33e599608c3df25
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 8877235048755578999}
+  - {fileID: -1075014033417409583}
   MinDistance: 1
   MaxDistance: 20
   Length: 1291
@@ -199,12 +199,12 @@ MonoBehaviour:
   Path: event:/Drone Voice/Drone Respawn
   guid: abc350df27f4b5469e6ab68101afd38f
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -507548539738925378}
+  - {fileID: -2238944876794982928}
   MinDistance: 1
   MaxDistance: 20
   Length: 2840
@@ -241,12 +241,12 @@ MonoBehaviour:
   Path: event:/Drone Voice/Double Kill
   guid: 493bae3005c9c6498b9dbf0fc6f78a77
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -7136744015929057830}
+  - {fileID: 1163899281957742450}
   MinDistance: 1
   MaxDistance: 20
   Length: 1567
@@ -367,12 +367,12 @@ MonoBehaviour:
   Path: event:/Drone Voice/Pain
   guid: 6993502a3b1fae4baab973b45d1ca03a
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 2546087988185775693}
+  - {fileID: 132699342494091218}
   MinDistance: 1
   MaxDistance: 20
   Length: 3084
@@ -391,12 +391,12 @@ MonoBehaviour:
   Path: event:/Drone Voice/Game Start
   guid: 8d7d52f461663f4c94810b4e747696db
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -297929466012214174}
+  - {fileID: -4525652109369931866}
   MinDistance: 1
   MaxDistance: 20
   Length: 1383
@@ -792,6 +792,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-4525652109369931866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Game Start/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-4497964968115511818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,7 +926,7 @@ MonoBehaviour:
   Path: event:/Drone Voice/Red Team Wins
   guid: bb08dfcc68183b4b983cbfe2d9259dfc
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1072,6 +1089,41 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-2385073290626968093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD Stuff/Projects/Bang For Your Truck Audio/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637211931197482688
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-2383118452113694327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Closer Look/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-2317804381600958934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,12 +1139,12 @@ MonoBehaviour:
   Path: event:/Drone Voice/Drone Death
   guid: e93c70100d4f1e4193066e733e6f5b42
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 7637104683563835490}
+  - {fileID: -114161306656518851}
   MinDistance: 1
   MaxDistance: 20
   Length: 1947
@@ -1131,6 +1183,23 @@ MonoBehaviour:
   lastModified: 637212000077746371
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &-2238944876794982928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drone Respawn/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &-2137376149451993185
 MonoBehaviour:
@@ -1286,6 +1355,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-1075014033417409583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/What Happened to This Guy/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-1022067290147314108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1388,6 +1474,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-114161306656518851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drone Death/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-103670492131913607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1402,7 +1505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Stuff/Projects/Bang For Your Truck Audio/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637212000077771316
+  lastModified: 637211931197562614
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1422,7 +1525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -103670492131913607}
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   EditorEvents:
   - {fileID: -8972826777689013035}
   - {fileID: -8002841025654978032}
@@ -1437,10 +1540,10 @@ MonoBehaviour:
   - {fileID: 5735408070988895119}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   StringsBanks:
   - {fileID: -103670492131913607}
-  stringsBankWriteTime: 637212000077771316
+  stringsBankWriteTime: 637211931197562614
   cacheVersion: 3
 --- !u!114 &9924098040105263
 MonoBehaviour:
@@ -1465,6 +1568,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3084
+--- !u!114 &132699342494091218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Pain/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &149897851121803431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,6 +1666,23 @@ MonoBehaviour:
   m_Name: parameter:/Red Team Wins/Red Team Wins
   m_EditorClassIdentifier: 
   Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &1163899281957742450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Double Kill/Double Kill
+  m_EditorClassIdentifier: 
+  Name: Double Kill
   Min: 0
   Max: 1
   Default: 0
@@ -1667,7 +1804,7 @@ MonoBehaviour:
   Path: event:/Drone Voice/Blue Team Wins
   guid: 434b1c620616e64b9af1440ff4e0023d
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2038,12 +2175,12 @@ MonoBehaviour:
   Path: event:/Drone Voice/Closer Look
   guid: 50c49eb3132dfe4da81a480f679a4909
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -8505365390826800438}
+  - {fileID: -2383118452113694327}
   MinDistance: 1
   MaxDistance: 20
   Length: 2008
@@ -2285,7 +2422,7 @@ MonoBehaviour:
   Path: event:/Drone Voice/Awesome2D
   guid: 1da6fce66793f146b14e63d9a42888f1
   Banks:
-  - {fileID: 5023824902418825196}
+  - {fileID: -2385073290626968093}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
