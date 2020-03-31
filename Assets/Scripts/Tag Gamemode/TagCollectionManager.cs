@@ -19,6 +19,8 @@ public class TagCollectionManager : MonoBehaviour
     public Camera winCam;
     public RotateAroundLevel ral;
     public List<GameObject> canvasToDisable = new List<GameObject>();
+    public float gameTimer = 600;
+    public Text gameTimerText;
     VictoryDisplayStats vds;
 
 
@@ -64,6 +66,44 @@ public class TagCollectionManager : MonoBehaviour
                     SceneManager.LoadScene("0_MainMenu");
                 }
             }
+        }
+
+        if(gameTimer >= 0 && !gameWon)
+        {
+            gameTimer -= Time.deltaTime;
+
+            int minutes = Mathf.FloorToInt(gameTimer / 60F);
+            int seconds = Mathf.FloorToInt(gameTimer - minutes * 60);
+            string gameTimerString = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+            gameTimerText.text = gameTimerString;
+        } else if (!gameWon)
+        {
+            gameTimerText.text = "0:00";
+            GameTimeOver();
+        }
+
+
+        
+    }
+
+    private void GameTimeOver ()
+    {
+        gameWon = true;
+        if(blueTeamTokens == redTeamTokens)
+        {
+            winText.text = "Teams tied!";
+            StartCoroutine(Victory("Teams tied!"));          
+        } else if (blueTeamTokens > redTeamTokens)
+        {
+            winText.text = "Blue Team Has Won!";
+            StartCoroutine(Victory("Blue Team Has Won!"));
+            FMODUnity.RuntimeManager.PlayOneShot(blueWinSound);
+        } else if (blueTeamTokens < redTeamTokens)
+        {
+            winText.text = "Red Team Has Won!";
+            StartCoroutine(Victory("Red Team Has Won!"));
+            FMODUnity.RuntimeManager.PlayOneShot(redWinSound);
         }
     }
 
