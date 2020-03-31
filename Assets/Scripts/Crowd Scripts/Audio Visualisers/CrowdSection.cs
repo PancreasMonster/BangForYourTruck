@@ -27,13 +27,13 @@ public class CrowdSection : MonoBehaviour
             if (((float)(i + 1 / crowdSections.Count)) < ((float)ASD.audSamples[bandNum]))
             {
                 
-                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_EED75798", ASD.col2);
+                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_5DE2E5C", ASD.col2);
                
     }
             else
             {
                
-                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_EED75798", ASD.col1);
+                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_5DE2E5C", ASD.col1);
 
             }
         }

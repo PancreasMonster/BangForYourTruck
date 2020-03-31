@@ -55,6 +55,8 @@ public class CannonBallScript : MonoBehaviour
             damageToDeal = velocityDamage;
 
         }
+
+        damageToDeal = Mathf.Clamp(damageToDeal, 0, float.PositiveInfinity);
     }
 
     void OnCollisionEnter(Collision coll)
