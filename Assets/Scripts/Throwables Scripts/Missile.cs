@@ -5,7 +5,7 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     public Transform target;
-
+    public GameObject particles;
     public int teamNum;
 
     public float speed = 500f; // speed of the missle forward
@@ -50,7 +50,8 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision coll)
     {
-        Destroy(this.gameObject);
+        Instantiate(particles, transform.position, transform.rotation);
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRange);
         foreach (Collider c in hitColliders)
         {
@@ -71,6 +72,8 @@ public class Missile : MonoBehaviour
                 }
             }
         }
+
+        Destroy(this.gameObject);
     }
 
     private IEnumerator WaitForHoming ()
