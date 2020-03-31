@@ -7,7 +7,7 @@ public class StickyGoo : MonoBehaviour
     public float increasedDrag;
     public int teamNum;
     int numInside = 0;
-    float sizeChangeFactor = -10f;
+    public float sizeChangeFactor = -10f;
     public float lifeTime = 5f;
 
     // Start is called before the first frame update

@@ -18,7 +18,7 @@ public class KillFeed : MonoBehaviour
         GameObject ka = Instantiate(killfeedItemPrefab, this.transform);
         ka.GetComponent<KillFeedItem>().Setup(killer, victim, damageString);
 
-        Destroy(ka, 5);
+        Destroy(ka, 12);
     }
 
     

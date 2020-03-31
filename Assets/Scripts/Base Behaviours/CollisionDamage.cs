@@ -83,7 +83,7 @@ public class CollisionDamage : MonoBehaviour
             if (!cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
-                coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damage, Vector3.zero);
+                coll.transform.GetComponent<Health>().TakeDamage("Machine Gunned", damageSource, damage, Vector3.zero);
             } 
 
             if (cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)

@@ -13,6 +13,6 @@ public class KillFeedItem : MonoBehaviour
         if (damageString != null)
             text.text = "<b>" + killer.transform.name + "</b>" + " " + damageString + " " + "<b>" + victim.transform.name + "</b>";
         else
-            text.text = "<b>" + killer.transform.name + "</b>" + " " + "Killed" + "<b>" + victim.transform.name + "</b>";
+            text.text = "<b>" + killer.transform.name + "</b>" + " Killed " + "<b>" + victim.transform.name + "</b>";
     }
 }
