@@ -45,7 +45,7 @@ public class TextAnnouncement : MonoBehaviour
     public void PlayerKill (GameObject killer, GameObject victim, string damageString)
     {
         if(damageString != null)
-            announcementText.text = killer.transform.name + damageString + victim.transform.name;
+            announcementText.text = killer.transform.name + " " + damageString + " " + victim.transform.name;
         else
             announcementText.text = killer.transform.name + " has killed " + victim.transform.name;
         announcementTextColor.a = 1;

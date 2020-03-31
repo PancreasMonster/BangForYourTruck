@@ -26,7 +26,7 @@ public class CannonBallScript : MonoBehaviour
     void Update()
     {
         if(cannonAirDamageTimer < 1)
-        cannonAirDamageTimer += Time.deltaTime;
+        cannonAirDamageTimer += Time.deltaTime * 2;
     }
 
     void FixedUpdate()
@@ -62,11 +62,11 @@ public class CannonBallScript : MonoBehaviour
         if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
         {
             
-            coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
+            coll.transform.GetComponent<Health>().TakeDamage("Cannoned", damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
         } else if (coll.transform.GetComponentInParent<Health>() != null && coll.transform.GetComponentInParent<Health>().teamNum != teamNum)
         {
             float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 2000));
-            coll.transform.GetComponentInParent<Health>().TakeDamage(null, damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
+            coll.transform.GetComponentInParent<Health>().TakeDamage("Cannoned", damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
         }
 
         if (destroyOnCollision)
