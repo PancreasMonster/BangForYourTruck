@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4847,7 +4847,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Use 'RB' to shoot your main weapon. Try attacking this enemy. You can also
-    ram for massive damage.
+    ram enemies for massive damage.
 --- !u!222 &334703850
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4924,8 +4924,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press 'A' to jump, press 'B' to boost, press 'X' to drift to high speeds,
-    and press 'Y' to lock on to enemies in range.
+  m_Text: Press 'A' to jump, press 'B' to boost, press 'X' to drift at high speeds,
+    and press 'Y' to lock on to enemies in range. Press 'Start' to continue.
 --- !u!222 &335633564
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5571,7 +5571,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843206
+  m_Name: pb_Mesh-1999986
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6380,6 +6380,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 447192703}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &449263769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449263770}
+  m_Layer: 0
+  m_Name: Training Triggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &449263770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449263769}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1258786409}
+  - {fileID: 1562059167}
+  m_Father: {fileID: 1780638071}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &455632245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7960,7 +7992,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843200
+  m_Name: pb_Mesh-1999980
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8259,7 +8291,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Use 'RB' to shoot your main weapon. Try attacking this enemy. You can also
-    ram for massive damage.
+    ram enemies for massive damage.
 --- !u!222 &618198377
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17376,7 +17408,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843176
+  m_Name: pb_Mesh-1999958
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18167,7 +18199,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843096
+  m_Name: pb_Mesh-1999878
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19306,7 +19338,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843208
+  m_Name: pb_Mesh-1999988
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20019,6 +20051,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1258786408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1258786409}
+  - component: {fileID: 1258786411}
+  - component: {fileID: 1258786410}
+  m_Layer: 0
+  m_Name: ' (1)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1258786409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258786408}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -65, y: 134, z: -549}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 449263770}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1258786410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258786408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d10644ccce12ca4b8d0869eabec23bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainingStage: 0
+--- !u!65 &1258786411
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258786408}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 830.55, y: 274.8, z: 34.91}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &1277350769
 Mesh:
   m_ObjectHideFlags: 0
@@ -20392,7 +20482,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843174
+  m_Name: pb_Mesh-1999956
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20645,7 +20735,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843202
+  m_Name: pb_Mesh-1999982
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22847,6 +22937,7 @@ GameObject:
   - component: {fileID: 1468113149}
   - component: {fileID: 1468113148}
   - component: {fileID: 1468113147}
+  - component: {fileID: 1468113151}
   m_Layer: 5
   m_Name: Training Canvas
   m_TagString: Untagged
@@ -22939,6 +23030,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1468113151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468113146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70fee47c203fd443accc7b463fc2270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainingStage: 0
 --- !u!1 &1471060742
 GameObject:
   m_ObjectHideFlags: 0
@@ -23036,7 +23140,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843178
+  m_Name: pb_Mesh-1999960
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23231,7 +23335,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843160
+  m_Name: pb_Mesh-1999942
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23394,7 +23498,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843122
+  m_Name: pb_Mesh-1999904
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23557,7 +23661,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843198
+  m_Name: pb_Mesh-1999978
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24801,6 +24905,36 @@ Transform:
   - {fileID: 1688709675}
   m_Father: {fileID: 1609731221}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1562059166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1562059167}
+  m_Layer: 0
+  m_Name: ' (2)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1562059167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562059166}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 449263770}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1568591880
 PrefabInstance:
@@ -33333,6 +33467,50 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1780638069}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1780638071 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4899377861343308066, guid: 98e37775a0301734fa7ceddc68fe831a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1780638069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1780638072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7504215861453497196, guid: 98e37775a0301734fa7ceddc68fe831a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1780638069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1780638073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7085751264530069263, guid: 98e37775a0301734fa7ceddc68fe831a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1780638069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1780638074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780638072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d10644ccce12ca4b8d0869eabec23bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainingStage: 4
+--- !u!114 &1780638075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780638073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d10644ccce12ca4b8d0869eabec23bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainingStage: 3
 --- !u!1 &1781861416
 GameObject:
   m_ObjectHideFlags: 0
@@ -33401,8 +33579,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press 'A' to jump, press 'B' to boost, press 'X' to drift to high speeds,
-    and press 'Y' to lock on to enemies in range.
+  m_Text: Press 'A' to jump, press 'B' to boost, press 'X' to drift at high speeds,
+    and press 'Y' to lock on to enemies in range. Press 'Start' to continue.
 --- !u!222 &1781861419
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33833,7 +34011,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-843204
+  m_Name: pb_Mesh-1999984
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
