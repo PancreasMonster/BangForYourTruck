@@ -11,6 +11,7 @@ public class FindPlayerStats : MonoBehaviour
     float playerHealth;
     float playerMaxHealth;
 
+    Text throwablesText2;
     Text throwablesText;
     Text resourceText;
     Text blackResourceText;
@@ -22,6 +23,7 @@ public class FindPlayerStats : MonoBehaviour
 
         throwableStats = transform.Find("ThrowablesStats").gameObject;
         throwablesText = transform.Find("ThrowablesStats").transform.Find("ThrowablesText").GetComponent<Text>();
+        throwablesText2 = transform.Find("ThrowablesStats").transform.Find("ThrowablesText2").GetComponent<Text>();
         resourceText = transform.Find("Resources").GetComponent<Text>();
         blackResourceText = transform.Find("Resources (Black)").GetComponent<Text>();
         //resourceIncomeText = transform.Find("Resources Income").GetComponent<Text>();
@@ -41,7 +43,10 @@ public class FindPlayerStats : MonoBehaviour
             throwableStats.SetActive(false);
         }
         playerHealth = player.GetComponent<Health>().health;
-        throwablesText.text = player.GetComponent<BuildModeFire>().currentDisc.transform.name.ToString();
+
+        string throwableName = player.GetComponent<BuildModeFire>().currentDisc.transform.name.ToString();
+        throwablesText.text = throwableName;
+        throwablesText2.text = throwableName;
         resourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
         blackResourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
         //resourceIncomeText = player.GetComponent<Resources(New)>().resourceIncomeAmount.ToString();

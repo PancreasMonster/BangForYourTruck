@@ -43,7 +43,7 @@ public class ShotgunWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()))
+        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) == false)
         {
             if (!rightFiredLast)
             {
