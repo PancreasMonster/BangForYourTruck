@@ -32,7 +32,11 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        km = GameObject.Find("KillManager").GetComponent<KillManager>();
+        if (GameObject.Find("KillManager") == true)
+        {
+            km = GameObject.Find("KillManager").GetComponent<KillManager>();
+        }
+
         maxHealth = health;
        /* if (!mbase)
         {
@@ -129,7 +133,7 @@ public class Health : MonoBehaviour
         dead = true;
         if (mbase)
         {
-            if (damageSource != this.gameObject)
+            if (damageSource != this.gameObject && GameObject.Find("KillManager") == true)
             {
                 km.KillTracked(damageSource, this.gameObject, damageString);
             }
