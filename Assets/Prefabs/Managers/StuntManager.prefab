@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &881069269587756980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881069269587756986}
+  - component: {fileID: 881069269587756987}
+  m_Layer: 0
+  m_Name: StuntManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881069269587756986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881069269587756980}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14853.666, y: -10612.585, z: 8831.952}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &881069269587756987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881069269587756980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faeb3af4ec1618241a2d9f2b4f887036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  driftScoreRate: 0.1
+  driftConnectDelay: 30
+  driftBoostAdd: 0.1
+  jumpScoreRate: 0.01
+  jumpBoostAdd: 0.1
+  stunts:
+  - name: Barrel Roll Right
+    rotationAxis: {x: 0, y: 0, z: -1}
+    precision: 0.8
+    scoreRate: 20
+    multiplier: 3
+    angleThreshold: 300
+    boostAdd: 0.1
+    score: 100
+  - name: Barrel Roll Left
+    rotationAxis: {x: 0, y: 0, z: 1}
+    precision: 0.8
+    scoreRate: 20
+    multiplier: 1
+    angleThreshold: 300
+    boostAdd: 0.1
+    score: 100
+  - name: Forward Flip
+    rotationAxis: {x: 1, y: 0, z: 0}
+    precision: 0.8
+    scoreRate: 20
+    multiplier: 1
+    angleThreshold: 300
+    boostAdd: 0.1
+    score: 100
+  - name: Backward Flip
+    rotationAxis: {x: -1, y: 0, z: 0}
+    precision: 0.8
+    scoreRate: 20
+    multiplier: 1
+    angleThreshold: 300
+    boostAdd: 0.1
+    score: 100
+  - name: Spin Right
+    rotationAxis: {x: 0, y: 1, z: 0}
+    precision: 0.8
+    scoreRate: 20
+    multiplier: 1
+    angleThreshold: 300
+    boostAdd: 0.1
+    score: 100
+  - name: Spin Left
+    rotationAxis: {x: 0, y: -1, z: 0}
+    precision: 0.8
+    scoreRate: 20
+    multiplier: 1
+    angleThreshold: 300
+    boostAdd: 0.1
+    score: 100
