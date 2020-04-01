@@ -30,6 +30,7 @@ public class FlipOver : MonoBehaviour
     public bool Grounded;
     public int wheelsOnGround;
     public bool crashing;
+    public float gravityForce;
 
     // Start is called before the first frame update
     void Start()
@@ -120,13 +121,13 @@ public class FlipOver : MonoBehaviour
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit, 7, layer) && !turnDelay)
             {
                 timer = 0;
-                rigidbody.AddForce(75f * -transform.up, ForceMode.Acceleration);
+                rigidbody.AddForce(gravityForce * -transform.up, ForceMode.Acceleration);
                
             }
             else
             {
                 timer += Time.deltaTime;
-                rigidbody.AddForce(75f * -Vector3.up, ForceMode.Acceleration);
+                rigidbody.AddForce(gravityForce * -Vector3.up, ForceMode.Acceleration);
             }
         }
         else
