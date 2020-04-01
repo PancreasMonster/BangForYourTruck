@@ -39,7 +39,7 @@ public class LevelCreator : MonoBehaviour
     public void SetLevelIndex (int i)
     {
         levelToActivate = i;
-        LoadScene();
+        //LoadScene();
     }
 
     public void QuitGame()
