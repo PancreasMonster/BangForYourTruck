@@ -18,7 +18,7 @@ public class ShotgunWeapon : MonoBehaviour
     ParticleSystem buckshotParticlesLeft;
     ParticleSystem emptyShellsLeft;
     Animation leftShotgunAnim;
-
+    public bool canFire;
 
 
     bool rightFiredLast;
@@ -57,17 +57,20 @@ public class ShotgunWeapon : MonoBehaviour
     private void OnRightBumper(InputValue value)
     {
         PadRB = value.Get<float>();
-        if (PadLB == 0)
+        if (canFire)
         {
-            if (!rightFiredLast)
+            if (PadLB == 0)
             {
+                if (!rightFiredLast)
+                {
 
-                FireRightSide();
-            }
-            else
-            {
-                FireLeftSide();
+                    FireRightSide();
+                }
+                else
+                {
+                    FireLeftSide();
 
+                }
             }
         }
     }

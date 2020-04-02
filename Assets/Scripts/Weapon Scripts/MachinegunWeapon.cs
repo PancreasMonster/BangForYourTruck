@@ -19,6 +19,7 @@ public class MachinegunWeapon : MonoBehaviour
     public ParticleSystem shellsParticles1;
     ParticleSystem bulletParticles2;
     public ParticleSystem shellsParticles2;
+    public bool canFire;
 
     private PlayerInput pi;
 
@@ -44,12 +45,20 @@ public class MachinegunWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
+       
         PadLB = 1;
     }
 
-    private void OnRightBumper(InputValue value)
+    private void OnRightBumperHold(InputValue value)
     {
-        PadRB = value.Get<float>();
+        if (canFire)
+        FireBullet();
+        shellsParticles1.Play();
+        shellsParticles2.Play();
+        InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
+        InvokeRepeating("FireBullet", fireRate, fireRate);
+        anim.SetBool("Spinning", true);
+
     }
 
     private void OnLeftBumperRelease(InputValue value)
@@ -58,8 +67,7 @@ public class MachinegunWeapon : MonoBehaviour
     }
 
     private void OnRightBumperRelease(InputValue value)
-    {
-        PadRB = 0;
+    { 
         CancelInvoke();
         shellsParticles1.Stop();
         shellsParticles2.Stop();
@@ -69,16 +77,10 @@ public class MachinegunWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PadRB > 0 && PadLB == 0)
+        if (PadRB == 1)
         {
 
             
-            FireBullet();
-            shellsParticles1.Play();
-            shellsParticles2.Play();
-            InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
-            InvokeRepeating("FireBullet", fireRate, fireRate);
-            anim.SetBool("Spinning", true);
             // triggerDown = false;
             // t = 0;
             // power = 0;
@@ -87,12 +89,7 @@ public class MachinegunWeapon : MonoBehaviour
             // rh.resourceAmount -= rc.resourceCosts[currentI];
 
 
-        }
-
-        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()))
-        {
-           
-        }
+        }      
     }
 
 

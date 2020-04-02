@@ -30,6 +30,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "RightBumperHold",
+                    "type": "Button",
+                    "id": "bd5f8a15-2dc1-4575-a31f-98644abf0d32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "RightBumperRelease",
                     "type": "Button",
                     "id": "5f84cc32-e143-41d3-8d7f-5ea8cb45915c",
@@ -185,7 +193,7 @@
                     "name": "",
                     "id": "a60e156e-1906-4965-afc2-5b1ada2f3a57",
                     "path": "<Gamepad>/rightShoulder",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "RightBumper",
@@ -196,7 +204,7 @@
                     "name": "",
                     "id": "b55c891e-b2b4-4e1f-9647-d3d8acae87dc",
                     "path": "<Gamepad>/leftShoulder",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "LeftBumper",
@@ -350,7 +358,7 @@
                     "name": "",
                     "id": "05da748b-6d40-4c78-b82e-71fb02237bde",
                     "path": "<Gamepad>/rightShoulder",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "RightBumperRelease",
@@ -365,6 +373,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LeftBumperRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad0c4e84-47b0-455a-bf1a-ac19ff2dfa29",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Hold(duration=0.1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightBumperHold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class FindPlayerStats : MonoBehaviour
@@ -32,16 +33,27 @@ public class FindPlayerStats : MonoBehaviour
         playerMaxHealth = player.GetComponent<Health>().maxHealth;
     }
 
+    private void OnLeftBumper(InputValue value)
+    {
+        throwableStats.SetActive(true);
+    }
+
+
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        throwableStats.SetActive(false);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         if(Input.GetButtonDown("PadLB" + player.GetComponent<Health>().playerNum))
         {
-            throwableStats.SetActive(true);
+            
         }
         else if (Input.GetButtonUp("PadLB" + player.GetComponent<Health>().playerNum))
         {
-            throwableStats.SetActive(false);
+
         }
         playerHealth = player.GetComponent<Health>().health;
 

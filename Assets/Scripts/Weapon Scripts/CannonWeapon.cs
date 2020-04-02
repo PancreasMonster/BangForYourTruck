@@ -21,6 +21,7 @@ public class CannonWeapon : MonoBehaviour
     PowerHolder ph;
     public PowerCosts pc;
     ParticleSystem particle;
+    public bool canFire;
 
     // Start is called before the first frame update
     void Start()
@@ -45,16 +46,18 @@ public class CannonWeapon : MonoBehaviour
 
     private void OnRightBumper(InputValue value)
     {
-        PadRB = value.Get<float>();
-        if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
+        if (canFire)
         {
-            //begin charging
-            charging = true;
-            chargingTime = 0f;
-        }
-        //Firecannon();
+            PadRB = 1;
+            if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
+            {
+                //begin charging
+                charging = true;
+                chargingTime = 0f;
+            }
+            //Firecannon();
 
-        
+        }
 
     }
 
