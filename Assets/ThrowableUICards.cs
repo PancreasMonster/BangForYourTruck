@@ -29,7 +29,8 @@ public class ThrowableUICards : MonoBehaviour
         {
             if (child.childCount == 0)
             {
-                GameObject addedCard =Instantiate(cardToAdd, child.position, child.rotation);
+                GameObject addedCard = Instantiate(cardToAdd, child.position, child.rotation);
+                addedCard.transform.parent = child;
                 // .Add(addedCard.GetComponent<ThrowableCooldown>().cooldownTime); this to the list of discCooldown(s) in the players buildmodefire
                 return;
             }
