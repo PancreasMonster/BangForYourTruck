@@ -41,12 +41,17 @@ public class CannonWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = value.Get<float>();
+        PadLB = 1;
+    }
+
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        PadLB = 0;
     }
 
     private void OnRightBumper(InputValue value)
     {
-        if (canFire)
+        if (canFire && PadLB == 0)
         {
             PadRB = 1;
             if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])

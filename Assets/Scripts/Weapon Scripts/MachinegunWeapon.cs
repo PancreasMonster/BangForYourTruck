@@ -49,15 +49,23 @@ public class MachinegunWeapon : MonoBehaviour
         PadLB = 1;
     }
 
+    private void OnRightBumper(InputValue value)
+    {
+        
+
+    }
+
     private void OnRightBumperHold(InputValue value)
     {
-        if (canFire)
-        FireBullet();
-        shellsParticles1.Play();
-        shellsParticles2.Play();
-        InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
-        InvokeRepeating("FireBullet", fireRate, fireRate);
-        anim.SetBool("Spinning", true);
+        if (canFire && PadLB == 0)
+        {
+            FireBullet();
+            shellsParticles1.Play();
+            shellsParticles2.Play();
+            InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
+            InvokeRepeating("FireBullet", fireRate, fireRate);
+            anim.SetBool("Spinning", true);
+        }
 
     }
 
@@ -67,7 +75,8 @@ public class MachinegunWeapon : MonoBehaviour
     }
 
     private void OnRightBumperRelease(InputValue value)
-    { 
+    {
+        PadRB = 0;
         CancelInvoke();
         shellsParticles1.Stop();
         shellsParticles2.Stop();
