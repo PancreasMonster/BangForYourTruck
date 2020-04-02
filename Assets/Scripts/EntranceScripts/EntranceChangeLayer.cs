@@ -30,10 +30,10 @@ public class EntranceChangeLayer : MonoBehaviour
             }
             if(turnOffBoost)
             {
-                coll.gameObject.GetComponent<PropelSelf>().enabled = false;
+                coll.gameObject.GetComponent<PropelSelf>().canBoost = false;
             } else
             {
-                coll.gameObject.GetComponent<PropelSelf>().enabled = true;
+                coll.gameObject.GetComponent<PropelSelf>().canBoost = true;
             }
         }
     }

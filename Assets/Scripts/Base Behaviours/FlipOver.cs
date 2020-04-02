@@ -67,14 +67,12 @@ public class FlipOver : MonoBehaviour
             }
             else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
             {
-                if (AButton > 0)
-                {
+                
                     StartCoroutine(JumpDelay());
                     rigidbody.AddForce(transform.up * force);
                     rigidbody.angularVelocity = Vector3.zero;
 
                     //  Debug.Log("Hit");
-                }
             }
         }
     }

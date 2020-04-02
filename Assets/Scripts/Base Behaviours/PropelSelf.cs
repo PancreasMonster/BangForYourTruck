@@ -23,6 +23,7 @@ public class PropelSelf : MonoBehaviour
     MobilityCharges mobCharges;
     public float targetBoostMaxDistance = 100;
     public Animation anim;
+    public bool canBoost = true;
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +38,11 @@ public class PropelSelf : MonoBehaviour
 
     private void OnFaceButtonEast(InputValue value)
     {
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up * 5, out hit, 5, layer))
+        if (canBoost)
         {
-            
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up * 5, out hit, 5, layer))
+            {
+
                 if (!coolingDown)
                 {
                     if (mobCharges.currentCharges > 0)
@@ -98,11 +101,11 @@ public class PropelSelf : MonoBehaviour
                         StartCoroutine(Cooldown());
                     }
                 }
-            
-        }
-        else
-        {
-           
+
+            }
+            else
+            {
+
                 if (mobCharges.currentCharges > 0)
                 {
                     //rb.velocity = Vector3.zero;
@@ -139,7 +142,7 @@ public class PropelSelf : MonoBehaviour
                     StartCoroutine(Cooldown());
                 }
             }
-        
+        }
     }
 
     // Update is called once per frame
