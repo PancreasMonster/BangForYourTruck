@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StuntChecker : MonoBehaviour
 {
@@ -55,6 +56,36 @@ public class StuntChecker : MonoBehaviour
     bool landStunt = true;
     bool canSlam = true;
     public float randomAnnouncmentChance;
+
+    Vector2 leftStick;
+    float rightTrigger;
+    float leftTrigger;
+    float XButton;
+
+    private void OnLeftStick(InputValue value)
+    {
+        leftStick = value.Get<Vector2>();
+    }
+
+    private void OnRightTrigger(InputValue value)
+    {
+        rightTrigger = value.Get<float>();
+    }
+
+    private void OnLeftTrigger(InputValue value)
+    {
+        leftTrigger = value.Get<float>();
+    }
+
+    private void OnFaceButtonWest(InputValue value)
+    {
+        XButton = 1;
+    }
+
+    private void OnFaceButtonWestRelease(InputValue value)
+    {
+        XButton = 0;
+    }
 
     void Start()
     {
@@ -117,7 +148,7 @@ public class StuntChecker : MonoBehaviour
         drifting = endDriftTime > 0;
         Vector3 localVelocity = tr.InverseTransformDirection(rb.velocity);
 
-        if (drifting && Input.GetButton("PadX" + h.playerNum.ToString()) && localVelocity.z > 20)
+        if (drifting && XButton > 0 && localVelocity.z > 20)
         {
             if(driftDisplay)
             {
