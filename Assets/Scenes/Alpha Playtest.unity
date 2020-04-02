@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -18427,6 +18427,11 @@ PrefabInstance:
       propertyPath: hpBarFill
       value: 
       objectReference: {fileID: 1393623933}
+    - target: {fileID: 9109576707173367362, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc018b919a2f61f46a3f1fe088148194, type: 3}
 --- !u!114 &1111863012 stripped
@@ -34603,6 +34608,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: aud
+      value: 
+      objectReference: {fileID: 1733981963}
     - target: {fileID: 7729516770130546572, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: cam
@@ -35518,6 +35528,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7854c90cc521070488d66823fc7abaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1733981963 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5344294216841015655, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+    type: 3}
+  m_PrefabInstance: {fileID: 1733981961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1735389209
 Mesh:
   m_ObjectHideFlags: 0
@@ -37607,16 +37623,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1710065049}
     m_Modifications:
-    - target: {fileID: 6744867180888281401, guid: eab828b4e2c5f4e41a895de67c19e800,
-        type: 3}
-      propertyPath: m_Name
-      value: StadiumSeparatedCrowd
-      objectReference: {fileID: 0}
-    - target: {fileID: 6744867180888281401, guid: eab828b4e2c5f4e41a895de67c19e800,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7764712838498591530, guid: eab828b4e2c5f4e41a895de67c19e800,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37670,6 +37676,16 @@ PrefabInstance:
     - target: {fileID: 7764712838498591530, guid: eab828b4e2c5f4e41a895de67c19e800,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744867180888281401, guid: eab828b4e2c5f4e41a895de67c19e800,
+        type: 3}
+      propertyPath: m_Name
+      value: StadiumSeparatedCrowd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744867180888281401, guid: eab828b4e2c5f4e41a895de67c19e800,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -50408,6 +50424,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1038743839555045944, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: aud
+      value: 
+      objectReference: {fileID: 6247115921050699282}
     - target: {fileID: 7729516770130546572, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: cam
@@ -51338,6 +51359,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7854c90cc521070488d66823fc7abaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &6247115921050699282 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5344294216841015655, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+    type: 3}
+  m_PrefabInstance: {fileID: 6247115921050699280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!33 &6258400837830718708
 MeshFilter:
   m_ObjectHideFlags: 0
