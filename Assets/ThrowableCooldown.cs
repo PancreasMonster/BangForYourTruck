@@ -1,20 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThrowableCooldown : MonoBehaviour
 {
     public float cooldownTime;
     float t = 0f;
-    Color spriteColor;
     bool onCooldown;
-    public Color startingColor;
+    float fillAmountValue = 0;
+    public Image[] images = new Image[2];
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteColor = transform.GetChild(1).GetComponent<SpriteRenderer>().material.color;
-        startingColor = new Color(spriteColor.r, spriteColor.g, spriteColor.b, spriteColor.a);
+        images = GetComponentsInChildren<Image>();
 
         GoOnCooldown();
     }
@@ -23,22 +23,21 @@ public class ThrowableCooldown : MonoBehaviour
     void Update()
     {
        
+        foreach (Image i in images)
+        {
+            i.fillAmount = fillAmountValue;
+        }
 
         if (onCooldown)
         {
             Debug.Log("LERPING BACK TO COLOR");
-            spriteColor = Color.Lerp(spriteColor, startingColor, t);
+            fillAmountValue += Time.deltaTime / cooldownTime;
 
-            if (t >= 1)
+            if (fillAmountValue >= 1)
             {
                 Debug.Log("FINISHED");
                 onCooldown = false;
             }
-        }
-
-        if (t < 1)
-        {
-            t += Time.deltaTime / cooldownTime;
         }
     }
 
@@ -46,8 +45,7 @@ public class ThrowableCooldown : MonoBehaviour
     {
 
         Debug.Log("GOING ON COOLDOWN");
-        spriteColor = new Color(spriteColor.r, spriteColor.g, spriteColor.b, 0f);
-        t = 0f;
+        fillAmountValue = 0f;
         onCooldown = true;
     }
 }
