@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OrbitalLaserSpawn : MonoBehaviour
 {
@@ -20,10 +21,17 @@ public class OrbitalLaserSpawn : MonoBehaviour
         
     }
 
+    float DPADUpDown;
+
+    private void OnDPADUpDown(InputValue value)
+    {
+        DPADUpDown = value.Get<float>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("DPADVertical" + GetComponent<Health>().playerNum.ToString()) > 0 && !laserSpawned)
+        if (DPADUpDown > 0 && !laserSpawned)
         {
             laserSpawned = true;
             GameObject clone = Instantiate(orbitalLaser, new Vector3(transform.position.x, transform.position.y + laserHeight, transform.position.z + zPosBehind), orbitalLaser.transform.rotation);

@@ -44,7 +44,7 @@ public class MachinegunWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = value.Get<float>();
+        PadLB = 1;
     }
 
     private void OnRightBumper(InputValue value)

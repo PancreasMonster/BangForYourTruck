@@ -67,21 +67,32 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = value.Get<float>();
+        PadLB = 1;
+        if (!cooldown)
+        {
+            aimTarget.transform.localPosition = targetOriginalPos;
+        }
     }
 
     private void OnRightBumper(InputValue value)
     {
-        PadRB = value.Get<float>();
+        PadRB = 1;
     }
 
-    private void DPADLeftRight(InputValue value)
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        PadLB = 0;
+    }
+
+    private void OnRightBumperRelease(InputValue value)
+    {
+        PadRB = 0;
+    }
+
+    private void OnDPADLeftRight(InputValue value)
     {
         DPadLeftRight = value.Get<float>();
-        if(!cooldown)
-        {
-            aimTarget.transform.localPosition = targetOriginalPos;
-        }
+        Debug.Log(DPadLeftRight);
     }
 
 

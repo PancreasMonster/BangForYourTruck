@@ -46,21 +46,29 @@ public class ShotgunWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = value.Get<float>();
+        PadLB = 1;
+    }
+
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        PadLB = 0;
     }
 
     private void OnRightBumper(InputValue value)
     {
         PadRB = value.Get<float>();
-        if (!rightFiredLast)
+        if (PadLB == 0)
         {
+            if (!rightFiredLast)
+            {
 
-            FireRightSide();
-        }
-        else
-        {
-            FireLeftSide();
+                FireRightSide();
+            }
+            else
+            {
+                FireLeftSide();
 
+            }
         }
     }
 

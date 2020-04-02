@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class QuickEjectTags : MonoBehaviour
 {
@@ -16,10 +17,17 @@ public class QuickEjectTags : MonoBehaviour
         TH = GetComponent<TagHolder>();
     }
 
+    float DPADUpDown;
+    
+    private void OnDPADUpDown (InputValue value)
+    {
+        DPADUpDown = value.Get<float>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("DPADVertical" + GetComponent<Health>().playerNum.ToString()) < 0 && !dpadTrigger)
+        if (DPADUpDown < 0 && !dpadTrigger)
         {
             dpadTrigger = true;
             for(int i = 0; i < TH.currentTags; i++)
@@ -30,7 +38,7 @@ public class QuickEjectTags : MonoBehaviour
         }
 
       
-        if (Input.GetAxis("DPADVertical" + GetComponent<Health>().playerNum.ToString()) == 0 && dpadTrigger)
+        if (DPADUpDown == 0 && dpadTrigger)
         {           
             dpadTrigger = false;
         }

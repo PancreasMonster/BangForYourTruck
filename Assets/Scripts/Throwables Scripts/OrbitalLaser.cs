@@ -42,6 +42,8 @@ public class OrbitalLaser : MonoBehaviour
         }
     }
 
+    
+
     // Use this for initialization
     void Start()
     {
@@ -57,7 +59,8 @@ public class OrbitalLaser : MonoBehaviour
 
             Vector3 dir = followPlayer.position - transform.position;
             dir.Normalize();
-            transform.Translate(dir * laserSpeed * Time.deltaTime);
+            if (Vector3.Distance(followPlayer.position, transform.position) > 5)
+            transform.position = Vector3.Lerp(transform.position, followPlayer.position, laserSpeed * Time.deltaTime);
 
         }
     }
