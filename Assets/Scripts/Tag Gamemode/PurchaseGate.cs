@@ -7,6 +7,7 @@ public class PurchaseGate : MonoBehaviour
     public int price;
     public GameObject throwableType;
     public GameObject throwableCard;
+    public float cooldown;
     public int teamGateNum;
     AudioSource audio;
 
@@ -36,6 +37,7 @@ public class PurchaseGate : MonoBehaviour
                     if (!col.GetComponent<BuildModeFire>().discSelection.Contains(throwableType))
                     {
                         col.GetComponent<BuildModeFire>().discSelection.Add(throwableType);
+                        col.GetComponent<BuildModeFire>().discCooldown.Add(cooldown);
                         GameObject.Find("PlayerStatsUICanvas").transform.GetChild(col.GetComponent<Health>().playerNum - 1)
                             .transform.Find("Throwables Cards").GetComponent<ThrowableUICards>().AddCard(throwableCard);
                         PB.tagsInBank -= price;
