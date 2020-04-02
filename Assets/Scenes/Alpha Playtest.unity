@@ -1268,7 +1268,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3290944
+  m_Name: pb_Mesh-37798
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3093,7 +3093,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3290388
+  m_Name: pb_Mesh-37242
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6020,7 +6020,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3296912
+  m_Name: pb_Mesh-43782
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7015,18 +7015,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1698771957}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &370912060 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4742906541862303570, guid: 4b616b0a160aad44a9cd3daae4101a7d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1754645604}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1556180842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &371545203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4621057052549871206, guid: 4ffc93fd2ce95e04b92cbb51dec35a83,
@@ -7736,7 +7724,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 426087155}
-  - component: {fileID: 426087157}
   - component: {fileID: 426087156}
   m_Layer: 12
   m_Name: CamFollow3
@@ -7799,38 +7786,6 @@ MonoBehaviour:
   buildModeDpad: {fileID: 0}
   origOffset_: {x: -4, y: 10, z: -6}
   targetYOffset: 15
---- !u!114 &426087157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426087154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 270
-  player: {fileID: 1509198659540736654}
-  hoverBox: {fileID: 1121058046771411433}
-  carDeath: {fileID: 1509198659540736654}
-  playerNum: 3
-  timeAllowance: 0.25
-  layer:
-    serializedVersion: 2
-    m_Bits: 16384
-  wheelVisuals: []
-  offset: {x: 0, y: 12, z: -48}
-  fo: {fileID: 4465024740886858140}
-  setDrag: 3
-  animSpeed: 0
-  death: 0
-  lookOffsetY: 4
-  yLookAmount: 12
-  aud: {fileID: 0}
-  lockOnScript: {fileID: 0}
-  lockOnParent: {fileID: 1496030863}
 --- !u!1 &434719416 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7310364558197313857, guid: 0e07bd983551bca45a2c86709bb452fe,
@@ -8126,6 +8081,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1111863011}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &466203105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466203103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 270
+  player: {fileID: 466203104}
+  hoverBox: {fileID: 243270893}
+  carDeath: {fileID: 466203104}
+  playerNum: 2
+  timeAllowance: 0.25
+  layer:
+    serializedVersion: 2
+    m_Bits: 16384
+  wheelVisuals: []
+  offset: {x: 0, y: 12, z: -48}
+  fo: {fileID: 466203117}
+  setDrag: 3
+  animSpeed: 0
+  death: 0
+  lookOffsetY: 4
+  yLookAmount: 12
+  aud: {fileID: 0}
+  lockOnScript: {fileID: 0}
+  lockOnParent: {fileID: 35388046}
+  cam: {fileID: 664152219}
 --- !u!114 &466203107 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,
@@ -11034,6 +11022,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1754645604}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &664152219 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4742906541965024729, guid: 4b616b0a160aad44a9cd3daae4101a7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1754645604}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &664598956 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2630381264991980415, guid: 04afd6820f35b884fa70c8a879d2ab6b,
@@ -11570,8 +11564,8 @@ Transform:
   m_LocalPosition: {x: -89.190056, y: 9.1, z: 226.59448}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
-  - {fileID: 1364545058}
   - {fileID: 828757023}
+  - {fileID: 1364545058}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13109,7 +13103,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3291544
+  m_Name: pb_Mesh-38396
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13423,10 +13417,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 466203104}
   - {fileID: 7135475736127482503}
+  - {fileID: 466203104}
   m_Father: {fileID: 710037752}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &835634794
 PrefabInstance:
@@ -13524,7 +13518,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3299746
+  m_Name: pb_Mesh-46628
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14550,7 +14544,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 921172528}
-  - component: {fileID: 921172530}
   - component: {fileID: 921172529}
   m_Layer: 12
   m_Name: CamFollow4
@@ -14613,38 +14606,6 @@ MonoBehaviour:
   buildModeDpad: {fileID: 0}
   origOffset_: {x: -4, y: 10, z: -6}
   targetYOffset: 15
---- !u!114 &921172530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921172527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 270
-  player: {fileID: 1384526926}
-  hoverBox: {fileID: 1681964279}
-  carDeath: {fileID: 1384526926}
-  playerNum: 4
-  timeAllowance: 0.25
-  layer:
-    serializedVersion: 2
-    m_Bits: 16384
-  wheelVisuals: []
-  offset: {x: 0, y: 12, z: -48}
-  fo: {fileID: 1384526939}
-  setDrag: 3
-  animSpeed: 0
-  death: 0
-  lookOffsetY: 4
-  yLookAmount: 12
-  aud: {fileID: 0}
-  lockOnScript: {fileID: 0}
-  lockOnParent: {fileID: 2010004646}
 --- !u!1001 &921198496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17210,7 +17171,7 @@ PrefabInstance:
     - target: {fileID: 5069446146252471771, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5069446146252471771, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -17429,7 +17390,7 @@ PrefabInstance:
         type: 3}
       propertyPath: orb
       value: 
-      objectReference: {fileID: 1459805476}
+      objectReference: {fileID: 0}
     - target: {fileID: 1484996265799474952, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: PPV
@@ -18330,6 +18291,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSizeY.scalar
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762484281808702026, guid: cc018b919a2f61f46a3f1fe088148194,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 6fe5471e-c163-401a-bf72-b3150af647d2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc018b919a2f61f46a3f1fe088148194, type: 3}
@@ -25553,7 +25519,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3293384
+  m_Name: pb_Mesh-40256
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26343,7 +26309,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3291934
+  m_Name: pb_Mesh-38804
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27160,10 +27126,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1384526926}
   - {fileID: 1509198659540736654}
+  - {fileID: 1384526926}
   m_Father: {fileID: 710037752}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1375302903
 Mesh:
@@ -27171,7 +27137,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3299758
+  m_Name: pb_Mesh-46642
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27693,6 +27659,39 @@ MonoBehaviour:
   currentTags: 0
   teamTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
   dropForce: 2000
+--- !u!114 &1384526929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384526925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 270
+  player: {fileID: 1384526926}
+  hoverBox: {fileID: 1681964279}
+  carDeath: {fileID: 1384526926}
+  playerNum: 4
+  timeAllowance: 0.25
+  layer:
+    serializedVersion: 2
+    m_Bits: 16384
+  wheelVisuals: []
+  offset: {x: 0, y: 12, z: -48}
+  fo: {fileID: 1384526939}
+  setDrag: 3
+  animSpeed: 0
+  death: 0
+  lookOffsetY: 4
+  yLookAmount: 12
+  aud: {fileID: 0}
+  lockOnScript: {fileID: 0}
+  lockOnParent: {fileID: 2010004646}
+  cam: {fileID: 921172528}
 --- !u!114 &1384526939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7729516770130546572, guid: 9043886a3a4aeaa4a8479fba23b02e38,
@@ -28955,18 +28954,6 @@ RectTransform:
   m_AnchoredPosition: {x: 330, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1459805476 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4742906541965024728, guid: 4b616b0a160aad44a9cd3daae4101a7d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1754645604}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664152217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1461328628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30073,7 +30060,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3298320
+  m_Name: pb_Mesh-45204
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30454,7 +30441,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3294786
+  m_Name: pb_Mesh-41658
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30943,6 +30930,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1754645604}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1556180847 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4742906541862303571, guid: 4b616b0a160aad44a9cd3daae4101a7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1754645604}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1557438807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31038,7 +31031,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3298338
+  m_Name: pb_Mesh-45222
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32921,7 +32914,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3291930
+  m_Name: pb_Mesh-38800
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -34145,7 +34138,7 @@ PrefabInstance:
     - target: {fileID: 4774931590751050910, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4774931590751050910, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -34626,7 +34619,7 @@ PrefabInstance:
         type: 3}
       propertyPath: orb
       value: 
-      objectReference: {fileID: 921172530}
+      objectReference: {fileID: 0}
     - target: {fileID: 1189645944545246797, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: PPV
@@ -35093,6 +35086,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2095391361276059198, guid: 69a280739e6abb840883f6858cdf48f8,
         type: 3}
+    - target: {fileID: 2085412907581912442, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 6fe5471e-c163-401a-bf72-b3150af647d2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9043886a3a4aeaa4a8479fba23b02e38, type: 3}
 --- !u!114 &1733981962 stripped
@@ -35900,7 +35898,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4742906541862303570, guid: 4b616b0a160aad44a9cd3daae4101a7d, type: 3}
+    - {fileID: 4742906541965024728, guid: 4b616b0a160aad44a9cd3daae4101a7d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4b616b0a160aad44a9cd3daae4101a7d, type: 3}
 --- !u!4 &1754645605 stripped
 Transform:
@@ -47955,6 +47955,39 @@ MonoBehaviour:
   currentTags: 0
   teamTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
   dropForce: 2000
+--- !u!114 &1509198659540736653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509198659540736650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 270
+  player: {fileID: 1509198659540736654}
+  hoverBox: {fileID: 1121058046771411433}
+  carDeath: {fileID: 1509198659540736654}
+  playerNum: 3
+  timeAllowance: 0.25
+  layer:
+    serializedVersion: 2
+    m_Bits: 16384
+  wheelVisuals: []
+  offset: {x: 0, y: 12, z: -48}
+  fo: {fileID: 4465024740886858140}
+  setDrag: 3
+  animSpeed: 0
+  death: 0
+  lookOffsetY: 4
+  yLookAmount: 12
+  aud: {fileID: 0}
+  lockOnScript: {fileID: 0}
+  lockOnParent: {fileID: 1496030863}
+  cam: {fileID: 426087155}
 --- !u!4 &1509198659540736654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4774931590751050910, guid: 9043886a3a4aeaa4a8479fba23b02e38,
@@ -48029,7 +48062,7 @@ PrefabInstance:
     - target: {fileID: 5069446146252471771, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5069446146252471771, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
@@ -48268,7 +48301,7 @@ PrefabInstance:
         type: 3}
       propertyPath: orb
       value: 
-      objectReference: {fileID: 370912060}
+      objectReference: {fileID: 0}
     - target: {fileID: 1484996265799474952, guid: cc018b919a2f61f46a3f1fe088148194,
         type: 3}
       propertyPath: PPV
@@ -49741,7 +49774,7 @@ PrefabInstance:
     - target: {fileID: 4774931590751050910, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4774931590751050910, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
@@ -50222,7 +50255,7 @@ PrefabInstance:
         type: 3}
       propertyPath: orb
       value: 
-      objectReference: {fileID: 426087157}
+      objectReference: {fileID: 0}
     - target: {fileID: 1189645944545246797, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: PPV
@@ -50684,6 +50717,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2095391361276059198, guid: 69a280739e6abb840883f6858cdf48f8,
         type: 3}
+    - target: {fileID: 2085412907581912442, guid: 9043886a3a4aeaa4a8479fba23b02e38,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 6fe5471e-c163-401a-bf72-b3150af647d2
+      objectReference: {fileID: 0}
     - target: {fileID: 6185349265176372122, guid: 9043886a3a4aeaa4a8479fba23b02e38,
         type: 3}
       propertyPath: targets.Array.data[0]
@@ -51116,6 +51154,43 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2692034413974640476}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7135475736127482500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135475736127482499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4049da2d1867241bcdd525ac95ecd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 270
+  player: {fileID: 7135475736127482503}
+  hoverBox: {fileID: 8681041318341822944}
+  carDeath: {fileID: 7135475736127482503}
+  playerNum: 1
+  timeAllowance: 0.25
+  layer:
+    serializedVersion: 2
+    m_Bits: 16384
+  wheelVisuals:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  offset: {x: 0, y: 12, z: -48}
+  fo: {fileID: 5332676575618120085}
+  setDrag: 3
+  animSpeed: 0
+  death: 0
+  lookOffsetY: 4
+  yLookAmount: 12
+  aud: {fileID: 0}
+  lockOnScript: {fileID: 0}
+  lockOnParent: {fileID: 1704451515}
+  cam: {fileID: 1556180847}
 --- !u!114 &7135475736127482501 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6587185966413225615, guid: cc018b919a2f61f46a3f1fe088148194,

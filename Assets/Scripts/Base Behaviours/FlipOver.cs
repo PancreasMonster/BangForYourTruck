@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FlipOver : MonoBehaviour
 {
@@ -37,6 +38,60 @@ public class FlipOver : MonoBehaviour
     {
         rigidbody = GetComponentInParent<Rigidbody>();
         h = GetComponentInParent<Health>();
+    }
+
+    float AButton;
+    float XButton;
+    Vector2 leftStick;
+
+    private void OnFaceButtonSouth(InputValue value)
+    {
+        if (!delay)
+        {
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, out hit2, 7.5f, layer))
+            {
+                if (Vector3.Dot(transform.up, hit2.normal) < .2f)
+                {
+                    StartCoroutine(FlipWithRollingForce(rigidbody, hit2.normal));
+                    //StartCoroutine(JumpDelay());
+                    rigidbody.AddForce(Vector3.up * force * .65f);
+                    rigidbody.angularVelocity = Vector3.zero;
+                }
+                else
+                {
+                    StartCoroutine(JumpDelay());
+
+                    rigidbody.AddForce(Vector3.up * force);
+                    rigidbody.angularVelocity = Vector3.zero;
+                }
+            }
+            else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
+            {
+                if (AButton > 0)
+                {
+                    StartCoroutine(JumpDelay());
+                    rigidbody.AddForce(transform.up * force);
+                    rigidbody.angularVelocity = Vector3.zero;
+
+                    //  Debug.Log("Hit");
+                }
+            }
+        }
+    }
+
+    private void OnFaceButtonWest(InputValue value)
+    {
+        XButton = 1;
+    }
+
+    private void OnFaceButtonWestRelease(InputValue value)
+    {
+        XButton = 0;
+    }
+
+    private void OnLeftStick(InputValue value)
+    {
+        leftStick = value.Get<Vector2>();
     }
 
     private void Update()
@@ -83,8 +138,8 @@ public class FlipOver : MonoBehaviour
                             ApplyAngularStabilityForces(rigidbody, hit2.normal);
                     }
 
-                    if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
-                    {
+                    if (AButton > 0)
+                    { 
                         if (Vector3.Dot(transform.up, hit2.normal) < .2f)
                         {
                             StartCoroutine(FlipWithRollingForce(rigidbody, hit2.normal));
@@ -105,7 +160,7 @@ public class FlipOver : MonoBehaviour
                 }
                 else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
                 {
-                    if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
+                    if (AButton > 0)
                     {
                         StartCoroutine(JumpDelay());
                         rigidbody.AddForce(transform.up * force);
@@ -150,17 +205,16 @@ public class FlipOver : MonoBehaviour
         {
            
 
-            if (XtoRoll)
-            {
-                float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
-                float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
-                if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
+           
+                float horAngle = leftStick.x;
+                float vertAngle = leftStick.y;
+                if (leftStick.x == 0 && leftStick.y == 0)
                     rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
                 if (camDependent)
                 {
 
                     rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
-                    if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                    if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
                     {
                         rigidbody.AddTorque(cam.transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
                     }
@@ -173,7 +227,7 @@ public class FlipOver : MonoBehaviour
                 else
                 {
                     rigidbody.AddTorque(transform.right * vertAngle * angForce, ForceMode.Force);
-                    if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                    if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
                     {
                         rigidbody.AddTorque(transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
                     }
@@ -184,32 +238,10 @@ public class FlipOver : MonoBehaviour
                     }
                 }
             }
-            else
-            {
+            
 
 
-                float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
-                float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
-                float rollAngle = Input.GetAxisRaw("RightTrigger" + h.playerNum.ToString()) - Input.GetAxisRaw("LeftTrigger" + h.playerNum.ToString());
-                if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
-                    rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
-                if (camDependent)
-                {
-                    rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(cam.transform.forward * rollAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(cam.transform.up * horAngle * angForce, ForceMode.Force);
-
-                }
-                else
-                {
-                    rigidbody.AddTorque(transform.right * vertAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(transform.forward * rollAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(transform.up * horAngle * angForce, ForceMode.Force);
-                }
-            }
-
-
-        }
+        
 
     }
 

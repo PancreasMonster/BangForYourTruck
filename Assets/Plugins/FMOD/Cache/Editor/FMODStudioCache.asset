@@ -35,7 +35,7 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -231,6 +231,24 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-8472707130670038586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD Stuff/Projects/Bang For Your Truck Audio/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637211931197482688
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-8304697035415895048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,12 +267,12 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 5833129827976587309}
+  - {fileID: -3327211987363953291}
   MinDistance: 1
   MaxDistance: 20
   Length: 1291
@@ -310,15 +328,32 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 2962608953709806876}
+  - {fileID: -6285812651694650431}
   MinDistance: 1
   MaxDistance: 20
   Length: 2840
+--- !u!114 &-8120854991119447077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Double Kill/Double Kill
+  m_EditorClassIdentifier: 
+  Name: Double Kill
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8080041457723297924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,12 +407,12 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -4814794250674447821}
+  - {fileID: -8120854991119447077}
   MinDistance: 1
   MaxDistance: 20
   Length: 1567
@@ -483,6 +518,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-7578203843153719068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Game Start/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-7575370532956814762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,12 +621,12 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -597460724547569639}
+  - {fileID: -1578168636782695151}
   MinDistance: 1
   MaxDistance: 20
   Length: 3084
@@ -596,12 +648,12 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 955213957866952149}
+  - {fileID: -7578203843153719068}
   MinDistance: 1
   MaxDistance: 20
   Length: 1383
@@ -820,6 +872,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Closer Look/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-6285812651694650431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drone Respawn/Red Team Wins
   m_EditorClassIdentifier: 
   Name: Red Team Wins
   Min: 0
@@ -1323,6 +1392,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-4705130528663941645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Closer Look/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-4689888518486177292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1647,6 +1733,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-3327211987363953291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/What Happened to This Guy/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-3291439854717906571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1665,7 +1768,7 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1966,12 +2069,12 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 7917066728543949227}
+  - {fileID: 6923269366875362140}
   MinDistance: 1
   MaxDistance: 20
   Length: 1947
@@ -2176,6 +2279,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Closer Look/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-1578168636782695151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Pain/Red Team Wins
   m_EditorClassIdentifier: 
   Name: Red Team Wins
   Min: 0
@@ -2589,7 +2709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Stuff/Projects/Bang For Your Truck Audio/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637211987298350403
+  lastModified: 637211931197562614
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -2609,7 +2729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -103670492131913607}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   EditorEvents:
   - {fileID: -8972826777689013035}
   - {fileID: -8002841025654978032}
@@ -2624,10 +2744,10 @@ MonoBehaviour:
   - {fileID: 5735408070988895119}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   StringsBanks:
   - {fileID: -103670492131913607}
-  stringsBankWriteTime: 637211987298350403
+  stringsBankWriteTime: 637211931197562614
   cacheVersion: 3
 --- !u!114 &9924098040105263
 MonoBehaviour:
@@ -3080,7 +3200,7 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3729,12 +3849,12 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -1592651490112284221}
+  - {fileID: -4705130528663941645}
   MinDistance: 1
   MaxDistance: 20
   Length: 2008
@@ -4287,7 +4407,7 @@ MonoBehaviour:
   - {fileID: 2626050577876226467}
   - {fileID: -5488914560325434987}
   - {fileID: -3766255096242767168}
-  - {fileID: 3048381632787034712}
+  - {fileID: -8472707130670038586}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -4603,6 +4723,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &6923269366875362140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drone Death/Red Team Wins
+  m_EditorClassIdentifier: 
+  Name: Red Team Wins
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &7012197608490523092
 MonoBehaviour:
   m_ObjectHideFlags: 0

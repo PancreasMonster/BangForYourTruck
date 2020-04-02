@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class BuildModeFire : MonoBehaviour
@@ -54,23 +55,53 @@ public class BuildModeFire : MonoBehaviour
         targetOriginalPos = aimTarget.transform.localPosition;
     }
 
+    Vector2 rightStick;
+    float PadLB;
+    float PadRB;
+    float DPadLeftRight;
+
+    private void OnRightStick(InputValue value)
+    {
+        rightStick = value.Get<Vector2>();
+    }
+
+    private void OnLeftBumper(InputValue value)
+    {
+        PadLB = value.Get<float>();
+    }
+
+    private void OnRightBumper(InputValue value)
+    {
+        PadRB = value.Get<float>();
+    }
+
+    private void DPADLeftRight(InputValue value)
+    {
+        DPadLeftRight = value.Get<float>();
+        if(!cooldown)
+        {
+            aimTarget.transform.localPosition = targetOriginalPos;
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {
         // text.text = rc.resourcesID[currentI];
         //  image.sprite = icons[currentI];
-        if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
-        {
-            aimTarget.transform.localPosition = targetOriginalPos;
-        }  
+        //if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+     //   {
+     //       aimTarget.transform.localPosition = targetOriginalPos;
+      //  }  
 
-        if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        if (PadLB > 0 && !cooldown)
         {
          
             RenderArc();
             targetZDistance = ranges[currentRange];
 
-            if(Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) < 0 && currentRange < ranges.Count - 1 && forwardRange)
+            if(rightStick.y < 0 && currentRange < ranges.Count - 1 && forwardRange)
             {
                 backwardRange = true;
                 forwardRange = false;
@@ -78,7 +109,7 @@ public class BuildModeFire : MonoBehaviour
 
                 StartCoroutine(resetRangeBools(0));
             }
-            else if (Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) > 0 && currentRange > 0 && backwardRange)
+            else if (rightStick.y > 0 && currentRange > 0 && backwardRange)
             {
                 forwardRange = true;
                 backwardRange = false;
@@ -90,7 +121,7 @@ public class BuildModeFire : MonoBehaviour
         }
 
         FindVelocity(aimTarget, fireAngle);
-        if (Input.GetButtonUp("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        if (PadLB == 0 && !cooldown)
         {
             targetZDistance = 0;
             lr.positionCount = 0;
@@ -117,7 +148,7 @@ public class BuildModeFire : MonoBehaviour
             }*/
         }
 
-        if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        if (PadLB > 0 && PadRB > 0 && !cooldown)
         {
             targetZDistance = 0;
             lr.positionCount = 0;
@@ -144,19 +175,19 @@ public class BuildModeFire : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) < 0 && !dpadTrigger)
+        if (DPadLeftRight < 0 && !dpadTrigger)
         {
             dpadTrigger = true;
             dpadLeft = true;
         }
 
-        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) > 0 && !dpadTrigger)
+        if (DPadLeftRight > 0 && !dpadTrigger)
         {
             dpadTrigger = true;
             dpadRight = true;
         }
 
-        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) == 0 && dpadTrigger)
+        if (DPadLeftRight == 0 && dpadTrigger)
         {
             if (dpadLeft)
             {

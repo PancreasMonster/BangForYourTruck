@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.InputSystem;
 
 public class PropelSelf : MonoBehaviour
 {
@@ -32,26 +33,13 @@ public class PropelSelf : MonoBehaviour
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
     }
 
-    // Update is called once per frame
-    void Update()
+    float BButton = 1;
+
+    private void OnFaceButtonEast(InputValue value)
     {
-        /* if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) && !triggerDown && !coolingDown)
-         {
-             triggerDown = true;
-             bg.gameObject.SetActive(true);
-         }
-
-         if (triggerDown)
-         {
-             t += Time.deltaTime;
-             power = Mathf.Pow((Mathf.Sin(t)), 2);
-             fill.fillAmount = power;
-         } */
-
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up * 5, out hit, 5, layer))
         {
-            if (Input.GetButtonDown("PadB" + GetComponent<Health>().playerNum.ToString()))
-            {
+            
                 if (!coolingDown)
                 {
                     if (mobCharges.currentCharges > 0)
@@ -71,7 +59,7 @@ public class PropelSelf : MonoBehaviour
                         Debug.Log("Boosted");
 
                         StartCoroutine(BoostEffect());
-                        triggerDown = false;                       
+                        triggerDown = false;
                         coolingDown = true;
                         mobCharges.UseCharge();
                         BroadcastMessage("ExhaustParticlesPlay");
@@ -79,12 +67,13 @@ public class PropelSelf : MonoBehaviour
                     }
                     else
                     {
-                        triggerDown = false;                       
+                        triggerDown = false;
                         coolingDown = true;
                         StartCoroutine(Cooldown());
                     }
                 }
-                else {
+                else
+                {
                     if (mobCharges.currentCharges > 0)
                     {
                         Vector3 dir = (8 * transform.forward) + (7 * transform.up);
@@ -96,7 +85,7 @@ public class PropelSelf : MonoBehaviour
                         Debug.Log("Boosted");
 
                         StartCoroutine(BoostEffect());
-                        triggerDown = false;                      
+                        triggerDown = false;
                         coolingDown = true;
                         mobCharges.UseCharge();
                         BroadcastMessage("ExhaustParticlesPlay");
@@ -104,16 +93,16 @@ public class PropelSelf : MonoBehaviour
                     }
                     else
                     {
-                        triggerDown = false;                      
+                        triggerDown = false;
                         coolingDown = true;
                         StartCoroutine(Cooldown());
                     }
                 }
-            } 
-        } else
+            
+        }
+        else
         {
-            if (Input.GetButtonDown("PadB" + GetComponent<Health>().playerNum.ToString()) && !coolingDown)
-            {
+           
                 if (mobCharges.currentCharges > 0)
                 {
                     //rb.velocity = Vector3.zero;
@@ -124,7 +113,8 @@ public class PropelSelf : MonoBehaviour
                             Vector3 dir = GetComponent<LockOn>().target.transform.position - transform.position;
                             dir.Normalize();
                             rb.AddForce(dir * force /* * power */);
-                        } else
+                        }
+                        else
                         {
                             rb.AddForce(transform.forward * force /* * power */);
                         }
@@ -136,7 +126,7 @@ public class PropelSelf : MonoBehaviour
                     // if(orb.enabled == true)
 
                     StartCoroutine(BoostEffect());
-                    triggerDown = false;                  
+                    triggerDown = false;
                     coolingDown = true;
                     mobCharges.UseCharge();
                     BroadcastMessage("ExhaustParticlesPlay");
@@ -144,12 +134,30 @@ public class PropelSelf : MonoBehaviour
                 }
                 else
                 {
-                    triggerDown = false;                   
+                    triggerDown = false;
                     coolingDown = true;
                     StartCoroutine(Cooldown());
                 }
             }
-        }
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        /* if (Input.GetButtonDown("PadA" + GetComponent<Health>().playerNum.ToString()) && !triggerDown && !coolingDown)
+         {
+             triggerDown = true;
+             bg.gameObject.SetActive(true);
+         }
+
+         if (triggerDown)
+         {
+             t += Time.deltaTime;
+             power = Mathf.Pow((Mathf.Sin(t)), 2);
+             fill.fillAmount = power;
+         } */
+
     }
 
     IEnumerator Cooldown ()
@@ -195,3 +203,4 @@ public class PropelSelf : MonoBehaviour
         dop.focalLength.value = 260f;
     }
 }
+ 

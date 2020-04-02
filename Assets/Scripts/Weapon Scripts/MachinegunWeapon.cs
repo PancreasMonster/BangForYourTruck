@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MachinegunWeapon : MonoBehaviour
 {
@@ -19,7 +20,12 @@ public class MachinegunWeapon : MonoBehaviour
     ParticleSystem bulletParticles2;
     public ParticleSystem shellsParticles2;
 
+    private PlayerInput pi;
 
+    private void Awake()
+    {
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +39,40 @@ public class MachinegunWeapon : MonoBehaviour
         ph = GetComponent<PowerHolder>();
     }
 
+    float PadLB;
+    float PadRB;
+
+    private void OnLeftBumper(InputValue value)
+    {
+        PadLB = value.Get<float>();
+    }
+
+    private void OnRightBumper(InputValue value)
+    {
+        PadRB = value.Get<float>();
+    }
+
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        PadLB = 0;
+    }
+
+    private void OnRightBumperRelease(InputValue value)
+    {
+        PadRB = 0;
+        CancelInvoke();
+        shellsParticles1.Stop();
+        shellsParticles2.Stop();
+        anim.SetBool("Spinning", false);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) == false)
+        if (PadRB > 0 && PadLB == 0)
         {
 
-
+            
             FireBullet();
             shellsParticles1.Play();
             shellsParticles2.Play();
@@ -53,14 +86,12 @@ public class MachinegunWeapon : MonoBehaviour
             //  bg.gameObject.SetActive(false);
             // rh.resourceAmount -= rc.resourceCosts[currentI];
 
+
         }
 
         if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()))
         {
-            CancelInvoke();
-            shellsParticles1.Stop();
-            shellsParticles2.Stop();
-            anim.SetBool("Spinning", false);
+           
         }
     }
 

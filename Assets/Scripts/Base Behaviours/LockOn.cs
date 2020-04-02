@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class LockOn : MonoBehaviour
@@ -25,6 +26,50 @@ public class LockOn : MonoBehaviour
             GameObject imageClone = Instantiate(targetImage, transform.position, Quaternion.identity);
             imageClone.transform.SetParent(targetImagesParent.transform, false);
             images.Add(imageClone.GetComponent<Image>());
+        }
+    }
+
+    private void OnFaceButtonNorth (InputValue value)
+    {
+        if (target == null)
+        {
+            // Debug.Log("Found");
+            List<GameObject> detectedTargets = new List<GameObject>();
+            foreach (GameObject t in targets)
+            {
+                Vector3 dir = t.transform.position - carFront.position;
+                dir.Normalize();
+                //Debug.Log(Vector3.Dot(transform.forward, dir));
+                if (Vector3.Dot(carFront.forward, dir) > .2f)
+                {
+                    detectedTargets.Add(t);
+                    //   Debug.Log(t.transform.name);
+                }
+            }
+
+            float dist = maxDistance;
+            foreach (GameObject t in detectedTargets)
+            {
+                float magDist = Vector3.Distance(t.transform.position, carFront.position);
+                if (magDist < dist)
+                {
+                    target = t;
+                    pivotCamera.target = t;
+                    dist = magDist;
+                    StartCoroutine(targetAcquire());
+                }
+            }
+        }
+
+        if (target != null && lockedOn)
+        {
+            target = null;
+            pivotCamera.target = null;
+            /*foreach (Image i in images)
+                {
+                    i.gameObject.SetActive(false);
+                }*/
+            lockedOn = false;
         }
     }
 

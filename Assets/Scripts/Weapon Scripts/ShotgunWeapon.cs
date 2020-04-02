@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShotgunWeapon : MonoBehaviour
 {
@@ -40,21 +41,35 @@ public class ShotgunWeapon : MonoBehaviour
         ph = GetComponent<PowerHolder>();
     }
 
+    float PadLB;
+    float PadRB;
+
+    private void OnLeftBumper(InputValue value)
+    {
+        PadLB = value.Get<float>();
+    }
+
+    private void OnRightBumper(InputValue value)
+    {
+        PadRB = value.Get<float>();
+        if (!rightFiredLast)
+        {
+
+            FireRightSide();
+        }
+        else
+        {
+            FireLeftSide();
+
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) == false)
+        if (PadRB > 0 && PadLB == 0)
         {
-            if (!rightFiredLast)
-            {
-
-                FireRightSide();
-            }
-            else
-            {
-                FireLeftSide();
-
-            }
+            
         }
     }
 

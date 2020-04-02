@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CannonWeapon : MonoBehaviour
 {
@@ -34,18 +35,46 @@ public class CannonWeapon : MonoBehaviour
         startForce = force;
     }
 
+    float PadLB;
+    float PadRB;
+
+    private void OnLeftBumper(InputValue value)
+    {
+        PadLB = value.Get<float>();
+    }
+
+    private void OnRightBumper(InputValue value)
+    {
+        PadRB = value.Get<float>();
+        if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
+        {
+            //begin charging
+            charging = true;
+            chargingTime = 0f;
+        }
+        //Firecannon();
+
+        
+
+    }
+
+    private void OnRightBumperRelease(InputValue value)
+    {
+
+        if (charging == true)
+        {
+            Firecannon();
+            model.GetComponent<Animation>().Play();
+        }
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) == false)
+        if (PadRB > 0 && PadLB == 0)
         {
-            if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
-            {
-            //begin charging
-             charging = true;
-             chargingTime = 0f;
-            }
-            //Firecannon();
+           
 
         }
 
@@ -60,11 +89,10 @@ public class CannonWeapon : MonoBehaviour
 
         }
 
-        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
+        if (PadRB > 0 && charging == true)
         {
-          Firecannon();
-          model.GetComponent<Animation>().Play();
-
+            Firecannon();
+            model.GetComponent<Animation>().Play();
         }
     }
 
