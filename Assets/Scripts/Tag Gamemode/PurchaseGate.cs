@@ -5,8 +5,8 @@ using UnityEngine;
 public class PurchaseGate : MonoBehaviour
 {
     public int price;
-    public int ammoType;
-    public int ammoAddition;
+    public GameObject throwableType;
+    public GameObject throwableCard;
     public int teamGateNum;
     AudioSource audio;
 
@@ -33,9 +33,15 @@ public class PurchaseGate : MonoBehaviour
                 PlayerBank PB = col.GetComponent<PlayerBank>();
                 if (PB.tagsInBank >= price)
                 {
-                    col.GetComponent<BuildModeFire>().ammo[ammoType] += ammoAddition;
-                    PB.tagsInBank -= price;
-                    audio.Play();
+                    if (!col.GetComponent<BuildModeFire>().discSelection.Contains(throwableType))
+                    {
+                        col.GetComponent<BuildModeFire>().discSelection.Add(throwableType);
+                        GameObject.Find("PlayerStatsUICanvas").transform.GetChild(col.GetComponent<Health>().playerNum - 1)
+                            .transform.Find("Throwables Cards").GetComponent<ThrowableUICards>().AddCard(throwableCard);
+                        PB.tagsInBank -= price;
+                        audio.Play();
+                    }
+                    
                 }
             }
         }

@@ -9,6 +9,7 @@ public class BuildModeFire : MonoBehaviour
     
     public Text text;
     public List<GameObject> discSelection = new List<GameObject>();
+    public List<float> discCooldown = new List<float>();
     public List<int> ammo = new List<int>();
     public Image image;
     public List<Sprite> icons = new List<Sprite>();
