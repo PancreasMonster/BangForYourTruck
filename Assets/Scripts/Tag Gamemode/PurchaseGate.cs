@@ -42,6 +42,7 @@ public class PurchaseGate : MonoBehaviour
                        //    .transform.Find("Throwables Cards").GetComponent<ThrowableUICards>().AddCard(throwableCard);
                         GameObject addCard = Instantiate(throwableCard, transform.position, Quaternion.identity);
                         addCard.transform.parent = col.GetComponent<BuildModeFire>().cardParent;
+                        addCard.transform.localScale = new Vector3(1, 1, 1);
                         col.GetComponent<BuildModeFire>().discUIImages.Add(addCard);
                         addCard.GetComponent<ThrowableCooldown>().cooldownTime = cooldown;
                         PB.tagsInBank -= price;
