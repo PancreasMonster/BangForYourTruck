@@ -64,7 +64,7 @@ public class MineTrigger : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.health -= damage;
+                h.TakeDamage ("Mined", this.gameObject, damage, Vector3.zero);
         }
         particles.Play();
         audio.Play();

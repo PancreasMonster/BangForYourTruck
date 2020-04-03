@@ -85,7 +85,7 @@ public class Bomb : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.health -= damage;
+                h.TakeDamage ("Bombed", this.gameObject, damage, Vector3.zero);
         }
 
         if (artillery)
