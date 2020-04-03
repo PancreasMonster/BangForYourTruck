@@ -180,10 +180,10 @@ public class BuildModeFire : MonoBehaviour
                     clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
                 if (clone.GetComponent<Health>() != null)
                     clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
-                if (clone.GetComponent<Bomb>() != null)
+                /*if (clone.GetComponent<Bomb>() != null)
                 {                 
                     cooldown = false;
-                }
+                }*/
                 if (clone.GetComponent<Missile>() != null)
                     clone.GetComponent<Missile>().teamNum = GetComponent<Health>().teamNum;
 
