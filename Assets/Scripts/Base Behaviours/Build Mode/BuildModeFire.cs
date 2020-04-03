@@ -81,6 +81,7 @@ public class BuildModeFire : MonoBehaviour
         if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
         {
             PadRB = 1;
+           
             discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown();
         }
     }
@@ -108,9 +109,9 @@ public class BuildModeFire : MonoBehaviour
         // text.text = rc.resourcesID[currentI];
         //  image.sprite = icons[currentI];
         //if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
-     //   {
-     //       aimTarget.transform.localPosition = targetOriginalPos;
-      //  }  
+        //   {
+        //       aimTarget.transform.localPosition = targetOriginalPos;
+        //  }  
 
         if (PadLB > 0 && !cooldown)
         {

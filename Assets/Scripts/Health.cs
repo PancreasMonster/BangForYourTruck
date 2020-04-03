@@ -113,7 +113,8 @@ public class Health : MonoBehaviour
         damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
 
         //Deals the damage to the player's health
-        health -= damageTaken;
+        float damageToTake = Mathf.Max(damageTaken, 0);
+        health -= damageToTake;
 
         if (drone && dronePainCooldown)
         {

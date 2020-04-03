@@ -58,7 +58,7 @@ public class BlackHole : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.health -= damage;
+                h.TakeDamage("black holed", this.gameObject, damage, Vector3.zero);
         }
         transform.GetChild(0).gameObject.SetActive(false);
         Invoke("DestroyThisGameObject", 1f);

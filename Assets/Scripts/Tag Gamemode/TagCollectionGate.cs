@@ -15,7 +15,7 @@ public class TagCollectionGate : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         tagCollectionManager = GameObject.Find("TagCollectionManager").GetComponent<TagCollectionManager>();
-        StartCoroutine(AssignPBs());
+        
         
     }
 

@@ -101,7 +101,7 @@ public class FlipOver : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (wheelsOnGround > 0)
+        if (wheelsOnGround > 1)
         {
             crashing = false;
         }
@@ -125,7 +125,7 @@ public class FlipOver : MonoBehaviour
                         }
                     }
                     wheelsOnGround = wheelsGrounded;
-                    if (wheelsGrounded < 3 && wheelsGrounded > 0)
+                    if (wheelsGrounded < 2 && wheelsGrounded > 0)
                     {
                         ApplyLinearStabilityForces(rigidbody, wheelPoints);
                     }
