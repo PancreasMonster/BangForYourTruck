@@ -14,7 +14,8 @@ public class ThrowableCooldown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        images = GetComponentsInChildren<Image>();
+        images[0] = transform.GetChild(2).GetComponent<Image>();
+        images[1] = transform.GetChild(3).GetComponent<Image>();
 
     }
 
