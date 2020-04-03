@@ -347,6 +347,7 @@ public class StuntChecker : MonoBehaviour
                 }
                 if(currentStunt != "")
                 FlipConcussiveForce(flipScore);
+               
                 
             } 
             currentStunt = "";
@@ -421,6 +422,7 @@ public class StuntChecker : MonoBehaviour
 
         GameObject flipPS = Instantiate(concussiveForcePS, new Vector3 (transform.position.x, transform.position.y  - 4f, transform.position.z), concussiveForcePS.transform.rotation);
         Destroy(flipPS, 3);
+        StartCoroutine(HelpLanding());
     }
 
     private void GainMobilityCharge ()
@@ -437,6 +439,17 @@ public class StuntChecker : MonoBehaviour
         {
             mc.charge3Time = mc.rechargeTime;
             Debug.Log("mc3");
+        }
+    }
+
+    public IEnumerator HelpLanding ()
+    {
+        float t = 0;
+        while(t < .25f)
+        {
+            t += Time.deltaTime;
+            rb.angularVelocity *= .1f;
+            yield return null;
         }
     }
 }
