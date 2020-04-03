@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TrainingText : MonoBehaviour
 {
     public int trainingStage;
@@ -10,26 +11,29 @@ public class TrainingText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.Find("PersistentSceneLoader").GetComponent<LevelCreator>().singlePlayer == true)
+        transform.GetChild(0).gameObject.SetActive(true);
+
+        /*if (GameObject.Find("PersistentSceneLoader").GetComponent<LevelCreator>().singlePlayer == true)
         {
             isTraining = true;
-            transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
             isTraining = false;
-        }
+        }*/
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button7) && isTraining)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button7))
         {
-            if (trainingStage == 1 || trainingStage ==2)
-            {
-                Debug.Log("Pressed start");
-                GoToNextTraining();
-            }           
+            Debug.Log("Pressed start");
+            GoToNextTraining();
+
+            //if (trainingStage == 1 || trainingStage ==2)
+            //{
+
+            //}           
         }
     }
 
