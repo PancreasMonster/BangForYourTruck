@@ -9,7 +9,7 @@ public class BuildModeFire : MonoBehaviour
     
     public Text text;
     public List<GameObject> discSelection = new List<GameObject>();
-    public List<float> discCooldown = new List<float>();
+    public List<GameObject> discUIImages = new List<GameObject>();
     public List<int> ammo = new List<int>();
     public Image image;
     public List<Sprite> icons = new List<Sprite>();
@@ -20,7 +20,7 @@ public class BuildModeFire : MonoBehaviour
     public float mortarSpeed;
     public Transform aimTarget, firingPoint;
     public GameObject bomb;
-    public int currentI;
+    public int currentI = 0;
     private bool cooldown;
     public float cooldownDelay = 1.5f;
     ResourceHolder rh;
@@ -43,6 +43,7 @@ public class BuildModeFire : MonoBehaviour
     public int currentRange = 1;
     public bool forwardRange = true, backwardRange = true;
     public float rangeDelay;
+    public Transform cardParent;
 
 
 
@@ -77,7 +78,11 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnRightBumper(InputValue value)
     {
-        PadRB = 1;
+        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
+        {
+            PadRB = 1;
+            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown();
+        }
     }
 
     private void OnLeftBumperRelease(InputValue value)
@@ -164,8 +169,7 @@ public class BuildModeFire : MonoBehaviour
         {
             targetZDistance = 0;
             lr.positionCount = 0;
-            if (ammo[currentI] > 0)
-            {
+            
                 cooldown = true;
                 StartCoroutine(Cooldown());
                 GameObject clone = Instantiate(currentDisc, firingPoint.position, transform.rotation);
@@ -185,8 +189,8 @@ public class BuildModeFire : MonoBehaviour
 
                 Rigidbody unitRB = clone.GetComponent<Rigidbody>();
                 unitRB.velocity = BallisticVel(aimTarget, fireAngle);
-                ammo[currentI]--;
-            }
+                //ammo[currentI]--;
+            
         }
 
         if (DPadLeftRight < 0 && !dpadTrigger)

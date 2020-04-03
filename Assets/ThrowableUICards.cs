@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class ThrowableUICards : MonoBehaviour
 {
-    public Transform[] childTransforms;
+    public Transform[] childTransforms = new Transform[5];
+    public GameObject card;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            childTransforms[i] = transform.GetChild(i);
-
-        }
+        childTransforms = GetComponentsInChildren<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.B) && card != null)
+        {
+            AddCard(card);
+            Debug.Log("Fafaf");
+        }
     }
 
     public void AddCard(GameObject cardToAdd)

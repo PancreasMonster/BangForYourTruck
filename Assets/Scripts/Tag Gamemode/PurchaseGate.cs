@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PurchaseGate : MonoBehaviour
 {
@@ -37,9 +38,12 @@ public class PurchaseGate : MonoBehaviour
                     if (!col.GetComponent<BuildModeFire>().discSelection.Contains(throwableType))
                     {
                         col.GetComponent<BuildModeFire>().discSelection.Add(throwableType);
-                        col.GetComponent<BuildModeFire>().discCooldown.Add(cooldown);
-                        GameObject.Find("PlayerStatsUICanvas").transform.GetChild(col.GetComponent<Health>().playerNum - 1)
-                            .transform.Find("Throwables Cards").GetComponent<ThrowableUICards>().AddCard(throwableCard);
+                       // GameObject.Find("PlayerStatsUICanvas").transform.GetChild(col.GetComponent<Health>().playerNum - 1)
+                       //    .transform.Find("Throwables Cards").GetComponent<ThrowableUICards>().AddCard(throwableCard);
+                        GameObject addCard = Instantiate(throwableCard, transform.position, Quaternion.identity);
+                        addCard.transform.parent = col.GetComponent<BuildModeFire>().cardParent;
+                        col.GetComponent<BuildModeFire>().discUIImages.Add(addCard);
+                        addCard.GetComponent<ThrowableCooldown>().cooldownTime = cooldown;
                         PB.tagsInBank -= price;
                         audio.Play();
                     }

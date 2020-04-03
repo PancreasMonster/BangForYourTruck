@@ -8,7 +8,7 @@ public class ThrowableCooldown : MonoBehaviour
     public float cooldownTime;
     float t = 0f;
     bool onCooldown;
-    float fillAmountValue = 0;
+    public float fillAmountValue = 1;
     public Image[] images = new Image[2];
 
     // Start is called before the first frame update
@@ -16,7 +16,6 @@ public class ThrowableCooldown : MonoBehaviour
     {
         images = GetComponentsInChildren<Image>();
 
-        GoOnCooldown();
     }
 
     // Update is called once per frame
