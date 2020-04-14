@@ -27,13 +27,20 @@ public class CannonWeapon : MonoBehaviour
     void Start()
     {
         GetComponent<LockOn>().maxDistance = lockOnRange;
-        model.SetActive(true);
-        engineModel.SetActive(true);
 
         particle = cannonFiringPoint.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
         startForce = force;
+
+        if (canFire)
+        {
+            model.SetActive(true);
+        }
+        else
+        {
+            engineModel.SetActive(true);
+        }
     }
 
     float PadLB;

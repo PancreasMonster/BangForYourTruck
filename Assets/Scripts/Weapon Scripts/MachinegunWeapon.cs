@@ -33,11 +33,15 @@ public class MachinegunWeapon : MonoBehaviour
     {
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
         GetComponent<LockOn>().maxDistance = lockOnRange;
-        model.SetActive(true);
 
         bulletParticles1 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint").GetComponent<ParticleSystem>();
         bulletParticles2 = transform.Find("Trails and firing points").transform.Find("AutoWeaponFiringPoint2").GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
+
+        if (canFire)
+        {
+            model.SetActive(true);
+        }
     }
 
     float PadLB;

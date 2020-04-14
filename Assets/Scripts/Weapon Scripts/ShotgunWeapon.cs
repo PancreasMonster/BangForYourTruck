@@ -27,7 +27,6 @@ public class ShotgunWeapon : MonoBehaviour
     void Start()
     {
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
-        model.SetActive(true);
         GameObject leftShotGun = model.transform.Find("Shotgun Left").gameObject;
         GameObject rightShotGun = model.transform.Find("Shotgun Right").gameObject;
         leftShotgunAnim = leftShotGun.GetComponent<Animation>();
@@ -39,6 +38,11 @@ public class ShotgunWeapon : MonoBehaviour
         buckshotParticlesRight = ShotgunWeaponFiringPoint.gameObject.GetComponent<ParticleSystem>();
         buckshotParticlesLeft = ShotgunWeaponFiringPoint2.gameObject.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
+
+        if (canFire)
+        {
+            model.SetActive(true);
+        }
     }
 
     float PadLB;
