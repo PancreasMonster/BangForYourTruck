@@ -26,23 +26,11 @@ public class WeaponSelectionGate : MonoBehaviour
         {
             if (col.GetComponent<Health>().teamNum == teamGateNum)
             {
-               if(flameThrower)
+               
+                if (machineGun)
                 {
-                    col.GetComponent<FlamethrowerWeapon>().enabled = true;
-                    col.GetComponent<FlamethrowerWeapon>().model.SetActive(true);
-                    col.GetComponent<MachinegunWeapon>().enabled = false;
-                    col.GetComponent<MachinegunWeapon>().model.SetActive(false);
-                    col.GetComponent<CannonWeapon>().enabled = false;
-                    col.GetComponent<CannonWeapon>().model.SetActive(false);
-                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
-                    col.GetComponent<ShotgunWeapon>().enabled = false;
-                    col.GetComponent<ShotgunWeapon>().model.SetActive(false);
-
-                }
-                else if (machineGun)
-                {
-                    col.GetComponent<FlamethrowerWeapon>().enabled = false;
-                    col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
+                    //col.GetComponent<FlamethrowerWeapon>().enabled = false;
+                    //col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
                     col.GetComponent<MachinegunWeapon>().canFire = true;
                     col.GetComponent<MachinegunWeapon>().model.SetActive(true);
                     col.GetComponent<CannonWeapon>().canFire = false;
@@ -53,8 +41,8 @@ public class WeaponSelectionGate : MonoBehaviour
                 }
                 else if (cannonGun)
                 {
-                    col.GetComponent<FlamethrowerWeapon>().enabled = false;
-                    col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
+                    //col.GetComponent<FlamethrowerWeapon>().enabled = false;
+                    //col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
                     col.GetComponent<MachinegunWeapon>().canFire = false;
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().canFire = true;
@@ -66,8 +54,8 @@ public class WeaponSelectionGate : MonoBehaviour
 
                 else if (shotgun)
                 {
-                    col.GetComponent<FlamethrowerWeapon>().enabled = false;
-                    col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
+                    //col.GetComponent<FlamethrowerWeapon>().enabled = false;
+                    //col.GetComponent<FlamethrowerWeapon>().model.SetActive(false);
                     col.GetComponent<MachinegunWeapon>().canFire = false;
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().canFire = false;
@@ -77,6 +65,19 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<ShotgunWeapon>().model.SetActive(true);
                 }
 
+                /*else if(flameThrower)
+                {
+                    col.GetComponent<FlamethrowerWeapon>().enabled = true;
+                    col.GetComponent<FlamethrowerWeapon>().model.SetActive(true);
+                    col.GetComponent<MachinegunWeapon>().enabled = false;
+                    col.GetComponent<MachinegunWeapon>().model.SetActive(false);
+                    col.GetComponent<CannonWeapon>().enabled = false;
+                    col.GetComponent<CannonWeapon>().model.SetActive(false);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
+                    col.GetComponent<ShotgunWeapon>().enabled = false;
+                    col.GetComponent<ShotgunWeapon>().model.SetActive(false);
+
+                }*/
                 audio.Play();
             }
         }
