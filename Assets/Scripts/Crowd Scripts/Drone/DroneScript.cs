@@ -189,6 +189,7 @@ public class DroneScript : MonoBehaviour
     {
         if(droneCorpse)
         {
+            droneCorpse.GetComponent<DroneDeath>().StopAllCoroutines();
             Destroy(droneCorpse);
             droneCorpse = null;
         }
