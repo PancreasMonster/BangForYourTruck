@@ -16,7 +16,7 @@ public class DroneDeath : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         StartCoroutine(DroneDeathEffect());
-        gravityForce = 37.5f;
+        gravityForce = -25f;
     }
 
     // Update is called once per frame
@@ -31,11 +31,12 @@ public class DroneDeath : MonoBehaviour
 
     IEnumerator DroneDeathEffect ()
     {
-        int rand = Random.Range(0, propellerPoints.Count);
+        int rand = Random.Range(0, propellerPoints.Count-1);
         propellerPoints[rand].transform.parent = null;
         propellerPoints[rand].GetComponent<BoxCollider>().isTrigger = false;
         propellerPoints[rand].GetComponent<Rigidbody>().isKinematic = false;
-        propellerPoints[rand].GetComponent<Rigidbody>().AddForce(transform.up * propellerForce * 5);
+        Vector3 randCircle = Random.insideUnitSphere;
+        propellerPoints[rand].GetComponent<Rigidbody>().AddForce(randCircle * 100, ForceMode.Impulse);
         propellerPoints.Remove(propellerPoints[rand]);
         yield return new WaitForSeconds(propellerRemovalTime);
         if(propellerPoints.Count > 0)
@@ -46,6 +47,7 @@ public class DroneDeath : MonoBehaviour
     {
         if(coll.gameObject.layer == 14 && !collidedWithGround)
         {
+            GetComponentInChildren<DroneBodySpin>().enabled = false;
             StopAllCoroutines();
             //Explosion Here
             Debug.Log(coll.transform.name);
@@ -54,10 +56,11 @@ public class DroneDeath : MonoBehaviour
                 t.transform.parent = null;
                 t.GetComponent<BoxCollider>().isTrigger = false;
                 t.GetComponent<Rigidbody>().isKinematic = false;
-                t.GetComponent<Rigidbody>().AddForce(transform.up * propellerForce * 5f);
+                Vector3 randCircle = Random.insideUnitSphere;
+                t.GetComponent<Rigidbody>().AddForce(randCircle * 100, ForceMode.Impulse);
             }
             propellerPoints.Clear();
-            gravityForce = 100;
+            gravityForce = 300;
             rb.mass = 20;
             //Explosion Damage Here
             collidedWithGround = true;

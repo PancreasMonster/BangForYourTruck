@@ -54,6 +54,8 @@ public class DroneScript : MonoBehaviour
 
     Vector3 spawnPoint;
 
+    Camera cam;
+
     public GameObject droneDeathPrefab;
 
     Transform droneCorpse;
@@ -72,6 +74,7 @@ public class DroneScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         StartCoroutine(OnlyFollowWayPoints());
         spawnPoint = transform.position;
+        cam = GetComponentInChildren<Camera>();
     }
 
     public void FixedUpdate()
@@ -194,6 +197,7 @@ public class DroneScript : MonoBehaviour
             droneCorpse = null;
         }
         dead = true;
+        cam.enabled = false;
         FMODUnity.RuntimeManager.PlayOneShot(deathDialogue);
         foreach (Transform child in transform)
         {
@@ -212,6 +216,7 @@ public class DroneScript : MonoBehaviour
         GetComponent<BoxCollider>().enabled = true;
         GetComponent<Health>().health = GetComponent<Health>().maxHealth;
         dead = false;
+        cam.enabled = true;
         checkForCorpse = true;
     }
 }
