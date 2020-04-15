@@ -22,8 +22,8 @@ public class PropelSelf : MonoBehaviour
     public Orbit orb;
     MobilityCharges mobCharges;
     public float targetBoostMaxDistance = 100;
-    public Animation anim;
     public bool canBoost = true;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +58,7 @@ public class PropelSelf : MonoBehaviour
                             rb.AddForce(transform.forward * force /* * power */);
                         }
                         // rb.AddForce(transform.forward * force /* * power */);
-                        anim.Play();
+                        anim.SetBool("Boost",true);
                         Debug.Log("Boosted");
 
                         StartCoroutine(BoostEffect());
@@ -84,7 +84,7 @@ public class PropelSelf : MonoBehaviour
                         rb.AddForce(dir * force * limitingForce /* * power */);
                         //rb.angularVelocity = Vector3.zero;
                         // Debug.Log(dir);
-                        anim.Play();
+                        anim.SetBool("Boost", true);
                         Debug.Log("Boosted");
 
                         StartCoroutine(BoostEffect());
@@ -175,6 +175,7 @@ public class PropelSelf : MonoBehaviour
         // bgcd.gameObject.SetActive(false);
         yield return new WaitForSeconds(cooldownDelay);
         coolingDown = false;
+        anim.SetBool("Boost",false);
     }
 
     IEnumerator BoostEffect ()

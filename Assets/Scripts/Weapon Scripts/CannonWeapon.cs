@@ -23,6 +23,7 @@ public class CannonWeapon : MonoBehaviour
     ParticleSystem particle;
     public bool canFire;
 
+    public Animator recoil;
     // Start is called before the first frame update
     void Start()
     {
@@ -130,14 +131,16 @@ public class CannonWeapon : MonoBehaviour
                 force = startForce;
             chargingTime = 0f;
             charging = false;
-            //onCooldown = true;
-            //Invoke("Cooldown", cooldownTime);
+            recoil.SetBool("Cannon",true);
+            onCooldown = true;
+            Invoke("Cooldown", cooldownTime);
             }
         }
 
     void Cooldown()
     {
         onCooldown = false;
+        recoil.SetBool("Cannon", false);
 
     }
 }
