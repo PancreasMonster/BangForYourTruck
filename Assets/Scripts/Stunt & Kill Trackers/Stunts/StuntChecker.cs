@@ -16,6 +16,7 @@ public class StuntChecker : MonoBehaviour
     public WheelSkid ws;
     public float driftIntensity = 2;
     public float stuntStringHoldTime = 1;
+    float oldVelocity;
 
     [System.NonSerialized]
     public float score = 0;
@@ -100,6 +101,7 @@ public class StuntChecker : MonoBehaviour
     void FixedUpdate()
     {
         localAngularVel = tr.InverseTransformDirection(rb.angularVelocity);
+        oldVelocity = rb.velocity.sqrMagnitude;
         //Detect drifts
         if (detectDrift && !fo.crashing)
         {
@@ -444,11 +446,14 @@ public class StuntChecker : MonoBehaviour
 
     public IEnumerator HelpLanding ()
     {
+        float newVelocity = oldVelocity * .7f;
+        rb.velocity *= .3f;
         float t = 0;
         while(t < .25f)
         {
+            rb.AddForce(transform.forward * newVelocity * Time.deltaTime, ForceMode.Acceleration);
             t += Time.deltaTime;
-            rb.angularVelocity *= .1f;
+            rb.angularVelocity *= .5f;
             yield return null;
         }
     }
