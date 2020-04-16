@@ -12,7 +12,7 @@ public class PropelSelf : MonoBehaviour
     public float cooldownDelay;    Rigidbody rb;
     bool triggerDown = false, coolingDown = false;
     public PostProcessVolume PPV;
-    public ParticleSystem ps, psChild;
+    public ParticleSystem psMid, psLeft, psRight;
     float t, power;
     PowerHolder ph;
     PowerCosts pc;
@@ -180,8 +180,9 @@ public class PropelSelf : MonoBehaviour
 
     IEnumerator BoostEffect ()
     {
-        ps.Play();
-        psChild.Play();
+        psMid.Play();
+        psLeft.Play();
+        psRight.Play();
         GetComponent<AudioSource>().pitch = .8f - (.4f * (1.0f - ((GetComponent<PowerHolder>().powerAmount - 40) / GetComponent<PowerHolder>().maxPower)));
         GetComponent<AudioSource>().Play();
         ChromaticAberration ChromAberr = null;
@@ -194,10 +195,12 @@ public class PropelSelf : MonoBehaviour
             dop.focalLength.value += (40f * Time.deltaTime);
             yield return null;
         }
-        yield return new WaitForSeconds(.4f);
-        ps.Stop();
-        psChild.Stop();
-        
+        yield return new WaitForSeconds(.6f);
+        psMid.Stop();
+        psLeft.Stop();
+        psRight.Stop();
+
+
         while (ChromAberr.intensity.value >= 0)
         {
             ChromAberr.intensity.value -= (5 * Time.deltaTime);
