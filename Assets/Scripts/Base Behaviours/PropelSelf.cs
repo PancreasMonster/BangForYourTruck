@@ -78,11 +78,11 @@ public class PropelSelf : MonoBehaviour
                 }
                 else
                 {
-                    if (mobCharges.currentCharges > 0)
+                   /* if (mobCharges.currentCharges > 0)
                     {
                         Vector3 dir = (8 * transform.forward) + (7 * transform.up);
                         dir.Normalize();
-                        rb.AddForce(dir * force * limitingForce /* * power */);
+                        rb.AddForce(dir * force * limitingForce  * power );
                         //rb.angularVelocity = Vector3.zero;
                         // Debug.Log(dir);
                         anim.SetBool("Boost", true);
@@ -100,7 +100,7 @@ public class PropelSelf : MonoBehaviour
                         triggerDown = false;
                         coolingDown = true;
                         StartCoroutine(Cooldown());
-                    }
+                    }*/
                 }
 
             }
@@ -164,7 +164,7 @@ public class PropelSelf : MonoBehaviour
 
         if (coolingDown)
         {
-            rb.AddForce(transform.forward * (force/ boostDurationFactor));
+            rb.AddForce(transform.forward * (force/ boostDurationFactor) * Time.deltaTime);
             Debug.Log("Boosting");
         }
     }

@@ -185,7 +185,7 @@ public class RearWheelDrive : MonoBehaviour {
                     curve.stiffness = 1.25f;
                 }
 
-                if (wheel.rpm > maxSpeed)
+                if (Mathf.Abs(wheel.rpm) > maxSpeed)
                     wheel.motorTorque = 0;
                 WheelHit wh;
                 if (wheel.GetGroundHit(out wh))
@@ -208,7 +208,7 @@ public class RearWheelDrive : MonoBehaviour {
 
             if (rightTrigger == 0 && leftTrigger == 0)
             {
-                wheel.brakeTorque = breakForce;
+                wheel.brakeTorque = breakForce / 20;
                // aud.Stop();
                 aud.volume = Mathf.Lerp(aud.volume, 0, .2f * Time.deltaTime);
             } else

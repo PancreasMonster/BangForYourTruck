@@ -33,16 +33,30 @@ public class FlipOver : MonoBehaviour
     public bool crashing;
     public float gravityForce;
 
+    float AButton;
+    float XButton;
+    Vector2 leftStick;
+    bool canSlam;
+
+    WheelFrictionCurve curve = new WheelFrictionCurve();
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponentInParent<Rigidbody>();
         h = GetComponentInParent<Health>();
+        curve.extremumSlip = 60;
+        curve.extremumValue = 100;
+        curve.asymptoteSlip = 50;
+        curve.asymptoteValue = 85;
+        curve.stiffness = 1;
+        foreach (WheelCollider w in wheels)
+        {
+            w.forwardFriction = curve;
+        }
     }
 
-    float AButton;
-    float XButton;
-    Vector2 leftStick;
+   
 
     private void OnFaceButtonSouth(InputValue value)
     {
@@ -201,10 +215,17 @@ public class FlipOver : MonoBehaviour
 
         if (timer > timerAllowance)
         {
-           
+            canSlam = true;
 
-           
-                float horAngle = leftStick.x;
+
+            curve.extremumSlip = 2200;
+            curve.asymptoteSlip = 2200;
+            foreach (WheelCollider w in wheels)
+            {
+                w.forwardFriction = curve;
+            }
+
+            float horAngle = leftStick.x;
                 float vertAngle = leftStick.y;
                 if (leftStick.x == 0 && leftStick.y == 0)
                     rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
@@ -235,7 +256,15 @@ public class FlipOver : MonoBehaviour
 
                     }
                 }
+            } else
+        {
+            if (canSlam)
+            {
+                canSlam = false;
+                StartCoroutine(HelpLanding());
+                
             }
+        }
             
 
 
@@ -316,4 +345,24 @@ public class FlipOver : MonoBehaviour
         delay = false;
     }
 
+
+    public IEnumerator HelpLanding()
+    {
+      
+        float t = 0;
+     
+        while (t < .25f)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        curve.extremumSlip = 60;
+        curve.asymptoteSlip = 50;
+        foreach (WheelCollider w in wheels)
+        {
+            w.forwardFriction = curve;
+        }
+
+    }
 }

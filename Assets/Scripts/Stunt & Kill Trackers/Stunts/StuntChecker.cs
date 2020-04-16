@@ -62,6 +62,8 @@ public class StuntChecker : MonoBehaviour
     float rightTrigger;
     float leftTrigger;
     float XButton;
+    RaycastHit hit;
+    Vector3 hitNormal = Vector3.up;
 
     private void OnLeftStick(InputValue value)
     {
@@ -101,7 +103,7 @@ public class StuntChecker : MonoBehaviour
     void FixedUpdate()
     {
         localAngularVel = tr.InverseTransformDirection(rb.angularVelocity);
-        oldVelocity = rb.velocity.sqrMagnitude;
+        oldVelocity = Mathf.Abs(rb.velocity.y);
         //Detect drifts
         if (detectDrift && !fo.crashing)
         {
@@ -446,15 +448,25 @@ public class StuntChecker : MonoBehaviour
 
     public IEnumerator HelpLanding ()
     {
-        float newVelocity = oldVelocity * .7f;
-        rb.velocity *= .3f;
+        float newVelocity = oldVelocity * .5f;
+        
         float t = 0;
-        while(t < .25f)
+        rb.angularVelocity *= .25f;
+        while (t < .25f)
         {
-            rb.AddForce(transform.forward * newVelocity * Time.deltaTime, ForceMode.Acceleration);
+            rb.angularVelocity *= .25f;
+            rb.velocity =  new Vector3(rb.velocity.x, rb.velocity.y *.6f, rb.velocity.z);
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, out hit, 7.5f, 14))
+                hitNormal = hit.normal;
+
+            Vector3 rotateAmount = Vector3.Cross(transform.up, hitNormal);
+            rb.angularVelocity = rotateAmount;
             t += Time.deltaTime;
-            rb.angularVelocity *= .5f;
+            
+            rb.AddForce(transform.forward * newVelocity * Time.deltaTime / .25f, ForceMode.Acceleration);
             yield return null;
         }
+        
+        hitNormal = Vector3.up;
     }
 }
