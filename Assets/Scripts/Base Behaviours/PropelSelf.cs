@@ -24,6 +24,7 @@ public class PropelSelf : MonoBehaviour
     public float targetBoostMaxDistance = 100;
     public bool canBoost = true;
     public Animator anim;
+    public float boostDurationFactor;
 
     // Start is called before the first frame update
     void Start()
@@ -161,6 +162,11 @@ public class PropelSelf : MonoBehaviour
              fill.fillAmount = power;
          } */
 
+        if (coolingDown)
+        {
+            rb.AddForce(transform.forward * (force/ boostDurationFactor));
+            Debug.Log("Boosting");
+        }
     }
 
     IEnumerator Cooldown ()
@@ -177,8 +183,9 @@ public class PropelSelf : MonoBehaviour
         coolingDown = false;
         anim.SetBool("Boost",false);
     }
+   
 
-    IEnumerator BoostEffect ()
+        IEnumerator BoostEffect ()
     {
         psMid.Play();
         psLeft.Play();
