@@ -29,6 +29,8 @@ public class KillManager : MonoBehaviour
 
     public PlayerInputManager pim;
 
+    public GameObject stadiumPyrotechnicParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +84,16 @@ public class KillManager : MonoBehaviour
     public void KillTracked (GameObject killer, GameObject victim, string damageString)
     {
         int deathNum = victim.GetComponent<Health>().playerNum - 1;
+
+        if (victim.GetComponent<Health>().teamNum == 1)
+        {
+            stadiumPyrotechnicParticles.GetComponent<PryotechnicsManager>().BlueTeamParticlesFire();
+        }
+        else
+        {
+            stadiumPyrotechnicParticles.GetComponent<PryotechnicsManager>().RedTeamParticlesFire();
+        }
+
         deaths[deathNum]++;
         killSpree[deathNum] = 0;
         int killNum = killer.GetComponent<Health>().playerNum - 1;
