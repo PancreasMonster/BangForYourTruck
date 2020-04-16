@@ -10,6 +10,9 @@ public class TagCollectionGate : MonoBehaviour
     public int gateTeamNum;
     AudioSource audio;
 
+    public ParticleSystem left;
+    public ParticleSystem right;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,8 @@ public class TagCollectionGate : MonoBehaviour
                     }
                     TH.currentTags = 0;
                     TH.EmptyTags();
+                    left.Play();
+                    right.Play();
                 }
             } else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
             {
@@ -67,6 +72,8 @@ public class TagCollectionGate : MonoBehaviour
                     }
                     TH.currentTags = 0;
                     TH.EmptyTags();
+                    left.Play();
+                    right.Play();
                 }
             }
             else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 1)
