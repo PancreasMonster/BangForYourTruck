@@ -14,6 +14,8 @@ public class LevelCreator : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+
+       
     }
 
     // Update is called once per frame
