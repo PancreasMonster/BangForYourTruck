@@ -30,6 +30,7 @@ public class Orbit : MonoBehaviour
     public LockOn lockOnScript;
     public GameObject lockOnParent;
     public Transform cam;
+    public float lerpSpeed = 30;
 
     void Start()
     {
@@ -45,10 +46,21 @@ public class Orbit : MonoBehaviour
     private void OnRightStickClick(InputValue value)
     {
 
-        lockedBehind = !lockedBehind;
+        /*lockedBehind = !lockedBehind;
         offset = origPos;
         offset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * offset;
+        */
+        origPos = new Vector3(origPos.x, origPos.y, -origPos.z);
+    }
 
+    private void OnRightStickRelease(InputValue value)
+    {
+
+        /*lockedBehind = !lockedBehind;
+        offset = origPos;
+        offset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * offset;
+        */
+        origPos = new Vector3(origPos.x, origPos.y, -origPos.z);
     }
 
     private void OnRightStick(InputValue value)
@@ -115,7 +127,9 @@ public class Orbit : MonoBehaviour
             {
                 Vector3 dir = player.position - cam.transform.position;
                 dir.Normalize();
-                
+                Vector3 tempOffset = origPos;
+                tempOffset = Quaternion.AngleAxis(rightStick.x * 90, Vector3.up) * tempOffset;
+                Vector3 appliedOffset = tempOffset;
 
                 if (lockedBehind)
                 {
@@ -127,28 +141,36 @@ public class Orbit : MonoBehaviour
                         {
                             jumpOffset = origPos;
                             jumpOffset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * jumpOffset;
+                            
                             disorient = true;
                         }
-
-                        cam.transform.position = player.position + jumpOffset;
-                        jumpOffset = Quaternion.AngleAxis(rightStick.x * turnSpeed * Time.deltaTime, Vector3.up) * jumpOffset;
+                        Vector3 jumpTempOffset = jumpOffset;
+                        jumpTempOffset = Quaternion.AngleAxis(rightStick.x * 90, Vector3.up) * jumpTempOffset;
+                        Vector3 jumpAppliedOffset = jumpTempOffset;
+                        cam.transform.position = Vector3.Lerp(cam.transform.position, player.position + jumpAppliedOffset, lerpSpeed * Time.deltaTime);
                         if (leftBumper == 0)
-                            cam.transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (rightStick.y * -yLookAmount), player.position.z));
+                            cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, Quaternion.LookRotation(player.TransformPoint(new Vector3(0, 0 + (rightStick.y * -yLookAmount), 0)) - cam.transform.position), lerpSpeed * Time.deltaTime);
                         else
-                            cam.transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                            cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, Quaternion.LookRotation(player.TransformPoint(new Vector3(0, 0, 0)) - cam.transform.position), lerpSpeed * Time.deltaTime);
                     }
                     else
                     {
+                      
                         if (leftBumper == 0)
-                            cam.transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y + (rightStick.y * -yLookAmount), player.TransformPoint(origPos).z);
+                            cam.transform.position = Vector3.Lerp(cam.transform.position, 
+                                new Vector3(player.TransformPoint(appliedOffset).x, player.TransformPoint(appliedOffset).y + (rightStick.y * -yLookAmount), player.TransformPoint(appliedOffset).z),
+                                lerpSpeed * Time.deltaTime);
                         else
-                            cam.transform.position = new Vector3(player.TransformPoint(origPos).x, player.TransformPoint(origPos).y, player.TransformPoint(origPos).z);
+                            cam.transform.position = Vector3.Lerp(cam.transform.position,
+                                new Vector3(player.TransformPoint(appliedOffset).x, player.TransformPoint(appliedOffset).y, player.TransformPoint(appliedOffset).z),
+                                lerpSpeed * Time.deltaTime);
 
-                        cam.transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                        cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, Quaternion.LookRotation(player.TransformPoint(new Vector3(0, lookOffsetY, 0)) - cam.transform.position), lerpSpeed * Time.deltaTime);
                         disorient = false;
                     }
 
-                    cam.transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                    if(!disorient)
+                        cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, Quaternion.LookRotation(player.TransformPoint(new Vector3(0, lookOffsetY, 0)) - cam.transform.position), lerpSpeed * Time.deltaTime);
                 }
 
                 if (!lockedBehind)
@@ -156,9 +178,9 @@ public class Orbit : MonoBehaviour
                     cam.transform.position = player.position + offset;
                     offset = Quaternion.AngleAxis(rightStick.x * turnSpeed * Time.deltaTime, Vector3.up) * offset;
                     if (leftBumper == 0)
-                        cam.transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY + (rightStick.y * -yLookAmount), player.position.z));
+                        cam.transform.LookAt(player.TransformPoint(new Vector3(0, 0 + (rightStick.y * -yLookAmount), 0)));
                     else
-                        cam.transform.LookAt(new Vector3(player.position.x, player.position.y + lookOffsetY, player.position.z));
+                        cam.transform.LookAt(player.TransformPoint(new Vector3(0, 0, 0)));
                 }
             }
             else
@@ -195,10 +217,5 @@ public class Orbit : MonoBehaviour
         }
 
     
-    }
-
-    public void rotateCamera (Vector3 direction)
-    {
-
     }
 }
