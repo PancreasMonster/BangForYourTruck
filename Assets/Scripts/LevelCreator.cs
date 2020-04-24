@@ -8,7 +8,7 @@ public class LevelCreator : MonoBehaviour
     
 {
     public bool mainMenu;
-    public bool singlePlayer, twoPlayer, fourPlayer;
+    public bool training, devRoom, twoPlayer, fourPlayer;
     public int levelToActivate;
     // Start is called before the first frame update
     void Start()
@@ -26,17 +26,31 @@ public class LevelCreator : MonoBehaviour
         }
     }
 
-    public void SetSinglePlayerTrue()
+    public void SetTrainingTrue()
     {
     
-            singlePlayer = true;
+        training = true;
         
     }
 
-    public void SetSinglePlayerFalse()
+    public void SetTrainingFalse()
     {
 
-        singlePlayer = false;
+        training = false;
+
+    }
+
+    public void SetDevRoomTrue()
+    {
+
+        devRoom = true;
+
+    }
+
+    public void SetDevRoomFalse()
+    {
+
+        devRoom = false;
 
     }
 
@@ -78,12 +92,18 @@ public class LevelCreator : MonoBehaviour
     public void LoadScene()
     {
         mainMenu = false;
-        if(singlePlayer)
+        if(training)
         {
             SceneManager.LoadScene("SinglePlayerScene", LoadSceneMode.Single);
             
         }
-        if(twoPlayer){
+
+        if (devRoom)
+        {
+            SceneManager.LoadScene("Gold Dev Room", LoadSceneMode.Single);
+
+        }
+        if (twoPlayer){
             SceneManager.LoadScene("Gold 1v1", LoadSceneMode.Single);
             
         }
