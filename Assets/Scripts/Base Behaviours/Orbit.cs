@@ -31,6 +31,8 @@ public class Orbit : MonoBehaviour
     public GameObject lockOnParent;
     public Transform cam;
     public float lerpSpeed = 30;
+    public float rotateSpeed = 180;
+    float rotateAmount;
 
     void Start()
     {
@@ -67,7 +69,7 @@ public class Orbit : MonoBehaviour
     {
 
         rightStick = value.Get<Vector2>();
-
+        
     }
 
     private void OnLeftBumper(InputValue value)
@@ -125,10 +127,11 @@ public class Orbit : MonoBehaviour
         {
             if (!death)
             {
+                rotateAmount = Mathf.Lerp(rotateAmount, 90 * rightStick.x, rotateSpeed * Time.deltaTime);
                 Vector3 dir = player.position - cam.transform.position;
                 dir.Normalize();
                 Vector3 tempOffset = origPos;
-                tempOffset = Quaternion.AngleAxis(rightStick.x * 90, Vector3.up) * tempOffset;
+                tempOffset = Quaternion.AngleAxis(rotateAmount, Vector3.up) * tempOffset;
                 Vector3 appliedOffset = tempOffset;
 
                 if (lockedBehind)
@@ -145,7 +148,7 @@ public class Orbit : MonoBehaviour
                             disorient = true;
                         }
                         Vector3 jumpTempOffset = jumpOffset;
-                        jumpTempOffset = Quaternion.AngleAxis(rightStick.x * 90, Vector3.up) * jumpTempOffset;
+                        jumpTempOffset = Quaternion.AngleAxis(rotateAmount, Vector3.up) * jumpTempOffset;
                         Vector3 jumpAppliedOffset = jumpTempOffset;
                         cam.transform.position = Vector3.Lerp(cam.transform.position, player.position + jumpAppliedOffset, lerpSpeed * Time.deltaTime);
                         if (leftBumper == 0)
