@@ -8,7 +8,8 @@ public class AudioSpectrumData : MonoBehaviour
     //public GameObject[][] crowdSections = new GameObject[10][];
     AudioSource aud;
     public float[] audSamples = new float[512];
-    public Color col1, col2;
+    public Color col1;
+    public List<Color> colors = new List<Color>();
 
 
 

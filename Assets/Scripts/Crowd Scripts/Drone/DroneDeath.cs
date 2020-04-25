@@ -64,6 +64,7 @@ public class DroneDeath : MonoBehaviour
             rb.mass = 20;
             //Explosion Damage Here
             collidedWithGround = true;
+            Destroy(this.gameObject);
         }
         
     }

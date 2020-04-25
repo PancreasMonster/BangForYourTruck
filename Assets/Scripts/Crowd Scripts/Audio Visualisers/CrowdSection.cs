@@ -9,6 +9,7 @@ public class CrowdSection : MonoBehaviour
 
     public AudioSpectrumData ASD;
     public int bandNum;
+    public int colorNum = 0;
 
     // Use this for initialization
     void Start()
@@ -27,7 +28,7 @@ public class CrowdSection : MonoBehaviour
             if (((float)(i + 1 / crowdSections.Count)) < ((float)ASD.audSamples[bandNum]))
             {
                 
-                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_5DE2E5C", ASD.col2);
+                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_5DE2E5C", ASD.colors[colorNum]);
                
     }
             else

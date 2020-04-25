@@ -131,7 +131,7 @@ public class Orbit : MonoBehaviour
                 Vector3 dir = player.position - cam.transform.position;
                 dir.Normalize();
                 Vector3 tempOffset = origPos;
-                tempOffset = Quaternion.AngleAxis(rotateAmount, Vector3.up) * tempOffset;
+                tempOffset = Quaternion.AngleAxis(rotateAmount, player.transform.up) * tempOffset;
                 Vector3 appliedOffset = tempOffset;
 
                 if (lockedBehind)
@@ -158,9 +158,9 @@ public class Orbit : MonoBehaviour
                     }
                     else
                     {
-                      
+
                         if (leftBumper == 0)
-                            cam.transform.position = Vector3.Lerp(cam.transform.position, 
+                            cam.transform.position = Vector3.Lerp(cam.transform.position,
                                 new Vector3(player.TransformPoint(appliedOffset).x, player.TransformPoint(appliedOffset).y + (rightStick.y * -yLookAmount), player.TransformPoint(appliedOffset).z),
                                 lerpSpeed * Time.deltaTime);
                         else
