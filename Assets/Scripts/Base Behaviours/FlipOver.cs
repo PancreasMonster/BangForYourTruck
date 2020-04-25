@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FlipOver : MonoBehaviour
 {
-    RaycastHit hit, hit2, hit3, hit4;
+    public RaycastHit hit, hit2, hit3, hit4;
     public LayerMask layer;
     public float force, angForce, linearForce = 500, angularStabilityForce = 2000;
     [Range(0, 1)]
@@ -167,8 +167,8 @@ public class FlipOver : MonoBehaviour
                             rigidbody.angularVelocity = Vector3.zero;
                         }
 
-                        //  Debug.Log("Hit");
                     }
+                    hit4 = hit2;
                 }
                 else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
                 {
@@ -178,7 +178,6 @@ public class FlipOver : MonoBehaviour
                         rigidbody.AddForce(transform.up * force);
                         rigidbody.angularVelocity = Vector3.zero;
 
-                        //  Debug.Log("Hit");
                     }
                 }
         }
@@ -189,7 +188,7 @@ public class FlipOver : MonoBehaviour
             {
                 timer = 0;
                 rigidbody.AddForce(gravityForce * -transform.up, ForceMode.Acceleration);
-               
+
             }
             else
             {

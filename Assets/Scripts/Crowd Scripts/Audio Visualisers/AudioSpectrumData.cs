@@ -10,6 +10,7 @@ public class AudioSpectrumData : MonoBehaviour
     public float[] audSamples = new float[512];
     public Color col1;
     public List<Color> colors = new List<Color>();
+    public float colorLerpTime = 10;
 
 
 
