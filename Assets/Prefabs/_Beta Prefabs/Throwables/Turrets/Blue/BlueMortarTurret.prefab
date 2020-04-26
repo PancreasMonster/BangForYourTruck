@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1538385023371662017}
   - component: {fileID: 7507949197446794917}
   m_Layer: 9
-  m_Name: Flamethrower Unwrap
+  m_Name: Turret Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   maxHealth: 0
-  currentHealth: 0
   playerNum: 1
   teamNum: 1
   healthBarCanvas: {fileID: 4105945699236562807, guid: 7639f25d764cf3a4bbc5d3499d915439,
@@ -322,6 +321,12 @@ MonoBehaviour:
   pr: {fileID: 0}
   damageText: {fileID: 0}
   damageTextLayer: 0
+  km: {fileID: 0}
+  killerTimer: 0
+  killMaxTime: 15
+  damageSource: {fileID: 0}
+  drone: 0
+  dronePainSound: 
 --- !u!114 &8024529850889431691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,11 +405,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5774676616864719765}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 296ecafa3ceba6644a1ee5b9bfbee683,
-        type: 3}
-      propertyPath: m_Name
-      value: Mortar Turret Base
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 296ecafa3ceba6644a1ee5b9bfbee683,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -475,12 +475,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45
       objectReference: {fileID: 0}
-    - target: {fileID: 1370317455370269502, guid: 296ecafa3ceba6644a1ee5b9bfbee683,
+    - target: {fileID: -927199367670048503, guid: 296ecafa3ceba6644a1ee5b9bfbee683,
+        type: 3}
+      propertyPath: m_Name
+      value: Mortar Turret Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684060692111445268, guid: 296ecafa3ceba6644a1ee5b9bfbee683,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: da3f1f8c0186be047ade576a0cb96555, type: 2}
-    - target: {fileID: 7684060692111445268, guid: 296ecafa3ceba6644a1ee5b9bfbee683,
+    - target: {fileID: 1370317455370269502, guid: 296ecafa3ceba6644a1ee5b9bfbee683,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -500,11 +505,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1538385023371662017}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 52bb2307dcb403a4e8847a522fb74711,
-        type: 3}
-      propertyPath: m_Name
-      value: Mortar Turret
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 52bb2307dcb403a4e8847a522fb74711,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -575,7 +575,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45000014
       objectReference: {fileID: 0}
-    - target: {fileID: -1724096388154614788, guid: 52bb2307dcb403a4e8847a522fb74711,
+    - target: {fileID: -927199367670048503, guid: 52bb2307dcb403a4e8847a522fb74711,
+        type: 3}
+      propertyPath: m_Name
+      value: Mortar Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357504551095723582, guid: 52bb2307dcb403a4e8847a522fb74711,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -585,7 +590,7 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b1f6dfd21b4456429cb4f83d9f6c1f9, type: 2}
-    - target: {fileID: 1357504551095723582, guid: 52bb2307dcb403a4e8847a522fb74711,
+    - target: {fileID: -1724096388154614788, guid: 52bb2307dcb403a4e8847a522fb74711,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

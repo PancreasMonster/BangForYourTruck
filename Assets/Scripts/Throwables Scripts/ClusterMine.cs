@@ -53,12 +53,13 @@ public class ClusterMine : MonoBehaviour
                 firedMine.GetComponent<Rigidbody>().AddForce((Vector3.up) * force * 1.5f, ForceMode.Impulse);
             }
         }
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 1);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 14)
         SpawnMines();
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 }
