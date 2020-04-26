@@ -173,7 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6523b6992a4e1ed438f3c702fe069432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerNum: 21
+  layerName: CarEntrance
+  turnOffBoost: 1
 --- !u!135 &1969161660446130727
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -194,14 +195,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 655881878873809752}
     m_Modifications:
-    - target: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
-      propertyPath: m_Name
-      value: Afterburner
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -246,6 +239,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
+      propertyPath: m_Name
+      value: Afterburner
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
       propertyPath: InitialModule.startSize.minScalar
       value: 20
@@ -285,11 +286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 655881878873809752}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
-        type: 3}
-      propertyPath: m_Name
-      value: Chevrons (2)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -360,6 +356,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.10000003
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
+        type: 3}
+      propertyPath: m_Name
+      value: Chevrons (2)
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -380,11 +381,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 655881878873809752}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
-        type: 3}
-      propertyPath: m_Name
-      value: Chevrons (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -455,6 +451,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.09999997
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
+        type: 3}
+      propertyPath: m_Name
+      value: Chevrons (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -475,11 +476,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 655881878873809752}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
-        type: 3}
-      propertyPath: m_Name
-      value: Chevrons
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -549,6 +545,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
+        type: 3}
+      propertyPath: m_Name
+      value: Chevrons
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: e7c0887bc7cc92446bb4f64702d6e0c9,
         type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntranceChangeLayer : MonoBehaviour
 {
-    public int layerNum;
+    public string layerName;
     public bool turnOffBoost;
 
     // Start is called before the first frame update
@@ -23,11 +23,8 @@ public class EntranceChangeLayer : MonoBehaviour
     {
         if(coll.transform.tag == "Player")
         {
-            coll.gameObject.layer = layerNum;
-            foreach(Transform t in coll.transform)
-            {
-                t.gameObject.layer = layerNum;
-            }
+            coll.gameObject.layer = LayerMask.NameToLayer(layerName);
+            ChangeLayersRecursively(coll.transform, layerName);
             if(turnOffBoost)
             {
                 coll.gameObject.GetComponent<PropelSelf>().canBoost = false;
@@ -35,6 +32,16 @@ public class EntranceChangeLayer : MonoBehaviour
             {
                 coll.gameObject.GetComponent<PropelSelf>().canBoost = true;
             }
+        }
+    }
+
+
+    private void ChangeLayersRecursively(Transform trans, string name)
+    {
+        foreach (Transform child in trans)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer(name);
+            ChangeLayersRecursively(child, name);
         }
     }
 }
