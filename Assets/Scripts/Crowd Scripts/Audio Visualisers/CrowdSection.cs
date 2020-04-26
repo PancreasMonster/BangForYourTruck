@@ -41,7 +41,7 @@ public class CrowdSection : MonoBehaviour
                 col = Color.Lerp(col, ASD.col1, ASD.colorLerpTime * Time.deltaTime);
 
             }
-            crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_5DE2E5C", col);
+            crowdSections[i].GetComponent<Renderer>().material.SetColor("_EmissionColor", col * ASD.intensity);
         }
     }
 

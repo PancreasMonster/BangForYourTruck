@@ -64,14 +64,14 @@ public class CollisionDamage : MonoBehaviour
     {
         if (thisHealth != null)
         {
-            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != thisHealth.playerNum)
+            if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != thisHealth.teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
                 damage = Mathf.RoundToInt(Mathf.Min(thisHealth.health, damage));
                 coll.transform.GetComponent<Health>().TakeDamage(null, transform.parent.gameObject, damage, Vector3.zero);
                 Debug.Log("Hit");
             } 
-            else if (coll.transform.GetComponentInParent<Health>() != null && coll.transform.GetComponentInParent<Health>().teamNum != thisHealth.playerNum)
+            else if (coll.transform.GetComponentInParent<Health>() != null && coll.transform.GetComponentInParent<Health>().teamNum != thisHealth.teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
                 damage = Mathf.RoundToInt(Mathf.Min(thisHealth.health, damage));

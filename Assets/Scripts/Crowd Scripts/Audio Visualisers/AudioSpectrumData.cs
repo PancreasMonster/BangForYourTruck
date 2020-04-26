@@ -11,6 +11,8 @@ public class AudioSpectrumData : MonoBehaviour
     public Color col1;
     public List<Color> colors = new List<Color>();
     public float colorLerpTime = 10;
+    [Range(1, 5)]
+    public float intensity;
 
 
 
