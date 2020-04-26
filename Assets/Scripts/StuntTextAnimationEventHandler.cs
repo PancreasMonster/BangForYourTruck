@@ -25,6 +25,6 @@ public class StuntTextAnimationEventHandler : MonoBehaviour
 
     public void LeaveGoToScoreTextState()
     {
-        anim.SetBool("GoToScroText", false);
+        anim.SetBool("GoToScoreText", false);
     }
 }
