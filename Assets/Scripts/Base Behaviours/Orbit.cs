@@ -169,7 +169,7 @@ public class Orbit : MonoBehaviour
 
                         if (leftBumper == 0)
                             cam.transform.position = Vector3.Lerp(cam.transform.position,
-                                new Vector3(player.TransformPoint(appliedOffset).x, player.TransformPoint(appliedOffset).y + (rightStick.y * yLookAmount), player.TransformPoint(appliedOffset).z),
+                                new Vector3(player.TransformPoint(appliedOffset).x, player.TransformPoint(appliedOffset).y, player.TransformPoint(appliedOffset).z),
                                 //player.transform.position + appliedOffset,
                                 lerpSpeed * Time.deltaTime);
                         else
@@ -182,7 +182,7 @@ public class Orbit : MonoBehaviour
                     }
 
                     if(!disorient)
-                        cam.transform.LookAt(player.TransformPoint(new Vector3(0, 0 + (rightStick.y * yLookAmount), 0)));
+                        cam.transform.LookAt(player.TransformPoint(new Vector3(0, lookOffsetY + (rightStick.y * yLookAmount), 0)));
                 }
 
                 if (!lockedBehind)
@@ -211,8 +211,8 @@ public class Orbit : MonoBehaviour
         {
             if (!death)
             {
-                cam.transform.position = Vector3.Lerp(transform.position, lockOnParent.transform.position, 60 * Time.deltaTime);
-                cam.transform.rotation = Quaternion.Slerp(transform.rotation, lockOnParent.transform.rotation, 60 * Time.deltaTime);
+                cam.transform.position = Vector3.Lerp(transform.position, lockOnParent.transform.position, lerpSpeed * Time.deltaTime);
+                cam.transform.rotation = Quaternion.Slerp(transform.rotation, lockOnParent.transform.rotation, lerpSpeed * Time.deltaTime);
             }
             else
             {
