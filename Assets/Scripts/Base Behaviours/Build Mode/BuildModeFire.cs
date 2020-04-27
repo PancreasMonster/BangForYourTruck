@@ -78,7 +78,7 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnRightBumper(InputValue value)
     {
-        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
+        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1 && PadLB == 1)
         {
             PadRB = 1;
            
