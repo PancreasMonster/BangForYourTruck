@@ -19,6 +19,7 @@ public class BlackHole : MonoBehaviour
     public ParticleSystem explosionParticle;
     public ParticleSystem vacuumParticle;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,14 +35,7 @@ public class BlackHole : MonoBehaviour
             timeActive += Time.deltaTime;
             range = Mathf.Max(maxRange * ((timeActive / duration)), minRange);
             GetComponent<MoonGravity>().maxDistance = range;
-
-            //particle system gets larger radius over time, at the start it is multiplied by .333, finally buy 1
-            float vacuumParticleRadius;
-            vacuumParticleRadius = Mathf.Max(300 * ((timeActive / duration)), 100);
-            Debug.Log(vacuumParticleRadius);
-            var shape = vacuumParticle.shape;
-            shape.radius = vacuumParticleRadius;
-            //vacuumParticle.shape.radius = vacuumParticleRadius;
+            
         }
     }
 
@@ -52,6 +46,7 @@ public class BlackHole : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePositionX |
                          RigidbodyConstraints.FreezePositionY |
                          RigidbodyConstraints.FreezePositionZ;
+        vacuumParticle.Play();
         activated = true;
         Invoke("ExplodingFinish", duration);
     }
