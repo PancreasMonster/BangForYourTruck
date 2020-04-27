@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3393869045288616349}
   - component: {fileID: 3353044194873522421}
   - component: {fileID: 4436831242324708472}
+  - component: {fileID: 6748958081497226449}
   m_Layer: 20
   m_Name: BlueTeamTag
   m_TagString: TeamTag
@@ -63,6 +64,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6748958081497226449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3393869045288616348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd990db8413f2d459088f12bde94cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 60
 --- !u!64 &7143226879188813281
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -181,7 +195,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9038810849678402710}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
@@ -200,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagTeamNum: 1
   collectionDelayTime: 0.75
+  parent: {fileID: 3393869045288616348}
 --- !u!1001 &5664644290318784511
 PrefabInstance:
   m_ObjectHideFlags: 0

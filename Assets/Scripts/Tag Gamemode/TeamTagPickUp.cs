@@ -7,6 +7,7 @@ public class TeamTagPickUp : MonoBehaviour
     public float tagTeamNum;
     bool collected;
     public float collectionDelayTime = .75f;
+    public GameObject parent;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class TeamTagPickUp : MonoBehaviour
 
     }
 
-    private void OnCollisionTrigger(Collision coll)
+    private void OnTriggerEnter(Collider coll)
     {
         if (!collected)
         {
@@ -34,13 +35,13 @@ public class TeamTagPickUp : MonoBehaviour
                     {
                         collected = true;
                         t.AddTag();
-                        Destroy(this.transform.parent);
+                        Destroy(parent);
                     }
                 }
                 else
                 {
                     collected = true;
-                    Destroy(this.gameObject);
+                    Destroy(parent);
                 }
             }
         }
@@ -51,4 +52,5 @@ public class TeamTagPickUp : MonoBehaviour
         yield return new WaitForSeconds(collectionDelayTime);
         this.gameObject.layer = 19;       
     }
+
 }
