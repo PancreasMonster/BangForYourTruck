@@ -19,6 +19,7 @@ public class BlackHole : MonoBehaviour
     public ParticleSystem explosionParticle;
     public ParticleSystem vacuumParticle;
 
+    public GameObject source;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +64,7 @@ public class BlackHole : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.TakeDamage("black holed", this.gameObject, damage, Vector3.zero);
+                h.TakeDamage("black holed", source, damage, Vector3.zero);
         }
         transform.GetChild(0).gameObject.SetActive(false);
         explosionParticle.Play();

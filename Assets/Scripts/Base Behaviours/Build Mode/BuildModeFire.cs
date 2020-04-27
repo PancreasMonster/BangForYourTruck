@@ -181,11 +181,17 @@ public class BuildModeFire : MonoBehaviour
                     clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
                 if (clone.GetComponent<Health>() != null)
                     clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
-                /*if (clone.GetComponent<Bomb>() != null)
-                {                 
-                    cooldown = false;
-                }*/
-                if (clone.GetComponent<Missile>() != null)
+            if (clone.GetComponent<Missile>() != null)
+                    clone.GetComponent<Missile>().source = this.gameObject;
+            if (clone.GetComponent<BlackHole>() != null)
+                clone.GetComponent<BlackHole>().source = this.gameObject;
+            if (clone.GetComponent<MoonGravity>() != null)
+                clone.GetComponent<MoonGravity>().teamNum = GetComponent<Health>().teamNum;
+            /*if (clone.GetComponent<Bomb>() != null)
+            {                 
+                cooldown = false;
+            }*/
+            if (clone.GetComponent<Missile>() != null)
                     clone.GetComponent<Missile>().teamNum = GetComponent<Health>().teamNum;
 
                 Rigidbody unitRB = clone.GetComponent<Rigidbody>();

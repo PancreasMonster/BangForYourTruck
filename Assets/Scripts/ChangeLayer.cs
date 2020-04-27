@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChangeLayer : MonoBehaviour
 {
+    public string layerName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +21,16 @@ public class ChangeLayer : MonoBehaviour
     IEnumerator LayerDelay ()
     {
         yield return new WaitForSeconds(2f);
-        this.gameObject.layer = 16;
-        Transform[] childrenT = GetComponentsInChildren<Transform>();
-        foreach (Transform t in childrenT)
+        this.gameObject.layer = LayerMask.NameToLayer(name);
+        ChangeLayersRecursively(transform, layerName);
+    }
+
+    private void ChangeLayersRecursively(Transform trans, string name)
+    {
+        foreach (Transform child in trans)
         {
-            t.gameObject.layer = 0;
+            child.gameObject.layer = LayerMask.NameToLayer(name);
+            ChangeLayersRecursively(child, name);
         }
     }
 }

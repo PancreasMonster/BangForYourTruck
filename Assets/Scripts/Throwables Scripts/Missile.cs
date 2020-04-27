@@ -6,6 +6,7 @@ public class Missile : MonoBehaviour
 {
     public Transform target;
     public GameObject particles;
+    public GameObject source;
     public int teamNum;
 
     public float speed = 500f; // speed of the missle forward
@@ -19,6 +20,8 @@ public class Missile : MonoBehaviour
     private bool lockedOn = false;
 
     private Rigidbody rb;
+
+    private List<GameObject> playersHit = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -60,15 +63,15 @@ public class Missile : MonoBehaviour
                 if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
                 {
                     if (Vector3.Distance(transform.position, c.transform.position) > damageRange / 2f)
-                    {
-                        c.GetComponent<Health>().TakeDamage ("missiled", this.gameObject, maxDamage / 2f, Vector3.zero);
+                    {                    
+                        c.GetComponent<Health>().TakeDamage ("missiled", source, maxDamage / 2f, Vector3.zero);
+                    
                     }
                     else if (Vector3.Distance(transform.position, c.transform.position) <= damageRange / 2f)
-                    {
-                        c.GetComponent<Health>().TakeDamage("missiled", this.gameObject, maxDamage, Vector3.zero);
-                    }
-                    if (c.GetComponentInChildren<Shaker>() != null)
-                        c.GetComponentInChildren<Shaker>().PlayShake();
+                    {                       
+                        c.GetComponent<Health>().TakeDamage("missiled", source, maxDamage, Vector3.zero);
+                     
+                    }                  
                 }
             }
         }

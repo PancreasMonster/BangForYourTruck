@@ -8,8 +8,10 @@ public class DroneDeath : MonoBehaviour
     Rigidbody rb;
     public float propellerForce;
     public float propellerRemovalTime;
+    public GameObject droneDeathPS;
     float gravityForce;
     bool collidedWithGround = false;
+    public float explosiveRadius, explosiveForce;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +51,7 @@ public class DroneDeath : MonoBehaviour
         {
             GetComponentInChildren<DroneBodySpin>().enabled = false;
             StopAllCoroutines();
-            //Explosion Here
+            Instantiate(droneDeathPS, transform.position, Quaternion.identity);
             Debug.Log(coll.transform.name);
             foreach (Transform t in propellerPoints)
             {
@@ -62,7 +64,15 @@ public class DroneDeath : MonoBehaviour
             propellerPoints.Clear();
             gravityForce = 300;
             rb.mass = 20;
-            //Explosion Damage Here
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosiveRadius);
+            foreach (Collider c in hitColliders)
+            {
+                Rigidbody rb = c.GetComponent<Rigidbody>();
+                if (rb != null)
+                    rb.AddExplosionForce(explosiveForce * rb.mass, transform.position, explosiveRadius);
+
+                
+            }
             collidedWithGround = true;
             Destroy(this.gameObject);
         }
