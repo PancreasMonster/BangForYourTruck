@@ -64,6 +64,7 @@ public class StuntChecker : MonoBehaviour
     float XButton;
     RaycastHit hit;
     Vector3 hitNormal = Vector3.up;
+    public Animator anim;
 
     private void OnLeftStick(InputValue value)
     {
