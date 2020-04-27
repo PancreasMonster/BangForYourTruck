@@ -196,25 +196,25 @@ public class PropelSelf : MonoBehaviour
         PPV.profile.TryGetSettings(out ChromAberr);
         DepthOfField dop = null;
         PPV.profile.TryGetSettings(out dop);
-        while (ChromAberr.intensity.value <= 1)
+       /* while (ChromAberr.intensity.value <= 1)
         {
             ChromAberr.intensity.value += (10f * Time.deltaTime);
             dop.focalLength.value += (40f * Time.deltaTime);
             yield return null;
-        }
+        }*/
         yield return new WaitForSeconds(.6f);
         psMid.Stop();
         psLeft.Stop();
         psRight.Stop();
 
 
-        while (ChromAberr.intensity.value >= 0)
+      /*  while (ChromAberr.intensity.value >= 0)
         {
             ChromAberr.intensity.value -= (5 * Time.deltaTime);
             dop.focalLength.value -= (40f * Time.deltaTime);
             yield return null;
-        }
-        dop.focalLength.value = 260f;
+        } */
+        //dop.focalLength.value = 260f;
     }
 }
  

@@ -6,6 +6,7 @@ public class EntranceChangeLayer : MonoBehaviour
 {
     public string layerName;
     public bool turnOffBoost;
+    public LayerMask lm;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class EntranceChangeLayer : MonoBehaviour
         if(coll.transform.tag == "Player")
         {
             coll.gameObject.layer = LayerMask.NameToLayer(layerName);
+            coll.GetComponent<FlipOver>().layer = lm;
             ChangeLayersRecursively(coll.transform, layerName);
             if(turnOffBoost)
             {

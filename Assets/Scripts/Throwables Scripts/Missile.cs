@@ -51,11 +51,11 @@ public class Missile : MonoBehaviour
     private void OnCollisionEnter(Collision coll)
     {
         Instantiate(particles, transform.position, transform.rotation);
-
+        StopAllCoroutines();
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRange);
         foreach (Collider c in hitColliders)
         {
-            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject && c.transform.tag != "Drone")
+            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
             {
                 if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
                 {
@@ -88,7 +88,7 @@ public class Missile : MonoBehaviour
             List<Transform> targets = new List<Transform>();
             foreach (Collider c in hitColliders)
             {
-                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
+                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject && c.transform.tag != "Drone")
                 {
                     if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
                     {
@@ -108,6 +108,47 @@ public class Missile : MonoBehaviour
                     target = t;
                 }
             }
+        }
+            if(target == null)
+        {
+            StartCoroutine(CheckForTargets());
+        }
+    }
+
+    private IEnumerator CheckForTargets()
+    {
+
+        yield return new WaitForSeconds(.5f);
+        if (!target)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, checkRange);
+            List<Transform> targets = new List<Transform>();
+            foreach (Collider c in hitColliders)
+            {
+                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject && c.transform.tag != "Drone")
+                {
+                    if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
+                    {
+                        targets.Add(c.transform);
+                    }
+                }
+            }
+
+            float dist = float.PositiveInfinity;
+
+            foreach (Transform t in targets)
+            {
+                float magDist = Vector3.Distance(t.transform.position, transform.position);
+                if (magDist < dist)
+                {
+                    dist = magDist;
+                    target = t;
+                }
+            }
+        }
+        if (target == null)
+        {
+            StartCoroutine(CheckForTargets());
         }
     }
 }

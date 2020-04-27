@@ -134,39 +134,39 @@ public class WheelSkid : MonoBehaviour {
                     DepthOfField dop = null;
                     PPV.profile.TryGetSettings(out dop);
 
-                    if (timer > .2f)
-                    {
-                        ChromAberr.intensity.value = Mathf.Clamp(timer - .2f, 0, .6f);
-                        dop.focalLength.value = Mathf.Clamp((timer * 12) + 260, 260, 280);
-                    } else if (ChromAberr.intensity.value > 0)
-                    {
-                        ChromAberr.intensity.value = Mathf.Lerp(ChromAberr.intensity.value, 0, 2 * Time.deltaTime);
-                        dop.focalLength.value = Mathf.Lerp(dop.focalLength.value, 260, 2 * Time.deltaTime);
-                    }
-                   /* while (ChromAberr.intensity.value <= 1)
-                    {
-                        ChromAberr.intensity.value += (10f * Time.deltaTime);
-                        dop.focalLength.value += (40f * Time.deltaTime);
-                        yield return null;
-                    }
-                    yield return new WaitForSeconds(.4f);
-                    
+                    /*  if (timer > .2f)
+                     {
+                         ChromAberr.intensity.value = Mathf.Clamp(timer - .2f, 0, .6f);
+                         dop.focalLength.value = Mathf.Clamp((timer * 12) + 260, 260, 280);
+                     } else if (ChromAberr.intensity.value > 0)
+                     {
+                         ChromAberr.intensity.value = Mathf.Lerp(ChromAberr.intensity.value, 0, 2 * Time.deltaTime);
+                         dop.focalLength.value = Mathf.Lerp(dop.focalLength.value, 260, 2 * Time.deltaTime);
+                     }
+                    /* while (ChromAberr.intensity.value <= 1)
+                     {
+                         ChromAberr.intensity.value += (10f * Time.deltaTime);
+                         dop.focalLength.value += (40f * Time.deltaTime);
+                         yield return null;
+                     }
+                     yield return new WaitForSeconds(.4f);
 
-                    while (ChromAberr.intensity.value >= 0)
-                    {
-                        ChromAberr.intensity.value -= (5 * Time.deltaTime);
-                        dop.focalLength.value -= (40f * Time.deltaTime);
-                        yield return null;
-                    }
-                    dop.focalLength.value = 260f; */
-                
 
+                     while (ChromAberr.intensity.value >= 0)
+                     {
+                         ChromAberr.intensity.value -= (5 * Time.deltaTime);
+                         dop.focalLength.value -= (40f * Time.deltaTime);
+                         yield return null;
+                     }
+                     dop.focalLength.value = 260f; */
 
 
 
-            }
-				// Account for further movement since the last FixedUpdate
-				Vector3 skidPoint = wheelHitInfo.point + (rb.velocity * (Time.time - lastFixedUpdateTime));
+
+
+                }
+                // Account for further movement since the last FixedUpdate
+                Vector3 skidPoint = wheelHitInfo.point + (rb.velocity * (Time.time - lastFixedUpdateTime));
 				lastSkid = skidmarksController.AddSkidMark(skidPoint, wheelHitInfo.normal, intensity, lastSkid);
 			}
 			else {

@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8114591173906883841}
   m_Layer: 0
   m_Name: DroneWaypoints
-  m_TagString: Untagged
+  m_TagString: Drone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 9020103374880410377}
   m_Layer: 0
   m_Name: DroneBounds
-  m_TagString: Untagged
+  m_TagString: Drone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -732,8 +732,10 @@ MonoBehaviour:
   droneCol: {fileID: 0}
   stateTime: 20
   closeUpDialogue: event:/Drone Voice/Closer Look
-  dead: 0
-  spawnPoint: {fileID: 0}
+  deathDialogue: 
+  whatHappenedDialogue: 
+  respawnDialogue: 
+  droneDeathPrefab: {fileID: 0}
 --- !u!65 &8641693531037832323
 BoxCollider:
   m_ObjectHideFlags: 0
