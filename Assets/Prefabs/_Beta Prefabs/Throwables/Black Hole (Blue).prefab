@@ -14565,6 +14565,8 @@ MonoBehaviour:
   minRange: 400
   damage: 30
   explosiveForce: 10000
+  explosionParticle: {fileID: 0}
+  vacuumParticle: {fileID: 0}
 --- !u!114 &5316140195681125289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19541,6 +19543,7 @@ GameObject:
   - component: {fileID: 8279841846926001680}
   - component: {fileID: 5828470652782250376}
   - component: {fileID: 7040388985361972593}
+  - component: {fileID: 3140587942370936378}
   m_Layer: 0
   m_Name: Vacuum particles sphere
   m_TagString: Untagged
@@ -24283,3 +24286,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!111 &3140587942370936378
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7022662978676790587}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 35dd33232492d6e48bd265c0a596a87f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 35dd33232492d6e48bd265c0a596a87f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
