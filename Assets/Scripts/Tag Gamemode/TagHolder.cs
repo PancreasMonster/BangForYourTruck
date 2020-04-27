@@ -54,7 +54,7 @@ public class TagHolder : MonoBehaviour
             float angle = i * Mathf.PI * 2f / 8;
             Vector3 newPos = new Vector3(Mathf.Cos(angle) * 6, 0, Mathf.Sin(angle) * 6);
             GameObject droppedTag = Instantiate(teamTag, new Vector3(transform.position.x + newPos.x, transform.position.y + 1, transform.position.z + newPos.z), Quaternion.identity);
-            droppedTag.GetComponent<TeamTagPickUp>().tagTeamNum = GetComponent<Health>().teamNum;
+            droppedTag.GetComponentInChildren<TeamTagPickUp>().tagTeamNum = GetComponent<Health>().teamNum;
             droppedTag.GetComponent<Rigidbody>().AddForce(Vector3.up * dropForce);
             currentTags = 0;
         }

@@ -11,7 +11,7 @@ public class TeamTagPickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(Random.insideUnitSphere * 500);
+        GetComponentInParent<Rigidbody>().AddForce(Random.insideUnitSphere * 500);
         StartCoroutine(CollectionDelayInitialisation());
     }
 
@@ -21,7 +21,7 @@ public class TeamTagPickUp : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision coll)
+    private void OnCollisionTrigger(Collision coll)
     {
         if (!collected)
         {
@@ -34,7 +34,7 @@ public class TeamTagPickUp : MonoBehaviour
                     {
                         collected = true;
                         t.AddTag();
-                        Destroy(this.gameObject);
+                        Destroy(this.transform.parent);
                     }
                 }
                 else
