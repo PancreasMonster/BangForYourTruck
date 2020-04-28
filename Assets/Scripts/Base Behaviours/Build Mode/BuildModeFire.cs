@@ -44,6 +44,8 @@ public class BuildModeFire : MonoBehaviour
     public bool forwardRange = true, backwardRange = true;
     public float rangeDelay;
     public Transform cardParent;
+    public GameObject selectorPrefab;
+    GameObject selector;
 
 
 
@@ -55,6 +57,8 @@ public class BuildModeFire : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics.gravity.y);
         targetOriginalPos = aimTarget.transform.localPosition;
+        GameObject clone = Instantiate(selectorPrefab, transform.position, Quaternion.identity);
+        selector = clone;
     }
 
     Vector2 rightStick;
@@ -69,7 +73,13 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = 1;
+        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
+        {
+            PadLB = 1;
+
+            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown();
+        }
+        
         if (!cooldown)
         {
             aimTarget.transform.localPosition = targetOriginalPos;
@@ -78,12 +88,7 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnRightBumper(InputValue value)
     {
-        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1 && PadLB == 1)
-        {
-            PadRB = 1;
-           
-            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown();
-        }
+        
     }
 
     private void OnLeftBumperRelease(InputValue value)
@@ -106,6 +111,9 @@ public class BuildModeFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        selector.transform.localPosition = new Vector3(0, 0, 0);
+        selector.transform.parent = discUIImages[currentI].transform;
+        selector.transform.SetSiblingIndex(0);
         // text.text = rc.resourcesID[currentI];
         //  image.sprite = icons[currentI];
         //if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
@@ -166,7 +174,7 @@ public class BuildModeFire : MonoBehaviour
             }*/
         }
 
-        if (PadLB > 0 && PadRB > 0 && !cooldown)
+        if (PadLB > 0 && !cooldown)
         {
             targetZDistance = 0;
             lr.positionCount = 0;
