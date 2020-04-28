@@ -330,8 +330,14 @@ public class FlipOver : MonoBehaviour
         rigidbody.angularVelocity = Vector3.zero;
         yield return new WaitForSeconds(.25f);
         turnDelay = false;
-        while (Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f)
+        float t = 0;
+        bool flippedOrTimeOver = false;
+        while (!flippedOrTimeOver && Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f)
         {
+            if(Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f || t > 1.5f)
+            {
+                flippedOrTimeOver = true;
+            }
             //Gets the angle in order to determine the direction the vehicle needs to roll
             float angle = Vector3.SignedAngle(rigidbody.transform.up, averageColliderSurfaceNormal, rigidbody.transform.forward);
 
@@ -339,6 +345,7 @@ public class FlipOver : MonoBehaviour
             Vector3 torqueAmount = Mathf.Sign(angle) * rigidbody.transform.forward * angularStabilityForce * Time.fixedDeltaTime;
 
             rigidbody.AddTorque(torqueAmount, ForceMode.Acceleration);
+            t += Time.deltaTime;
             yield return null;
         }
         delay = false;

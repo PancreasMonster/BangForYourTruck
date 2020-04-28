@@ -151,17 +151,16 @@ public class Orbit : MonoBehaviour
                     {
                         if (!disorient)
                         {
-                            
+                             jumpOffset = origPos;                        
+                        jumpOffset = Quaternion.AngleAxis(player.eulerAngles.y - 180, Vector3.up) * jumpOffset;
                             
                             disorient = true;
                         }
-                        jumpOffset = origPos;
-                        //yAirRotation = Mathf.Lerp(yAirRotation, player.transform.localEulerAngles.y - 180, lerpSpeed * .5f * Time.deltaTime);
-                        jumpOffset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * jumpOffset;
+                       
                         Vector3 jumpTempOffset = jumpOffset;
                         jumpTempOffset = Quaternion.AngleAxis(rotateAmount, Vector3.up) * jumpTempOffset;
                         Vector3 jumpAppliedOffset = jumpTempOffset;
-                        cam.transform.position = Vector3.Lerp(cam.transform.position, playerPos.position + jumpAppliedOffset, lerpSpeed * .75f * Time.deltaTime);
+                        cam.transform.position = Vector3.Lerp(cam.transform.position, playerPos.position + jumpAppliedOffset, lerpSpeed * 1 * Time.deltaTime);
                         if (leftBumper == 0)
                             cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, 0 + (rightStick.y * yLookAmount), 0)));
                         else
