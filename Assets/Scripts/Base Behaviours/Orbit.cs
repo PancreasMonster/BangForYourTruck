@@ -213,8 +213,8 @@ public class Orbit : MonoBehaviour
         {
             if (!death)
             {
-                cam.transform.position = Vector3.Lerp(transform.position, lockOnParent.transform.position, lerpSpeed * 2f * Time.deltaTime);
-                cam.transform.rotation = Quaternion.Slerp(transform.rotation, lockOnParent.transform.rotation, lerpSpeed * 2f * Time.deltaTime);
+                cam.transform.position = Vector3.Lerp(cam.transform.position, lockOnParent.transform.position, lerpSpeed * 2f * Time.deltaTime);
+                cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, lockOnParent.transform.rotation, lerpSpeed * 2f * Time.deltaTime);
             }
             else
             {

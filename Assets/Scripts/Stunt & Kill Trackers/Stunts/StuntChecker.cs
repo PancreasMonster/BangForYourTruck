@@ -65,6 +65,7 @@ public class StuntChecker : MonoBehaviour
     RaycastHit hit;
     Vector3 hitNormal = Vector3.up;
     public Animator anim;
+    bool animCrash = false;
 
     private void OnLeftStick(InputValue value)
     {
@@ -145,6 +146,17 @@ public class StuntChecker : MonoBehaviour
 
         //Combine strings into final stunt string
         stuntString = fo.crashing ? "Crashed" : driftString + jumpString + (string.IsNullOrEmpty(flipString) || string.IsNullOrEmpty(jumpString) ? "" : " + ") + flipString;
+
+        if (!animCrash && fo.crashing)
+        {
+            animCrash = true;
+            anim.SetBool("Crashed", true);
+        }
+
+        if(!fo.crashing)
+        {
+            animCrash = false;
+        }
     }
 
     void DetectDrift()
@@ -160,12 +172,12 @@ public class StuntChecker : MonoBehaviour
                 score += driftScore;
                 driftDist = 0;
                 driftScore = 0;
-                driftString = "";
+                //driftString = "";
                 driftDisplay = false;
             }
             driftHold = true;   
             driftDist += rb.velocity.magnitude * Time.fixedDeltaTime / 10;
-            driftScore += driftDist;
+            driftScore += driftDist / 100;
             driftString = "Drift: " + driftDist.ToString("n0") + " m ";
 
             /*  if (engine)
@@ -178,7 +190,8 @@ public class StuntChecker : MonoBehaviour
             score += driftScore;
             driftDist = 0;
             driftScore = 0;
-            driftString = "";
+            //driftString = "";
+            
         }
         else
         {
@@ -243,7 +256,7 @@ public class StuntChecker : MonoBehaviour
                 score += flipScore;
                 stunts.Clear();
                 doneStunts.Clear();
-                flipString = "";
+                //flipString = "";
                 flipDisplay = false;
             }
 
@@ -333,7 +346,7 @@ public class StuntChecker : MonoBehaviour
             
             stunts.Clear();
             doneStunts.Clear();
-            flipString = "";
+            //flipString = "";
         }
         else
         {
@@ -373,6 +386,7 @@ public class StuntChecker : MonoBehaviour
         yield return new WaitForSeconds(stuntStringHoldTime);
         jumpHold = false;
         jumpDisplay = false;
+        anim.SetBool("GoToScoreText", true);
     }
 
     IEnumerator flipHoldActivation()
@@ -382,6 +396,7 @@ public class StuntChecker : MonoBehaviour
         flipHold = false;
         flipDisplay = false;
         landStunt = true;
+        anim.SetBool("GoToScoreText", true);
     }
 
     public void FlipEffect()
