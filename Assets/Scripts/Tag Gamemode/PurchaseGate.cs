@@ -16,7 +16,7 @@ public class PurchaseGate : MonoBehaviour
     void Start()
     {
         TextMesh text = transform.parent.GetComponentInChildren<TextMesh>();
-        text.text = text.text + "Cost: " + price.ToString();
+        //text.text = text.text + "Cost: " + price.ToString();
         audio = GetComponent<AudioSource>();
     }
 

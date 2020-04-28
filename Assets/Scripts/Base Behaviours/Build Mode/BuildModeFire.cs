@@ -99,7 +99,7 @@ public class BuildModeFire : MonoBehaviour
     private void OnDPADLeftRight(InputValue value)
     {
         DPadLeftRight = value.Get<float>();
-        Debug.Log(DPadLeftRight);
+        //Debug.Log(DPadLeftRight);
     }
 
 
@@ -174,9 +174,12 @@ public class BuildModeFire : MonoBehaviour
                 cooldown = true;
                 StartCoroutine(Cooldown());
                 GameObject clone = Instantiate(currentDisc, firingPoint.position, transform.rotation);
-                // clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
-                if (clone.transform.name == "BlueLaserTurret" || clone.transform.name == "RedLaserTurret" || clone.transform.name == "BlueParticleTurret" || clone.transform.name == "RedParticleTurret")
-                    clone.transform.rotation = Quaternion.Euler(-90, clone.transform.rotation.eulerAngles.x, clone.transform.rotation.eulerAngles.z);
+            // clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
+            if (clone.transform.name == "BlueLaserTurret(Clone)" || clone.transform.name == "RedLaserTurret(Clone)"
+                || clone.transform.name == "BlueParticleTurret(Clone)" || clone.transform.name == "RedParticleTurret(Clone)")
+            {
+                clone.transform.eulerAngles = new Vector3(-90, 0, 0);
+            }
                 if (clone.GetComponent<ResourceCollection>() != null)
                     clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
                 if (clone.GetComponent<Health>() != null)

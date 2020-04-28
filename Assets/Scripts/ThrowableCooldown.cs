@@ -30,7 +30,7 @@ public class ThrowableCooldown : MonoBehaviour
 
         if (onCooldown)
         {
-            Debug.Log("LERPING BACK TO COLOR");
+            //Debug.Log("LERPING BACK TO COLOR");
             fillAmountValue += Time.deltaTime / cooldownTime;
 
             if (fillAmountValue >= 1)
@@ -44,7 +44,7 @@ public class ThrowableCooldown : MonoBehaviour
     public void GoOnCooldown()
     {
 
-        Debug.Log("GOING ON COOLDOWN");
+        //Debug.Log("GOING ON COOLDOWN");
         fillAmountValue = 0f;
         onCooldown = true;
     }
