@@ -334,7 +334,7 @@ public class FlipOver : MonoBehaviour
         bool flippedOrTimeOver = false;
         while (!flippedOrTimeOver && Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f)
         {
-            if(Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f || t > 1.5f)
+            if(Vector3.Dot(transform.up, averageColliderSurfaceNormal) > .95f || t > 1.5f)
             {
                 flippedOrTimeOver = true;
             }

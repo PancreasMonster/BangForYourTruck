@@ -152,7 +152,7 @@ public class Orbit : MonoBehaviour
                         if (!disorient)
                         {
                              jumpOffset = origPos;                        
-                        jumpOffset = Quaternion.AngleAxis(player.eulerAngles.y - 180, Vector3.up) * jumpOffset;
+                            jumpOffset = Quaternion.AngleAxis(player.eulerAngles.y, Vector3.up) * jumpOffset;
                             
                             disorient = true;
                         }
