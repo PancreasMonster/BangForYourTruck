@@ -112,7 +112,7 @@ public class BuildModeFire : MonoBehaviour
     void Update()
     {
         selector.transform.localPosition = new Vector3(0, 0, 0);
-        selector.transform.parent = discUIImages[currentI].transform;
+        selector.transform.SetParent(discUIImages[currentI].transform, false);
         selector.transform.SetSiblingIndex(0);
         // text.text = rc.resourcesID[currentI];
         //  image.sprite = icons[currentI];
