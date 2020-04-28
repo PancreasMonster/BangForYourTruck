@@ -33,6 +33,7 @@ public class Orbit : MonoBehaviour
     public float lerpSpeed = 30;
     public float rotateSpeed = 180;
     float rotateAmount;
+    float yAirRotation;
 
     void Start()
     {
@@ -138,7 +139,7 @@ public class Orbit : MonoBehaviour
                 if (Vector3.Dot(Vector3.forward, fo.hit.normal.normalized) > .6f || Vector3.Dot(Vector3.forward, fo.hit.normal.normalized) < -.6f)
                 {
                     wallOffset = Quaternion.AngleAxis(-90, Vector3.up) * wallOffset;
-                }
+                } 
                 tempOffset = Quaternion.AngleAxis(rotateAmount, wallOffset) * tempOffset;              
                 Vector3 appliedOffset = tempOffset;
 
@@ -150,15 +151,17 @@ public class Orbit : MonoBehaviour
                     {
                         if (!disorient)
                         {
-                            jumpOffset = origPos;
-                            jumpOffset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * jumpOffset;
+                            
                             
                             disorient = true;
                         }
+                        jumpOffset = origPos;
+                        //yAirRotation = Mathf.Lerp(yAirRotation, player.transform.localEulerAngles.y - 180, lerpSpeed * .5f * Time.deltaTime);
+                        jumpOffset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * jumpOffset;
                         Vector3 jumpTempOffset = jumpOffset;
                         jumpTempOffset = Quaternion.AngleAxis(rotateAmount, Vector3.up) * jumpTempOffset;
                         Vector3 jumpAppliedOffset = jumpTempOffset;
-                        cam.transform.position = Vector3.Lerp(cam.transform.position, playerPos.position + jumpAppliedOffset, lerpSpeed * Time.deltaTime);
+                        cam.transform.position = Vector3.Lerp(cam.transform.position, playerPos.position + jumpAppliedOffset, lerpSpeed * .75f * Time.deltaTime);
                         if (leftBumper == 0)
                             cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, 0 + (rightStick.y * yLookAmount), 0)));
                         else

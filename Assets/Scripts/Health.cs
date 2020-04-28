@@ -123,8 +123,7 @@ public class Health : MonoBehaviour
             StartCoroutine(DronePainCooldown());
         }
 
-        if (health - damageTaken <= 0)
-            Death();
+        
     }
 
     public void Death()

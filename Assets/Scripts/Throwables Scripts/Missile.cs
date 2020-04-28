@@ -21,6 +21,8 @@ public class Missile : MonoBehaviour
 
     private Rigidbody rb;
 
+    bool exploded;
+
     private List<GameObject> playersHit = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -53,30 +55,36 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision coll)
     {
-        Instantiate(particles, transform.position, transform.rotation);
-        StopAllCoroutines();
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRange);
-        foreach (Collider c in hitColliders)
+        if (!exploded)
         {
-            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
+            Instantiate(particles, transform.position, transform.rotation);
+            StopAllCoroutines();
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRange);
+            foreach (Collider c in hitColliders)
             {
-                if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
+                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
                 {
-                    if (Vector3.Distance(transform.position, c.transform.position) > damageRange / 2f)
-                    {                    
-                        c.GetComponent<Health>().TakeDamage ("missiled", source, maxDamage / 2f, Vector3.zero);
-                    
+                    if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
+                    {
+                        if (Vector3.Distance(transform.position, c.transform.position) > damageRange / 2f)
+                        {
+                            c.GetComponent<Health>().TakeDamage("missiled", source, maxDamage / 2f, Vector3.zero);
+                            Debug.Log(maxDamage / 2f);
+                            Debug.Log(c.transform.name);
+                        }
+                        else if (Vector3.Distance(transform.position, c.transform.position) <= damageRange / 2f)
+                        {
+                            c.GetComponent<Health>().TakeDamage("missiled", source, maxDamage, Vector3.zero);
+                            Debug.Log(maxDamage);
+                            Debug.Log(c.transform.name);
+                        }
                     }
-                    else if (Vector3.Distance(transform.position, c.transform.position) <= damageRange / 2f)
-                    {                       
-                        c.GetComponent<Health>().TakeDamage("missiled", source, maxDamage, Vector3.zero);
-                     
-                    }                  
                 }
             }
-        }
 
-        Destroy(this.gameObject);
+            Destroy(this.gameObject);
+            exploded = true;
+        }
     }
 
     private IEnumerator WaitForHoming ()

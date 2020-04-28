@@ -21,7 +21,7 @@ public class ChangeLayer : MonoBehaviour
     IEnumerator LayerDelay ()
     {
         yield return new WaitForSeconds(2f);
-        this.gameObject.layer = LayerMask.NameToLayer(name);
+        gameObject.layer = LayerMask.NameToLayer(layerName);
         ChangeLayersRecursively(transform, layerName);
     }
 
