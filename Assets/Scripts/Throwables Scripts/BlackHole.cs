@@ -16,7 +16,6 @@ public class BlackHole : MonoBehaviour
     public float damage;
     public float explosiveForce;
     MoonGravity gravity;
-    public ParticleSystem explosionParticle;
     public ParticleSystem vacuumParticle;
 
     public GameObject source;
@@ -67,7 +66,6 @@ public class BlackHole : MonoBehaviour
                 h.TakeDamage("black holed", source, damage, Vector3.zero);
         }
         transform.GetChild(0).gameObject.SetActive(false);
-        explosionParticle.Play();
         Invoke("DestroyThisGameObject", 1f);
     }
 
