@@ -33,7 +33,9 @@ public class Orbit : MonoBehaviour
     public float lerpSpeed = 30;
     public float rotateSpeed = 180;
     float rotateAmount;
+    float yRotateAmount;
     float yAirRotation;
+    float wallTransition;
 
     void Start()
     {
@@ -131,16 +133,41 @@ public class Orbit : MonoBehaviour
             if (!death)
             {
                 rotateAmount = Mathf.Lerp(rotateAmount, 90 * rightStick.x, rotateSpeed * Time.deltaTime);
+                if(rightStick.y > 0)
+                yRotateAmount = Mathf.Lerp(yRotateAmount, 65 * rightStick.y, rotateSpeed * Time.deltaTime);
+                if (rightStick.y < 0)
+                    yRotateAmount = Mathf.Lerp(yRotateAmount, 22.5f * rightStick.y, rotateSpeed * Time.deltaTime);
+                if (rightStick.y == 0)
+                    yRotateAmount = Mathf.Lerp(yRotateAmount, 0, rotateSpeed * Time.deltaTime);
                 Vector3 dir = player.position - cam.transform.position;
                 dir.Normalize();
                 Vector3 tempOffset = origPos;
                 //tempOffset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * tempOffset;
-                Vector3 wallOffset = fo.hit.normal;             
-                if (Vector3.Dot(Vector3.forward, fo.hit.normal.normalized) > .6f || Vector3.Dot(Vector3.forward, fo.hit.normal.normalized) < -.6f)
+                Vector3 wallOffset = fo.hit.normal;
+                Vector3 wallOffsetY = fo.hit.normal;
+                
+                if (Vector3.Dot(Vector3.forward, fo.hit.normal.normalized) > .8f || Vector3.Dot(Vector3.forward, fo.hit.normal.normalized) < -.8f)
                 {
                     wallOffset = Quaternion.AngleAxis(-90, Vector3.up) * wallOffset;
-                } 
-                tempOffset = Quaternion.AngleAxis(rotateAmount, wallOffset) * tempOffset;              
+                    
+                }
+
+                if (Vector3.Dot(Vector3.up, fo.hit.normal) < -.8f || Vector3.Dot(Vector3.up, fo.hit.normal) > .8f)
+                {
+                    wallOffsetY = Quaternion.AngleAxis(90, Vector3.forward) * wallOffsetY;
+                }
+
+                    if (Vector3.Dot(Vector3.up, fo.hit.normal) < -.8f)
+                {
+
+                    wallTransition = Mathf.Lerp(wallTransition, -180, lerpSpeed * .3f * Time.deltaTime);
+                    tempOffset = new Vector3(tempOffset.x, -tempOffset.y, tempOffset.z);
+                } else
+                {
+                    wallTransition = Mathf.Lerp(wallTransition, 0, lerpSpeed * .3f * Time.deltaTime);
+                }
+                    tempOffset = Quaternion.AngleAxis(-rotateAmount, wallOffset) * tempOffset;
+                    tempOffset = Quaternion.AngleAxis(-yRotateAmount, wallOffsetY) * tempOffset;
                 Vector3 appliedOffset = tempOffset;
 
                 if (lockedBehind)
@@ -158,33 +185,59 @@ public class Orbit : MonoBehaviour
                         }
                        
                         Vector3 jumpTempOffset = jumpOffset;
-                        jumpTempOffset = Quaternion.AngleAxis(rotateAmount, Vector3.up) * jumpTempOffset;
+                        jumpTempOffset = Quaternion.AngleAxis(-rotateAmount, Vector3.up) * jumpTempOffset;
+                        jumpTempOffset = Quaternion.AngleAxis(yRotateAmount, Vector3.right) * jumpTempOffset;
                         Vector3 jumpAppliedOffset = jumpTempOffset;
                         cam.transform.position = Vector3.Lerp(cam.transform.position, playerPos.position + jumpAppliedOffset, lerpSpeed * 1 * Time.deltaTime);
-                        if (leftBumper == 0)
-                            cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, 0 + (rightStick.y * yLookAmount), 0)));
+                        if (Vector3.Dot(Vector3.up, fo.hit.normal) < -.8f)
+                        {
+                            cam.transform.LookAt(new Vector3(playerPos.position.x, playerPos.position.y + yLookAmount, playerPos.position.z));
+                        }
                         else
-                            cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, 0, 0)));
+                        {
+                            cam.transform.LookAt(new Vector3(playerPos.position.x, playerPos.position.y + yLookAmount, playerPos.position.z));
+                        }
                     }
                     else
                     {
 
-                        if (leftBumper == 0)
+                        //if (leftBumper == 0)
                             cam.transform.position = Vector3.Lerp(cam.transform.position,
                                 new Vector3(playerPos.TransformPoint(appliedOffset).x, playerPos.TransformPoint(appliedOffset).y, playerPos.TransformPoint(appliedOffset).z),
                                 //player.transform.position + appliedOffset,
                                 lerpSpeed * Time.deltaTime);
-                        else
-                            cam.transform.position = Vector3.Lerp(cam.transform.position,
-                                new Vector3(playerPos.TransformPoint(appliedOffset).x, playerPos.TransformPoint(appliedOffset).y, playerPos.TransformPoint(appliedOffset).z),
-                                lerpSpeed * Time.deltaTime);
+                      //  else
+                      //      cam.transform.position = Vector3.Lerp(cam.transform.position,
+                      //          new Vector3(playerPos.TransformPoint(appliedOffset).x, playerPos.TransformPoint(appliedOffset).y, playerPos.TransformPoint(appliedOffset).z),
+                      //          lerpSpeed * Time.deltaTime);
 
-                        cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, 0 + (rightStick.y * yLookAmount), 0)));
+                       
+
+                        
+                        if (Vector3.Dot(Vector3.up, fo.hit.normal) < -.8f)
+                        {
+                            cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, -yLookAmount, 0)));
+                            cam.transform.eulerAngles = new Vector3(cam.transform.eulerAngles.x, cam.transform.eulerAngles.y, wallTransition);
+                        } else
+                        {
+                            cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, yLookAmount, 0)));
+                        }
                         disorient = false;
                     }
 
                     if(!disorient)
-                        cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, lookOffsetY + (rightStick.y * yLookAmount), 0)));
+                        
+                    if (Vector3.Dot(Vector3.up, fo.hit.normal) < -.8f)
+                    {
+                            cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, -yLookAmount, 0)));
+                            
+                        cam.transform.eulerAngles = new Vector3(cam.transform.eulerAngles.x, cam.transform.eulerAngles.y, wallTransition);
+                    } else
+                    {
+                            cam.transform.LookAt(playerPos.TransformPoint(new Vector3(0, yLookAmount, 0)));
+                            
+                        cam.transform.eulerAngles = new Vector3(cam.transform.eulerAngles.x, cam.transform.eulerAngles.y, wallTransition);
+                    }
                 }
 
                 if (!lockedBehind)

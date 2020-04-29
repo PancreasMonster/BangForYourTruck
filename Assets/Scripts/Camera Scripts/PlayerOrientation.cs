@@ -22,13 +22,13 @@ public class PlayerOrientation : MonoBehaviour
 
 
         
-        if (Vector3.Dot(Vector3.up, fo.hit.normal) < -.6f)
+        if (Vector3.Dot(Vector3.up, fo.hit.normal) < -.8f)
         {
             transform.up = Vector3.Lerp(transform.up, -fo.hit.normal, 15 * Time.deltaTime);
             transform.Rotate(0, p.eulerAngles.y, 0);
             
         }
-        else if (Vector3.Dot(Vector3.up, fo.hit.normal) > .6f)
+        else if (Vector3.Dot(Vector3.up, fo.hit.normal) > .8f)
         {
             transform.up = Vector3.Lerp(transform.up, fo.hit.normal, 15 * Time.deltaTime);
             transform.Rotate(0, p.eulerAngles.y, 0);
