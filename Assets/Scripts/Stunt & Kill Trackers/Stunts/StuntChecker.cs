@@ -172,7 +172,7 @@ public class StuntChecker : MonoBehaviour
                 score += driftScore;
                 driftDist = 0;
                 driftScore = 0;
-                //driftString = "";
+                driftString = "";
                 driftDisplay = false;
             }
             driftHold = true;   
@@ -190,7 +190,7 @@ public class StuntChecker : MonoBehaviour
             score += driftScore;
             driftDist = 0;
             driftScore = 0;
-            //driftString = "";
+            driftString = "";
             
         }
         else
@@ -256,7 +256,7 @@ public class StuntChecker : MonoBehaviour
                 score += flipScore;
                 stunts.Clear();
                 doneStunts.Clear();
-                //flipString = "";
+                flipString = "";
                 flipDisplay = false;
             }
 
@@ -346,7 +346,7 @@ public class StuntChecker : MonoBehaviour
             
             stunts.Clear();
             doneStunts.Clear();
-            //flipString = "";
+            flipString = "";
         }
         else
         {
