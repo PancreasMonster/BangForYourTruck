@@ -30,10 +30,15 @@ public class MobilityCharges : MonoBehaviour
     ParticleSystem particles2;
     SpriteRenderer sprite3;
     ParticleSystem particles3;
+    public GameObject noChargeParticlesParent;
+    ParticleSystem[] noChargeParticles;
+    public GameObject useChargeParticlesParent;
 
     // Start is called before the first frame update
     void Start()
     {
+        noChargeParticles = noChargeParticlesParent.GetComponentsInChildren<ParticleSystem>();
+
         sprite1 = light1.GetComponent<SpriteRenderer>();
         sprite2 = light2.GetComponent<SpriteRenderer>();    
         sprite3 = light3.GetComponent<SpriteRenderer>();
@@ -53,9 +58,7 @@ public class MobilityCharges : MonoBehaviour
             currentDriftMultiplier = maxDriftMultiplier;
         }
 
-        if (Input.GetKeyDown("z")) {
-            UseCharge();
-        }
+        
 
         if (charge1 == false)
         {
@@ -159,6 +162,7 @@ public class MobilityCharges : MonoBehaviour
         if (currentCharges == 0)
         {
             Debug.Log("empty");
+            NoChargeTelegraph();
             return;
         }
         else
@@ -169,11 +173,20 @@ public class MobilityCharges : MonoBehaviour
         }
     }
 
+    void NoChargeTelegraph()
+    {
+        for (int i = 0; i <= noChargeParticles.Length; i++)
+        {
+            noChargeParticlesParent.transform.GetChild(i).GetComponent<ParticleSystem>().Play();
+        }
+    }
+
     void ToggleCharges()
     {
         if (charge1 == true)
         {
             charge1 = false;
+            useChargeParticlesParent.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             sprite1.color = Color.red;
             return;
         }
@@ -181,6 +194,7 @@ public class MobilityCharges : MonoBehaviour
         if (charge2 == true)
         {
             charge2 = false;
+            useChargeParticlesParent.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
             sprite2.color = Color.red;
             return;
         }
@@ -188,6 +202,7 @@ public class MobilityCharges : MonoBehaviour
         if (charge3 == true)
         {
             charge3 = false;
+            useChargeParticlesParent.transform.GetChild(2).GetComponent<ParticleSystem>().Play();
             sprite3.color = Color.red;
             return;
         }
