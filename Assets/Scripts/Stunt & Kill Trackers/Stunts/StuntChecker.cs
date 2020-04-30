@@ -150,7 +150,7 @@ public class StuntChecker : MonoBehaviour
         if (!animCrash && fo.crashing)
         {
             animCrash = true;
-            anim.SetBool("Crashed", true);
+            anim.SetBool("Crashed",true);
         }
 
         if(!fo.crashing)
@@ -386,7 +386,7 @@ public class StuntChecker : MonoBehaviour
         yield return new WaitForSeconds(stuntStringHoldTime);
         jumpHold = false;
         jumpDisplay = false;
-        anim.SetBool("GoToScoreText", true);
+        anim.SetBool("GoToScoreText",true);
     }
 
     IEnumerator flipHoldActivation()
@@ -396,7 +396,7 @@ public class StuntChecker : MonoBehaviour
         flipHold = false;
         flipDisplay = false;
         landStunt = true;
-        anim.SetBool("GoToScoreText", true);
+        anim.SetBool("GoToScoreText",true);
     }
 
     public void FlipEffect()

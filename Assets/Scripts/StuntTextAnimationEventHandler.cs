@@ -23,7 +23,9 @@ public class StuntTextAnimationEventHandler : MonoBehaviour
 
     public void LeaveCrashedState()
     {
-        anim.SetBool("Crashed",false);
+        Debug.Log("Leaving Crashed State");
+        anim.SetBool("Crashed", false);
+        anim.SetTrigger("Idle");
         foreach(Text t in stuntStrings)
         {
             t.text = "";
@@ -32,7 +34,9 @@ public class StuntTextAnimationEventHandler : MonoBehaviour
 
     public void LeaveGoToScoreTextState()
     {
+        Debug.Log("Leaving GoToScoreState State");
         anim.SetBool("GoToScoreText", false);
+        anim.SetTrigger("Idle");
         foreach (Text t in stuntStrings)
         {
             t.text = "";
