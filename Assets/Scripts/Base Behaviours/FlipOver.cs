@@ -37,12 +37,14 @@ public class FlipOver : MonoBehaviour
     float XButton;
     Vector2 leftStick;
     bool canSlam;
+    MobilityCharges mobCharges;
 
     WheelFrictionCurve curve = new WheelFrictionCurve();
 
     // Start is called before the first frame update
     void Start()
     {
+        mobCharges = GetComponent<MobilityCharges>();
         rigidbody = GetComponentInParent<Rigidbody>();
         h = GetComponentInParent<Health>();
         curve.extremumSlip = 60;
@@ -71,15 +73,18 @@ public class FlipOver : MonoBehaviour
                     rigidbody.AddForce(Vector3.up * force * .65f);
                     rigidbody.angularVelocity = Vector3.zero;
                 }
-                else
+                else 
                 {
-                    StartCoroutine(JumpDelay());
+                    if (mobCharges.currentCharges > 0)
+                    {
+                        StartCoroutine(JumpDelay());
 
-                    rigidbody.AddForce(Vector3.up * force);
-                    rigidbody.angularVelocity = Vector3.zero;
+                        rigidbody.AddForce(Vector3.up * force);
+                        rigidbody.angularVelocity = Vector3.zero;
+                    }                   
                 }
             }
-            else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
+            else if (mobCharges.currentCharges > 0 && Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
             {
                 
                     StartCoroutine(JumpDelay());
