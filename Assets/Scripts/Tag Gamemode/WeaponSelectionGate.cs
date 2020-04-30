@@ -38,6 +38,9 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
                     col.GetComponent<ShotgunWeapon>().canFire = false;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(false);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(true);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Cannon").gameObject.SetActive(false);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Shotgun").gameObject.SetActive(false);
                 }
                 else if (cannonGun)
                 {
@@ -50,6 +53,9 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<CannonWeapon>().engineModel.SetActive(true);
                     col.GetComponent<ShotgunWeapon>().canFire = false;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(false);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(false);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Cannon").gameObject.SetActive(true);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Shotgun").gameObject.SetActive(false);
                 }
 
                 else if (shotgun)
@@ -63,6 +69,9 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
                     col.GetComponent<ShotgunWeapon>().canFire = true;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(true);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(false);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Cannon").gameObject.SetActive(false);
+                    col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Shotgun").gameObject.SetActive(true);
                 }
 
                 /*else if(flameThrower)
