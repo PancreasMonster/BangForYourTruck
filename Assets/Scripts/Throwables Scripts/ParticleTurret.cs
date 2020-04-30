@@ -40,6 +40,7 @@ public class ParticleTurret : AIBehaviours
             {
                 Vector3 dir = ctDir.transform.position - transform.position;
                 dir.Normalize();
+                dir = Quaternion.AngleAxis(90, Vector3.right) * dir;
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z)), rotationSpeed * Time.deltaTime);
             }
         }

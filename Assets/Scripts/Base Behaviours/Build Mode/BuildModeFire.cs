@@ -44,9 +44,9 @@ public class BuildModeFire : MonoBehaviour
     public bool forwardRange = true, backwardRange = true;
     public float rangeDelay;
     public Transform cardParent;
-    public GameObject selectorPrefab;
-    GameObject selector;
-
+    //public GameObject selectorPrefab;
+    //GameObject selector;
+    public Color imageCol, blackHoleCol;
 
 
     void Start()
@@ -57,8 +57,9 @@ public class BuildModeFire : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics.gravity.y);
         targetOriginalPos = aimTarget.transform.localPosition;
-        GameObject clone = Instantiate(selectorPrefab, transform.position, Quaternion.identity);
-        selector = clone;
+        //GameObject clone = Instantiate(selectorPrefab, transform.position, Quaternion.identity);
+        //selector = clone;
+        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
     }
 
     Vector2 rightStick;
@@ -111,9 +112,7 @@ public class BuildModeFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        selector.transform.localPosition = new Vector3(0, 0, 0);
-        selector.transform.SetParent(discUIImages[currentI].transform, false);
-        selector.transform.SetSiblingIndex(0);
+        
         // text.text = rc.resourcesID[currentI];
         //  image.sprite = icons[currentI];
         //if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
@@ -232,12 +231,24 @@ public class BuildModeFire : MonoBehaviour
                     currentI = discSelection.Count - 1;
                     currentDisc = discSelection[currentI];
                     dpadLeft = false;
+                    if(discUIImages.Count > 1)
+                    discUIImages[0].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
+                    if (discUIImages[currentI].transform.name == "Black Hole")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
                 }
                 else
                 {
                     currentI--;
                     currentDisc = discSelection[currentI];
                     dpadLeft = false;
+                    if (discUIImages.Count > 1)
+                    discUIImages[currentI + 1].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
+                    if (discUIImages[currentI].transform.name == "Black Hole")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
                 }
             }
 
@@ -248,12 +259,24 @@ public class BuildModeFire : MonoBehaviour
                     currentI = 0;
                     currentDisc = discSelection[currentI];
                     dpadRight = false;
+                    if (discUIImages[currentI].transform.name == "Black Hole")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                    discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
+                    if (discUIImages.Count > 1)
+                    discUIImages[discSelection.Count - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
                 }
                 else
                 {
                     currentI++;
                     currentDisc = discSelection[currentI];
                     dpadRight = false;
+                    if (discUIImages.Count > 1)
+                        discUIImages[currentI - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
+                    if (discUIImages[currentI].transform.name == "Black Hole")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
                 }
             }
             dpadTrigger = false;
