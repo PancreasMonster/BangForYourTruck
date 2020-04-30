@@ -78,7 +78,7 @@ public class FlipOver : MonoBehaviour
                     if (mobCharges.currentCharges > 0)
                     {
                         StartCoroutine(JumpDelay());
-
+                        mobCharges.UseCharge();
                         rigidbody.AddForce(Vector3.up * force);
                         rigidbody.angularVelocity = Vector3.zero;
                     }                   
@@ -86,7 +86,7 @@ public class FlipOver : MonoBehaviour
             }
             else if (mobCharges.currentCharges > 0 && Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
             {
-                
+                    mobCharges.UseCharge();
                     StartCoroutine(JumpDelay());
                     rigidbody.AddForce(transform.up * force);
                     rigidbody.angularVelocity = Vector3.zero;

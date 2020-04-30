@@ -163,7 +163,7 @@ public class MobilityCharges : MonoBehaviour
         {
             Debug.Log("empty");
             NoChargeTelegraph();
-            return;
+            
         }
         else
         {
@@ -175,9 +175,11 @@ public class MobilityCharges : MonoBehaviour
 
     void NoChargeTelegraph()
     {
-        for (int i = 0; i <= noChargeParticles.Length; i++)
+        
         {
-            noChargeParticlesParent.transform.GetChild(i).GetComponent<ParticleSystem>().Play();
+            noChargeParticlesParent.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+            noChargeParticlesParent.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+            noChargeParticlesParent.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         }
     }
 
