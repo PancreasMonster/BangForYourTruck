@@ -197,11 +197,15 @@ public class BuildModeFire : MonoBehaviour
                 clone.GetComponent<BlackHole>().source = this.gameObject;
             if (clone.GetComponent<MoonGravity>() != null)
                 clone.GetComponent<MoonGravity>().teamNum = GetComponent<Health>().teamNum;
-            /*if (clone.GetComponent<Bomb>() != null)
-            {                 
-                cooldown = false;
-            }*/
-            if (clone.GetComponent<Missile>() != null)
+            if (clone.GetComponent<ClusterMine>() != null)
+                clone.GetComponent<ClusterMine>().source = this.gameObject;
+            if (clone.GetComponentInChildren<ParticleTurret>() != null)
+                clone.GetComponentInChildren<ParticleTurret>().source = this.gameObject;
+                /*if (clone.GetComponent<Bomb>() != null)
+                {                 
+                    cooldown = false;
+                }*/
+                if (clone.GetComponent<Missile>() != null)
                     clone.GetComponent<Missile>().teamNum = GetComponent<Health>().teamNum;
 
                 Rigidbody unitRB = clone.GetComponent<Rigidbody>();
@@ -232,8 +236,8 @@ public class BuildModeFire : MonoBehaviour
                     currentDisc = discSelection[currentI];
                     dpadLeft = false;
                     if(discUIImages.Count > 1)
-                    discUIImages[0].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
-                    if (discUIImages[currentI].transform.name == "Black Hole")
+                    discUIImages[0].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
                     else
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
@@ -244,8 +248,8 @@ public class BuildModeFire : MonoBehaviour
                     currentDisc = discSelection[currentI];
                     dpadLeft = false;
                     if (discUIImages.Count > 1)
-                    discUIImages[currentI + 1].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
-                    if (discUIImages[currentI].transform.name == "Black Hole")
+                    discUIImages[currentI + 1].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
                     else
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
@@ -259,12 +263,12 @@ public class BuildModeFire : MonoBehaviour
                     currentI = 0;
                     currentDisc = discSelection[currentI];
                     dpadRight = false;
-                    if (discUIImages[currentI].transform.name == "Black Hole")
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
                     else
                     discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
                     if (discUIImages.Count > 1)
-                    discUIImages[discSelection.Count - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
+                    discUIImages[discSelection.Count - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
                 }
                 else
                 {
@@ -272,8 +276,8 @@ public class BuildModeFire : MonoBehaviour
                     currentDisc = discSelection[currentI];
                     dpadRight = false;
                     if (discUIImages.Count > 1)
-                        discUIImages[currentI - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.grey;
-                    if (discUIImages[currentI].transform.name == "Black Hole")
+                        discUIImages[currentI - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
                     else
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;

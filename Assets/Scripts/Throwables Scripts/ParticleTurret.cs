@@ -21,16 +21,18 @@ public class ParticleTurret : AIBehaviours
     public ParticleSystem ps;
     public List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
     public LineRenderer lr;
+    public GameObject source;
 
     void Start()
     {
         StartCoroutine(EnemyCheck());
-        ps = GetComponentInChildren<ParticleSystem>();
+        //ps = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
 
         if (ctDir != null)
         {
@@ -39,9 +41,11 @@ public class ParticleTurret : AIBehaviours
             if (Vector3.Distance(transform.position, ctDir.transform.position) < range)
             {
                 Vector3 dir = ctDir.transform.position - transform.position;
-                dir.Normalize();
-                dir = Quaternion.AngleAxis(90, Vector3.right) * dir;
+                dir.Normalize();              
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z)), rotationSpeed * Time.deltaTime);
+                var psShape = ps.shape;
+                psShape.position = firingPoint.localPosition;
+                psShape.rotation = dir;
             }
         }
 
@@ -197,8 +201,10 @@ public class ParticleTurret : AIBehaviours
 
     void OnParticleCollision(GameObject other)
     {
+        Debug.Log(other.transform.name);
+
         if(other.gameObject != this.gameObject && other.GetComponent<Health>())
-        other.GetComponent<Health>().TakeDamage(null, this.gameObject, damage, Vector3.zero);
+        other.GetComponent<Health>().TakeDamage("Machine Gunned", source, damage, Vector3.zero);
 
         int numCollisionEvents = ps.GetCollisionEvents(other, collisionEvents);
 

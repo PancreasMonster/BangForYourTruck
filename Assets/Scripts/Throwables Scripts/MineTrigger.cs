@@ -11,6 +11,7 @@ public class MineTrigger : MonoBehaviour
     public float lifeTime = 15f;
     ParticleSystem particles;
     AudioSource audio;
+    public GameObject source;
     
 
     public float maxRange; //the furthest distance away in which objects get effected by the explosion
@@ -64,7 +65,7 @@ public class MineTrigger : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.TakeDamage ("Mined", this.gameObject, damage, Vector3.zero);
+                h.TakeDamage ("Mined", source, damage, Vector3.zero);
         }
         particles.Play();
         audio.Play();
