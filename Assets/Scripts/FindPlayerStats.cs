@@ -33,7 +33,7 @@ public class FindPlayerStats : MonoBehaviour
         playerMaxHealth = player.GetComponent<Health>().maxHealth;
     }
 
-    private void OnLeftBumper(InputValue value)
+    /*private void OnLeftBumper(InputValue value)
     {
         throwableStats.SetActive(true);
     }
@@ -42,7 +42,7 @@ public class FindPlayerStats : MonoBehaviour
     private void OnLeftBumperRelease(InputValue value)
     {
         throwableStats.SetActive(false);
-    }
+    }*/
 
     // Update is called once per frame
     void FixedUpdate()
@@ -60,7 +60,7 @@ public class FindPlayerStats : MonoBehaviour
         string throwableName = player.GetComponent<BuildModeFire>().currentDisc.transform.name.ToString();
         throwablesText.text = throwableName;
         throwablesText2.text = throwableName;
-        resourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
+        resourceText.text = " $ " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
         blackResourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
         //resourceIncomeText = player.GetComponent<Resources(New)>().resourceIncomeAmount.ToString();
         hpBarFill.fillAmount = playerHealth / 100;
