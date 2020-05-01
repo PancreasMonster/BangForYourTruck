@@ -135,7 +135,7 @@ public class Health : MonoBehaviour
         {
             if (damageSource != this.gameObject && GameObject.Find("KillManager") == true)
             {
-                km.KillTracked(damageSource, this.gameObject, damageString);
+                km.KillTracked(damageSource, this.gameObject, damageString, teamNum, damageSource.GetComponent<Health>().teamNum);
             }
             
             //Destroy(baseUI);
