@@ -56,29 +56,34 @@ public class LevelCreator : MonoBehaviour
 
     }
 
-    public void ToggleTwoPlayer()
+    public void Set1v1False()
     {
-        if (twoPlayer)
-        {
-            twoPlayer = false;
-        }
-        else
-        {
-            twoPlayer = true;
-        }
+
+        twoPlayer = false;
+
     }
 
-    public void ToggleFourPlayer()
+    public void Set1v1True()
     {
-        if (fourPlayer)
-        {
-            fourPlayer = false;
-        }
-        else
-        {
-            fourPlayer = true;
-        }
+
+        twoPlayer = true;
+
     }
+
+    public void Set2v2False()
+    {
+
+        fourPlayer = false;
+
+    }
+
+    public void Set2v2True()
+    {
+
+        fourPlayer = true;
+
+    }
+
 
     public void SetLevelIndex (int i)
     {
