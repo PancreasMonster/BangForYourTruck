@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponSelectionGate : MonoBehaviour
 {
     public bool flameThrower, machineGun, cannonGun, shotgun;
     public int teamGateNum;
     AudioSource audio;
+
+    [Header("Text Animation")]
+    public float timeForFirstLerp = .25f;
+    public float timeForSecondLerp = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +46,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(true);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Cannon").gameObject.SetActive(false);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Shotgun").gameObject.SetActive(false);
+                    StartCoroutine(playerTextPopUp(col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("WeaponSelectionText").gameObject, "Machine Gun"));
                 }
                 else if (cannonGun)
                 {
@@ -56,6 +62,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(false);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Cannon").gameObject.SetActive(true);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Shotgun").gameObject.SetActive(false);
+                    StartCoroutine(playerTextPopUp(col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("WeaponSelectionText").gameObject, "Cannon"));
                 }
 
                 else if (shotgun)
@@ -72,6 +79,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(false);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Cannon").gameObject.SetActive(false);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Shotgun").gameObject.SetActive(true);
+                    StartCoroutine(playerTextPopUp(col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("WeaponSelectionText").gameObject, "Shotgun"));
                 }
 
                 /*else if(flameThrower)
@@ -89,6 +97,21 @@ public class WeaponSelectionGate : MonoBehaviour
                 }*/
                 audio.Play();
             }
+        }
+    }
+
+    public IEnumerator playerTextPopUp(GameObject text, string name)
+    {
+        float alpha = 1;
+        Text textComponent = text.GetComponent<Text>();
+        textComponent.text = name;
+        textComponent.color = new Color(1, 1, 1, alpha);        
+
+        while (alpha > 0)
+        {
+            alpha -= (Time.deltaTime / timeForSecondLerp);
+            textComponent.color = new Color(1, 1, 1, alpha);
+            yield return null;
         }
     }
 }
