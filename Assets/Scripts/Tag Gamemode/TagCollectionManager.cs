@@ -21,6 +21,7 @@ public class TagCollectionManager : MonoBehaviour
     public List<GameObject> canvasToDisable = new List<GameObject>();
     public float gameTimer = 600;
     public Text gameTimerText;
+    public Text blueTeamTokenString, redTeamTokenString;
     VictoryDisplayStats vds;
 
 
@@ -36,6 +37,8 @@ public class TagCollectionManager : MonoBehaviour
         {
             redImage.fillAmount = redTeamTokens / gameWinningAmount;
             blueImage.fillAmount = blueTeamTokens / gameWinningAmount;
+            blueTeamTokenString.text = blueTeamTokens.ToString();
+            redTeamTokenString.text = redTeamTokens.ToString();
         }
 
         if (blueTeamTokens >= gameWinningAmount && !gameWon)
