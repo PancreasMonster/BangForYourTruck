@@ -17,10 +17,10 @@ public class TextAnnouncement : MonoBehaviour
         imageColor.a = 0; */
     }
 
-    public void KillAnnouncement (GameObject killer, GameObject victim, string damageString, int teamNumV, int teamNumK)
+    public void KillAnnouncement (GameObject killer, GameObject victim, Sprite sourceImage, int teamNumV, int teamNumK)
     {
         GameObject ka = Instantiate(killfeedItemPrefab, this.transform);
-        ka.GetComponent<KillFeedItem>().Setup(killer, victim, damageString, teamNumV, teamNumK);
+        ka.GetComponent<KillFeedItem>().Setup(killer, victim, sourceImage, teamNumV, teamNumK);
     }
 
     /*

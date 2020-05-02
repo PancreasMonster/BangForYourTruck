@@ -22,6 +22,7 @@ public class ParticleTurret : AIBehaviours
     public List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
     public LineRenderer lr;
     public GameObject source;
+    public Sprite damageImage;
 
     void Start()
     {
@@ -204,7 +205,7 @@ public class ParticleTurret : AIBehaviours
         Debug.Log(other.transform.name);
 
         if(other.gameObject != this.gameObject && other.GetComponent<Health>())
-        other.GetComponent<Health>().TakeDamage("Machine Gunned", source, damage, Vector3.zero);
+        other.GetComponent<Health>().TakeDamage(damageImage, source, damage, Vector3.zero);
 
         int numCollisionEvents = ps.GetCollisionEvents(other, collisionEvents);
 

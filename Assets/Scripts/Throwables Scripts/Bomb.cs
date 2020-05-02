@@ -17,6 +17,7 @@ public class Bomb : MonoBehaviour
     AudioSource audio;
     Rigidbody rb;
     public GameObject particles;
+    public Sprite damageImage;
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +86,7 @@ public class Bomb : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.TakeDamage ("Bombed", this.gameObject, damage, Vector3.zero);
+                h.TakeDamage (damageImage, this.gameObject, damage, Vector3.zero);
         }
 
         if (artillery)

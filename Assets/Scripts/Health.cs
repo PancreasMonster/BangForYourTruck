@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
     public float killMaxTime = 15;
     public GameObject damageSource;
     public bool drone;
-    string damageString;
+    Sprite damageSourceImage;
 
     [FMODUnity.EventRef]
     public string dronePainSound;
@@ -64,7 +64,7 @@ public class Health : MonoBehaviour
         } else
         {
             damageSource = null;
-            damageString = null;
+            damageSourceImage = null;
         }
 
 
@@ -86,7 +86,7 @@ public class Health : MonoBehaviour
 
     }
 
-    public void TakeDamage(string playerSourceString, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)
+    public void TakeDamage(Sprite sourceImage, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)
     {
         //If dead, stop code here
         if (dead)
@@ -94,7 +94,7 @@ public class Health : MonoBehaviour
 
         killerTimer = killMaxTime;
         damageSource = playerSourceGameObject;
-        damageString = playerSourceString;
+        damageSourceImage = sourceImage;
 
         //Instantiates the damage text mesh on the players position
         GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
@@ -135,7 +135,7 @@ public class Health : MonoBehaviour
         {
             if (damageSource != this.gameObject && GameObject.Find("KillManager") == true)
             {
-                km.KillTracked(damageSource, this.gameObject, damageString, teamNum, damageSource.GetComponent<Health>().teamNum);
+                km.KillTracked(damageSource, this.gameObject, damageSourceImage, teamNum, damageSource.GetComponent<Health>().teamNum);
             }
             
             //Destroy(baseUI);

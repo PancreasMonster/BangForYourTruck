@@ -14,6 +14,7 @@ public class CollisionDamage : MonoBehaviour
     public float damageToDeal;
     public bool player;
     Health thisHealth;
+    public Sprite damageImage;
 
     public Rigidbody rb;
     // Start is called before the first frame update
@@ -68,14 +69,14 @@ public class CollisionDamage : MonoBehaviour
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
                 damage = Mathf.RoundToInt(Mathf.Min(thisHealth.health, damage));
-                coll.transform.GetComponent<Health>().TakeDamage("rammed", transform.parent.gameObject, damage, Vector3.zero);
+                coll.transform.GetComponent<Health>().TakeDamage(damageImage, transform.parent.gameObject, damage, Vector3.zero);
                 Debug.Log("Hit");
             } 
             else if (coll.transform.GetComponentInParent<Health>() != null && coll.transform.GetComponentInParent<Health>().teamNum != thisHealth.teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
                 damage = Mathf.RoundToInt(Mathf.Min(thisHealth.health, damage));
-                coll.transform.GetComponentInParent<Health>().TakeDamage("rammed", transform.parent.gameObject, damage, Vector3.zero);
+                coll.transform.GetComponentInParent<Health>().TakeDamage(damageImage, transform.parent.gameObject, damage, Vector3.zero);
                 Debug.Log("Hit");
             }
         } else 
@@ -83,7 +84,7 @@ public class CollisionDamage : MonoBehaviour
             if (!cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
             {
                 float damage = Mathf.RoundToInt(Mathf.Min(minimumDamage, oldVelocity / 100));
-                coll.transform.GetComponent<Health>().TakeDamage("Machine Gunned", damageSource, damage, Vector3.zero);
+                coll.transform.GetComponent<Health>().TakeDamage(damageImage, damageSource, damage, Vector3.zero);
             } 
 
             if (cannonBall && coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)

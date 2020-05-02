@@ -12,7 +12,9 @@ public class MineTrigger : MonoBehaviour
     ParticleSystem particles;
     AudioSource audio;
     public GameObject source;
-    
+    public Sprite damageImage;
+
+
 
     public float maxRange; //the furthest distance away in which objects get effected by the explosion
     public float force; //the force exerted on objects in the explosion effect
@@ -65,7 +67,7 @@ public class MineTrigger : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.TakeDamage ("Mined", source, damage, Vector3.zero);
+                h.TakeDamage (damageImage, source, damage, Vector3.zero);
         }
         particles.Play();
         audio.Play();

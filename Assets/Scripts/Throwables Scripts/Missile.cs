@@ -25,6 +25,8 @@ public class Missile : MonoBehaviour
 
     private List<GameObject> playersHit = new List<GameObject>();
 
+    public Sprite damageImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,13 +70,13 @@ public class Missile : MonoBehaviour
                     {
                         if (Vector3.Distance(transform.position, c.transform.position) > damageRange / 2f)
                         {
-                            c.GetComponent<Health>().TakeDamage("missiled", source, maxDamage / 2f, Vector3.zero);
+                            c.GetComponent<Health>().TakeDamage(damageImage, source, maxDamage / 2f, Vector3.zero);
                             Debug.Log(maxDamage / 2f);
                             Debug.Log(c.transform.name);
                         }
                         else if (Vector3.Distance(transform.position, c.transform.position) <= damageRange / 2f)
                         {
-                            c.GetComponent<Health>().TakeDamage("missiled", source, maxDamage, Vector3.zero);
+                            c.GetComponent<Health>().TakeDamage(damageImage, source, maxDamage, Vector3.zero);
                             Debug.Log(maxDamage);
                             Debug.Log(c.transform.name);
                         }

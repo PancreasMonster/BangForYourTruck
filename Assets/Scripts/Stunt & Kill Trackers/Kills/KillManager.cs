@@ -81,7 +81,7 @@ public class KillManager : MonoBehaviour
 
     }
 
-    public void KillTracked (GameObject killer, GameObject victim, string damageString, int teamNumV, int teamNumK)
+    public void KillTracked (GameObject killer, GameObject victim, Sprite sourceImage, int teamNumV, int teamNumK)
     {
         int deathNum = victim.GetComponent<Health>().playerNum - 1;
 
@@ -102,7 +102,7 @@ public class KillManager : MonoBehaviour
         DoubleKillDialougeActivation(killNum);
         killSpreeDialougeActivation(killNum);
         StartCoroutine(DoubleKillDialougeBool(killNum));
-        kf.KillAnnouncement(killer, victim, damageString, teamNumV, teamNumK);
+        kf.KillAnnouncement(killer, victim, sourceImage, teamNumV, teamNumK);
     }
 
     private void DoubleKillDialougeActivation (int i)

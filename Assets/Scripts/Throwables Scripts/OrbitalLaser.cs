@@ -28,6 +28,8 @@ public class OrbitalLaser : MonoBehaviour
 
     public int teamNum;
 
+    public Sprite damageImage;
+
     public void OnDrawGizmos()
     {
         int count = looped ? (transform.childCount + 1) : transform.childCount;
@@ -97,7 +99,7 @@ public class OrbitalLaser : MonoBehaviour
         {
             if (col.gameObject.GetComponent<Health>().teamNum != teamNum)
             {
-                col.gameObject.GetComponent<Health>().TakeDamage("Lasered", followPlayer.gameObject, 100, Vector3.zero);
+                col.gameObject.GetComponent<Health>().TakeDamage(damageImage, followPlayer.gameObject, 100, Vector3.zero);
             }
         }
     }

@@ -66,6 +66,7 @@ public class StuntChecker : MonoBehaviour
     Vector3 hitNormal = Vector3.up;
     public Animator anim;
     bool animCrash = false;
+    public Sprite damageImage;
 
     private void OnLeftStick(InputValue value)
     {
@@ -436,7 +437,7 @@ public class StuntChecker : MonoBehaviour
 
                 Health h = t.GetComponent<Health>();
                 if (h != null)
-                    h.TakeDamage("Power Slammed", this.gameObject, concussiveForceDamage, Vector3.zero);
+                    h.TakeDamage(damageImage, this.gameObject, concussiveForceDamage, Vector3.zero);
            // }
         }
 
