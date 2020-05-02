@@ -20,6 +20,6 @@ public class PropellorBlade : MonoBehaviour
     {
         velocity = rb.velocity.magnitude;
         //newRotation = (transform.rotation.x, transform.rotation.y, transform.rotation.z);
-        transform.Rotate(Vector3.left * velocity * 10f * Time.deltaTime);
+        transform.Rotate(Vector3.forward * velocity * 10f * Time.deltaTime);
     }
 }
