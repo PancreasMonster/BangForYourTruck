@@ -29,8 +29,11 @@ public class ChangeLayer : MonoBehaviour
     {
         foreach (Transform child in trans)
         {
-            child.gameObject.layer = LayerMask.NameToLayer(name);
-            ChangeLayersRecursively(child, name);
+            if (child.name != "Collider")
+            {
+                child.gameObject.layer = LayerMask.NameToLayer(name);
+                ChangeLayersRecursively(child, name);
+            }
         }
     }
 }

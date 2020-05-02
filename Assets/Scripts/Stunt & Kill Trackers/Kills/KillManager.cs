@@ -99,6 +99,7 @@ public class KillManager : MonoBehaviour
         int killNum = killer.GetComponent<Health>().playerNum - 1;
         kills[killNum]++;
         killSpree[killNum]++;
+        killer.GetComponent<TextPopUp>().ScoreFeedMessage();
         DoubleKillDialougeActivation(killNum);
         killSpreeDialougeActivation(killNum);
         StartCoroutine(DoubleKillDialougeBool(killNum));

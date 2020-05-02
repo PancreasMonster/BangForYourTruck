@@ -33,6 +33,8 @@ public class EntranceChangeLayer : MonoBehaviour
             } else
             {
                 coll.gameObject.GetComponent<PropelSelf>().canBoost = true;
+                ThrowableCooldown tc = coll.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>();
+                tc.GoOnCooldown(tc.fillAmountValue);
             }
         }
     }

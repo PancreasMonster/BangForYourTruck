@@ -78,7 +78,7 @@ public class BuildModeFire : MonoBehaviour
         {
             PadLB = 1;
 
-            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown();
+            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown(0);
         }
         
         if (!cooldown)

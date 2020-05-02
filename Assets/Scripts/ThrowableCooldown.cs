@@ -41,11 +41,11 @@ public class ThrowableCooldown : MonoBehaviour
         }
     }
 
-    public void GoOnCooldown()
+    public void GoOnCooldown(float time)
     {
 
         //Debug.Log("GOING ON COOLDOWN");
-        fillAmountValue = 0f;
+        fillAmountValue = time;
         onCooldown = true;
     }
 }

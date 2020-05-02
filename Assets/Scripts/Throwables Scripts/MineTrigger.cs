@@ -24,7 +24,7 @@ public class MineTrigger : MonoBehaviour
     void Start()
     {
         audio = GetComponent<AudioSource>();
-        particles1 = GetComponent<ParticleSystem>();
+        //particles1 = GetComponent<ParticleSystem>();
         StartCoroutine(setPrime());
         Destroy(this.gameObject, lifeTime);
         blackholeTargets = GameObject.FindGameObjectsWithTag("BlackHole");
