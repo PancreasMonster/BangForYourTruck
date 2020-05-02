@@ -9,7 +9,7 @@ public class MineTrigger : MonoBehaviour
     public float primeTime = 1.5f;
     bool primed = false, triggered = false;
     public float lifeTime = 15f;
-    ParticleSystem particles;
+    public ParticleSystem particles1, particles2;
     AudioSource audio;
     public GameObject source;
     public Sprite damageImage;
@@ -24,7 +24,7 @@ public class MineTrigger : MonoBehaviour
     void Start()
     {
         audio = GetComponent<AudioSource>();
-        particles = GetComponent<ParticleSystem>();
+        particles1 = GetComponent<ParticleSystem>();
         StartCoroutine(setPrime());
         Destroy(this.gameObject, lifeTime);
         blackholeTargets = GameObject.FindGameObjectsWithTag("BlackHole");
@@ -50,6 +50,10 @@ public class MineTrigger : MonoBehaviour
                 Debug.Log("HIT Player");
                 triggered = true;
                 Invoke("DamageExplosion", .15f);
+                particles1.Play();
+                particles2.Play();
+                Destroy(this.gameObject, 3f);
+                transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
@@ -69,10 +73,7 @@ public class MineTrigger : MonoBehaviour
             if (h != null)
                 h.TakeDamage (damageImage, source, damage, Vector3.zero);
         }
-        particles.Play();
         audio.Play();
-        transform.GetChild(0).gameObject.SetActive(false);
-        Destroy(this.gameObject, 2f);
     }
 
         IEnumerator setPrime ()

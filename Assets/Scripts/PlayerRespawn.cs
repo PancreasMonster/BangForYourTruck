@@ -140,7 +140,8 @@ public class PlayerRespawn : MonoBehaviour
         player1.GetComponent<FlagHolder>().FallOff();
         player1.GetComponent<Health>().health = player1.GetComponent<Health>().maxHealth;
         player1Death = false;
-       // player1Text.text = "";
+        player1.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        // player1Text.text = "";
     }
 
     public IEnumerator FallPlayer2(Transform carRB)
@@ -162,7 +163,8 @@ public class PlayerRespawn : MonoBehaviour
         player2.GetComponent<FlagHolder>().FallOff();
         player2.GetComponent<Health>().health = player2.GetComponent<Health>().maxHealth;
         player2Death = false;
-       // player2Text.text = "";
+        player2.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        // player2Text.text = "";
     }
 
     public IEnumerator FallPlayer3(Transform carRB)
@@ -184,7 +186,8 @@ public class PlayerRespawn : MonoBehaviour
         player3.GetComponent<FlagHolder>().FallOff();
         player3.GetComponent<Health>().health = player3.GetComponent<Health>().maxHealth;
         player3Death = false;
-       // player3Text.text = "";
+        player3.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        // player3Text.text = "";
     }
 
     public IEnumerator FallPlayer4(Transform carRB)
@@ -207,7 +210,8 @@ public class PlayerRespawn : MonoBehaviour
         //player4.GetComponent<FlagHolder>().FallOff();
         player4.GetComponent<Health>().health = player4.GetComponent<Health>().maxHealth;
         player4Death = false;
-       // player4Text.text = "";
+        player4.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        // player4Text.text = "";
     }
 
     IEnumerator SpawnAssign ()
