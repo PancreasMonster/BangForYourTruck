@@ -40,7 +40,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(true);
                     col.GetComponent<CannonWeapon>().canFire = false;
                     col.GetComponent<CannonWeapon>().model.SetActive(false);
-                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(true);
                     col.GetComponent<ShotgunWeapon>().canFire = false;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(false);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(true);
@@ -56,7 +56,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().canFire = true;
                     col.GetComponent<CannonWeapon>().model.SetActive(true);
-                    col.GetComponent<CannonWeapon>().engineModel.SetActive(true);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
                     col.GetComponent<ShotgunWeapon>().canFire = false;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(false);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(false);
@@ -73,7 +73,7 @@ public class WeaponSelectionGate : MonoBehaviour
                     col.GetComponent<MachinegunWeapon>().model.SetActive(false);
                     col.GetComponent<CannonWeapon>().canFire = false;
                     col.GetComponent<CannonWeapon>().model.SetActive(false);
-                    col.GetComponent<CannonWeapon>().engineModel.SetActive(false);
+                    col.GetComponent<CannonWeapon>().engineModel.SetActive(true);
                     col.GetComponent<ShotgunWeapon>().canFire = true;
                     col.GetComponent<ShotgunWeapon>().model.SetActive(true);
                     col.GetComponent<FindPlayerStats>().stats.transform.Find("Weapon Icons").transform.Find("Machine Gun").gameObject.SetActive(false);
