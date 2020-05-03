@@ -6,8 +6,8 @@ public class TextPopUp : MonoBehaviour
 {
     public ScoreFeed scoreFeed;
 
-    public void ScoreFeedMessage()
+    public void ScoreFeedMessage(string scoreText, List<string> flavour)
     {
-        scoreFeed.SetScoreFeedItem();
+        scoreFeed.SetScoreFeedItem(scoreText, flavour);
     }
 }

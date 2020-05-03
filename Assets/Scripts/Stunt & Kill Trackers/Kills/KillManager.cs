@@ -31,6 +31,8 @@ public class KillManager : MonoBehaviour
 
     public GameObject stadiumPyrotechnicParticles;
 
+    public float longShotDistance = 300;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,12 +100,17 @@ public class KillManager : MonoBehaviour
         killSpree[deathNum] = 0;
         int killNum = killer.GetComponent<Health>().playerNum - 1;
         kills[killNum]++;
-        killSpree[killNum]++;
-        killer.GetComponent<TextPopUp>().ScoreFeedMessage();
-        DoubleKillDialougeActivation(killNum);
+        killSpree[killNum]++;        
+        
         killSpreeDialougeActivation(killNum);
-        StartCoroutine(DoubleKillDialougeBool(killNum));
+        
         kf.KillAnnouncement(killer, victim, sourceImage, teamNumV, teamNumK);
+        int longShot = 0;
+        if (Vector3.Distance(killer.transform.position, victim.transform.position) > longShotDistance)
+            longShot = 1;
+        ScoreFeedTotalMessage(killer, killNum, longShot);
+        DoubleKillDialougeActivation(killNum);
+        StartCoroutine(DoubleKillDialougeBool(killNum));
     }
 
     private void DoubleKillDialougeActivation (int i)
@@ -122,11 +129,39 @@ public class KillManager : MonoBehaviour
         }
     }
 
-    IEnumerator DoubleKillDialougeBool (int i)
+    public void ScoreFeedTotalMessage(GameObject killer, int i, int ls)
+    {
+        int scoreNum = 100;
+        List<string> flavourTexts = new List<string>();
+        flavourTexts.Add("Kill");
+        if (doubleKill[i] == true)
+        {
+
+            string dk = "Double Kill";
+            flavourTexts.Add(dk);
+            scoreNum += 75;
+        }
+        if (killSpree[i] >= killSpreeNum)
+        {
+            string ks = "Kill Spree";
+            flavourTexts.Add(ks);
+            scoreNum += 75;
+        }
+        if (ls == 1)
+        {
+            string lss = "Long Shot";
+            flavourTexts.Add(lss);
+            scoreNum += 75;
+        }
+        Debug.Log(flavourTexts.Count);
+        string scoreString = scoreNum.ToString();
+        killer.GetComponent<TextPopUp>().ScoreFeedMessage(scoreString, flavourTexts);
+    }
+
+    IEnumerator DoubleKillDialougeBool(int i)
     {
         doubleKill[i] = true;
         yield return new WaitForSeconds(doubleKillTimer);
         doubleKill[i] = false;
     }
-
 }

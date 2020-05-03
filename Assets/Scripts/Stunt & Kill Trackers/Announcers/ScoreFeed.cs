@@ -6,11 +6,11 @@ public class ScoreFeed : MonoBehaviour
 {
     public GameObject scoreFeedItem;
 
-    public void SetScoreFeedItem()
+    public void SetScoreFeedItem(string scoreText, List<string> flavour)
     {
         GameObject SFI = Instantiate(scoreFeedItem, this.transform);
-        SFI.GetComponent<ScoreFeedItem>().setText();
+        SFI.GetComponent<ScoreFeedItem>().setText(scoreText, flavour);
 
-        Destroy(SFI, 2);
+        
     }
 }
