@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class TrainingTrigger : MonoBehaviour
 {
-    TrainingText trainingManager;
+    TrainingManager manager;
 
-    public int trainingStage;
+    public int neededStagetoProceed;
 
     // Start is called before the first frame update
     void Start()
     {
-        trainingManager = GameObject.Find("Training Canvas").GetComponent<TrainingText>();
+        manager = GameObject.Find("TrainingManager").GetComponent<TrainingManager>();
     }
 
     
 
     private void OnTriggerEnter(Collider other)
     {
-        if (trainingManager.trainingStage == trainingStage)
+        if (manager.trainingStage == neededStagetoProceed)
         {
-            trainingManager.GoToNextTraining();
-            gameObject.SetActive(false);
+            manager.ProceedTraining();
         }       
     }
 }
