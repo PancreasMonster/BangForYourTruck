@@ -18,6 +18,8 @@ public class RearWheelDrive : MonoBehaviour {
     WheelHit hit, hit2, hit3, hit4;
     public AudioSource aud;
     public float sidewaySlipEx, sidewaySlipAS;
+    public bool trainingMode;
+    public TrainingManager tm;
 
 
     // here we find all the WheelColliders down in the hierarchy
@@ -54,12 +56,17 @@ public class RearWheelDrive : MonoBehaviour {
 
     private void OnRightTrigger (InputValue value)
     {
+        
         rightTrigger = value.Get<float>();
+        if (trainingMode)
+            tm.pressedRT = true;
     }
 
     private void OnLeftTrigger (InputValue value)
     {
         leftTrigger = value.Get<float>();
+        if (trainingMode)
+            tm.pressedLT = true;
     }
 
     private void OnFaceButtonWest(InputValue value)

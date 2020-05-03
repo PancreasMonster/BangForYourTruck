@@ -12,7 +12,9 @@ public class ScoreFeedItem : MonoBehaviour
     int currentText = 0;
     List<RectTransform> rectTrans = new List<RectTransform>();
     List<Vector2> tvectors = new List<Vector2>();
+    List<int> scoreAmounts = new List<int>();
     Vector2 origPos;
+    int score;
 
     public void Start()
     {
@@ -28,9 +30,10 @@ public class ScoreFeedItem : MonoBehaviour
         }
     }
 
-    public void setText(string scoreText, List<string> flavour)
+    public void setText(List<string> flavour, List<int> scoreList)
     {
-        text.text = "+" + scoreText;
+        score = scoreList[0];
+        text.text = "+" + score.ToString();
         for(int i = 0; i < flavour.Count; i++)
         {
             Text g = Instantiate(text, this.transform);
@@ -59,9 +62,13 @@ public class ScoreFeedItem : MonoBehaviour
                 Vector2 v = rectTrans[i].localPosition;
                 tvectors[i] = new Vector2(v.x, v.y - 25);
             }
-
-
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
+            for (int i = 0; i < textsGameObjects.Count; i++)
+            {
+                score += scoreAmounts[i + 1];
+                text.text = "+" + score.ToString();
+            }           
+            yield return new WaitForSeconds(.25f);
             currentText += 1;
             if (currentText < textsGameObjects.Count - 1)
             {

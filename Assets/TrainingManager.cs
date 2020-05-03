@@ -8,7 +8,7 @@ public class TrainingManager : MonoBehaviour
     public GameObject player;
     public Camera camera;
     public GameObject drone;
-    public int trainingStage;
+    public int trainingStage = 0;
     GameObject trainingCanvas;
     BoxCollider[] triggers;
 
@@ -17,15 +17,19 @@ public class TrainingManager : MonoBehaviour
     Animator camAnim;
     Animator droneAnim;
 
-    bool pressedRT;
-    bool pressedLT;
+    public bool pressedRT;
+    public bool pressedLT;
     public bool targetDroneDestroyed;
     public bool killTokenDelivered;
+
+    Orbit orbitScript;
 
 
     // Start is called before the first frame update
     void Start()
-    {
+    {        
+        player.GetComponent<RearWheelDrive>().trainingMode = true;
+        orbitScript = player.GetComponent<Orbit>();
         triggers = GetComponentsInChildren<BoxCollider>();
         camAnim = camera.GetComponent<Animator>();
         droneAnim = drone.GetComponent<Animator>();
@@ -46,6 +50,15 @@ public class TrainingManager : MonoBehaviour
             {
                 ProceedTraining();
             }
+
+        }
+
+        if (trainingStage == 1)
+        {
+            //if player presses RT, pressedRT = true;
+            //if player presses LT, pressedLT = true;
+
+            ProceedTraining();
 
         }
 
@@ -143,6 +156,7 @@ public class TrainingManager : MonoBehaviour
         {
             //once inside the drones trigger, stop and look at hard to reach drone, player must kill it (presumably with a missile)
             Debug.Log(trainingStage);
+            orbitScript.enabled = false;
             camAnim.SetTrigger("");
             textDelay = 3f;
 
@@ -153,16 +167,17 @@ public class TrainingManager : MonoBehaviour
             //watch training drone die, look at killtoken, then look at collection gate. Proceed when player delivers it to the collection gate
             camAnim.SetTrigger("");
             Debug.Log(trainingStage);
-
+            triggers[1].isTrigger = true;
 
         }
 
         if (trainingStage == 6)
         {
             //Closeup of drones face fade to black
+            orbitScript.enabled = false;
             camAnim.SetTrigger("");
             Debug.Log(trainingStage);
-            triggers[1].isTrigger = true;
+            
 
 
         }

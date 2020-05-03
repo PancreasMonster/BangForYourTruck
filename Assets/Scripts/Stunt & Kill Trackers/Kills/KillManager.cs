@@ -131,31 +131,31 @@ public class KillManager : MonoBehaviour
 
     public void ScoreFeedTotalMessage(GameObject killer, int i, int ls)
     {
-        int scoreNum = 100;
         List<string> flavourTexts = new List<string>();
+        List<int> scoreList = new List<int>();
         flavourTexts.Add("Kill");
+        scoreList.Add(100);
         if (doubleKill[i] == true)
         {
 
             string dk = "Double Kill";
             flavourTexts.Add(dk);
-            scoreNum += 75;
+            scoreList.Add(75);
         }
         if (killSpree[i] >= killSpreeNum)
         {
             string ks = "Kill Spree";
             flavourTexts.Add(ks);
-            scoreNum += 75;
+            scoreList.Add(75);
         }
         if (ls == 1)
         {
             string lss = "Long Shot";
             flavourTexts.Add(lss);
-            scoreNum += 75;
+            scoreList.Add(75);
         }
         Debug.Log(flavourTexts.Count);
-        string scoreString = scoreNum.ToString();
-        killer.GetComponent<TextPopUp>().ScoreFeedMessage(scoreString, flavourTexts);
+        killer.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
     }
 
     IEnumerator DoubleKillDialougeBool(int i)
