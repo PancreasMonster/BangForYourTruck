@@ -5,6 +5,7 @@ using FMODUnity;
 
 public class TrainingManager : MonoBehaviour
 {
+    public GameObject player;
     public Camera camera;
     public GameObject drone;
     public int trainingStage;
@@ -15,6 +16,12 @@ public class TrainingManager : MonoBehaviour
     AudioSource audio;
     Animator camAnim;
     Animator droneAnim;
+
+    bool pressedRT;
+    bool pressedLT;
+    public bool targetDroneDestroyed;
+    public bool killTokenDelivered;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +37,60 @@ public class TrainingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (trainingStage == 0)
+        {
+            //if player presses RT, pressedRT = true;
+            //if player presses LT, pressedLT = true;
+
+            if (pressedLT && pressedRT)
+            {
+                ProceedTraining();
+            }
+
+        }
+
+        if (trainingStage == 2)
+        {
+            //player is locked onto a target
+
+            //if (lockedOn)
+            {
+                ProceedTraining();
+            }
+
+        }
+
+        if (trainingStage == 3)
+        {
+            //player has to overheat their weapons
+
+            if (player.GetComponent<PowerHolder>().powerAmount <= 5)
+            {
+                ProceedTraining();
+            }
+
+        }
+
+        if (trainingStage == 4)
+        {
+            //player has to kill a training drone
+
+            if (targetDroneDestroyed)
+            {
+                ProceedTraining();
+            }
+
+        }
+
+        if (trainingStage == 5)
+        {
+            //player has deliver a killtoken to their collection gate
+
+            if (killTokenDelivered)
+            {
+                ProceedTraining();
+            }
+        }        
     }
 
     public void ProceedTraining()
