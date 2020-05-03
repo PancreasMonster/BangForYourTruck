@@ -44,8 +44,8 @@ public class TrainingManager : MonoBehaviour
     {
         if (trainingStage == 0)
         {
-            //show drone coming to the player and talking to them
-            droneAnim.SetTrigger("");
+            //show drone coming to the player and talking to them, drone should wait at waypoint 4 and look at the player at all times. 
+            //Proceed when player has pressed both RT and LT
             camAnim.SetTrigger("");
             Debug.Log(trainingStage);
             textDelay = 2f;
@@ -55,33 +55,34 @@ public class TrainingManager : MonoBehaviour
 
         if (trainingStage == 1)
         {
+            //drone should wait at waypoint 4 and look at the player at all times. 
+            //Proceed when player enters trigger(0)
             Debug.Log(trainingStage);
-            droneAnim.SetTrigger("");
             triggers[0].isTrigger = true;
             trainingCanvas.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         if (trainingStage == 2)
         {
+            //drone should wait at waypoint 6 and look at the player at all times. 
+            //Proceed when player locks onto a target
             Debug.Log(trainingStage);
-            droneAnim.SetTrigger("");
             textDelay = 3f;
 
         }
 
         if (trainingStage == 3)
         {
+            //proceed to next training when player overheats their weapon, and enters a trigger on the camera drone "Come back to me when you're ready"
             Debug.Log(trainingStage);
-            droneAnim.SetTrigger("");
             textDelay = 2f;
 
         }
 
         if (trainingStage == 4)
         {
-            //look at hard to reach drone 
+            //once inside the drones trigger, stop and look at hard to reach drone, player must kill it (presumably with a missile)
             Debug.Log(trainingStage);
-            droneAnim.SetTrigger("");
             camAnim.SetTrigger("");
             textDelay = 3f;
 
@@ -89,9 +90,8 @@ public class TrainingManager : MonoBehaviour
 
         if (trainingStage == 5)
         {
-            //watch training drone die, look at killtoken, then look at collection gate 
+            //watch training drone die, look at killtoken, then look at collection gate. Proceed when player delivers it to the collection gate
             camAnim.SetTrigger("");
-            droneAnim.SetTrigger("");
             Debug.Log(trainingStage);
 
 
@@ -101,7 +101,6 @@ public class TrainingManager : MonoBehaviour
         {
             //Closeup of drones face fade to black
             camAnim.SetTrigger("");
-            droneAnim.SetTrigger("");
             Debug.Log(trainingStage);
             triggers[1].isTrigger = true;
 
@@ -109,9 +108,8 @@ public class TrainingManager : MonoBehaviour
         }
     }
 
-    IEnumerator DisplayText()
+    void DisplayText()
     {
-        yield return new WaitForSeconds(textDelay);
         if (trainingStage == 0)
         {
             trainingCanvas.transform.GetChild(0).gameObject.SetActive(true);
