@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ScoreFeedItem : MonoBehaviour
 {
     public Text text;
+    Text scoreAdderText;
     public List<Text> flavourTexts = new List<Text>();
     public List<Text> textsGameObjects = new List<Text>();
     public GameObject textObject;
@@ -15,6 +16,8 @@ public class ScoreFeedItem : MonoBehaviour
     List<int> scoreAmounts = new List<int>();
     Vector2 origPos;
     int score;
+    int adderScore;
+    int targetScore;
 
     public void Start()
     {
@@ -28,13 +31,25 @@ public class ScoreFeedItem : MonoBehaviour
             rectTrans[i].localPosition = Vector2.MoveTowards(rectTrans[i].localPosition, tvectors[i], 2);
             textsGameObjects[i].color = new Color(1, 1, 1, 25 - (((float)Vector2.Distance(origPos, rectTrans[i].localPosition)/1.5f)));
         }
+
+        score = Mathf.FloorToInt(Mathf.MoveTowards(((float)score), ((float)targetScore), 4));
+        text.text = "+" + score.ToString();
+       // if(adderScore > 0)
+      //  adderScore = Mathf.FloorToInt(Mathf.MoveTowards(((float)adderScore), 0, 4));
+       // scoreAdderText.text = "+" + adderScore.ToString();
     }
 
     public void setText(List<string> flavour, List<int> scoreList)
     {
         score = scoreList[0];
+        targetScore = scoreList[0];
         text.text = "+" + score.ToString();
-        for(int i = 0; i < flavour.Count; i++)
+        scoreAmounts = scoreList;
+       // Text sAT = Instantiate(text, this.transform);
+        //sAT.GetComponent<RectTransform>().localPosition = new Vector2(text.rectTransform.localPosition.x, text.rectTransform.localPosition.y - 15);
+       // scoreAdderText = sAT;
+        //scoreAdderText.color = Color.yellow;
+        for (int i = 0; i < flavour.Count; i++)
         {
             Text g = Instantiate(text, this.transform);
             Text t = g.GetComponent<Text>();
@@ -63,12 +78,10 @@ public class ScoreFeedItem : MonoBehaviour
                 tvectors[i] = new Vector2(v.x, v.y - 25);
             }
             yield return new WaitForSeconds(.5f);
-            for (int i = 0; i < textsGameObjects.Count; i++)
-            {
-                score += scoreAmounts[i + 1];
-                text.text = "+" + score.ToString();
-            }           
+            targetScore = score + scoreAmounts[currentText];
+          //  adderScore = scoreAmounts[currentText];
             yield return new WaitForSeconds(.25f);
+           // scoreAdderText.text = "";
             currentText += 1;
             if (currentText < textsGameObjects.Count - 1)
             {
