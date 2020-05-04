@@ -31,7 +31,6 @@ public class MobilityCharges : MonoBehaviour
     public GameObject emission3;
     Renderer emissionMat3;
 
-    public Material redMat;
     Material startingMat;
 
     ParticleSystem particles1;

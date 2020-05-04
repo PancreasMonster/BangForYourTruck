@@ -154,6 +154,12 @@ public class KillManager : MonoBehaviour
             flavourTexts.Add(lss);
             scoreList.Add(75);
         }
+        if(killer.GetComponent<FlipOver>().timer > killer.GetComponent<FlipOver>().timerAllowance)
+        {
+            string aerial = "Aerial Kill";
+            flavourTexts.Add(aerial);
+            scoreList.Add(50);
+        }
         Debug.Log(flavourTexts.Count);
         killer.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
     }
