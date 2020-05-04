@@ -59,7 +59,7 @@ public class BuildModeFire : MonoBehaviour
         targetOriginalPos = aimTarget.transform.localPosition;
         //GameObject clone = Instantiate(selectorPrefab, transform.position, Quaternion.identity);
         //selector = clone;
-        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
+        StartCoroutine(assignColour());
     }
 
     Vector2 rightStick;
@@ -367,5 +367,12 @@ public class BuildModeFire : MonoBehaviour
             yield return new WaitForSeconds(rangeDelay);
             backwardRange = true;
         }
+    }
+
+    IEnumerator assignColour ()
+    {
+        yield return null;
+        Debug.Log("ChangeColour");
+        discUIImages[0].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
     }
 }

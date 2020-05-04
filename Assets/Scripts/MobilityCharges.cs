@@ -25,11 +25,11 @@ public class MobilityCharges : MonoBehaviour
     public float maxDriftMultiplier;
 
     public GameObject emission1;
-    MeshRenderer emissionMat1;
+    Renderer emissionMat1;
     public GameObject emission2;
-    MeshRenderer emissionMat2;
+    Renderer emissionMat2;
     public GameObject emission3;
-    MeshRenderer emissionMat3;
+    Renderer emissionMat3;
 
     public Material redMat;
     Material startingMat;
@@ -37,6 +37,7 @@ public class MobilityCharges : MonoBehaviour
     ParticleSystem particles1;
     ParticleSystem particles2;
     ParticleSystem particles3;
+    public float intensity = 7.5f;
 
     //SpriteRenderer sprite1;
     //SpriteRenderer sprite2;
@@ -48,13 +49,19 @@ public class MobilityCharges : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startingMat = emission1.GetComponent<MeshRenderer>().material;
+        //startingMat = emission1.GetComponent<Renderer>().material;
 
-        emissionMat1 = emission1.GetComponent<MeshRenderer>();
+        emissionMat1 = emission1.GetComponent<Renderer>();
 
-        emissionMat2 = emission2.GetComponent<MeshRenderer>();
+        emissionMat2 = emission2.GetComponent<Renderer>();
 
-        emissionMat3 = emission3.GetComponent<MeshRenderer>();
+        emissionMat3 = emission3.GetComponent<Renderer>();
+
+        emissionMat1.material.SetColor("_EmissionColor", Color.green * intensity);
+
+        emissionMat2.material.SetColor("_EmissionColor", Color.green * intensity);
+
+        emissionMat3.material.SetColor("_EmissionColor", Color.green * intensity);
 
         /*noChargeParticles = noChargeParticlesParent.GetComponentsInChildren<ParticleSystem>();
 
@@ -93,7 +100,7 @@ public class MobilityCharges : MonoBehaviour
             aud.Play();
             particles1.Play();
             //sprite1.color = Color.green;
-            emissionMat1.material = startingMat;
+            emissionMat1.material.SetColor("_EmissionColor", Color.green * intensity);
             charge1Time = 0f;
         }
 
@@ -111,7 +118,7 @@ public class MobilityCharges : MonoBehaviour
             aud.Play();
             particles2.Play();
             //sprite2.color = Color.green;
-            emissionMat2.material = startingMat;
+            emissionMat2.material.SetColor("_EmissionColor", Color.green * intensity);
             charge2Time = 0f;
         }
 
@@ -129,64 +136,66 @@ public class MobilityCharges : MonoBehaviour
             aud.Play();
             particles3.Play();
             //sprite3.color = Color.green;
-            emissionMat3.material = startingMat;
+            emissionMat3.material.SetColor("_EmissionColor", Color.green * intensity);
             charge3Time = 0f;
         }
-        /*
-        if (charge1Time >= rechargeTime/2)
+
+        if (charge1Time >= (rechargeTime * .25f) && charge1Time <= (rechargeTime * .5f))
         {
             //sprite1.color = Color.yellow;
-            //emissionMat1.color = Color.yellow;
+            emissionMat1.material.SetColor("_EmissionColor", new Color(0.99f, 0.2f, 0) * intensity);
         }
 
-        if (charge2Time >= rechargeTime / 2)
+        if (charge2Time >= (rechargeTime * .25f) && charge2Time <= (rechargeTime * .75f))
         {
             //sprite2.color = Color.yellow;
-            //emissionMat2.color = Color.yellow;
+            emissionMat2.material.SetColor("_EmissionColor", new Color(0.99f, 0.2f, 0) * intensity);
         }
 
-        if (charge3Time >= rechargeTime / 2)
+        if (charge3Time >= (rechargeTime * .25f) && charge3Time <= (rechargeTime * .5f))
         {
             //sprite3.color = Color.yellow;
-            //emissionMat3.color = Color.yellow;
+            emissionMat3.material.SetColor("_EmissionColor", new Color(0.99f, 0.2f, 0) * intensity);
         }
 
-        if (charge1Time >= (rechargeTime * .25f))
+        if (charge1Time >= (rechargeTime * .5f) && charge1Time <= (rechargeTime * .75f))
         {
             //sprite1.color = new Color(1.0f, 0.64f, 0.0f);
+            emissionMat1.material.SetColor("_EmissionColor", new Color(1.0f, 0.64f, 0.0f) * intensity);
             //emissionMat1.color = new Color(1.0f, 0.64f, 0.0f);
         }
 
-        if (charge2Time >= (rechargeTime * .25f))
+        if (charge2Time >= (rechargeTime * .5f) && charge2Time <= (rechargeTime * .75f))
         {
             //sprite2.color = new Color(1.0f, 0.64f, 0.0f);
-            //emissionMat2.color = new Color(1.0f, 0.64f, 0.0f);
+            emissionMat1.material.SetColor("_EmissionColor", new Color(1.0f, 0.64f, 0.0f) * intensity);
         }
 
-        if (charge3Time >= (rechargeTime * .25f))
+        if (charge3Time >= (rechargeTime * .5f) && charge3Time <= (rechargeTime * .75f))
         {
             //sprite3.color = new Color(1.0f, 0.64f, 0.0f);
-            //emissionMat3.color = new Color(1.0f, 0.64f, 0.0f);
+            emissionMat1.material.SetColor("_EmissionColor", new Color(1.0f, 0.64f, 0.0f) * intensity);
         }
 
-        if (charge1Time >= (rechargeTime * .75f))
+        if (charge1Time >= (rechargeTime * .75f) && charge1Time <= (rechargeTime))
         {
             //sprite1.color = new Color(.64f, 1f, 0.0f);
+            emissionMat1.material.SetColor("_EmissionColor", new Color(.64f, 1f, 0.0f) * intensity);
             //emissionMat1.color = new Color(.64f, 1f, 0.0f);
         }
 
-        if (charge2Time >= (rechargeTime * .75f))
+        if (charge2Time >= (rechargeTime * .75f) && charge2Time <= (rechargeTime))
         {
             //sprite2.color = new Color(.64f, 1f, 0.0f);
-            //emissionMat2.color = new Color(.64f, 1f, 0.0f);
+            emissionMat2.material.SetColor("_EmissionColor", new Color(.64f, 1f, 0.0f) * intensity);
         }
 
-        if (charge3Time >= (rechargeTime * .75f))
+        if (charge3Time >= (rechargeTime * .75f) && charge3Time <= (rechargeTime))
         {
             //sprite3.color = new Color(.64f, 1f, 0.0f);
-            //emissionMat3.color = new Color(.64f, 1f, 0.0f);
+            emissionMat3.material.SetColor("_EmissionColor", new Color(.64f, 1f, 0.0f) * intensity);
         }
-        */
+        
     }
 
     public void UseCharge()
@@ -222,7 +231,7 @@ public class MobilityCharges : MonoBehaviour
             charge1 = false;
             //useChargeParticlesParent.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             //sprite1.color = Color.red;
-            emissionMat1.material = redMat;
+            emissionMat1.material.SetColor("_EmissionColor", Color.red * intensity);
             return;
         }
 
@@ -231,7 +240,7 @@ public class MobilityCharges : MonoBehaviour
             charge2 = false;
             //useChargeParticlesParent.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
             //sprite2.color = Color.red;
-            emissionMat2.material = redMat;
+            emissionMat2.material.SetColor("_EmissionColor", Color.red * intensity);
             return;
         }
 
@@ -240,7 +249,7 @@ public class MobilityCharges : MonoBehaviour
             charge3 = false;
             //useChargeParticlesParent.transform.GetChild(2).GetComponent<ParticleSystem>().Play();
             //sprite3.color = Color.red;
-            emissionMat3.material = redMat;
+            emissionMat3.material.SetColor("_EmissionColor", Color.red * intensity);
             return;
         }
     }
