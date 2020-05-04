@@ -132,7 +132,7 @@ public class MobilityCharges : MonoBehaviour
             emissionMat3.material = startingMat;
             charge3Time = 0f;
         }
-
+        /*
         if (charge1Time >= rechargeTime/2)
         {
             //sprite1.color = Color.yellow;
@@ -186,6 +186,7 @@ public class MobilityCharges : MonoBehaviour
             //sprite3.color = new Color(.64f, 1f, 0.0f);
             //emissionMat3.color = new Color(.64f, 1f, 0.0f);
         }
+        */
     }
 
     public void UseCharge()
