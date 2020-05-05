@@ -372,7 +372,6 @@ public class BuildModeFire : MonoBehaviour
     IEnumerator assignColour ()
     {
         yield return null;
-        Debug.Log("ChangeColour");
         discUIImages[0].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
     }
 }

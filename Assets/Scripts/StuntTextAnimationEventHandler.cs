@@ -42,7 +42,7 @@ public class StuntTextAnimationEventHandler : MonoBehaviour
 
     public void LeaveGoToScoreTextState()
     {
-        Debug.Log("Leaving GoToScoreState State");
+        //Debug.Log("Leaving GoToScoreState State");
         anim.SetBool("GoToScoreText", false);
         anim.SetTrigger("Idle");
         stuntText1.text = "";
