@@ -40,10 +40,17 @@ public class FlipOver : MonoBehaviour
     MobilityCharges mobCharges;
 
     WheelFrictionCurve curve = new WheelFrictionCurve();
+    GameObject jumpParticlesParent;
+    ParticleSystem jumpParticles1;
+    ParticleSystem jumpParticles2;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        jumpParticlesParent = transform.Find("Jump particle").gameObject;
+        jumpParticles1 = jumpParticlesParent.GetComponent<ParticleSystem>();
+        jumpParticles2 = jumpParticlesParent.transform.GetChild(0).GetComponent<ParticleSystem>();
         mobCharges = GetComponent<MobilityCharges>();
         rigidbody = GetComponentInParent<Rigidbody>();
         h = GetComponentInParent<Health>();
@@ -79,6 +86,8 @@ public class FlipOver : MonoBehaviour
                     {
                         StartCoroutine(JumpDelay());
                         mobCharges.UseCharge();
+                        jumpParticles1.Play();
+                        jumpParticles2.Play();
                         rigidbody.AddForce(Vector3.up * force);
                         rigidbody.angularVelocity = Vector3.zero;
                     }                   
@@ -87,6 +96,8 @@ public class FlipOver : MonoBehaviour
             else if (mobCharges.currentCharges > 0 && Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
             {
                     mobCharges.UseCharge();
+                    jumpParticles1.Play();
+                    jumpParticles2.Play();
                     StartCoroutine(JumpDelay());
                     rigidbody.AddForce(transform.up * force);
                     rigidbody.angularVelocity = Vector3.zero;
