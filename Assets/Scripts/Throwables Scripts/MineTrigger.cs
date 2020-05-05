@@ -47,9 +47,12 @@ public class MineTrigger : MonoBehaviour
 
             if (other.gameObject.GetComponent<Health>() != null && other.gameObject.GetComponent<Health>().teamNum != teamNum && !triggered)
             {
+                Rigidbody rb = GetComponent<Rigidbody>();
                 Debug.Log("HIT Player");
                 triggered = true;
                 Invoke("DamageExplosion", .15f);
+                rb.velocity = Vector3.zero;
+                rb.isKinematic = true;
                 particles1.Play();
                 particles2.Play();
                 Destroy(this.gameObject, 3f);
