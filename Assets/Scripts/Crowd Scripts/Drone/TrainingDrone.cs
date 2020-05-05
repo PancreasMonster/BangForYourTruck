@@ -18,7 +18,7 @@ public class TrainingDrone : MonoBehaviour
 
     public float rotationSpeed = 5;
 
-
+    public TrainingManager tm;
 
     public void OnDrawGizmos()
     {
@@ -90,8 +90,19 @@ public class TrainingDrone : MonoBehaviour
     {
         if (other.transform.tag == "TrainingDroneWaypoint")
         {
-            AdvanceToNextWaypoint();
+
+            if (other.transform.name == " (4)")
+            {
+                tm.ProceedTraining();
+            }
+            else
+            {
+                AdvanceToNextWaypoint();
+            }
+            
         }
+
+        
     }
 
 }
