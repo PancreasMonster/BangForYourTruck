@@ -18,7 +18,6 @@ public class StuntChecker : MonoBehaviour
     public float stuntStringHoldTime = 1;
     float oldVelocity;
 
-    [System.NonSerialized]
     public float score = 0;
     List<Stunt> stunts = new List<Stunt>();
     List<Stunt> doneStunts = new List<Stunt>();
