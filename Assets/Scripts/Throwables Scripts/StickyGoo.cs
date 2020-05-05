@@ -19,7 +19,7 @@ public class StickyGoo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (numInside > 0)
+        /*if (numInside > 0)
         {
             lifeTime -= Time.deltaTime;
             transform.localScale += new Vector3(0.1F, 0f, .1f) * sizeChangeFactor * Time.deltaTime;
@@ -29,14 +29,15 @@ public class StickyGoo : MonoBehaviour
                 GetComponent<BoxCollider>().enabled = false;
                 Destroy(this.gameObject, 1f);
             }
-        }
+        }*/
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Health>() == true && other.GetComponent<Rigidbody>() == true && other.GetComponent<Health>().teamNum != teamNum)
         {
-            numInside++;
+            Debug.Log("Slowdown Trigger activate");
+            //numInside++;
             other.GetComponent<Rigidbody>().drag = increasedDrag;
         }
     }
@@ -45,6 +46,7 @@ public class StickyGoo : MonoBehaviour
     {
         if (other.GetComponent<Health>() == true && other.GetComponent<Rigidbody>() == true && other.GetComponent<Health>().teamNum != teamNum)
         {
+            Debug.Log("Slowdown Trigger deactivate");
             numInside--;
             other.GetComponent<Rigidbody>().drag = 0f;
         }

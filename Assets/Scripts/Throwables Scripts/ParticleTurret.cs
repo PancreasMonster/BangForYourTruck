@@ -204,7 +204,7 @@ public class ParticleTurret : AIBehaviours
     {
         Debug.Log(other.transform.name);
 
-        if(other.gameObject != this.gameObject && other.GetComponent<Health>())
+        if(other.gameObject != this.gameObject && other.GetComponent<Health>() && other.GetComponent<Health>().teamNum != GetComponentInParent<Health>().teamNum)
         other.GetComponent<Health>().TakeDamage(damageImage, source, damage, Vector3.zero);
 
         int numCollisionEvents = ps.GetCollisionEvents(other, collisionEvents);
