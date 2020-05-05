@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     public float killerTimer;
     public float killMaxTime = 15;
     public GameObject damageSource;
-    public bool drone;
+    public bool drone, targetDrone;
     Sprite damageSourceImage;
 
     [FMODUnity.EventRef]
@@ -76,13 +76,14 @@ public class Health : MonoBehaviour
             }         
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
 
         //hpBarFill.fillAmount = health / maxHealth;
 
         if (health <= 0 && !dead)
+        
             Death();
+
 
     }
 
@@ -145,6 +146,12 @@ public class Health : MonoBehaviour
         if(drone)
         {
             GetComponent<DroneScript>().DeathTrigger();
+        }
+
+        if (targetDrone)
+        {
+            GameObject.Find("TrainingKillTagSpawner").GetComponent<KillTagSpawner>().SpawnKillTag();
+            GetComponent<TargetDrone>().DeathTrigger();
         }
 
         if (!mbase && !drone)

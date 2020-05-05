@@ -25,8 +25,8 @@ public class TrainingManager : MonoBehaviour
 
     Orbit orbitScript;
 
-    public bool trigger1;
-    public bool trigger2;
+    public bool trigger1 = false;
+    public bool trigger2 = false;
 
 
     // Start is called before the first frame update
@@ -55,11 +55,6 @@ public class TrainingManager : MonoBehaviour
                 ProceedTraining();
             }
 
-        }
-
-        if (targetDrone == null)
-        {
-            targetDroneDestroyed = true;
         }
 
         if (trainingStage == 1)
@@ -107,11 +102,17 @@ public class TrainingManager : MonoBehaviour
         {
             //player has deliver a killtoken to their collection gate
 
-            if (killTokenDelivered)
+            if (trigger2)
             {
                 ProceedTraining();
             }
-        }        
+        }
+
+
+        if (targetDrone == null)
+        {
+            targetDroneDestroyed = true;
+        }
     }
 
     public void ProceedTraining()
@@ -131,7 +132,7 @@ public class TrainingManager : MonoBehaviour
             Debug.Log(trainingStage);
             textDelay = 2f;
             Invoke("DisplayText", 1f);
-            Invoke("ProceedTraining", 2f);
+
         }
 
         if (trainingStage == 1)

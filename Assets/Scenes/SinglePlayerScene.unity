@@ -2345,7 +2345,8 @@ MonoBehaviour:
   killerTimer: 0
   killMaxTime: 15
   damageSource: {fileID: 0}
-  drone: 1
+  drone: 0
+  targetDrone: 1
   dronePainSound: event:/Drone Voice/Pain
 --- !u!54 &91541223
 Rigidbody:
@@ -2356,10 +2357,10 @@ Rigidbody:
   m_GameObject: {fileID: 91541220}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2374,8 +2375,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.38652346, z: 2.5636718}
-  m_Center: {x: 0, y: 0.066113286, z: 0.037207033}
+  m_Size: {x: 0.73, y: 0.23, z: 1.67}
+  m_Center: {x: 0, y: 0.066113286, z: 0.14}
 --- !u!114 &91541225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,9 +2392,12 @@ MonoBehaviour:
   dwp: {fileID: 1035860417}
   player: {fileID: 533072701}
   nextWaypoint: {x: 0, y: 0, z: 0}
-  arriveDistance: 5
+  arriveDistance: 10
   droneSpeed: 500
-  rotationSpeed: 5
+  rotationSpeed: 50
+  droneCorpse: {fileID: 0}
+  droneDeathPrefab: {fileID: 2705857064438722281, guid: 30069322d1ea70147b7f17b1bbf9d7a2,
+    type: 3}
 --- !u!43 &92444034
 Mesh:
   m_ObjectHideFlags: 0
@@ -13891,6 +13895,7 @@ MonoBehaviour:
   killMaxTime: 15
   damageSource: {fileID: 0}
   drone: 1
+  targetDrone: 0
   dronePainSound: event:/Drone Voice/Pain
 --- !u!54 &551601858
 Rigidbody:
@@ -23668,9 +23673,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 688835233}
+  - component: {fileID: 688835234}
   m_Layer: 0
   m_Name: ' (1)'
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23689,6 +23695,19 @@ Transform:
   m_Father: {fileID: 1035860416}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &688835234
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688835232}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &693745387
 GameObject:
   m_ObjectHideFlags: 0
@@ -27304,9 +27323,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 855897356}
+  - component: {fileID: 855897357}
   m_Layer: 0
   m_Name: ' (4)'
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27325,6 +27345,19 @@ Transform:
   m_Father: {fileID: 1035860416}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &855897357
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855897355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &858096733
 Mesh:
   m_ObjectHideFlags: 0
@@ -29652,6 +29685,7 @@ MonoBehaviour:
   killMaxTime: 15
   damageSource: {fileID: 0}
   drone: 1
+  targetDrone: 0
   dronePainSound: event:/Drone Voice/Pain
 --- !u!54 &934728541
 Rigidbody:
@@ -30084,6 +30118,51 @@ Transform:
   m_Father: {fileID: 1609731221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &956645646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 956645648}
+  - component: {fileID: 956645647}
+  m_Layer: 0
+  m_Name: TrainingKillTagSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &956645647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956645646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04d9ed0ba375074c9f6911b1abee485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTag: {fileID: 0}
+  targetDrone: {fileID: 0}
+--- !u!4 &956645648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956645646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 14.661133, z: 0.3720703}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 40
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &958769477
 GameObject:
   m_ObjectHideFlags: 0
@@ -30093,9 +30172,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 958769478}
+  - component: {fileID: 958769479}
   m_Layer: 0
   m_Name: ' (2)'
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30114,6 +30194,19 @@ Transform:
   m_Father: {fileID: 1035860416}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &958769479
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958769477}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &982312182
 GameObject:
   m_ObjectHideFlags: 0
@@ -33998,6 +34091,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 21
       objectReference: {fileID: 0}
+    - target: {fileID: 576083637717296056, guid: ab29158f6c00c0d4281a17526b1dc317,
+        type: 3}
+      propertyPath: m_TagString
+      value: TrainingDroneWaypoint
+      objectReference: {fileID: 0}
     - target: {fileID: 1113098500733231687, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -34218,6 +34316,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 21
       objectReference: {fileID: 0}
+    - target: {fileID: 6634640180649743449, guid: ab29158f6c00c0d4281a17526b1dc317,
+        type: 3}
+      propertyPath: m_TagString
+      value: TrainingDroneWaypoint
+      objectReference: {fileID: 0}
     - target: {fileID: 6983256063578111084, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34248,7 +34351,9 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7054526768987340980, guid: ab29158f6c00c0d4281a17526b1dc317, type: 3}
+    - {fileID: 8640428827875686996, guid: ab29158f6c00c0d4281a17526b1dc317, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ab29158f6c00c0d4281a17526b1dc317, type: 3}
 --- !u!1001 &1242238435
 PrefabInstance:
@@ -35487,7 +35592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291410953}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.7, z: 0}
+  m_LocalPosition: {x: 0, y: 14, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 91541221}
@@ -59527,6 +59632,7 @@ MonoBehaviour:
   killMaxTime: 15
   damageSource: {fileID: 0}
   drone: 1
+  targetDrone: 0
   dronePainSound: event:/Drone Voice/Pain
 --- !u!54 &1973846744
 Rigidbody:
@@ -64572,9 +64678,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121078641}
+  - component: {fileID: 2121078642}
   m_Layer: 0
   m_Name: ' (3)'
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64593,6 +64700,19 @@ Transform:
   m_Father: {fileID: 1035860416}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2121078642
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121078640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2124595306
 GameObject:
   m_ObjectHideFlags: 0
