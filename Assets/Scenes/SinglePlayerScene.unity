@@ -2289,7 +2289,7 @@ GameObject:
   - component: {fileID: 91541225}
   m_Layer: 0
   m_Name: CameraDroneMain
-  m_TagString: Drone
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7843,7 +7843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 809458592}
-  neededStagetoProceed: 1
+  neededStagetoProceed: 2
 --- !u!65 &293263922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8093,11 +8093,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press ''A'' to jump, press ''B'' to boost, press ''X'' to drift at high
-    speeds, and press ''Y'' to lock on to enemies in range.
-
-    Press ''start''
-    to continue.'
+  m_Text: "Press 'A': to jump\nPress 'B': to boost, \nPress 'X' to drift at high
+    speeds, and barrel roll in the air\nPress 'Y' to lock on to enemies in range"
 --- !u!222 &335633564
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11940,7 +11937,7 @@ GameObject:
   - component: {fileID: 497707783}
   - component: {fileID: 497707782}
   m_Layer: 5
-  m_Name: Collecting tags
+  m_Name: Congratulations!! That concludes the basic training
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25003,11 +25000,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Use the D-pad left and right to select an ability, and hold Left Bumper
-    to ready the attack.
-
-    Use the Right Stick up and down to select a range and
-    release Left Bumper to fire'
+  m_Text: Collect that Killtag and return it to your gate to score a point. This
+    also awards money to your team
 --- !u!222 &747132035
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28006,7 +28000,7 @@ MonoBehaviour:
   m_Text: 'For Hard to reach enemies you can launch a missile.
 
     Hold Left Bumper
-    to ready the attack abd use the D-pad (up and down) to select a trajectory and
+    to ready the attack and use the D-pad (up and down) to select a trajectory and
     release Left Bumper to fire'
 --- !u!222 &854583437
 CanvasRenderer:
@@ -29337,7 +29331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913212841}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1291410954}
@@ -36684,7 +36678,9 @@ GameObject:
   - component: {fileID: 1307353583}
   - component: {fileID: 1307353582}
   m_Layer: 5
-  m_Name: Collecting tags
+  m_Name: You can spend your money on other special abilities  by driving through
+    these gates, and yo ucan use the D Pad (left and right) to cycle through which
+    is selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36742,7 +36738,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: You can spend your money on other special abilities  by driving through
-    these gates, and yo ucan use the D Pad (left and right) to cycle through which
+    these gates, and you can use the D Pad (left and right) to cycle through which
     is selected
 --- !u!222 &1307353583
 CanvasRenderer:
@@ -52633,7 +52629,7 @@ GameObject:
   - component: {fileID: 1644531694}
   - component: {fileID: 1644531693}
   m_Layer: 5
-  m_Name: Collecting tags
+  m_Name: Congratulations!! That concludes the basic training
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53621,7 +53617,9 @@ GameObject:
   - component: {fileID: 1723274978}
   - component: {fileID: 1723274977}
   m_Layer: 5
-  m_Name: Collecting tags
+  m_Name: You can spend your money on other special abilities  by driving through
+    these gates, and yo ucan use the D Pad (left and right) to cycle through which
+    is selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53679,7 +53677,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: You can spend your money on other special abilities  by driving through
-    these gates, and yo ucan use the D Pad (left and right) to cycle through which
+    these gates, and you can use the D Pad (left and right) to cycle through which
     is selected
 --- !u!222 &1723274978
 CanvasRenderer:
@@ -55421,7 +55419,7 @@ GameObject:
   - component: {fileID: 1770646383}
   - component: {fileID: 1770646382}
   m_Layer: 0
-  m_Name: TrainingTrigger (Stage5)
+  m_Name: TrainingTrigger (Stage6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55440,7 +55438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 809458592}
-  neededStagetoProceed: 5
+  neededStagetoProceed: 6
 --- !u!65 &1770646383
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56268,7 +56266,7 @@ MonoBehaviour:
   m_Text: 'For Hard to reach enemies you can launch a missile.
 
     Hold Left Bumper
-    to ready the attack abd use the D-pad (up and down) to select a trajectory and
+    to ready the attack and use the D-pad (up and down) to select a trajectory and
     release Left Bumper to fire'
 --- !u!222 &1810549958
 CanvasRenderer:

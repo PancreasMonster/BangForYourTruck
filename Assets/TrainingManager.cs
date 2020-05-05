@@ -120,7 +120,6 @@ public class TrainingManager : MonoBehaviour
         {
             //Fade to black
 
-            Invoke("ProceedTraining", 2f);
 
         }
 
@@ -156,7 +155,7 @@ public class TrainingManager : MonoBehaviour
             //Proceed when player enters trigger(0)
             Debug.Log(trainingStage);
             triggers[0].isTrigger = true;
-            Invoke("DisplayText", 4f);
+            Invoke("DisplayText", 1f);
         }
 
         if (trainingStage == 3)
@@ -167,7 +166,7 @@ public class TrainingManager : MonoBehaviour
             //textDelay = 3f;
             Debug.Log("DroneShouldMove");
             drone.GetComponent<TrainingDrone>().AdvanceToNextWaypoint();
-            Invoke("DisplayText", textDelay);
+            Invoke("DisplayText", 8f);
         }
 
         if (trainingStage == 4)

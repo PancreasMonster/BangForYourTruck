@@ -24,8 +24,8 @@ public class TrainingTrigger : MonoBehaviour
             if (transform.name == "TrainingTrigger (Stage2)")
                 manager.trigger1 = true;
 
-            if (transform.name == "TrainingTrigger (Stage5)")
-                if (player.GetComponent<TagHolder>().currentTags != 0)
+            if (transform.name == "TrainingTrigger (Stage6)")
+                
                 manager.trigger2 = true;
         }   
             
