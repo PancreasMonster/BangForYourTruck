@@ -2398,6 +2398,7 @@ MonoBehaviour:
   droneCorpse: {fileID: 0}
   droneDeathPrefab: {fileID: 2705857064438722281, guid: 30069322d1ea70147b7f17b1bbf9d7a2,
     type: 3}
+  tm: {fileID: 2046613397}
 --- !u!43 &92444034
 Mesh:
   m_ObjectHideFlags: 0
@@ -7762,7 +7763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d10644ccce12ca4b8d0869eabec23bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 809458592}
   neededStagetoProceed: 1
 --- !u!65 &293263922
 BoxCollider:
@@ -13422,7 +13423,7 @@ PrefabInstance:
         type: 3}
       propertyPath: lockOnParent
       value: 
-      objectReference: {fileID: 945473044}
+      objectReference: {fileID: 506630931}
     - target: {fileID: 5769034158848722091, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: cam
@@ -30366,7 +30367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71586084e812824983e2f273bf432f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObject: {fileID: 2060228503}
+  parentObject: {fileID: 809458592}
   target: {fileID: 0}
   yOffset: 1
 --- !u!4 &945473046
@@ -30413,8 +30414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04d9ed0ba375074c9f6911b1abee485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTag: {fileID: 0}
-  targetDrone: {fileID: 0}
+  killTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
+  targetDrone: {fileID: 91541220}
 --- !u!4 &956645648
 Transform:
   m_ObjectHideFlags: 0
@@ -32339,7 +32340,8 @@ MonoBehaviour:
   killSpreeDialouge: 
   doubleKill: 
   doubleKillTimer: 0
-  players: []
+  players:
+  - {fileID: 809458592}
   kills: 
   deaths: 
   killSpree: 
@@ -34368,12 +34370,12 @@ PrefabInstance:
     - target: {fileID: 170257496735216049, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 576083637717296056, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 576083637717296056, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
@@ -34428,17 +34430,17 @@ PrefabInstance:
     - target: {fileID: 1521207845033597131, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1763979568628489439, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1981349671433755838, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2116426712304580106, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
@@ -34558,12 +34560,12 @@ PrefabInstance:
     - target: {fileID: 3980080536779041814, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4258199511823298163, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4773679220813090362, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
@@ -34573,32 +34575,32 @@ PrefabInstance:
     - target: {fileID: 4799516767842691287, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4816267330838406614, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5950707719832443070, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6140089902081778464, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6589781014355772838, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6634640180649743449, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6634640180649743449, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
@@ -34618,17 +34620,22 @@ PrefabInstance:
     - target: {fileID: 7452966196396846642, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7677161468455858280, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677161468455858280, guid: ab29158f6c00c0d4281a17526b1dc317,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7919536867236066185, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8101047022689916903, guid: ab29158f6c00c0d4281a17526b1dc317,
         type: 3}
@@ -54702,7 +54709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d10644ccce12ca4b8d0869eabec23bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 809458592}
   neededStagetoProceed: 5
 --- !u!65 &1770646383
 BoxCollider:
@@ -57872,7 +57879,7 @@ PrefabInstance:
     - target: {fileID: 4742906541963177659, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 4185911
+      value: 8380215
       objectReference: {fileID: 0}
     - target: {fileID: 4742906541963177659, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}

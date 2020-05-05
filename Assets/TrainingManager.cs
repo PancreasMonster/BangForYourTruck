@@ -109,10 +109,7 @@ public class TrainingManager : MonoBehaviour
         }
 
 
-        if (targetDrone == null)
-        {
-            targetDroneDestroyed = true;
-        }
+        
     }
 
     public void ProceedTraining()
@@ -151,6 +148,7 @@ public class TrainingManager : MonoBehaviour
             //Proceed when player locks onto a target
             Debug.Log(trainingStage);
             textDelay = 3f;
+            Debug.Log("DroneShouldMove");
             drone.GetComponent<TrainingDrone>().AdvanceToNextWaypoint();
 
         }
@@ -167,7 +165,7 @@ public class TrainingManager : MonoBehaviour
         {
             //once inside the drones trigger, stop and look at hard to reach drone, player must kill it (presumably with a missile)
             Debug.Log(trainingStage);
-            orbitScript.enabled = false;
+            //orbitScript.enabled = false;
             camAnim.SetTrigger("");
             textDelay = 3f;
 
@@ -212,5 +210,10 @@ public class TrainingManager : MonoBehaviour
         {
             trainingCanvas.transform.GetChild(3).gameObject.SetActive(true);
         }
+    }
+
+    public void DroneKilled()
+    {
+            targetDroneDestroyed = true;
     }
 }

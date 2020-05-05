@@ -192,10 +192,10 @@ public class PropelSelf : MonoBehaviour
         psRight.Play();
         GetComponent<AudioSource>().pitch = .8f - (.4f * (1.0f - ((GetComponent<PowerHolder>().powerAmount - 40) / GetComponent<PowerHolder>().maxPower)));
         GetComponent<AudioSource>().Play();
-        ChromaticAberration ChromAberr = null;
-        PPV.profile.TryGetSettings(out ChromAberr);
-        DepthOfField dop = null;
-        PPV.profile.TryGetSettings(out dop);
+       // ChromaticAberration ChromAberr = null;
+       // PPV.profile.TryGetSettings(out ChromAberr);
+       // DepthOfField dop = null;
+      //  PPV.profile.TryGetSettings(out dop);
        /* while (ChromAberr.intensity.value <= 1)
         {
             ChromAberr.intensity.value += (10f * Time.deltaTime);

@@ -24,6 +24,8 @@ public class TargetDrone : MonoBehaviour
 
     bool dead = false;
 
+    public TrainingManager tm;
+
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -98,20 +100,8 @@ public class TargetDrone : MonoBehaviour
         }
         GetComponent<BoxCollider>().enabled = false;
         GameObject droneDeathBody = Instantiate(droneDeathPrefab, transform.position, droneDeathPrefab.transform.rotation);
-        return null;
-        //droneCorpse = droneDeathBody.transform;
-        //yield return new WaitForSeconds(30);
-        //rb.position = spawnPoint;
-        //FMODUnity.RuntimeManager.PlayOneShot(respawnDialogue);
-        //foreach (Transform child in transform)
-        //{
-        //    child.gameObject.SetActive(true);
-        //}
-        //GetComponent<BoxCollider>().enabled = true;
-        //GetComponent<Health>().health = GetComponent<Health>().maxHealth;
-        //dead = false;
-        //cam.enabled = true;
-        //checkForCorpse = true;
+        yield return null;
+        tm.DroneKilled();
     }
 
     public void AdvanceToNextWaypoint()

@@ -150,6 +150,9 @@ public class LockOn : MonoBehaviour
 
     void ImageDisplay ()
     {
+        if (target == null)
+            return;
+
         float UIdist = maxDistance;
         List<GameObject> UITargets = new List<GameObject>();
        

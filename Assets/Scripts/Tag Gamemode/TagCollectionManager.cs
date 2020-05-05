@@ -127,6 +127,11 @@ public class TagCollectionManager : MonoBehaviour
         vds.DisplayContinueButtons();
     }  
 
+    void GoToAwards()
+    {
+
+    }
+
     void OnGUI()
     {
     //    GUI.Label(new Rect(0, 0, 100, 100), ((int)(1.0f / Time.smoothDeltaTime)).ToString());
