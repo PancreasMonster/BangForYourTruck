@@ -118,10 +118,13 @@ public class TagCollectionManager : MonoBehaviour
         {
             g.SetActive(false);
         }
-        allowSceneChange = true;
+        
         winCam.enabled = true;
         ral.enabled = true;
         vds.StartDisplayEndScreenStats(victoryText);
+        yield return new WaitForSeconds(5);
+        allowSceneChange = true;
+        vds.DisplayContinueButtons();
     }  
 
     void OnGUI()

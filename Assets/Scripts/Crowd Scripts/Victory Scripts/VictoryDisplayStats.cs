@@ -14,6 +14,7 @@ public class VictoryDisplayStats : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     public GameObject victoryScreenItem;
     public GameObject victoryScreenItemHolder, victoryScreenHeaderHolder;
+    public GameObject continueButtons;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,16 @@ public class VictoryDisplayStats : MonoBehaviour
                 GameObject VSI = Instantiate(victoryScreenItem, victoryScreenItemHolder.transform);
                 Text[] texts = new Text[4];
                 texts = VSI.GetComponentsInChildren<Text>();
+                
                 texts[0].text = players[num].transform.name.ToString();
+                if (players[num].GetComponent<Health>().teamNum == 1)
+                {
+                texts[0].color = Color.blue;
+                }
+                else
+                {
+                texts[0].color = Color.red;
+            }
                 texts[1].text = km.kills[num].ToString();
                 texts[2].text = km.deaths[num].ToString();
                 texts[3].text = Mathf.CeilToInt(players[num].GetComponent<StuntChecker>().score).ToString();   
@@ -56,5 +66,10 @@ public class VictoryDisplayStats : MonoBehaviour
 
         winText.text = victoryText;
        
+    }
+
+    public void DisplayContinueButtons ()
+    {
+        continueButtons.SetActive(true);
     }
 }
