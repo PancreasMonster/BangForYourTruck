@@ -86,4 +86,12 @@ public class TrainingDrone : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "TrainingDroneWaypoint")
+        {
+            AdvanceToNextWaypoint();
+        }
+    }
+
 }

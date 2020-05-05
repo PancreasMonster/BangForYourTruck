@@ -11,6 +11,7 @@ public class TrainingManager : MonoBehaviour
     public int trainingStage = 0;
     GameObject trainingCanvas;
     BoxCollider[] triggers;
+    public GameObject targetDrone;
 
     public float textDelay;
     AudioSource audio;
@@ -23,6 +24,9 @@ public class TrainingManager : MonoBehaviour
     public bool killTokenDelivered;
 
     Orbit orbitScript;
+
+    public bool trigger1;
+    public bool trigger2;
 
 
     // Start is called before the first frame update
@@ -53,10 +57,14 @@ public class TrainingManager : MonoBehaviour
 
         }
 
+        if (targetDrone == null)
+        {
+            targetDroneDestroyed = true;
+        }
+
         if (trainingStage == 1)
         {
-            //if player presses RT, pressedRT = true;
-            //if player presses LT, pressedLT = true;
+            if (trigger1)
 
             ProceedTraining();
 
@@ -66,7 +74,7 @@ public class TrainingManager : MonoBehaviour
         {
             //player is locked onto a target
 
-            //if (lockedOn)
+            if (player.GetComponent<LockOn>().target != null)
             {
                 ProceedTraining();
             }
@@ -77,7 +85,7 @@ public class TrainingManager : MonoBehaviour
         {
             //player has to overheat their weapons
 
-            if (player.GetComponent<PowerHolder>().powerAmount <= 5)
+            if (player.GetComponent<PowerHolder>().powerAmount <= 50)
             {
                 ProceedTraining();
             }
@@ -133,6 +141,7 @@ public class TrainingManager : MonoBehaviour
             Debug.Log(trainingStage);
             triggers[0].isTrigger = true;
             trainingCanvas.transform.GetChild(0).gameObject.SetActive(false);
+            
         }
 
         if (trainingStage == 2)
@@ -141,6 +150,7 @@ public class TrainingManager : MonoBehaviour
             //Proceed when player locks onto a target
             Debug.Log(trainingStage);
             textDelay = 3f;
+            drone.GetComponent<TrainingDrone>().AdvanceToNextWaypoint();
 
         }
 

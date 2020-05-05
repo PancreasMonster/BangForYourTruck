@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrainingTrigger : MonoBehaviour
 {
     TrainingManager manager;
+    public GameObject player;
 
     public int neededStagetoProceed;
 
@@ -18,9 +19,15 @@ public class TrainingTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (manager.trainingStage == neededStagetoProceed)
+        if (other.gameObject == player && manager.trainingStage == neededStagetoProceed)
         {
-            manager.ProceedTraining();
-        }       
+            if (transform.name == "TrainingTrigger (Stage2)")
+                manager.trigger1 = true;
+
+            if (transform.name == "TrainingTrigger (Stage5)")
+                if (player.GetComponent<TagHolder>().currentTags != 0)
+                manager.trigger2 = true;
+        }   
+            
     }
 }
