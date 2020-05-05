@@ -77,6 +77,8 @@ MonoBehaviour:
   velocityDamage: 0
   damageToDeal: 0
   player: 0
+  ramDamageImage: {fileID: 0}
+  mgDamageImage: {fileID: 0}
   rb: {fileID: 0}
 --- !u!114 &5204615862334753473
 MonoBehaviour:
@@ -99,8 +101,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10498041286837138}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 2
+  m_Shape: 0
   m_Color: {r: 0.25, g: 0.38211203, b: 1, a: 1}
   m_Intensity: 1000
   m_Range: 25
@@ -161,7 +164,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.2
+  m_Radius: 2.5
   m_Height: 3
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.6}
@@ -340,6 +343,7 @@ TrailRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5161,6 +5165,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

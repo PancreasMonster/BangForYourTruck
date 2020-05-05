@@ -4705,6 +4705,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4815,11 +4816,12 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5992517852860151210}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 2
-  m_Color: {r: 0.25, g: 0.38211203, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Shape: 0
+  m_Color: {r: 1, g: 0, b: 0.03915453, a: 1}
+  m_Intensity: 500
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4886,6 +4888,7 @@ MonoBehaviour:
   bulletLifetime: 0.25
   damageFallOffOverTime: 100
   player: 0
+  damageImage: {fileID: 0}
 --- !u!65 &5992517852860151211
 BoxCollider:
   m_ObjectHideFlags: 0
