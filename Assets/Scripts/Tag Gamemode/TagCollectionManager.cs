@@ -23,12 +23,17 @@ public class TagCollectionManager : MonoBehaviour
     public Text gameTimerText;
     public Text blueTeamTokenString, redTeamTokenString;
     VictoryDisplayStats vds;
+    AwardScene awardScene;
+    bool redTeamWon, blueTeamWon;
+    public Transform targetPosition;
+    public KillManager km;
 
 
     // Start is called before the first frame update
     void Start()
     {
         vds = GetComponent<VictoryDisplayStats>();
+        awardScene = GetComponent<AwardScene>();
     }
 
     void Update()
@@ -47,6 +52,7 @@ public class TagCollectionManager : MonoBehaviour
             winText.text = "Blue Team Has Won!";
             StartCoroutine(Victory("Blue Team Has Won!"));
             FMODUnity.RuntimeManager.PlayOneShot(blueWinSound);
+            blueTeamWon = true;
         }
         else if (redTeamTokens >= gameWinningAmount && !gameWon)
         {
@@ -54,6 +60,7 @@ public class TagCollectionManager : MonoBehaviour
             winText.text = "Red Team Has Won!";
             StartCoroutine(Victory("Red Team Has Won!"));
             FMODUnity.RuntimeManager.PlayOneShot(redWinSound);
+            redTeamWon = true;
         }
 
         if(allowSceneChange)
@@ -62,7 +69,7 @@ public class TagCollectionManager : MonoBehaviour
             {
                 if (Input.GetButtonDown("PadA" + (i+1).ToString()))
                 {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    GoToAwards();
                 }
                 else if (Input.GetButtonDown("PadB" + (i + 1).ToString()))
                 {
@@ -125,11 +132,22 @@ public class TagCollectionManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         allowSceneChange = true;
         vds.DisplayContinueButtons();
+        GoToAwards();
     }  
 
     void GoToAwards()
     {
-
+        ral.enabled = false;
+        winCam.transform.position = targetPosition.position;
+        winCam.transform.rotation = targetPosition.rotation;
+        if (blueTeamWon)
+        {
+            awardScene.SetUpPodium(1, km);
+        } else
+        {
+            awardScene.SetUpPodium(2, km);
+        }
+        vds.RemoveScoreboard();
     }
 
     void OnGUI()

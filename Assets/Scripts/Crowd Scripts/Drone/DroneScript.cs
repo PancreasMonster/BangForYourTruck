@@ -34,6 +34,10 @@ public class DroneScript : MonoBehaviour
 
     public float stateTime;
 
+    public bool killM;
+
+    public KillManager km;
+
     [FMODUnity.EventRef]
     public string closeUpDialogue;
 
@@ -183,9 +187,10 @@ public class DroneScript : MonoBehaviour
         StartCoroutine(OnlyFollowWayPoints());
     }
 
-    public void DeathTrigger ()
+    public void DeathTrigger (int playerNum)
     {
         StartCoroutine(DroneDeath());
+        km.droneKills[playerNum]++;
     }
 
     IEnumerator DroneDeath()

@@ -21,6 +21,9 @@ public class KillManager : MonoBehaviour
     public List<int> kills = new List<int>();
     public List<int> deaths = new List<int>();
     public List<int> killSpree = new List<int>();
+    public List<int> killSpreeCount = new List<int>();
+    public List<int> droneKills = new List<int>();
+    public List<int> longShotKills = new List<int>();
     public int killSpreeNum = 3;
 
     public KillFeed kf;
@@ -100,8 +103,9 @@ public class KillManager : MonoBehaviour
         killSpree[deathNum] = 0;
         int killNum = killer.GetComponent<Health>().playerNum - 1;
         kills[killNum]++;
-        killSpree[killNum]++;        
-        
+        killSpree[killNum]++;
+        if (killSpree[killNum] > killSpreeCount[killNum])
+            killSpreeCount[killNum] = killSpree[killNum];
         killSpreeDialougeActivation(killNum);
         
         kf.KillAnnouncement(killer, victim, sourceImage, teamNumV, teamNumK);
@@ -135,6 +139,17 @@ public class KillManager : MonoBehaviour
         List<int> scoreList = new List<int>();
         flavourTexts.Add("Kill");
         scoreList.Add(100);
+        int killCount = 0;
+        foreach(int k in kills)
+        {
+            killCount += k;
+        }
+        if (killCount == 0)
+        {
+            string fb = "First Blood";
+            flavourTexts.Add(fb);
+            scoreList.Add(75);
+        }
         if (doubleKill[i] == true)
         {
 
@@ -153,6 +168,7 @@ public class KillManager : MonoBehaviour
             string lss = "Long Shot";
             flavourTexts.Add(lss);
             scoreList.Add(75);
+            longShotKills[i]++;
         }
         if(killer.GetComponent<FlipOver>().timer > killer.GetComponent<FlipOver>().timerAllowance)
         {

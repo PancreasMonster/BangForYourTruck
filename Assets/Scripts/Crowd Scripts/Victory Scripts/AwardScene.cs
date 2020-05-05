@@ -20,9 +20,10 @@ public class AwardScene : MonoBehaviour
         
     }
 
-    public void SetUpPodium ()
+    public void SetUpPodium(int teamNum, KillManager km)
     {
         GameObject pod = Instantiate(podium, podiumPlacement.transform);
         pod.transform.localPosition = Vector3.zero;
+        pod.GetComponent<Podium>().SetUp(teamNum, km);
     }
 }

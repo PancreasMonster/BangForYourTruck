@@ -145,7 +145,7 @@ public class Health : MonoBehaviour
 
         if(drone)
         {
-            GetComponent<DroneScript>().DeathTrigger();
+            GetComponent<DroneScript>().DeathTrigger(damageSource.GetComponent<Health>().playerNum);
         }
 
         if (targetDrone)

@@ -72,4 +72,17 @@ public class VictoryDisplayStats : MonoBehaviour
     {
         continueButtons.SetActive(true);
     }
+
+    public void RemoveScoreboard()
+    {
+        scoreBoard.gameObject.SetActive(false);
+
+        victoryScreenItemHolder.gameObject.SetActive(false);
+
+        victoryScreenHeaderHolder.gameObject.SetActive(false);
+
+        winPanel.gameObject.SetActive(false);
+
+        continueButtons.SetActive(false);
+    }
 }
