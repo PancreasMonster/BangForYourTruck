@@ -7,10 +7,11 @@ public class TrainingManager : MonoBehaviour
 {
     public GameObject player;
     public Camera camera;
+    public Camera camera2;
     public GameObject drone;
     public int trainingStage = 0;
     GameObject trainingCanvas;
-    BoxCollider[] triggers;
+    public BoxCollider[] triggers;
     public GameObject targetDrone;
     public AudioClip[] clips;
 
@@ -59,6 +60,8 @@ public class TrainingManager : MonoBehaviour
             if (pressedLT && pressedRT)
             {
                 ProceedTraining();
+                triggers[0].isTrigger = true;
+                triggers[1].isTrigger = true;
             }
 
         }
@@ -72,7 +75,7 @@ public class TrainingManager : MonoBehaviour
             if (trigger1)
 
             ProceedTraining();
-            droneAnim.SetTrigger("ProceedTraining");
+            droneAnim.SetBool("ProceedTraining1",true);
 
         }
 
@@ -99,7 +102,7 @@ public class TrainingManager : MonoBehaviour
             {
                 ProceedTraining();
                 targetDrone.GetComponentInChildren<Health>().enabled = true;
-                droneAnim.SetTrigger("ProceedTraining");
+                droneAnim.SetBool("ProceedTraining2", true);
 
             }
 
@@ -114,8 +117,8 @@ public class TrainingManager : MonoBehaviour
             if (targetDroneDestroyed)
             {
                 ProceedTraining();
-                droneAnim.SetTrigger("ProceedTraining");
-
+                droneAnim.SetBool("ProceedTraining3", true);
+                triggers[2].isTrigger = true;
             }
 
         }
@@ -129,7 +132,7 @@ public class TrainingManager : MonoBehaviour
             if (trigger2)
             {
                 ProceedTraining();
-                droneAnim.SetTrigger("ProceedTraining");
+                droneAnim.SetBool("ProceedTraining4", true);
             }
         }
 
@@ -140,7 +143,7 @@ public class TrainingManager : MonoBehaviour
             audio.Play();
 
             Invoke("ProceedTraining", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
-            droneAnim.SetTrigger("ProceedTraining");
+            droneAnim.SetBool("ProceedTraining5", true);
 
 
         }
@@ -151,7 +154,6 @@ public class TrainingManager : MonoBehaviour
             audio.clip = clips[7];
             audio.Play();
 
-            droneAnim.SetTrigger("ProceedTraining");
 
         }
 

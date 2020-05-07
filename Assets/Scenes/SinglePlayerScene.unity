@@ -7855,8 +7855,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 700, y: 100, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 700, y: 100, z: 8.31755}
+  m_Center: {x: 0, y: 0, z: 42.521957}
 --- !u!4 &293263923
 Transform:
   m_ObjectHideFlags: 0
@@ -7869,7 +7869,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.4716, z: 2.6892}
   m_Children: []
   m_Father: {fileID: 2046613398}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &297282613
 GameObject:
@@ -25171,6 +25171,65 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &758802424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 758802425}
+  - component: {fileID: 758802427}
+  - component: {fileID: 758802426}
+  m_Layer: 0
+  m_Name: TrainingStartingCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &758802425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758802424}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 224, z: -2421}
+  m_LocalScale: {x: 1, y: 1.4716, z: 2.6892}
+  m_Children: []
+  m_Father: {fileID: 2046613398}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &758802426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758802424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d10644ccce12ca4b8d0869eabec23bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 809458592}
+  neededStagetoProceed: 2
+--- !u!65 &758802427
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758802424}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 700, y: 100, z: 8.31755}
+  m_Center: {x: 0, y: 0, z: 42.521957}
 --- !u!43 &762757557
 Mesh:
   m_ObjectHideFlags: 0
@@ -55625,7 +55684,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2046613398}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1777367324 stripped
 MonoBehaviour:
@@ -62760,8 +62819,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 809458592}
   camera: {fileID: 1885909899}
+  camera2: {fileID: 0}
   drone: {fileID: 1232924109}
   trainingStage: 0
+  triggers: []
   targetDrone: {fileID: 1291410953}
   clips:
   - {fileID: 8300000, guid: 17adf8db6f8c0164791649b5f51d061d, type: 3}
@@ -62793,6 +62854,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 7.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 758802425}
   - {fileID: 293263923}
   - {fileID: 1770646384}
   m_Father: {fileID: 0}
