@@ -93,7 +93,7 @@ public class TrainingDrone : MonoBehaviour
 
             if (other.transform.name == " (4)")
             {
-                tm.ProceedTraining();
+                tm.ProceedToTraining1();
             }
             else
             {

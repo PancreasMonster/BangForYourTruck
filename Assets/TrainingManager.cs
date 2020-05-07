@@ -6,7 +6,7 @@ using FMODUnity;
 public class TrainingManager : MonoBehaviour
 {
     public GameObject player;
-    public Camera camera;
+    public Camera camera1;
     public Camera camera2;
     public GameObject drone;
     public int trainingStage = 0;
@@ -17,7 +17,6 @@ public class TrainingManager : MonoBehaviour
 
     public float textDelay = 1f;
     AudioSource audio;
-    Animator camAnim;
     Animator droneAnim;
 
     public bool pressedRT;
@@ -38,10 +37,7 @@ public class TrainingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        player.GetComponent<RearWheelDrive>().trainingMode = true;
-        orbitScript = player.GetComponent<Orbit>();
-        triggers = GetComponentsInChildren<BoxCollider>();
-        camAnim = camera.GetComponent<Animator>();
+        player.GetComponent<TrainingCheck>().enabled = true;
         droneAnim = drone.GetComponent<Animator>();
         trainingCanvas = GameObject.Find("Training Canvas");
         audio = GetComponent<AudioSource>();
@@ -59,7 +55,8 @@ public class TrainingManager : MonoBehaviour
 
             if (pressedLT && pressedRT)
             {
-                ProceedTraining();
+                trainingStage = 2;
+                ClearText();
                 triggers[0].isTrigger = true;
                 triggers[1].isTrigger = true;
             }
@@ -74,7 +71,8 @@ public class TrainingManager : MonoBehaviour
 
             if (trigger1)
 
-            ProceedTraining();
+            trainingStage = 3;
+            ClearText();
             droneAnim.SetBool("ProceedTraining1",true);
 
         }
@@ -87,7 +85,8 @@ public class TrainingManager : MonoBehaviour
 
             if (pressedA && pressedB && pressedX && pressedY)
             {
-                ProceedTraining();
+                ClearText();
+                trainingStage = 4;
             }
 
         }
@@ -100,7 +99,8 @@ public class TrainingManager : MonoBehaviour
 
             if (player.GetComponent<PowerHolder>().powerAmount <= 50)
             {
-                ProceedTraining();
+                ClearText();
+                trainingStage = 5;
                 targetDrone.GetComponentInChildren<Health>().enabled = true;
                 droneAnim.SetBool("ProceedTraining2", true);
 
@@ -116,7 +116,8 @@ public class TrainingManager : MonoBehaviour
 
             if (targetDroneDestroyed)
             {
-                ProceedTraining();
+                ClearText();
+                trainingStage = 6;
                 droneAnim.SetBool("ProceedTraining3", true);
                 triggers[2].isTrigger = true;
             }
@@ -131,7 +132,8 @@ public class TrainingManager : MonoBehaviour
 
             if (trigger2)
             {
-                ProceedTraining();
+                ClearText();
+                trainingStage = 7;
                 droneAnim.SetBool("ProceedTraining4", true);
             }
         }
@@ -142,7 +144,7 @@ public class TrainingManager : MonoBehaviour
             audio.clip = clips[6];
             audio.Play();
 
-            Invoke("ProceedTraining", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
+            Invoke("ProceedToTraining8", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
             droneAnim.SetBool("ProceedTraining5", true);
 
 
@@ -154,21 +156,21 @@ public class TrainingManager : MonoBehaviour
             audio.clip = clips[7];
             audio.Play();
 
-
         }
-
-
-
-
     }
 
-    public void ProceedTraining()
+    public void ProceedToTraining1()
     {
-        trainingStage++;
-        Training();
+        trainingStage = 1;
         ClearText();
     }
 
+    public void ProceedToTraining8()
+    {
+        trainingStage = 8;
+        ClearText();
+    }
+/*
     void Training()
     {
         if (trainingStage == 1)
@@ -253,7 +255,7 @@ public class TrainingManager : MonoBehaviour
 
         }
     }
-
+    */
     void ClearText()
     {
         for (int i = 0; i < trainingCanvas.transform.childCount; i++)
