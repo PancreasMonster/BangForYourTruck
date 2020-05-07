@@ -14373,6 +14373,8 @@ MonoBehaviour:
   riseSpeed: 1000
   droneCol: {fileID: 896050312}
   stateTime: 20
+  killM: 0
+  km: {fileID: 0}
   closeUpDialogue: event:/Drone Voice/Closer Look
   deathDialogue: 
   whatHappenedDialogue: 
@@ -24125,6 +24127,8 @@ MonoBehaviour:
   gameTimerText: {fileID: 864435264}
   blueTeamTokenString: {fileID: 385436116}
   redTeamTokenString: {fileID: 422785616}
+  targetPosition: {fileID: 0}
+  km: {fileID: 0}
 --- !u!4 &666428528
 Transform:
   m_ObjectHideFlags: 0
@@ -30466,6 +30470,8 @@ MonoBehaviour:
   riseSpeed: 1000
   droneCol: {fileID: 345320734}
   stateTime: 20
+  killM: 0
+  km: {fileID: 0}
   closeUpDialogue: event:/Drone Voice/Closer Look
   deathDialogue: 
   whatHappenedDialogue: 
@@ -32804,6 +32810,9 @@ MonoBehaviour:
   kills: 
   deaths: 
   killSpree: 
+  killSpreeCount: 
+  droneKills: 
+  longShotKills: 
   killSpreeNum: 3
   kf: {fileID: 1777367324}
   PI:
@@ -35142,6 +35151,31 @@ PrefabInstance:
     - {fileID: 7054526768987340980, guid: ab29158f6c00c0d4281a17526b1dc317, type: 3}
     - {fileID: 8640428827875686996, guid: ab29158f6c00c0d4281a17526b1dc317, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ab29158f6c00c0d4281a17526b1dc317, type: 3}
+--- !u!1 &1232924109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1521207845033597131, guid: ab29158f6c00c0d4281a17526b1dc317,
+    type: 3}
+  m_PrefabInstance: {fileID: 1232924108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1232924110
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232924109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e083d59e28572d449c710097bb538dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1242238435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60708,6 +60742,8 @@ MonoBehaviour:
   riseSpeed: 1000
   droneCol: {fileID: 297282615}
   stateTime: 20
+  killM: 0
+  km: {fileID: 0}
   closeUpDialogue: event:/Drone Voice/Closer Look
   deathDialogue: 
   whatHappenedDialogue: 
