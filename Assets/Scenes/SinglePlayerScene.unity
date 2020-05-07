@@ -33125,7 +33125,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091413975}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -35273,7 +35273,7 @@ Animator:
   m_GameObject: {fileID: 1232924109}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7e083d59e28572d449c710097bb538dd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4168d3efdedacee429f8b5f1a445da56, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -35300,6 +35300,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deb4e68ecdb7254a825b23ca4e1ad3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1885909899}
+  droneCamera: {fileID: 1091413978}
+  droneFaceAnimator: {fileID: 1232924113}
+--- !u!95 &1232924113 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 442736872913321053, guid: ab29158f6c00c0d4281a17526b1dc317,
+    type: 3}
+  m_PrefabInstance: {fileID: 1232924108}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1242238435
 PrefabInstance:
   m_ObjectHideFlags: 0

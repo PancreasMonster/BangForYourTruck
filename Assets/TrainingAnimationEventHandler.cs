@@ -7,6 +7,7 @@ public class TrainingAnimationEventHandler : MonoBehaviour
     public Camera playerCamera;
     public Camera droneCamera;
 
+    public Animator droneFaceAnimator;
 
     public void SwapToDroneCamera()
     {
@@ -18,5 +19,20 @@ public class TrainingAnimationEventHandler : MonoBehaviour
     {
         droneCamera.enabled = false;
         playerCamera.enabled = true;
+    }
+
+    public void ShowWOWFace()
+    {
+        droneFaceAnimator.SetTrigger("Wow");
+    }
+
+    public void ShowSadFace()
+    {
+        droneFaceAnimator.SetTrigger("Sad");
+    }
+
+    public void GoBackToIdleFace()
+    {
+        droneFaceAnimator.SetTrigger("GoBack");
     }
 }
