@@ -12,6 +12,7 @@ public class TrainingManager : MonoBehaviour
     GameObject trainingCanvas;
     BoxCollider[] triggers;
     public GameObject targetDrone;
+    public AudioClip[] clips;
 
     public float textDelay = 1f;
     AudioSource audio;
@@ -20,6 +21,10 @@ public class TrainingManager : MonoBehaviour
 
     public bool pressedRT;
     public bool pressedLT;
+    public bool pressedX;
+    public bool pressedA;
+    public bool pressedB;
+    public bool pressedY;
     public bool targetDroneDestroyed;
     public bool killTokenDelivered;
 
@@ -39,6 +44,8 @@ public class TrainingManager : MonoBehaviour
         droneAnim = drone.GetComponent<Animator>();
         trainingCanvas = GameObject.Find("Training Canvas");
         audio = GetComponent<AudioSource>();
+        trainingCanvas.SetActive(true);
+        drone.SetActive(true);
     }
 
     // Update is called once per frame
@@ -46,8 +53,8 @@ public class TrainingManager : MonoBehaviour
     {
         if (trainingStage == 1)
         {
-            //if player presses RT, pressedRT = true;
-            //if player presses LT, pressedLT = true;
+            //Drone explains the driving controls
+            audio.Play();
 
             if (pressedLT && pressedRT)
             {
@@ -58,17 +65,24 @@ public class TrainingManager : MonoBehaviour
 
         if (trainingStage == 2)
         {
+            //Drone explains to select a weapon
+            audio.clip = clips[1];
+            audio.Play();
+
             if (trigger1)
 
             ProceedTraining();
+            droneAnim.SetTrigger("ProceedTraining");
 
         }
 
         if (trainingStage == 3)
         {
-            //player is locked onto a target
+            //Drone explains A, B, X, Y controls, and tells you to try them all
+            audio.clip = clips[2];
+            audio.Play();
 
-            if (player.GetComponent<LockOn>().target != null)
+            if (pressedA && pressedB && pressedX && pressedY)
             {
                 ProceedTraining();
             }
@@ -77,49 +91,67 @@ public class TrainingManager : MonoBehaviour
 
         if (trainingStage == 4)
         {
-            //player has to overheat their weapons
+            //Drone explains how to fire your weapon
+            audio.clip = clips[3];
+            audio.Play();
 
             if (player.GetComponent<PowerHolder>().powerAmount <= 50)
             {
                 ProceedTraining();
+                targetDrone.GetComponentInChildren<Health>().enabled = true;
+                droneAnim.SetTrigger("ProceedTraining");
+
             }
 
         }
 
         if (trainingStage == 5)
         {
-            //player has to kill a training drone
+            //Drone tells you to kill the target drone
+            audio.clip = clips[4];
+            audio.Play();
 
             if (targetDroneDestroyed)
             {
                 ProceedTraining();
+                droneAnim.SetTrigger("ProceedTraining");
+
             }
 
         }
 
         if (trainingStage == 6)
         {
-            //player has deliver a killtoken to their collection gate
+            //Drone tells the player to deliver a killtoken to their collection gate
+            audio.clip = clips[5];
+            audio.Play();
 
             if (trigger2)
             {
                 ProceedTraining();
+                droneAnim.SetTrigger("ProceedTraining");
             }
         }
 
         if (trainingStage == 7)
         {
             //player is shown how to purchase throwables
+            audio.clip = clips[6];
+            audio.Play();
 
-            Invoke("ProceedTraining", 2f);
-                
-            
+            Invoke("ProceedTraining", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
+            droneAnim.SetTrigger("ProceedTraining");
+
+
         }
 
         if (trainingStage == 8)
         {
             //Fade to black
+            audio.clip = clips[7];
+            audio.Play();
 
+            droneAnim.SetTrigger("ProceedTraining");
 
         }
 
@@ -133,7 +165,6 @@ public class TrainingManager : MonoBehaviour
         trainingStage++;
         Training();
         ClearText();
-        audio.Play();
     }
 
     void Training()
