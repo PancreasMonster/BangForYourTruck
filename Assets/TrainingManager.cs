@@ -37,7 +37,8 @@ public class TrainingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        player.GetComponent<TrainingCheck>().enabled = true;
+        player.GetComponent<RearWheelDrive>().trainingMode = true;
+        //player.GetComponent<TrainingCheck>().enabled = true;
         droneAnim = drone.GetComponent<Animator>();
         trainingCanvas = GameObject.Find("Training Canvas");
         audio = GetComponent<AudioSource>();

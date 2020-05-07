@@ -33190,7 +33190,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091413975}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -35366,7 +35366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1885909899}
-  droneCamera: {fileID: 1091413978}
+  droneCamera1: {fileID: 1091413978}
+  droneCamera2: {fileID: 1297849434}
   droneFaceAnimator: {fileID: 1232924113}
 --- !u!95 &1232924113 stripped
 Animator:
@@ -36807,7 +36808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1297849432
 Transform:
   m_ObjectHideFlags: 0
@@ -44453,6 +44454,57 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1562741696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6720468989174147038, guid: eab828b4e2c5f4e41a895de67c19e800,
+    type: 3}
+  m_PrefabInstance: {fileID: 5320644023315030889, guid: 98e37775a0301734fa7ceddc68fe831a,
+    type: 3}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1562741697}
+  - component: {fileID: 1562741700}
+  - component: {fileID: 1562741699}
+  - component: {fileID: 1562741698}
+  m_Layer: 0
+  m_Name: Light Beam (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1562741697 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8034458209838629251, guid: eab828b4e2c5f4e41a895de67c19e800,
+    type: 3}
+  m_PrefabInstance: {fileID: 3367419153820839991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1562741698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6219748939248066374, guid: eab828b4e2c5f4e41a895de67c19e800,
+    type: 3}
+  m_PrefabInstance: {fileID: 3367419153820839991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562741696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!23 &1562741699 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2623403572948305329, guid: eab828b4e2c5f4e41a895de67c19e800,
+    type: 3}
+  m_PrefabInstance: {fileID: 3367419153820839991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &1562741700 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 3067265882969334410, guid: eab828b4e2c5f4e41a895de67c19e800,
+    type: 3}
+  m_PrefabInstance: {fileID: 3367419153820839991}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1568591880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62942,7 +62994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 809458592}
-  camera: {fileID: 1885909899}
+  camera1: {fileID: 0}
   camera2: {fileID: 0}
   drone: {fileID: 1232924109}
   trainingStage: 0

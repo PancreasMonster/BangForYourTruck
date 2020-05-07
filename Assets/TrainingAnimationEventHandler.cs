@@ -5,19 +5,30 @@ using UnityEngine;
 public class TrainingAnimationEventHandler : MonoBehaviour
 {
     public Camera playerCamera;
-    public Camera droneCamera;
+    public Camera droneCamera1;
+    public Camera droneCamera2;
+
 
     public Animator droneFaceAnimator;
 
     public void SwapToDroneCamera()
     {
         playerCamera.enabled = false;
-        droneCamera.enabled = true;
+        droneCamera2.enabled = false;
+        droneCamera1.enabled = true;
+    }
+
+    public void SwapToChildedCamera()
+    {
+        playerCamera.enabled = false;
+        droneCamera2.enabled = true;
+        droneCamera1.enabled = false;
     }
 
     public void SwapToPlayerCamera()
     {
-        droneCamera.enabled = false;
+        droneCamera1.enabled = false;
+        droneCamera2.enabled = false;
         playerCamera.enabled = true;
     }
 
