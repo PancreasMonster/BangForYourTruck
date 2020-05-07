@@ -26,6 +26,11 @@ public class TrainingAnimationEventHandler : MonoBehaviour
         droneFaceAnimator.SetTrigger("Wow");
     }
 
+    public void ShowOUCHFace()
+    {
+        droneFaceAnimator.SetTrigger("Ouch");
+    }
+
     public void ShowSadFace()
     {
         droneFaceAnimator.SetTrigger("Sad");
