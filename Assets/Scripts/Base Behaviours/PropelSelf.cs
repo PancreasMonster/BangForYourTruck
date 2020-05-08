@@ -59,7 +59,7 @@ public class PropelSelf : MonoBehaviour
                             rb.AddForce(transform.forward * force /* * power */);
                         }
                         // rb.AddForce(transform.forward * force /* * power */);
-                        anim.SetBool("Boost",true);
+                        anim.SetTrigger("Boost 0");
                         Debug.Log("Boosted");
 
                         StartCoroutine(BoostEffect());
@@ -181,7 +181,7 @@ public class PropelSelf : MonoBehaviour
         // bgcd.gameObject.SetActive(false);
         yield return new WaitForSeconds(cooldownDelay);
         coolingDown = false;
-        anim.SetBool("Boost",false);
+        //anim.SetBool("Boost",false);
     }
    
 

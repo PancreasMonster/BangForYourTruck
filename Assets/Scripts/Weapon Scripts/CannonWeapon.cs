@@ -131,7 +131,7 @@ public class CannonWeapon : MonoBehaviour
                 force = startForce;
             chargingTime = 0f;
             charging = false;
-            recoil.SetBool("Cannon",true);
+            recoil.SetTrigger("Cannon 0");
             onCooldown = true;
             Invoke("Cooldown", cooldownTime);
             }
@@ -140,7 +140,7 @@ public class CannonWeapon : MonoBehaviour
     void Cooldown()
     {
         onCooldown = false;
-        recoil.SetBool("Cannon", false);
+        //recoil.SetBool("Cannon", false);
 
     }
 }
