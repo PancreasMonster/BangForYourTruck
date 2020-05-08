@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LevelCreator : MonoBehaviour
@@ -10,6 +11,13 @@ public class LevelCreator : MonoBehaviour
     public bool mainMenu;
     public bool training, devRoom, twoPlayer, fourPlayer;
     public int levelToActivate;
+    public float volumeSetting;
+    public GameObject volumeSlider;
+    public bool hints;
+    public bool AVCrowd;
+    public bool credits;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +92,11 @@ public class LevelCreator : MonoBehaviour
 
     }
 
+    public void GetVolumeSliderValue()
+    {
+        volumeSetting = volumeSlider.GetComponent<Slider>().value;
+    }
+
 
     public void SetLevelIndex (int i)
     {
@@ -94,6 +107,42 @@ public class LevelCreator : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ToggleHints() 
+    {
+        if (hints)
+        {
+            hints = false;
+        }
+        else 
+        {
+            hints = true;
+        }
+    }
+
+    public void ToggleAVCrowd()
+    {
+        if (AVCrowd)
+        {
+            AVCrowd = false;
+        }
+        else
+        {
+            AVCrowd = true;
+        }
+    }
+
+    public void ToggleCredits()
+    {
+        if (credits)
+        {
+            credits = false;
+        }
+        else
+        {
+            credits = true;
+        }
     }
 
     public void LoadScene()
