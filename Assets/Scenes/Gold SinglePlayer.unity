@@ -3041,7 +3041,7 @@ GameObject:
   - component: {fileID: 125158441}
   - component: {fileID: 125158442}
   m_Layer: 0
-  m_Name: TrainingTrigger
+  m_Name: Starting Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3055,7 +3055,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125158440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -168, y: 133, z: -2291}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1619019564}
@@ -3072,7 +3072,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 500, y: 200, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &125173375
 Mesh:
@@ -11928,6 +11928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 533410502}
   - component: {fileID: 533410503}
+  - component: {fileID: 533410504}
   m_Layer: 0
   m_Name: TrainingTrigger (1)
   m_TagString: Untagged
@@ -11943,7 +11944,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533410501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -168, y: 133, z: -2159}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1619019564}
@@ -11961,6 +11962,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &533410504
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533410501}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 500, y: 200, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &534165470
 Mesh:
@@ -23025,7 +23039,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604281455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -168.5, y: -85, z: -726.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1619019564}
@@ -23042,8 +23056,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 113.68937, y: 50, z: 16}
+  m_Center: {x: -0.00065231323, y: 0, z: -0.67926025}
 --- !u!43 &609397142
 Mesh:
   m_ObjectHideFlags: 0
@@ -50174,8 +50188,11 @@ MonoBehaviour:
   player: {fileID: 742342219}
   drone: {fileID: 1725367838}
   trainingStage: 0
-  triggers: []
-  targetDrone: {fileID: 0}
+  triggers:
+  - {fileID: 125158442}
+  - {fileID: 533410503}
+  - {fileID: 0}
+  targetDrone: {fileID: 1921874465}
   clips: []
   textDelay: 1
   pressedRT: 0
@@ -69044,6 +69061,12 @@ MonoBehaviour:
   droneDeathPrefab: {fileID: 2705857064438722281, guid: 30069322d1ea70147b7f17b1bbf9d7a2,
     type: 3}
   tm: {fileID: 1619019563}
+--- !u!1 &1921874465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 852868164126080625, guid: e6222b5c3cbc9d6418c3aec45a819b19,
+    type: 3}
+  m_PrefabInstance: {fileID: 1921874456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1926164550
 Mesh:
   m_ObjectHideFlags: 0

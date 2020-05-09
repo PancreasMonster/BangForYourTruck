@@ -11,7 +11,7 @@ public class TrainingManager : MonoBehaviour
     GameObject trainingCanvas;
     public BoxCollider[] triggers;
     public GameObject targetDrone;
-    public AudioClip[] trainingAudioClips;
+    public AudioClip[] clips;
 
     public float textDelay = 1f;
     AudioSource audio;
