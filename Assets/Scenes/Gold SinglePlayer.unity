@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -32246,6 +32246,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 94502702}
     m_Modifications:
+    - target: {fileID: 460690909154467664, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: skidmarksController
+      value: 
+      objectReference: {fileID: 1043833367}
+    - target: {fileID: 460690909154467664, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: PPV
+      value: 
+      objectReference: {fileID: 1885909902}
+    - target: {fileID: 460690909154467664, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: mobCharges
+      value: 
+      objectReference: {fileID: 742342233}
     - target: {fileID: 808691975034998935, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
@@ -32270,7 +32285,12 @@ PrefabInstance:
         type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2117494359}
+    - target: {fileID: 1484484263235661319, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: hpBarFill
+      value: 
+      objectReference: {fileID: 1631874977}
     - target: {fileID: 1498994198851717938, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: PPV
@@ -32371,6 +32391,16 @@ PrefabInstance:
       propertyPath: pc
       value: 
       objectReference: {fileID: 273943449}
+    - target: {fileID: 3677742563903872558, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: skidmarksController
+      value: 
+      objectReference: {fileID: 1043833367}
+    - target: {fileID: 3677742563903872558, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: PPV
+      value: 
+      objectReference: {fileID: 1885909902}
     - target: {fileID: 3958377735510516656, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: launchPoint
@@ -32396,6 +32426,21 @@ PrefabInstance:
       propertyPath: dampingRatio
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4257988114199735941, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: skidmarksController
+      value: 
+      objectReference: {fileID: 1043833367}
+    - target: {fileID: 4257988114199735941, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: PPV
+      value: 
+      objectReference: {fileID: 1885909902}
+    - target: {fileID: 4257988114199735941, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: mobCharges
+      value: 
+      objectReference: {fileID: 742342233}
     - target: {fileID: 5241426700754520379, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
@@ -32636,6 +32681,21 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key0.b
       value: 0.6037736
       objectReference: {fileID: 0}
+    - target: {fileID: 8316782146724785963, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: skidmarksController
+      value: 
+      objectReference: {fileID: 1043833367}
+    - target: {fileID: 8316782146724785963, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: PPV
+      value: 
+      objectReference: {fileID: 1885909902}
+    - target: {fileID: 8316782146724785963, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: mobCharges
+      value: 
+      objectReference: {fileID: 742342233}
     - target: {fileID: 8566300516512760412, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: pc
@@ -32694,6 +32754,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 742342218}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &742342233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5769034158848722090, guid: d3a34a1908fc16e4489de870084c559c,
+    type: 3}
+  m_PrefabInstance: {fileID: 742342218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742342219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d936bd92da1bf14f935f54254005b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &754725455
 Mesh:
   m_ObjectHideFlags: 0
