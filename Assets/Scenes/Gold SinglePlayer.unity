@@ -6969,6 +6969,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ce95d5c69a242b43b560595c84bc5a8, type: 3}
+--- !u!114 &273943449 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3411508758263927955, guid: 8ce95d5c69a242b43b560595c84bc5a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 273943448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7236a38882b3b1743b37cb5304da3ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &277364343
 Mesh:
   m_ObjectHideFlags: 0
@@ -32245,6 +32257,16 @@ PrefabInstance:
       propertyPath: stats
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1498994198851717938, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: PPV
+      value: 
+      objectReference: {fileID: 1885909902}
+    - target: {fileID: 1498994198851717938, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: orb
+      value: 
+      objectReference: {fileID: 742342220}
     - target: {fileID: 1609456776759753073, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: anim
@@ -32312,14 +32334,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3299002601888912224, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
+      propertyPath: ammo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299002601888912224, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
       propertyPath: discUIImages.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1631874979}
     - target: {fileID: 3299002601888912224, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: cardParent
       value: 
+      objectReference: {fileID: 884146437}
+    - target: {fileID: 3299002601888912224, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: ammo.Array.data[0]
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3299002601888912224, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: pc
+      value: 
+      objectReference: {fileID: 273943449}
     - target: {fileID: 3958377735510516656, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: launchPoint
@@ -32330,6 +32367,11 @@ PrefabInstance:
       propertyPath: force
       value: 8000
       objectReference: {fileID: 0}
+    - target: {fileID: 4154782214775946960, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: pc
+      value: 
+      objectReference: {fileID: 273943449}
     - target: {fileID: 4232500412554703605, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: naturalFrequency
@@ -32449,12 +32491,12 @@ PrefabInstance:
         type: 3}
       propertyPath: lockOnParent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 635389936}
     - target: {fileID: 5769034158848722091, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1885909891}
     - target: {fileID: 5769034158848722091, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: lerpSpeed
@@ -32509,22 +32551,42 @@ PrefabInstance:
         type: 3}
       propertyPath: targetImagesParent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 635389936}
     - target: {fileID: 6877032889733651669, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1885909899}
     - target: {fileID: 6877032889733651669, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: camTarget
       value: 
       objectReference: {fileID: 742342220}
+    - target: {fileID: 6877032889733651669, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: pivotCamera
+      value: 
+      objectReference: {fileID: 945473045}
     - target: {fileID: 6978141899698351550, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: breakForce
       value: 40000
       objectReference: {fileID: 0}
+    - target: {fileID: 6978141899698351550, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: tm
+      value: 
+      objectReference: {fileID: 1619019563}
+    - target: {fileID: 7322996439378250605, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: pr
+      value: 
+      objectReference: {fileID: 1083064736}
+    - target: {fileID: 7532606957045812002, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: pc
+      value: 
+      objectReference: {fileID: 273943449}
     - target: {fileID: 7807257121289159053, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_DynamicOccludee
@@ -32560,11 +32622,21 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key0.b
       value: 0.6037736
       objectReference: {fileID: 0}
+    - target: {fileID: 8566300516512760412, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: pc
+      value: 
+      objectReference: {fileID: 273943449}
     - target: {fileID: 8721377321829423034, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: linearForce
       value: 12000
       objectReference: {fileID: 0}
+    - target: {fileID: 8721377321829423034, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1885909899}
     - target: {fileID: 9029924982520008841, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: powerDisplay
@@ -67674,6 +67746,18 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1885909902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4742906540988854297, guid: 4b616b0a160aad44a9cd3daae4101a7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1885909890}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1885909907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4742906541862303571, guid: 4b616b0a160aad44a9cd3daae4101a7d,
