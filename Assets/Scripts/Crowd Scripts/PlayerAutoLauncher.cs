@@ -24,7 +24,7 @@ public class PlayerAutoLauncher : MonoBehaviour
         if(timer > 0 && startLaunch)
         {
             timer -= Time.deltaTime;
-            text.text = "Automatically Launching in: " + Mathf.CeilToInt(timer).ToString();
+            text.text = "Auto-Launching in: " + Mathf.CeilToInt(timer).ToString();
         }
 
         
