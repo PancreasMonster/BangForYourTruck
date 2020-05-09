@@ -6,14 +6,12 @@ using FMODUnity;
 public class TrainingManager : MonoBehaviour
 {
     public GameObject player;
-    public Camera camera1;
-    public Camera camera2;
     public GameObject drone;
     public int trainingStage = 0;
     GameObject trainingCanvas;
     public BoxCollider[] triggers;
     public GameObject targetDrone;
-    public AudioClip[] clips;
+    public AudioClip[] trainingAudioClips;
 
     public float textDelay = 1f;
     AudioSource audio;
