@@ -90,7 +90,7 @@ public class TrainingManager : MonoBehaviour
             trainingCanvas.transform.GetChild(2).gameObject.SetActive(true);
             audio.Play();
 
-            if (pressedA && pressedB && pressedX && pressedY)
+            if (pressedA && pressedB)
             {
                 ClearText();
                 trainingStage = 4;
