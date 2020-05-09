@@ -7,13 +7,12 @@ using UnityEngine.UI;
 
 public class OptionsSelections : MonoBehaviour
 {
-    bool buttonOn;
+    public bool buttonOn;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        buttonOn = true;
     }  
 
     public void ToggleButtonText() 
