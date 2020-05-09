@@ -91,7 +91,7 @@ public class TrainingDrone : MonoBehaviour
         if (other.transform.tag == "TrainingDroneWaypoint")
         {
 
-            if (other.transform.name == " (4)")
+            if (other.transform.name == "Waypoint (3)")
             {
                 tm.ProceedToTraining1();
             }

@@ -76,7 +76,7 @@ public class TrainingManager : MonoBehaviour
             audio.Play();
 
             if (trigger1)
-
+            drone.GetComponent<TrainingDrone>().AdvanceToNextWaypoint();
             trainingStage = 3;
             ClearText();
             droneAnim.SetBool("ProceedTraining1",true);
