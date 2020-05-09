@@ -11,7 +11,7 @@ public class TrainingManager : MonoBehaviour
     GameObject trainingCanvas;
     public BoxCollider[] triggers;
     public GameObject targetDrone;
-    public AudioClip[] clips;
+    public AudioClip[] trainingAudioClips;
 
     public float textDelay = 1f;
     AudioSource audio;
@@ -19,16 +19,21 @@ public class TrainingManager : MonoBehaviour
 
     public bool pressedRT;
     public bool pressedLT;
-    public bool pressedX;
+
+    public bool trigger1 = false;
+
     public bool pressedA;
     public bool pressedB;
-    public bool pressedY;
+
+    public bool driftCompleted;
+
     public bool targetDroneDestroyed;
+
     public bool killTokenDelivered;
 
     Orbit orbitScript;
 
-    public bool trigger1 = false;
+
     public bool trigger2 = false;
 
 
@@ -51,6 +56,7 @@ public class TrainingManager : MonoBehaviour
         {
             //Drone explains the driving controls
             audio.Play();
+            trainingCanvas.transform.GetChild(0).gameObject.SetActive(true);
 
             if (pressedLT && pressedRT)
             {
@@ -65,7 +71,8 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 2)
         {
             //Drone explains to select a weapon
-            audio.clip = clips[1];
+            audio.clip = trainingAudioClips[1];
+            trainingCanvas.transform.GetChild(1).gameObject.SetActive(true);
             audio.Play();
 
             if (trigger1)
@@ -79,7 +86,8 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 3)
         {
             //Drone explains A, B, X, Y controls, and tells you to try them all
-            audio.clip = clips[2];
+            audio.clip = trainingAudioClips[2];
+            trainingCanvas.transform.GetChild(2).gameObject.SetActive(true);
             audio.Play();
 
             if (pressedA && pressedB && pressedX && pressedY)
@@ -87,19 +95,33 @@ public class TrainingManager : MonoBehaviour
                 ClearText();
                 trainingStage = 4;
             }
-
         }
 
         if (trainingStage == 4)
         {
+            //Drone explains A, B, X, Y controls, and tells you to try them all
+            audio.clip = trainingAudioClips[3];
+            trainingCanvas.transform.GetChild(3).gameObject.SetActive(true);
+            audio.Play();
+
+            if (driftCompleted)
+            {
+                ClearText();
+                trainingStage = 5;
+            }
+        }
+
+        if (trainingStage == 5)
+        {
             //Drone explains how to fire your weapon
-            audio.clip = clips[3];
+            audio.clip = trainingAudioClips[4];
+            trainingCanvas.transform.GetChild(4).gameObject.SetActive(true);
             audio.Play();
 
             if (player.GetComponent<PowerHolder>().powerAmount <= 50)
             {
                 ClearText();
-                trainingStage = 5;
+                trainingStage = 6;
                 targetDrone.GetComponentInChildren<Health>().enabled = true;
                 droneAnim.SetBool("ProceedTraining2", true);
 
@@ -107,52 +129,56 @@ public class TrainingManager : MonoBehaviour
 
         }
 
-        if (trainingStage == 5)
+        if (trainingStage == 6)
         {
             //Drone tells you to kill the target drone
-            audio.clip = clips[4];
+            audio.clip = trainingAudioClips[5];
+            trainingCanvas.transform.GetChild(5).gameObject.SetActive(true);
             audio.Play();
 
             if (targetDroneDestroyed)
             {
                 ClearText();
-                trainingStage = 6;
+                trainingStage = 7;
                 droneAnim.SetBool("ProceedTraining3", true);
                 triggers[2].isTrigger = true;
             }
 
         }
 
-        if (trainingStage == 6)
+        if (trainingStage == 7)
         {
             //Drone tells the player to deliver a killtoken to their collection gate
-            audio.clip = clips[5];
+            audio.clip = trainingAudioClips[6];
+            trainingCanvas.transform.GetChild(6).gameObject.SetActive(true);
             audio.Play();
 
             if (trigger2)
             {
                 ClearText();
-                trainingStage = 7;
+                trainingStage = 8;
                 droneAnim.SetBool("ProceedTraining4", true);
             }
         }
 
-        if (trainingStage == 7)
+        if (trainingStage == 8)
         {
             //player is shown how to purchase throwables
-            audio.clip = clips[6];
+            audio.clip = trainingAudioClips[7];
+            trainingCanvas.transform.GetChild(7).gameObject.SetActive(true);
             audio.Play();
 
-            Invoke("ProceedToTraining8", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
+            Invoke("ProceedToTraining9", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
             droneAnim.SetBool("ProceedTraining5", true);
 
 
         }
 
-        if (trainingStage == 8)
+        if (trainingStage == 9)
         {
             //Fade to black
-            audio.clip = clips[7];
+            audio.clip = trainingAudioClips[8];
+            trainingCanvas.transform.GetChild(8).gameObject.SetActive(true);
             audio.Play();
 
         }
@@ -164,9 +190,9 @@ public class TrainingManager : MonoBehaviour
         ClearText();
     }
 
-    public void ProceedToTraining8()
+    public void ProceedToTraining9()
     {
-        trainingStage = 8;
+        trainingStage = 9;
         ClearText();
     }
 /*
