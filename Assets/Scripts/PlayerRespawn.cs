@@ -141,6 +141,7 @@ public class PlayerRespawn : MonoBehaviour
         player1.GetComponent<Health>().health = player1.GetComponent<Health>().maxHealth;
         player1Death = false;
         player1.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        player1.GetComponent<PlayerAutoLauncher>().StartCountdown();
         // player1Text.text = "";
     }
 
@@ -164,6 +165,7 @@ public class PlayerRespawn : MonoBehaviour
         player2.GetComponent<Health>().health = player2.GetComponent<Health>().maxHealth;
         player2Death = false;
         player2.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        player2.GetComponent<PlayerAutoLauncher>().StartCountdown();
         // player2Text.text = "";
     }
 
@@ -187,6 +189,7 @@ public class PlayerRespawn : MonoBehaviour
         player3.GetComponent<Health>().health = player3.GetComponent<Health>().maxHealth;
         player3Death = false;
         player3.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        player3.GetComponent<PlayerAutoLauncher>().StartCountdown();
         // player3Text.text = "";
     }
 
@@ -211,6 +214,7 @@ public class PlayerRespawn : MonoBehaviour
         player4.GetComponent<Health>().health = player4.GetComponent<Health>().maxHealth;
         player4Death = false;
         player4.GetComponent<BuildModeFire>().discUIImages[0].gameObject.GetComponent<ThrowableCooldown>().fillAmountValue = 0;
+        player4.GetComponent<PlayerAutoLauncher>().StartCountdown();
         // player4Text.text = "";
     }
 

@@ -30,6 +30,7 @@ public class EntranceChangeLayer : MonoBehaviour
             if(turnOffBoost)
             {
                 coll.gameObject.GetComponent<PropelSelf>().canBoost = false;
+                coll.gameObject.GetComponent<PlayerAutoLauncher>().StopLaunch();
             } else
             {
                 coll.gameObject.GetComponent<PropelSelf>().canBoost = true;
