@@ -12674,9 +12674,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531957869}
+  - component: {fileID: 531957870}
   m_Layer: 0
   m_Name: Waypoint (1)
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12689,12 +12690,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531957868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -208, y: 91, z: 1114}
+  m_LocalPosition: {x: 103, y: -15, z: 157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2922962350812618245}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &531957870
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531957868}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &533410501
 GameObject:
   m_ObjectHideFlags: 0
@@ -18279,9 +18293,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 558430775}
+  - component: {fileID: 558430776}
   m_Layer: 0
   m_Name: Waypoint
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18294,12 +18309,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558430774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -208, y: 91, z: -212}
+  m_LocalPosition: {x: -97, y: -15, z: -158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2922962350812618245}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &558430776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558430774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &577998423
 GameObject:
   m_ObjectHideFlags: 0
@@ -23608,9 +23636,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 596293918}
+  - component: {fileID: 596293919}
   m_Layer: 0
   m_Name: Waypoint (2)
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23623,12 +23652,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596293917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 440, y: 91, z: 1114}
+  m_LocalPosition: {x: -97, y: -15, z: 157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2922962350812618245}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &596293919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596293917}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &604281455
 GameObject:
   m_ObjectHideFlags: 0
@@ -33403,6 +33445,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c33fde2f78608d46905bf191d7a7aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &739382880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739382882}
+  - component: {fileID: 739382881}
+  m_Layer: 0
+  m_Name: Killtag Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &739382881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739382880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04d9ed0ba375074c9f6911b1abee485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
+  targetDrone: {fileID: 852868165425955945}
+--- !u!4 &739382882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739382880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 249.07727, y: 366.7991, z: -1749.2561}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 45
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &739646554
 Mesh:
   m_ObjectHideFlags: 0
@@ -41643,7 +41730,7 @@ GameObject:
   - component: {fileID: 1134492804}
   - component: {fileID: 1134492805}
   m_Layer: 0
-  m_Name: Waypoint (3)
+  m_Name: Wait-at Waypoint
   m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52015,6 +52102,7 @@ MonoBehaviour:
   driftCompleted: 0
   targetDroneDestroyed: 0
   killTokenDelivered: 0
+  tagSpawner: {fileID: 0}
   trigger2: 0
 --- !u!4 &1619019564
 Transform:
@@ -68613,9 +68701,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1883700346}
+  - component: {fileID: 1883700347}
   m_Layer: 0
   m_Name: Waypoint (3)
-  m_TagString: Untagged
+  m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68628,12 +68717,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883700345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 440, y: 91, z: -212}
+  m_LocalPosition: {x: 103, y: -15, z: -158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2922962350812618245}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1883700347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883700345}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1885909890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70286,9 +70388,9 @@ MonoBehaviour:
   dwp: {fileID: 8114591175759896345}
   player: {fileID: 742342222}
   nextWaypoint: {x: 0, y: 0, z: 0}
-  arriveDistance: 0
-  droneSpeed: 0
-  rotationSpeed: 5
+  arriveDistance: 2
+  droneSpeed: 150
+  rotationSpeed: 10
   droneCorpse: {fileID: 0}
   droneDeathPrefab: {fileID: 2705857064438722281, guid: 30069322d1ea70147b7f17b1bbf9d7a2,
     type: 3}
@@ -77144,7 +77246,7 @@ Transform:
   m_GameObject: {fileID: 8377632934677933258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1205384414173915905}
   - {fileID: 1010698214343792616}

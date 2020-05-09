@@ -33,7 +33,7 @@ public class TrainingManager : MonoBehaviour
 
     Orbit orbitScript;
 
-
+    public KillTagSpawner tagSpawner;
     public bool trigger2 = false;
 
 
@@ -138,6 +138,7 @@ public class TrainingManager : MonoBehaviour
 
             if (targetDroneDestroyed)
             {
+                tagSpawner.SpawnKillTag();
                 ClearText();
                 trainingStage = 7;
                 droneAnim.SetBool("ProceedTraining3", true);
