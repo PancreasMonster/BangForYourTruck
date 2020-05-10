@@ -47,6 +47,7 @@ public class TrainingManager : MonoBehaviour
         audio = GetComponent<AudioSource>();
         trainingCanvas.SetActive(true);
         drone.SetActive(true);
+        triggers = GetComponentsInChildren<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -55,6 +56,7 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 1)
         {
             //Drone explains the driving controls
+            if(audio)
             audio.Play();
             trainingCanvas.transform.GetChild(0).gameObject.SetActive(true);
 
@@ -71,24 +73,31 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 2)
         {
             //Drone explains to select a weapon
-            audio.clip = trainingAudioClips[1];
+            if (audio)
+                audio.clip = trainingAudioClips[1];
             trainingCanvas.transform.GetChild(1).gameObject.SetActive(true);
-            audio.Play();
+
+            if (audio)
+                audio.Play();
 
             if (trigger1)
-            drone.GetComponent<TrainingDrone>().AdvanceToNextWaypoint();
-            trainingStage = 3;
-            ClearText();
-            droneAnim.SetBool("ProceedTraining1",true);
+            {
+                drone.GetComponent<TrainingDrone>().AdvanceToNextWaypoint();
+                trainingStage = 3;
+                ClearText();
+                droneAnim.SetBool("ProceedTraining1", true);
+            }
 
         }
 
         if (trainingStage == 3)
         {
             //Drone explains A, B, X, Y controls, and tells you to try them all
-            audio.clip = trainingAudioClips[2];
+            if (audio)
+                audio.clip = trainingAudioClips[2];
             trainingCanvas.transform.GetChild(2).gameObject.SetActive(true);
-            audio.Play();
+            if (audio)
+                audio.Play();
 
             if (pressedA && pressedB)
             {
@@ -100,9 +109,11 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 4)
         {
             //Drone explains A, B, X, Y controls, and tells you to try them all
-            audio.clip = trainingAudioClips[3];
+            if (audio)
+                audio.clip = trainingAudioClips[3];
             trainingCanvas.transform.GetChild(3).gameObject.SetActive(true);
-            audio.Play();
+            if (audio)
+                audio.Play();
 
             if (driftCompleted)
             {
@@ -114,9 +125,11 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 5)
         {
             //Drone explains how to fire your weapon
-            audio.clip = trainingAudioClips[4];
+            if (audio)
+                audio.clip = trainingAudioClips[4];
             trainingCanvas.transform.GetChild(4).gameObject.SetActive(true);
-            audio.Play();
+            if (audio)
+                audio.Play();
 
             if (player.GetComponent<PowerHolder>().powerAmount <= 50)
             {
@@ -132,9 +145,11 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 6)
         {
             //Drone tells you to kill the target drone
-            audio.clip = trainingAudioClips[5];
+            if (audio)
+                audio.clip = trainingAudioClips[5];
             trainingCanvas.transform.GetChild(5).gameObject.SetActive(true);
-            audio.Play();
+            if (audio)
+                audio.Play();
 
             if (targetDroneDestroyed)
             {
@@ -150,9 +165,11 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 7)
         {
             //Drone tells the player to deliver a killtoken to their collection gate
-            audio.clip = trainingAudioClips[6];
+            if (audio)
+                audio.clip = trainingAudioClips[6];
             trainingCanvas.transform.GetChild(6).gameObject.SetActive(true);
-            audio.Play();
+            if (audio)
+                audio.Play();
 
             if (trigger2)
             {
@@ -165,9 +182,11 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 8)
         {
             //player is shown how to purchase throwables
-            audio.clip = trainingAudioClips[7];
+            if (audio)
+                audio.clip = trainingAudioClips[7];
             trainingCanvas.transform.GetChild(7).gameObject.SetActive(true);
-            audio.Play();
+            if (audio)
+                audio.Play();
 
             Invoke("ProceedToTraining9", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
             droneAnim.SetBool("ProceedTraining5", true);
@@ -178,9 +197,11 @@ public class TrainingManager : MonoBehaviour
         if (trainingStage == 9)
         {
             //Fade to black
-            audio.clip = trainingAudioClips[8];
+            if (audio)
+                audio.clip = trainingAudioClips[8];
             trainingCanvas.transform.GetChild(8).gameObject.SetActive(true);
-            audio.Play();
+            if (audio)
+                audio.Play();
 
         }
     }

@@ -7642,7 +7642,8 @@ GameObject:
   m_Component:
   - component: {fileID: 283143227}
   - component: {fileID: 283143228}
-  m_Layer: 0
+  - component: {fileID: 283143229}
+  m_Layer: 22
   m_Name: Waypoint
   m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
@@ -7676,6 +7677,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &283143229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283143226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd2899fe38bcea41bc96a6ad37a0820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tm: {fileID: 0}
 --- !u!1001 &337533012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8458,7 +8472,8 @@ GameObject:
   m_Component:
   - component: {fileID: 345698658}
   - component: {fileID: 345698659}
-  m_Layer: 0
+  - component: {fileID: 345698660}
+  m_Layer: 22
   m_Name: Waypoint (1)
   m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
@@ -8492,6 +8507,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &345698660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345698657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd2899fe38bcea41bc96a6ad37a0820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tm: {fileID: 0}
 --- !u!1 &354161435
 GameObject:
   m_ObjectHideFlags: 0
@@ -8735,7 +8763,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -24764,7 +24792,8 @@ GameObject:
   m_Component:
   - component: {fileID: 620794580}
   - component: {fileID: 620794581}
-  m_Layer: 0
+  - component: {fileID: 620794582}
+  m_Layer: 22
   m_Name: Waypoint (2)
   m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
@@ -24798,6 +24827,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &620794582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620794579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd2899fe38bcea41bc96a6ad37a0820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tm: {fileID: 0}
 --- !u!43 &630515771
 Mesh:
   m_ObjectHideFlags: 0
@@ -33840,6 +33882,11 @@ PrefabInstance:
       propertyPath: dampingRatio
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4232500412554703605, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: setSuspensionDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4257988114199735941, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: skidmarksController
@@ -34055,6 +34102,11 @@ PrefabInstance:
       propertyPath: pr
       value: 
       objectReference: {fileID: 1083064736}
+    - target: {fileID: 7322996439378250605, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: km
+      value: 
+      objectReference: {fileID: 959143762}
     - target: {fileID: 7532606957045812002, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: pc
@@ -38883,6 +38935,8 @@ MonoBehaviour:
   killSpreeCount: 00000000000000000000000000000000
   droneKills: 00000000000000000000000000000000
   longShotKills: 00000000000000000000000000000000
+  tagsDeposited: 
+  tagsDenied: 
   killSpreeNum: 3
   kf: {fileID: 864435268}
   PI:
@@ -41729,7 +41783,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1134492804}
   - component: {fileID: 1134492805}
-  m_Layer: 0
+  - component: {fileID: 1134492806}
+  m_Layer: 22
   m_Name: Wait-at Waypoint
   m_TagString: TrainingDroneWaypoint
   m_Icon: {fileID: 0}
@@ -41763,6 +41818,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1134492806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134492803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd2899fe38bcea41bc96a6ad37a0820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tm: {fileID: 1619019563}
 --- !u!1 &1148791193
 GameObject:
   m_ObjectHideFlags: 0
@@ -44758,7 +44826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1340210696}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Waypoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48215,7 +48283,7 @@ GameObject:
   - component: {fileID: 1469800784}
   - component: {fileID: 1469800783}
   - component: {fileID: 1469800782}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Camera1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50687,7 +50755,7 @@ MonoBehaviour:
 
     Press ''B'': Boost
 
-    You have imilted mobility,
+    You have limilted mobility,
 
     Use
     all three mobility charges to proceed'
@@ -65295,7 +65363,7 @@ MonoBehaviour:
   dwp: {fileID: 8114591175562388252}
   player: {fileID: 742342222}
   nextWaypoint: {x: 0, y: 0, z: 0}
-  arriveDistance: 0
+  arriveDistance: 5
   droneSpeed: 500
   rotationSpeed: 10
   tm: {fileID: 1619019563}
@@ -68966,18 +69034,18 @@ PrefabInstance:
     - target: {fileID: 4742906541963170117, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4742906541963177657, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4742906541963177657, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 11400000, guid: c39b4c9f791b7784a9c4de6cd011e238,
+      objectReference: {fileID: 11400000, guid: 91513ec6c34a57a49b49cb9abfa750e8,
         type: 2}
     - target: {fileID: 4742906541963177658, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
@@ -69047,7 +69115,7 @@ PrefabInstance:
     - target: {fileID: 4742906541963177659, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 4185911
+      value: 8380215
       objectReference: {fileID: 0}
     - target: {fileID: 4742906541963177659, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
@@ -69057,7 +69125,12 @@ PrefabInstance:
     - target: {fileID: 4742906541963177662, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742906541963177662, guid: 4b616b0a160aad44a9cd3daae4101a7d,
+        type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 4096
       objectReference: {fileID: 0}
     - target: {fileID: 4742906541963177663, guid: 4b616b0a160aad44a9cd3daae4101a7d,
         type: 3}
@@ -69206,7 +69279,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1885909890}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373200750}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -72041,7 +72114,7 @@ GameObject:
   - component: {fileID: 1995008296}
   - component: {fileID: 1995008298}
   - component: {fileID: 1995008297}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Camera2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77039,7 +77112,7 @@ GameObject:
   - component: {fileID: 8393924110266078081}
   - component: {fileID: 2020116911840844501}
   - component: {fileID: 7042698863780739210}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Dron Propeller FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77103,7 +77176,7 @@ GameObject:
   - component: {fileID: 4435666074145950335}
   - component: {fileID: 1725367845}
   - component: {fileID: 852868165756942445}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Training Drone
   m_TagString: Drone
   m_Icon: {fileID: 0}
@@ -77136,7 +77209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2922962351019565568}
   - component: {fileID: 8114591175562388252}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: DroneWaypoints
   m_TagString: Drone
   m_Icon: {fileID: 0}
@@ -77386,7 +77459,7 @@ GameObject:
   - component: {fileID: 4726762559899698215}
   - component: {fileID: 8516472860576075146}
   - component: {fileID: 4950505410454720115}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Drone Propeller FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77423,7 +77496,7 @@ GameObject:
   - component: {fileID: 5694576065623426253}
   - component: {fileID: 9206744171251834583}
   - component: {fileID: 7524368876491913996}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Drone Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77523,7 +77596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6773133702884827476}
   - component: {fileID: 7426701061309758124}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78107,7 +78180,7 @@ GameObject:
   - component: {fileID: 575809978615749194}
   - component: {fileID: 9074963845911453360}
   - component: {fileID: 1796232277627935994}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Animated Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78173,7 +78246,7 @@ GameObject:
   - component: {fileID: 3745064377590989642}
   - component: {fileID: 137670158570070966}
   - component: {fileID: 3984070182130592112}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Dron Propeller BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78220,7 +78293,7 @@ GameObject:
   - component: {fileID: 3775725767694805608}
   - component: {fileID: 7009984316385258731}
   - component: {fileID: 3817135261471814653}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Dron Propeller BL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78623,7 +78696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5421213284542981878}
   - component: {fileID: 9020103376605252884}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: DroneBounds
   m_TagString: Drone
   m_Icon: {fileID: 0}
@@ -78741,7 +78814,7 @@ GameObject:
   - component: {fileID: 258565053696071341}
   - component: {fileID: 8001009619004771646}
   - component: {fileID: 1725367847}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: TrainingDroneMain
   m_TagString: Drone
   m_Icon: {fileID: 0}
