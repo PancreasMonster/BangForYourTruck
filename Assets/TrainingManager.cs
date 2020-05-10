@@ -182,7 +182,7 @@ public class TrainingManager : MonoBehaviour
             if (audio)
                 audio.Play();
 
-            Invoke("ProceedToTraining9", 2f);// this Invoke needs to last as long as the drones purchase gate audioclip
+            Invoke("ProceedToTraining9", 4f);// this Invoke needs to last as long as the drones purchase gate audioclip
             droneAnim.SetBool("ProceedTraining5", true);
 
 
