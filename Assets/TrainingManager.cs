@@ -36,18 +36,24 @@ public class TrainingManager : MonoBehaviour
     public KillTagSpawner tagSpawner;
     public bool trigger2 = false;
 
+    MobilityCharges mc;
+
+    TrainingDrone td;
+
 
     // Start is called before the first frame update
     void Start()
     {        
         player.GetComponent<RearWheelDrive>().trainingMode = true;
         //player.GetComponent<TrainingCheck>().enabled = true;
-        droneAnim = drone.GetComponent<Animator>();
+        droneAnim = drone.GetComponentInParent<Animator>();
         trainingCanvas = GameObject.Find("Training Canvas");
         audio = GetComponent<AudioSource>();
         trainingCanvas.SetActive(true);
         drone.SetActive(true);
         triggers = GetComponentsInChildren<BoxCollider>();
+        mc = player.GetComponent<MobilityCharges>();
+        td = drone.GetComponent<TrainingDrone>();
     }
 
     // Update is called once per frame
@@ -80,13 +86,7 @@ public class TrainingManager : MonoBehaviour
             if (audio)
                 audio.Play();
 
-            if (trigger1)
-            {
-                drone.GetComponent<TrainingDrone>().AdvanceToNextWaypoint();
-                trainingStage = 3;
-                ClearText();
-                droneAnim.SetBool("ProceedTraining1", true);
-            }
+           
 
         }
 
@@ -99,7 +99,7 @@ public class TrainingManager : MonoBehaviour
             if (audio)
                 audio.Play();
 
-            if (pressedA && pressedB)
+            if (!mc.charge1 && !mc.charge2 && !mc.charge3)
             {
                 ClearText();
                 trainingStage = 4;
@@ -153,7 +153,7 @@ public class TrainingManager : MonoBehaviour
 
             if (targetDroneDestroyed)
             {
-                tagSpawner.SpawnKillTag();
+                player.GetComponent<LockOn>().targets.Clear();
                 ClearText();
                 trainingStage = 7;
                 droneAnim.SetBool("ProceedTraining3", true);
@@ -171,12 +171,6 @@ public class TrainingManager : MonoBehaviour
             if (audio)
                 audio.Play();
 
-            if (trigger2)
-            {
-                ClearText();
-                trainingStage = 8;
-                droneAnim.SetBool("ProceedTraining4", true);
-            }
         }
 
         if (trainingStage == 8)
@@ -350,6 +344,49 @@ public class TrainingManager : MonoBehaviour
 
     public void DroneKilled()
     {
-            targetDroneDestroyed = true;
+        StartCoroutine(DroneKilledCoroutine());
+    }
+
+    IEnumerator DroneKilledCoroutine()
+    {
+        yield return new WaitForSeconds(2);
+        targetDroneDestroyed = true;
+    }
+
+    public void Drift()
+    {
+        Debug.Log("Drifted");
+        if (trainingStage == 4)
+            driftCompleted = true;
+    }
+
+    public void MoveToArena()
+    {
+        StartCoroutine(MoveToArenaCoroutine());
+    }
+
+    IEnumerator MoveToArenaCoroutine()
+    {
+        td.AdvanceToNextWaypoint();
+        td.droneSpeed = 3000;
+        ClearText();
+        yield return new WaitForSeconds(1.5f);
+        td.droneSpeed = 800;
+        yield return new WaitForSeconds(1.5f);
+        td.BarrelRoll(10000);
+        droneAnim.SetBool("ProceedTraining1", true);
+    }
+
+    public void TagDeposit()
+    {
+        StartCoroutine(TagDepositCoroutine());
+    }
+
+    IEnumerator TagDepositCoroutine()
+    {
+        yield return new WaitForSeconds(0);
+        ClearText();
+        trainingStage = 8;
+        droneAnim.SetBool("ProceedTraining4", true);
     }
 }

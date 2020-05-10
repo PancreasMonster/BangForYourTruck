@@ -32,7 +32,7 @@ public class Missile : MonoBehaviour
     {
         Destroy(this.gameObject, 60);
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(WaitForHoming());     
+        StartCoroutine(WaitForHoming());
     }
 
     // Update is called once per frame

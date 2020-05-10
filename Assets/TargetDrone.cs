@@ -101,7 +101,10 @@ public class TargetDrone : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
         GameObject droneDeathBody = Instantiate(droneDeathPrefab, transform.position, droneDeathPrefab.transform.rotation);
         yield return null;
+        
         tm.DroneKilled();
+        yield return null;
+        Destroy(this.gameObject);
     }
 
     public void AdvanceToNextWaypoint()

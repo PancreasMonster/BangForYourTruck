@@ -47,6 +47,7 @@ public class BuildModeFire : MonoBehaviour
     //public GameObject selectorPrefab;
     //GameObject selector;
     public Color imageCol, blackHoleCol;
+    bool release = false;
 
 
     void Start()
@@ -60,12 +61,15 @@ public class BuildModeFire : MonoBehaviour
         //GameObject clone = Instantiate(selectorPrefab, transform.position, Quaternion.identity);
         //selector = clone;
         StartCoroutine(assignColour());
+        targetZDistance = ranges[0];
     }
 
     Vector2 rightStick;
     float PadLB;
+    float display = 0;
     float PadRB;
     float DPadLeftRight;
+    float DPadUpDown;
 
     private void OnRightStick(InputValue value)
     {
@@ -74,13 +78,8 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
-        {
-            PadLB = 1;
 
-            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown(0);
-        }
-        
+        display = 1;
         if (!cooldown)
         {
             aimTarget.transform.localPosition = targetOriginalPos;
@@ -94,7 +93,13 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnLeftBumperRelease(InputValue value)
     {
-        PadLB = 0;
+        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
+        {
+            PadLB = 1;
+            release = true;
+            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown(0);
+        }
+        display = 0;
     }
 
     private void OnRightBumperRelease(InputValue value)
@@ -106,6 +111,18 @@ public class BuildModeFire : MonoBehaviour
     {
         DPadLeftRight = value.Get<float>();
         //Debug.Log(DPadLeftRight);
+    }
+
+    private void OnDPADUpDown(InputValue value)
+    {
+        DPadLeftRight = value.Get<float>();
+        if(DPadUpDown == 1)
+        {
+            targetZDistance = ranges[0];
+        } else
+        {
+            targetZDistance = ranges[1];
+        }
     }
 
 
@@ -120,13 +137,13 @@ public class BuildModeFire : MonoBehaviour
         //       aimTarget.transform.localPosition = targetOriginalPos;
         //  }  
 
-        if (PadLB > 0 && !cooldown)
+        if (display > 1)
         {
          
             RenderArc();
-            targetZDistance = ranges[currentRange];
+            
 
-            if(rightStick.y < 0 && currentRange < ranges.Count - 1 && forwardRange)
+          /*  if(rightStick.y < 0 && currentRange < ranges.Count - 1 && forwardRange)
             {
                 backwardRange = true;
                 forwardRange = false;
@@ -141,12 +158,12 @@ public class BuildModeFire : MonoBehaviour
                 currentRange--;
 
                 StartCoroutine(resetRangeBools(1));
-            }
+            }*/
             aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, targetOriginalPos.z + targetZDistance);
         }
 
         FindVelocity(aimTarget, fireAngle);
-        if (PadLB == 0 && !cooldown)
+        if (display == 0)
         {
             targetZDistance = 0;
             lr.positionCount = 0;
@@ -173,8 +190,9 @@ public class BuildModeFire : MonoBehaviour
             }*/
         }
 
-        if (PadLB > 0 && !cooldown)
+        if (!cooldown && release)
         {
+            release = false;
             targetZDistance = 0;
             lr.positionCount = 0;
             
@@ -192,7 +210,13 @@ public class BuildModeFire : MonoBehaviour
                 if (clone.GetComponent<Health>() != null)
                     clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
             if (clone.GetComponent<Missile>() != null)
-                    clone.GetComponent<Missile>().source = this.gameObject;
+            {
+                clone.GetComponent<Missile>().source = this.gameObject;
+                if(GetComponent<LockOn>().target != null)
+                    clone.GetComponent<Missile>().target = GetComponent<LockOn>().target.transform;
+            }
+
+
             if (clone.GetComponent<BlackHole>() != null)
                 clone.GetComponent<BlackHole>().source = this.gameObject;
             if (clone.GetComponent<MoonGravity>() != null)

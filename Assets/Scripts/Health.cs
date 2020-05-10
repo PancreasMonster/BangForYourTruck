@@ -150,7 +150,7 @@ public class Health : MonoBehaviour
 
         if (targetDrone)
         {
-            GameObject.Find("TrainingKillTagSpawner").GetComponent<KillTagSpawner>().SpawnKillTag();
+            GetComponent<KillTagSpawner>().SpawnKillTag();
             GetComponent<TargetDrone>().DeathTrigger();
         }
 
@@ -213,5 +213,10 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(8);
         dronePainCooldown = true;
     }
-    
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 100), Mathf.FloorToInt((1.0f / Time.smoothDeltaTime)).ToString());
+    }
+
 }

@@ -21,12 +21,17 @@ public class TrainingTrigger : MonoBehaviour
     {
         if (other.gameObject == player && manager.trainingStage == neededStagetoProceed)
         {
-            if (transform.name == "TrainingTrigger (Stage2)")
-                manager.trigger1 = true;
+            if (manager.trainingStage == 2)
+            {
+                manager.trainingStage = 3;
+                manager.MoveToArena();
+            }
+            if (manager.trainingStage == 7)
+            {
 
-            if (transform.name == "TrainingTrigger (Stage6)")
-                
-                manager.trigger2 = true;
+                manager.trainingStage = 8;
+                manager.TagDeposit();
+            }
         }   
             
     }

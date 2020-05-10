@@ -38,6 +38,8 @@ public class KillManager : MonoBehaviour
 
     public float longShotDistance = 300;
 
+    public TrainingManager tm;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,12 +59,6 @@ public class KillManager : MonoBehaviour
     string[] names = Input.GetJoystickNames();
         for (int x = 0; x < names.Length; x++)
         {
-
-            if (names[x].Length == 19)
-            {
-                
-                conTrollerCount++;
-            }
             if (names[x].Length == 33)
             {
                 
@@ -190,10 +186,14 @@ public class KillManager : MonoBehaviour
         {
             flavourTexts.Add("Long Drift");
             scoreList.Add(100);
+            if (tm)
+                tm.Drift();
         } else if (driftLength > 50)
         {
             flavourTexts.Add("Short Drift");
             scoreList.Add(50);
+            if (tm)
+                tm.Drift();
         } else if (driftLength >= 25)
         {
             flavourTexts.Add("Mini Drift");

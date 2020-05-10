@@ -85,7 +85,10 @@ public class TrainingDrone : MonoBehaviour
         dwp.AdvanceToNext();
     }
 
-
+    public void BarrelRoll(float dForce)
+    {
+        rb.AddTorque(transform.forward * dForce, ForceMode.Impulse);
+    }
    
 
 }
