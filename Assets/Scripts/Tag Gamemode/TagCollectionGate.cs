@@ -8,6 +8,7 @@ public class TagCollectionGate : MonoBehaviour
     public bool redTeam, blueTeam;
     public TagCollectionManager tagCollectionManager;
     public int gateTeamNum;
+    KillManager km;
     AudioSource audio;
 
     public ParticleSystem left;
@@ -18,8 +19,7 @@ public class TagCollectionGate : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         tagCollectionManager = GameObject.Find("TagCollectionManager").GetComponent<TagCollectionManager>();
-        
-        
+        km = GameObject.Find("KillManager").GetComponent<KillManager>();
     }
 
     // Update is called once per frame
@@ -47,6 +47,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.EmptyTags();
                     left.Play();
                     right.Play();
+                    km.ScoreFeedDepositToken(col.gameObject);
                 }
             } else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
             {
@@ -74,6 +75,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.EmptyTags();
                     left.Play();
                     right.Play();
+                    km.ScoreFeedDepositToken(col.gameObject);
                 }
             }
             else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 1)

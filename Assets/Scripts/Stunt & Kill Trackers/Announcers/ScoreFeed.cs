@@ -29,13 +29,13 @@ public class ScoreFeed : MonoBehaviour
             float timeForScoreFeedItem;
             if(flavour.Count < 2)
             {
-                timeForScoreFeedItem = ((2.25f) * amountOfSFIs) - timer;
+                timeForScoreFeedItem = ((2.25f) * amountOfSFIs);
                 Debug.Log(timeForScoreFeedItem);
                 StartCoroutine(scoreFeedStarter(timeForScoreFeedItem, flavour, scoreList));
                 amountOfSFIs++;
             } else
             {
-                timeForScoreFeedItem = ((1.25f + ((flavour.Count - 2) * .75f)) * amountOfSFIs) - timer;
+                timeForScoreFeedItem = ((1.25f + ((flavour.Count - 2) * .75f)) * amountOfSFIs);
                 Debug.Log(timeForScoreFeedItem);
                 StartCoroutine(scoreFeedStarter(timeForScoreFeedItem, flavour, scoreList));
                 amountOfSFIs++;

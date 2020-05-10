@@ -60,8 +60,8 @@ public class FindPlayerStats : MonoBehaviour
         string throwableName = player.GetComponent<BuildModeFire>().currentDisc.transform.name.ToString();
         throwablesText.text = throwableName;
         throwablesText2.text = throwableName;
-        resourceText.text = " $ " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
-        blackResourceText.text = " = " + ((int)player.GetComponent<PlayerBank>().tagsInBank).ToString();
+        resourceText.text = " $ " + (((int)player.GetComponent<PlayerBank>().tagsInBank)*100).ToString();
+        blackResourceText.text = " $ " + (((int)player.GetComponent<PlayerBank>().tagsInBank) * 100).ToString();
         //resourceIncomeText = player.GetComponent<Resources(New)>().resourceIncomeAmount.ToString();
         hpBarFill.fillAmount = playerHealth / 100;
 

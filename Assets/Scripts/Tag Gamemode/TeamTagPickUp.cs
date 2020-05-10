@@ -8,12 +8,14 @@ public class TeamTagPickUp : MonoBehaviour
     bool collected;
     public float collectionDelayTime = .75f;
     public GameObject parent;
+    public KillManager km;
 
     // Start is called before the first frame update
     void Start()
     {
         GetComponentInParent<Rigidbody>().AddForce(Random.insideUnitSphere * 500);
-        StartCoroutine(CollectionDelayInitialisation());
+        StartCoroutine(CollectionDelayInitialisation());   
+        km = GameObject.Find("KillManager").GetComponent<KillManager>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class TeamTagPickUp : MonoBehaviour
                 {
                     if (t.currentTags < 3)
                     {
+                        km.ScoreFeedCollectToken(coll.gameObject);
                         collected = true;
                         t.AddTag();
                         Destroy(parent);
@@ -40,6 +43,7 @@ public class TeamTagPickUp : MonoBehaviour
                 }
                 else
                 {
+                    km.ScoreFeedDeny(coll.gameObject);
                     collected = true;
                     Destroy(parent);
                 }

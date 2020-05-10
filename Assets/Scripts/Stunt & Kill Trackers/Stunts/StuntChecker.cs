@@ -57,6 +57,7 @@ public class StuntChecker : MonoBehaviour
     bool canSlam = true;
     public float randomAnnouncmentChance;
 
+    public KillManager km;
     Vector2 leftStick;
     float rightTrigger;
     float leftTrigger;
@@ -100,6 +101,7 @@ public class StuntChecker : MonoBehaviour
         fo = GetComponent<FlipOver>();
         h = GetComponent<Health>();
         mc = GetComponent<MobilityCharges>();
+        km = GetComponent<Health>().km;
     }
 
     void FixedUpdate()
@@ -145,17 +147,17 @@ public class StuntChecker : MonoBehaviour
         }
 
         //Combine strings into final stunt string
-        stuntString = fo.crashing ? "Crashed" : driftString + jumpString + (string.IsNullOrEmpty(flipString) || string.IsNullOrEmpty(jumpString) ? "" : " + ") + flipString;
+        stuntString = fo.crashing ? "Crashed" : driftString;
 
         if (!animCrash && fo.crashing)
         {
-            animCrash = true;
-            anim.SetBool("Crashed",true);
+            //animCrash = true;
+           // anim.SetBool("Crashed",true);
         }
 
         if(!fo.crashing)
         {
-            animCrash = false;
+            //animCrash = false;
         }
     }
 
@@ -177,7 +179,7 @@ public class StuntChecker : MonoBehaviour
             }
             driftHold = true;   
             driftDist += rb.velocity.magnitude * Time.fixedDeltaTime / 10;
-            driftScore += driftDist / 100;
+            driftScore += driftDist;
             driftString = "Drift: " + driftDist.ToString("n0") + " m ";
 
             /*  if (engine)
@@ -185,18 +187,18 @@ public class StuntChecker : MonoBehaviour
                   engine.boost += (StuntManager.driftBoostAddStatic * Mathf.Abs(vp.localVelocity.x)) * Time.timeScale * 0.0002f;
               } */
         }      
-        else if (!driftHold)
+        else 
         {
-            score += driftScore;
+            if(driftDist >= 25)
+            km.ScoreFeedDrift(this.gameObject, Mathf.CeilToInt(driftDist));
             driftDist = 0;
             driftScore = 0;
             driftString = "";
-            
         }
-        else
-        {
-            StartCoroutine(driftHoldActivation());
-        }
+       // else
+       // {
+       //     StartCoroutine(driftHoldActivation());
+      //  }
     }
 
    /* void DetectJump()
@@ -335,7 +337,7 @@ public class StuntChecker : MonoBehaviour
                
             }
         }
-        else if (!flipHold)
+       /* else if (!flipHold)
         {
             //Add stunt points to the score
             foreach (Stunt curStunt in doneStunts)
@@ -347,17 +349,27 @@ public class StuntChecker : MonoBehaviour
             stunts.Clear();
             doneStunts.Clear();
             flipString = "";
-        }
+        } */
         else
         {
+            List<string> dStunts = new List<string>();
+            List<int> stuntScores = new List<int>();
             StartCoroutine(flipHoldActivation());
 
             if (!fo.crashing && canSlam)
             {
+               
                 foreach (Stunt curStunt in doneStunts)
                 {
                     flipScore += curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold);
+                    if (Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold) >= 2)
+                        dStunts.Add(curStunt.name + " x" + Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold));
+                    else
+                        dStunts.Add(curStunt.name);
+
+                    stuntScores.Add(curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold));
                 }
+                
                 float rand = Random.Range(0f, 1f);             
                 if (rand > randomAnnouncmentChance && flipScore >= maxScoreExplosion)
                 {
@@ -369,6 +381,13 @@ public class StuntChecker : MonoBehaviour
                 
             } 
             currentStunt = "";
+            if(dStunts.Count > 0)
+            km.ScoreFeedStunt(this.gameObject, dStunts, stuntScores);
+            stunts.Clear();
+            doneStunts.Clear();
+            dStunts.Clear();
+            stuntScores.Clear();
+            flipString = "";
         }
     }
 
@@ -386,7 +405,7 @@ public class StuntChecker : MonoBehaviour
         yield return new WaitForSeconds(stuntStringHoldTime);
         jumpHold = false;
         jumpDisplay = false;
-        anim.SetBool("GoToScoreText",true);
+        //anim.SetBool("GoToScoreText",true);
     }
 
     IEnumerator flipHoldActivation()
@@ -396,7 +415,7 @@ public class StuntChecker : MonoBehaviour
         flipHold = false;
         flipDisplay = false;
         landStunt = true;
-        anim.SetBool("GoToScoreText",true);
+        //anim.SetBool("GoToScoreText",true);
     }
 
     public void FlipEffect()

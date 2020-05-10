@@ -9,6 +9,7 @@ public class TagHolder : MonoBehaviour
     public float dropForce = 2000;
     GameObject tagHolder;
     ParticleSystem particles;
+    KillManager km;
 
 
 
@@ -17,6 +18,7 @@ public class TagHolder : MonoBehaviour
     {
         tagHolder = transform.Find("KillTag Holder").gameObject;
         particles = transform.Find("Item Pickup Particle").GetComponent<ParticleSystem>();
+        km = GetComponent<KillManager>();
     }
 
     // Update is called once per frame
@@ -55,6 +57,7 @@ public class TagHolder : MonoBehaviour
             Vector3 newPos = new Vector3(Mathf.Cos(angle) * 6, 0, Mathf.Sin(angle) * 6);
             GameObject droppedTag = Instantiate(teamTag, new Vector3(transform.position.x + newPos.x, transform.position.y + 1, transform.position.z + newPos.z), Quaternion.identity);
             droppedTag.GetComponentInChildren<TeamTagPickUp>().tagTeamNum = GetComponent<Health>().teamNum;
+            droppedTag.GetComponentInChildren<TeamTagPickUp>().km = km;
             droppedTag.GetComponent<Rigidbody>().AddForce(Vector3.up * dropForce);
             currentTags = 0;
         }

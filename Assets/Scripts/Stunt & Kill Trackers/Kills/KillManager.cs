@@ -24,6 +24,8 @@ public class KillManager : MonoBehaviour
     public List<int> killSpreeCount = new List<int>();
     public List<int> droneKills = new List<int>();
     public List<int> longShotKills = new List<int>();
+    public List<int> tagsDeposited = new List<int>();
+    public List<int> tagsDenied = new List<int>();
     public int killSpreeNum = 3;
 
     public KillFeed kf;
@@ -139,7 +141,7 @@ public class KillManager : MonoBehaviour
         List<int> scoreList = new List<int>();
         flavourTexts.Add("Kill");
         scoreList.Add(100);
-        int killCount = 0;
+        int killCount = -1;
         foreach(int k in kills)
         {
             killCount += k;
@@ -178,6 +180,72 @@ public class KillManager : MonoBehaviour
         }
         Debug.Log(flavourTexts.Count);
         killer.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+    }
+
+    public void ScoreFeedDrift(GameObject player, int driftLength)
+    {
+        List<string> flavourTexts = new List<string>();
+        List<int> scoreList = new List<int>();
+        if(driftLength > 100)
+        {
+            flavourTexts.Add("Long Drift");
+            scoreList.Add(100);
+        } else if (driftLength > 50)
+        {
+            flavourTexts.Add("Short Drift");
+            scoreList.Add(50);
+        } else if (driftLength >= 25)
+        {
+            flavourTexts.Add("Mini Drift");
+            scoreList.Add(25);
+        }
+
+
+        player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+    }
+
+    public void ScoreFeedStunt(GameObject player, List<string> stunts, List<int> scores)
+    {
+        List<string> flavourTexts = new List<string>();
+        List<int> scoreList = new List<int>();
+        foreach(string s in stunts)
+        {
+            flavourTexts.Add(s);            
+        }
+
+        foreach (int s in scores)
+        {
+            scoreList.Add(s);
+        }
+
+        player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+    }
+
+    public void ScoreFeedDepositToken(GameObject player)
+    {
+        List<string> flavourTexts = new List<string>();
+        List<int> scoreList = new List<int>();
+        flavourTexts.Add("Tag Deposited");
+        scoreList.Add(100);
+        player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+    }
+
+    public void ScoreFeedCollectToken(GameObject player)
+    {
+        List<string> flavourTexts = new List<string>();
+        List<int> scoreList = new List<int>();
+        flavourTexts.Add("Tag Collected");
+        scoreList.Add(50);
+        player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+    }
+
+    public void ScoreFeedDeny(GameObject player)
+    {
+        List<string> flavourTexts = new List<string>();
+        List<int> scoreList = new List<int>();
+        flavourTexts.Add("Tag Denied");
+        scoreList.Add(50);
+        player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
     }
 
     IEnumerator DoubleKillDialougeBool(int i)
