@@ -80,10 +80,9 @@ public class BuildModeFire : MonoBehaviour
     {
 
         display = 1;
-        if (!cooldown)
-        {
+
             aimTarget.transform.localPosition = targetOriginalPos;
-        }
+       
     }
 
     private void OnRightBumper(InputValue value)
@@ -165,8 +164,7 @@ public class BuildModeFire : MonoBehaviour
         FindVelocity(aimTarget, fireAngle);
         if (display == 0)
         {
-            targetZDistance = 0;
-            lr.positionCount = 0;
+            //lr.positionCount = 0;
            /* if (ammo[currentI] > 0)
             {
                 cooldown = true;
@@ -194,7 +192,7 @@ public class BuildModeFire : MonoBehaviour
         {
             release = false;
             targetZDistance = 0;
-            lr.positionCount = 0;
+            //lr.positionCount = 0;
             
                 cooldown = true;
                 StartCoroutine(Cooldown());
@@ -360,7 +358,9 @@ public class BuildModeFire : MonoBehaviour
         float radAngle = angle * Mathf.Deg2Rad;
         targetDir.y = dist * Mathf.Tan(radAngle);
         float fireVelocity = Mathf.Sqrt(dist * Physics.gravity.magnitude * mortarSpeed / Mathf.Sin(radAngle * 2));
-        return fireVelocity * targetDir.normalized;
+        Vector3 targetVel = fireVelocity * targetDir.normalized;
+        float dotVector = Vector3.Dot(transform.up, Vector3.up);
+        return new Vector3(targetVel.x, dotVector * targetVel.y, targetVel.z);
     }
 
     public void FindVelocity (Transform target, float angle)
