@@ -58,7 +58,7 @@ public class TagCollectionManager : MonoBehaviour
         {
             gameWon = true;
             winText.text = "Red Team Has Won!";
-            StartCoroutine(Victory("Red Team Has Won!"));
+            StartCoroutine(Victory("Red Team Wins!"));
             FMODUnity.RuntimeManager.PlayOneShot(redWinSound);
             redTeamWon = true;
         }
@@ -103,11 +103,11 @@ public class TagCollectionManager : MonoBehaviour
         if(blueTeamTokens == redTeamTokens)
         {
             winText.text = "Teams tied!";
-            StartCoroutine(Victory("Teams tied!"));          
+            StartCoroutine(Victory("Teams Tied!"));          
         } else if (blueTeamTokens > redTeamTokens)
         {
             winText.text = "Blue Team Has Won!";
-            StartCoroutine(Victory("Blue Team Has Won!"));
+            StartCoroutine(Victory("Blue Team Wins!"));
             FMODUnity.RuntimeManager.PlayOneShot(blueWinSound);
         } else if (blueTeamTokens < redTeamTokens)
         {
