@@ -20,7 +20,7 @@ public class ParticleTurret : AIBehaviours
 
     public ParticleSystem ps;
     public List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
-    public LineRenderer lr;
+    //public LineRenderer lr;
     public GameObject source;
     public Sprite damageImage;
 
@@ -59,15 +59,15 @@ public class ParticleTurret : AIBehaviours
                 currentTarget = null;
             }
 
-            lr.SetPosition(0, firingPoint.position);
+            //lr.SetPosition(0, firingPoint.position);
             RaycastHit hit;
             if (Physics.Raycast(firingPoint.position, firingPoint.transform.forward, out hit, 10000, laserLayer))
             {
-                lr.SetPosition(1, hit.point);
+                //lr.SetPosition(1, hit.point);
             }
             else
             {
-                lr.SetPosition(1, firingPoint.position);
+                //lr.SetPosition(1, firingPoint.position);
             }
 
 
@@ -88,7 +88,7 @@ public class ParticleTurret : AIBehaviours
         }
         else
         {
-            lr.positionCount = 0;
+            //lr.positionCount = 0;
             ps.Stop();
         }
     }
@@ -128,7 +128,7 @@ public class ParticleTurret : AIBehaviours
                         {
                             Debug.Log(hit.transform.name);
 
-                            lr.positionCount = 2;
+                            //lr.positionCount = 2;
                             currentTarget = t;
                         }
 
