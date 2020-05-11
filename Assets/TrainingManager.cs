@@ -372,7 +372,7 @@ public class TrainingManager : MonoBehaviour
         ClearText();
         yield return new WaitForSeconds(1.5f);
         td.droneSpeed = 800;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3.5f);
         td.BarrelRoll(10000);
         droneAnim.SetBool("ProceedTraining1", true);
     }

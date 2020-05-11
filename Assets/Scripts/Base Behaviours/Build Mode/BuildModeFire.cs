@@ -81,8 +81,7 @@ public class BuildModeFire : MonoBehaviour
 
         display = 1;
 
-            aimTarget.transform.localPosition = targetOriginalPos;
-       
+            
     }
 
     private void OnRightBumper(InputValue value)
@@ -114,11 +113,11 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnDPADUpDown(InputValue value)
     {
-        DPadLeftRight = value.Get<float>();
+        DPadUpDown = value.Get<float>();
         if(DPadUpDown == 1)
         {
             targetZDistance = ranges[0];
-        } else
+        } else if (DPadUpDown == -1)
         {
             targetZDistance = ranges[1];
         }
@@ -136,11 +135,10 @@ public class BuildModeFire : MonoBehaviour
         //       aimTarget.transform.localPosition = targetOriginalPos;
         //  }  
 
-        if (display > 1)
+        if (display > 0)
         {
          
             RenderArc();
-            
 
           /*  if(rightStick.y < 0 && currentRange < ranges.Count - 1 && forwardRange)
             {
@@ -164,7 +162,7 @@ public class BuildModeFire : MonoBehaviour
         FindVelocity(aimTarget, fireAngle);
         if (display == 0)
         {
-            //lr.positionCount = 0;
+            lr.positionCount = 0;
            /* if (ammo[currentI] > 0)
             {
                 cooldown = true;
@@ -191,7 +189,6 @@ public class BuildModeFire : MonoBehaviour
         if (!cooldown && release)
         {
             release = false;
-            targetZDistance = 0;
             //lr.positionCount = 0;
             
                 cooldown = true;
