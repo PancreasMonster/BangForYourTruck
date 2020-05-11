@@ -9,8 +9,14 @@ public class TrainingAnimationEventHandler : MonoBehaviour
     public Camera droneCamera1;
     public Camera droneCamera2;
 
+    public TrainingManager tm;
 
     public Animator droneFaceAnimator;
+
+    public void PlayKillHim() 
+    {
+        tm.PlayKILLHIMAudio();
+    }
 
     public void SwapToDroneCamera()
     {
