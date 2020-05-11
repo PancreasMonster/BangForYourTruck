@@ -5,12 +5,12 @@ using UnityEngine;
 public class KillTagSpawner : MonoBehaviour
 {
     public GameObject killTag;
-    public GameObject targetDrone;
+    public GameObject originPoint;
 
     
 
     public void SpawnKillTag()
     {
-        Instantiate(killTag,targetDrone.transform.position,targetDrone.transform.rotation);
+        Instantiate(killTag, originPoint.transform.position, originPoint.transform.rotation);
     }
 }

@@ -5415,6 +5415,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 929e9772e7968e7498c8374a7ec4c18f, type: 3}
+--- !u!1 &207733649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 207733650}
+  m_Layer: 0
+  m_Name: Origin Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &207733650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207733649}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 15.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 46
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &207745527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7089,10 +7119,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Press ''X'' to drift at high speeds
 
-    this imporves your mobilty recharge
+    this improves your mobilty recharge
     rate,
 
-    perform a 50m drift to proceed'
+    perform a 25m drift to proceed'
 --- !u!222 &252904381
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35181,7 +35211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
-  targetDrone: {fileID: 852868165425955945}
+  originPoint: {fileID: 0}
 --- !u!4 &739382882
 Transform:
   m_ObjectHideFlags: 0
@@ -53832,7 +53862,7 @@ MonoBehaviour:
 
     Press ''B'': Boost
 
-    You have limilted mobility,
+    You have limited mobility,
 
     Use
     all three mobility charges to proceed'
@@ -98413,7 +98443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
-  targetDrone: {fileID: 8377632934677933258}
+  originPoint: {fileID: 0}
 --- !u!4 &8384307630307306347
 Transform:
   m_ObjectHideFlags: 0
