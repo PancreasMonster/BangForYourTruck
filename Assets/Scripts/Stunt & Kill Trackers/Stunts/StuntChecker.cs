@@ -66,6 +66,7 @@ public class StuntChecker : MonoBehaviour
     public Animator anim;
     bool animCrash = false;
     public Sprite damageImage;
+    public bool trainingMode;
 
     private void OnLeftStick(InputValue value)
     {
@@ -370,7 +371,7 @@ public class StuntChecker : MonoBehaviour
                 }
                 
                 float rand = Random.Range(0f, 1f);             
-                if (rand > randomAnnouncmentChance && flipScore >= maxScoreExplosion)
+                if (rand > randomAnnouncmentChance && flipScore >= maxScoreExplosion && !trainingMode)
                 {
                     FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);                   
                 }

@@ -40,6 +40,40 @@ public class TrainingManager : MonoBehaviour
 
     TrainingDrone td;
 
+    [FMODUnity.EventRef]
+    public string welcome;
+
+    [FMODUnity.EventRef]
+    public string voiceline1;
+
+    [FMODUnity.EventRef]
+    public string voiceline2;
+
+    [FMODUnity.EventRef]
+    public string voiceline3;
+
+    [FMODUnity.EventRef]
+    public string voiceline4;
+
+    [FMODUnity.EventRef]
+    public string voiceline5;
+
+    [FMODUnity.EventRef]
+    public string voiceline6;
+
+    [FMODUnity.EventRef]
+    public string voiceline7;
+
+    [FMODUnity.EventRef]
+    public string voiceline8;
+
+    [FMODUnity.EventRef]
+    public string droneInArena;
+
+    [FMODUnity.EventRef]
+    public string killHim;
+
+    bool playSound = true;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +88,7 @@ public class TrainingManager : MonoBehaviour
         triggers = GetComponentsInChildren<BoxCollider>();
         mc = player.GetComponent<MobilityCharges>();
         td = drone.GetComponent<TrainingDrone>();
+        FMODUnity.RuntimeManager.PlayOneShot(welcome);
     }
 
     // Update is called once per frame
@@ -61,6 +96,11 @@ public class TrainingManager : MonoBehaviour
     {
         if (trainingStage == 1)
         {
+            if(playSound)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(voiceline1);
+                playSound = false;
+            }
             //Drone explains the driving controls
             if(audio)
             audio.Play();
@@ -72,12 +112,18 @@ public class TrainingManager : MonoBehaviour
                 ClearText();
                 triggers[0].isTrigger = true;
                 triggers[1].isTrigger = true;
+                playSound = true;
             }
 
         }
 
         if (trainingStage == 2)
         {
+            if (playSound)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(voiceline2);
+                playSound = false;
+            }
             //Drone explains to select a weapon
             if (audio)
                 audio.clip = trainingAudioClips[1];
@@ -92,6 +138,11 @@ public class TrainingManager : MonoBehaviour
 
         if (trainingStage == 3)
         {
+            if (playSound)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(voiceline3);
+                playSound = false;
+            }
             //Drone explains A, B, X, Y controls, and tells you to try them all
             if (audio)
                 audio.clip = trainingAudioClips[2];
@@ -367,6 +418,7 @@ public class TrainingManager : MonoBehaviour
 
     IEnumerator MoveToArenaCoroutine()
     {
+        playSound = true;
         td.AdvanceToNextWaypoint();
         td.droneSpeed = 3000;
         ClearText();

@@ -35456,10 +35456,15 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1187221265}
+    - target: {fileID: 1609456776759753073, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: trainingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1609456776759753074, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: tagsInBank
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1669895550865721216, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -55432,6 +55437,17 @@ MonoBehaviour:
   killTokenDelivered: 0
   tagSpawner: {fileID: 0}
   trigger2: 0
+  welcome: event:/Drone Training Voice/Welcome
+  voiceline1: event:/Drone Training Voice/VoiceLine
+  voiceline2: event:/Drone Training Voice/VoiceLine 2
+  voiceline3: event:/Drone Training Voice/VoiceLine 3
+  voiceline4: 
+  voiceline5: 
+  voiceline6: 
+  voiceline7: 
+  voiceline8: 
+  droneInArena: 
+  killHim: 
 --- !u!4 &1619019564
 Transform:
   m_ObjectHideFlags: 0
@@ -97694,8 +97710,8 @@ MonoBehaviour:
   killerTimer: 0
   killMaxTime: 15
   damageSource: {fileID: 0}
-  drone: 1
-  targetDrone: 0
+  drone: 0
+  targetDrone: 1
   dronePainSound: event:/Drone Voice/Pain
 --- !u!114 &8001945755421479042
 MonoBehaviour:

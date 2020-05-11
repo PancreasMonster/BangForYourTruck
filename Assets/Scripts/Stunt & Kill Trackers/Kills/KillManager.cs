@@ -43,6 +43,7 @@ public class KillManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(!tm)
         FMODUnity.RuntimeManager.PlayOneShot(startSound, players[0].transform.position);
 
     }
