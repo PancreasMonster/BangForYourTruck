@@ -5,21 +5,17 @@ using UnityEngine;
 
 public class ToggleTrucksFromTwoToFour : MonoBehaviour
 {
-    bool twoTrucks;
 
-    public void ToggleTrucks() 
+    public void GoToFourTrucks() 
     {
-        if (twoTrucks)
-        {
             transform.GetChild(2).gameObject.SetActive(true);
             transform.GetChild(3).gameObject.SetActive(true);
-            twoTrucks = false;
-        }
-        else 
-        {
-            transform.GetChild(2).gameObject.SetActive(false);
-            transform.GetChild(3).gameObject.SetActive(false);
-            twoTrucks = true;
-        }
+    }
+    public void GoToTwoTrucks()
+
+    {
+             transform.GetChild(2).gameObject.SetActive(false);
+             transform.GetChild(3).gameObject.SetActive(false);
+        
     }
 }
