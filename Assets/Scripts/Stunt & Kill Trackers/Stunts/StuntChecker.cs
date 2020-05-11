@@ -38,7 +38,6 @@ public class StuntChecker : MonoBehaviour
     public string driftString;//String indicating drift distance
     public string jumpString;//String indicating jump distance
     public string flipString;//String indicating flips
-    [System.NonSerialized]
     public string stuntString;//String containing all stunts
     public string currentStunt;
     Vector3 localAngularVel;

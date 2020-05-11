@@ -12,6 +12,7 @@ public class StuntText : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
+        Debug.Log(transform.name);
     }
 
     // Update is called once per frame

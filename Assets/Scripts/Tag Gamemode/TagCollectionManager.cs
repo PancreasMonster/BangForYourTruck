@@ -27,6 +27,7 @@ public class TagCollectionManager : MonoBehaviour
     bool redTeamWon, blueTeamWon;
     public Transform targetPosition;
     public KillManager km;
+    public bool countDownDisabled = false;
 
 
     // Start is called before the first frame update
@@ -34,6 +35,10 @@ public class TagCollectionManager : MonoBehaviour
     {
         vds = GetComponent<VictoryDisplayStats>();
         awardScene = GetComponent<AwardScene>();
+        if (countDownDisabled)
+        {
+            gameTimerText.text = "Infinite";
+        }
     }
 
     void Update()
@@ -78,7 +83,7 @@ public class TagCollectionManager : MonoBehaviour
             }
         }
 
-        if(gameTimer >= 0 && !gameWon)
+        if(gameTimer >= 0 && !gameWon && !countDownDisabled)
         {
             gameTimer -= Time.deltaTime;
 
@@ -87,7 +92,7 @@ public class TagCollectionManager : MonoBehaviour
             string gameTimerString = string.Format("{0:00}:{1:00}", minutes, seconds);
 
             gameTimerText.text = gameTimerString;
-        } else if (!gameWon)
+        } else if (!gameWon && !countDownDisabled)
         {
             gameTimerText.text = "0:00";
             GameTimeOver();
