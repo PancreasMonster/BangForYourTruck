@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class AwardScene : MonoBehaviour
 {
-    public GameObject podium;
-    public Transform podiumPlacement;
-    public List<GameObject> players = new List<GameObject>();
+    public GameObject panelTop, panelBottom;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +18,8 @@ public class AwardScene : MonoBehaviour
         
     }
 
-    public void SetUpPodium(int teamNum, KillManager km)
+    public void SetUpAwardScene(int teamNum, KillManager km)
     {
-        GameObject pod = Instantiate(podium, podiumPlacement.transform);
-        pod.transform.localPosition = Vector3.zero;
-        pod.GetComponent<Podium>().SetUp(teamNum, km);
+
     }
 }

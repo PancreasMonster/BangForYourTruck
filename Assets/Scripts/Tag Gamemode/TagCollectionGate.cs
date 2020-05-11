@@ -37,6 +37,7 @@ public class TagCollectionGate : MonoBehaviour
                 TagHolder TH = col.GetComponent<TagHolder>();
                 if(TH.currentTags > 0)
                 {
+                    int i = TH.currentTags;
                     tagCollectionManager.blueTeamTokens += TH.currentTags;
                     foreach (PlayerBank pb in playerBanks)
                     {
@@ -47,7 +48,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.EmptyTags();
                     left.Play();
                     right.Play();
-                    km.ScoreFeedDepositToken(col.gameObject);
+                    km.ScoreFeedDepositToken(col.gameObject, i);
                 }
             } else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
             {
@@ -65,6 +66,7 @@ public class TagCollectionGate : MonoBehaviour
                 TagHolder TH = col.GetComponent<TagHolder>();
                 if (TH.currentTags > 0)
                 {
+                    int i = TH.currentTags;
                     tagCollectionManager.redTeamTokens += TH.currentTags;
                     foreach (PlayerBank pb in playerBanks)
                     {
@@ -75,7 +77,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.EmptyTags();
                     left.Play();
                     right.Play();
-                    km.ScoreFeedDepositToken(col.gameObject);
+                    km.ScoreFeedDepositToken(col.gameObject, i);
                 }
             }
             else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 1)

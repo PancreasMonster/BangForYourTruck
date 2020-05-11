@@ -150,7 +150,7 @@ public class Health : MonoBehaviour
 
         if (targetDrone)
         {
-            GetComponent<KillTagSpawner>().SpawnKillTag();
+            //GetComponent<KillTagSpawner>().SpawnKillTag();
             GetComponent<TargetDrone>().DeathTrigger();
         }
 

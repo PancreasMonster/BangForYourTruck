@@ -15,7 +15,7 @@ public class TagCollectionManager : MonoBehaviour
     public Text winText;
     public Image redImage, blueImage, winPanelImage;
     public float blueTeamTokens, redTeamTokens, gameWinningAmount = 30;
-    bool gameWon, allowSceneChange;
+    public bool gameWon, allowSceneChange;
     public Camera winCam;
     public RotateAroundLevel ral;
     public List<GameObject> canvasToDisable = new List<GameObject>();
@@ -54,15 +54,15 @@ public class TagCollectionManager : MonoBehaviour
         if (blueTeamTokens >= gameWinningAmount && !gameWon)
         {
             gameWon = true;
-            winText.text = "Blue Team Has Won!";
-            StartCoroutine(Victory("Blue Team Has Won!"));
+            winText.text = "Blue Team Wins!";
+            StartCoroutine(Victory("Blue Team Wins!"));
             FMODUnity.RuntimeManager.PlayOneShot(blueWinSound);
             blueTeamWon = true;
         }
         else if (redTeamTokens >= gameWinningAmount && !gameWon)
         {
             gameWon = true;
-            winText.text = "Red Team Has Won!";
+            winText.text = "Red Team Wins!";
             StartCoroutine(Victory("Red Team Wins!"));
             FMODUnity.RuntimeManager.PlayOneShot(redWinSound);
             redTeamWon = true;
@@ -111,13 +111,13 @@ public class TagCollectionManager : MonoBehaviour
             StartCoroutine(Victory("Teams Tied!"));          
         } else if (blueTeamTokens > redTeamTokens)
         {
-            winText.text = "Blue Team Has Won!";
+            winText.text = "Blue Team Wins!";
             StartCoroutine(Victory("Blue Team Wins!"));
             FMODUnity.RuntimeManager.PlayOneShot(blueWinSound);
         } else if (blueTeamTokens < redTeamTokens)
         {
-            winText.text = "Red Team Has Won!";
-            StartCoroutine(Victory("Red Team Has Won!"));
+            winText.text = "Blue Team Wins!";
+            StartCoroutine(Victory("Blue Team Wins!"));
             FMODUnity.RuntimeManager.PlayOneShot(redWinSound);
         }
     }
@@ -137,7 +137,6 @@ public class TagCollectionManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         allowSceneChange = true;
         vds.DisplayContinueButtons();
-        GoToAwards();
     }  
 
     void GoToAwards()
@@ -147,10 +146,10 @@ public class TagCollectionManager : MonoBehaviour
         winCam.transform.rotation = targetPosition.rotation;
         if (blueTeamWon)
         {
-            awardScene.SetUpPodium(1, km);
+            //awardScene.SetUpPodium(1, km);
         } else
         {
-            awardScene.SetUpPodium(2, km);
+           // awardScene.SetUpPodium(2, km);
         }
         vds.RemoveScoreboard();
     }

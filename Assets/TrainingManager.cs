@@ -36,6 +36,8 @@ public class TrainingManager : MonoBehaviour
     public KillTagSpawner tagSpawner;
     public bool trigger2 = false;
 
+    public bool canProceed = false;
+
     MobilityCharges mc;
 
     TrainingDrone td;
@@ -75,6 +77,8 @@ public class TrainingManager : MonoBehaviour
 
     bool playSound = true;
 
+    public KillTagSpawner kts;
+
     // Start is called before the first frame update
     void Start()
     {        
@@ -100,6 +104,7 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline1);
                 playSound = false;
+                StartCoroutine(CanProceed(4.5f));
             }
             //Drone explains the driving controls
             if(audio)
@@ -140,6 +145,7 @@ public class TrainingManager : MonoBehaviour
             if (playSound)
             {
                 StartCoroutine(PlayVoiceLine3());
+                playSound = false;
             }
             //Drone explains A, B, X, Y controls, and tells you to try them all
             if (audio)
@@ -360,6 +366,7 @@ public class TrainingManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         targetDroneDestroyed = true;
+        kts.SpawnKillTag();
     }
 
     public void Drift()
@@ -412,5 +419,11 @@ public class TrainingManager : MonoBehaviour
         playSound = true;
         FMODUnity.RuntimeManager.PlayOneShot(killHim);
         playSound = false;
+    }
+
+    IEnumerator CanProceed(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canProceed = true;
     }
 }

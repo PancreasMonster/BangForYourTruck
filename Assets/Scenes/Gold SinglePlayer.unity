@@ -34108,6 +34108,8 @@ MonoBehaviour:
   blueTeamTokens: 0
   redTeamTokens: 0
   gameWinningAmount: 30
+  gameWon: 0
+  allowSceneChange: 0
   winCam: {fileID: 1642532069}
   ral: {fileID: 1642532064}
   canvasToDisable: []
@@ -35211,7 +35213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
-  originPoint: {fileID: 0}
+  originPoint: {fileID: 207733649}
 --- !u!4 &739382882
 Transform:
   m_ObjectHideFlags: 0
@@ -41095,8 +41097,9 @@ MonoBehaviour:
   killSpreeCount: 00000000000000000000000000000000
   droneKills: 00000000000000000000000000000000
   longShotKills: 00000000000000000000000000000000
-  tagsDeposited: 
-  tagsDenied: 
+  tagsDeposited: 0000000000000000
+  tagsDenied: 0000000000000000
+  score: 0000000000000000
   killSpreeNum: 3
   kf: {fileID: 864435268}
   PI:
@@ -55437,17 +55440,19 @@ MonoBehaviour:
   killTokenDelivered: 0
   tagSpawner: {fileID: 0}
   trigger2: 0
-  welcome: 
-  voiceline1: 
-  voiceline2: 
-  voiceline3: 
-  voiceline4: 
-  voiceline5: 
-  voiceline6: 
-  voiceline7: 
-  voiceline8: 
-  droneInArena: 
-  killHim: 
+  canProceed: 0
+  welcome: event:/Drone Training Voice/Welcome
+  voiceline1: event:/Drone Training Voice/VoiceLine
+  voiceline2: event:/Drone Training Voice/VoiceLine 2
+  voiceline3: event:/Drone Training Voice/VoiceLine 3
+  voiceline4: event:/Drone Training Voice/VoiceLine 4
+  voiceline5: event:/Drone Training Voice/VoiceLine 5
+  voiceline6: event:/Drone Training Voice/VoiceLine 7
+  voiceline7: event:/Drone Training Voice/VoiceLine 8
+  voiceline8: event:/Drone Training Voice/VoiceLine 9
+  droneInArena: event:/Drone Training Voice/Drone In The Arena
+  killHim: event:/Drone Training Voice/Kill Him!
+  kts: {fileID: 739382881}
 --- !u!4 &1619019564
 Transform:
   m_ObjectHideFlags: 0
@@ -98460,7 +98465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killTag: {fileID: 7347076909467617898, guid: 173f80fee1e406242954cd2ea17780d5, type: 3}
-  originPoint: {fileID: 0}
+  originPoint: {fileID: 207733649}
 --- !u!4 &8384307630307306347
 Transform:
   m_ObjectHideFlags: 0

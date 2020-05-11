@@ -39,21 +39,15 @@ public class VictoryDisplayStats : MonoBehaviour
         for(int num = 0; num < players.Count; num++)
         {
                 GameObject VSI = Instantiate(victoryScreenItem, victoryScreenItemHolder.transform);
-                Text[] texts = new Text[4];
+                Text[] texts = new Text[6];
                 texts = VSI.GetComponentsInChildren<Text>();
                 
                 texts[0].text = players[num].transform.name.ToString();
-                if (players[num].GetComponent<Health>().teamNum == 1)
-                {
-                texts[0].color = Color.blue;
-                }
-                else
-                {
-                texts[0].color = Color.red;
-            }
                 texts[1].text = km.kills[num].ToString();
                 texts[2].text = km.deaths[num].ToString();
-                texts[3].text = Mathf.CeilToInt(players[num].GetComponent<StuntChecker>().score).ToString();   
+                texts[3].text = km.tagsDeposited[num].ToString();
+                texts[4].text = km.tagsDenied[num].ToString();
+                texts[5].text = km.score[num].ToString();
         }
 
         scoreBoard.gameObject.SetActive(true);

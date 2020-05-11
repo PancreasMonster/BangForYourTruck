@@ -26,6 +26,7 @@ public class KillManager : MonoBehaviour
     public List<int> longShotKills = new List<int>();
     public List<int> tagsDeposited = new List<int>();
     public List<int> tagsDenied = new List<int>();
+    public List<int> score = new List<int>();
     public int killSpreeNum = 3;
 
     public KillFeed kf;
@@ -138,6 +139,7 @@ public class KillManager : MonoBehaviour
         List<int> scoreList = new List<int>();
         flavourTexts.Add("Kill");
         scoreList.Add(100);
+        score[i] += 100;
         int killCount = -1;
         foreach(int k in kills)
         {
@@ -148,6 +150,7 @@ public class KillManager : MonoBehaviour
             string fb = "First Blood";
             flavourTexts.Add(fb);
             scoreList.Add(75);
+            score[i] += 75;
         }
         if (doubleKill[i] == true)
         {
@@ -155,25 +158,29 @@ public class KillManager : MonoBehaviour
             string dk = "Double Kill";
             flavourTexts.Add(dk);
             scoreList.Add(75);
+            score[i] += 75;
         }
         if (killSpree[i] >= killSpreeNum)
         {
             string ks = "Kill Spree";
             flavourTexts.Add(ks);
             scoreList.Add(75);
+            score[i] += 75;
         }
         if (ls == 1)
         {
             string lss = "Long Shot";
             flavourTexts.Add(lss);
-            scoreList.Add(75);
+            scoreList.Add(50);
             longShotKills[i]++;
+            score[i] += 75;
         }
         if(killer.GetComponent<FlipOver>().timer > killer.GetComponent<FlipOver>().timerAllowance)
         {
             string aerial = "Aerial Kill";
             flavourTexts.Add(aerial);
-            scoreList.Add(50);
+            scoreList.Add(75);
+            score[i] += 75;
         }
         Debug.Log(flavourTexts.Count);
         killer.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
@@ -183,16 +190,19 @@ public class KillManager : MonoBehaviour
     {
         List<string> flavourTexts = new List<string>();
         List<int> scoreList = new List<int>();
-        if(driftLength > 100)
+        int i = player.GetComponent<Health>().playerNum - 1;
+        if (driftLength > 100)
         {
             flavourTexts.Add("Long Drift");
             scoreList.Add(100);
+            score[i] += 100;
             if (tm)
                 tm.Drift();
         } else if (driftLength > 50)
         {
             flavourTexts.Add("Short Drift");
             scoreList.Add(50);
+            score[i] += 50;
             if (tm)
                 tm.Drift();
         } else if (driftLength >= 25)
@@ -201,6 +211,7 @@ public class KillManager : MonoBehaviour
                 tm.Drift();
             flavourTexts.Add("Mini Drift");
             scoreList.Add(25);
+            score[i] += 25;
         }
 
 
@@ -211,7 +222,9 @@ public class KillManager : MonoBehaviour
     {
         List<string> flavourTexts = new List<string>();
         List<int> scoreList = new List<int>();
-        foreach(string s in stunts)
+        int i = player.GetComponent<Health>().playerNum - 1;
+
+        foreach (string s in stunts)
         {
             flavourTexts.Add(s);            
         }
@@ -219,18 +232,25 @@ public class KillManager : MonoBehaviour
         foreach (int s in scores)
         {
             scoreList.Add(s);
+            score[i] += s;
         }
 
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
     }
 
-    public void ScoreFeedDepositToken(GameObject player)
+    public void ScoreFeedDepositToken(GameObject player, int tokens)
     {
         List<string> flavourTexts = new List<string>();
         List<int> scoreList = new List<int>();
+        if(tokens == 1)
         flavourTexts.Add("Tag Deposited");
-        scoreList.Add(100);
+        else
+        flavourTexts.Add("Tags Deposited x" + tokens);
+        scoreList.Add(100 * tokens);
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        int i = player.GetComponent<Health>().playerNum - 1;
+        tagsDeposited[i]++;
+        score[i] += 50;
     }
 
     public void ScoreFeedCollectToken(GameObject player)
@@ -240,6 +260,8 @@ public class KillManager : MonoBehaviour
         flavourTexts.Add("Tag Collected");
         scoreList.Add(50);
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        int i = player.GetComponent<Health>().playerNum - 1;
+        score[i] += 50;
     }
 
     public void ScoreFeedDeny(GameObject player)
@@ -249,6 +271,9 @@ public class KillManager : MonoBehaviour
         flavourTexts.Add("Tag Denied");
         scoreList.Add(50);
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        int i = player.GetComponent<Health>().playerNum - 1;
+        tagsDenied[i]++;
+        score[i] += 50;
     }
 
     IEnumerator DoubleKillDialougeBool(int i)

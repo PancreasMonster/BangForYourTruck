@@ -58,14 +58,14 @@ public class RearWheelDrive : MonoBehaviour {
     {
         
         rightTrigger = value.Get<float>();
-        if (trainingMode && tm.trainingStage == 1)
+        if (trainingMode && tm.canProceed)
             tm.pressedRT = true;
     }
 
     private void OnLeftTrigger (InputValue value)
     {
         leftTrigger = value.Get<float>();
-        if (trainingMode && tm.trainingStage == 1)
+        if (trainingMode && tm.canProceed)
             tm.pressedLT = true;
     }
 
