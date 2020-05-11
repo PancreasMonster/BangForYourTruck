@@ -26,7 +26,7 @@ public class TrainingTrigger : MonoBehaviour
                 manager.trainingStage = 3;
                 manager.MoveToArena();
             }
-            if (manager.trainingStage == 7)
+            if (manager.trainingStage == 7 && other.gameObject.GetComponent<TagHolder>().currentTags > 0)
             {
 
                 manager.trainingStage = 8;
