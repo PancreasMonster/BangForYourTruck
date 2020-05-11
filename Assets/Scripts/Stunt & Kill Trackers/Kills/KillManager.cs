@@ -196,6 +196,8 @@ public class KillManager : MonoBehaviour
                 tm.Drift();
         } else if (driftLength >= 25)
         {
+            if (tm)
+                tm.Drift();
             flavourTexts.Add("Mini Drift");
             scoreList.Add(25);
         }

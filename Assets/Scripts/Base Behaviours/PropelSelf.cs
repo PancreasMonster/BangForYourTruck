@@ -48,17 +48,10 @@ public class PropelSelf : MonoBehaviour
                 {
                     if (mobCharges.currentCharges > 0)
                     {
-                        if (GetComponent<LockOn>().target != null)
-                        {
-                            Vector3 dir = GetComponent<LockOn>().target.transform.position - transform.position;
-                            dir.Normalize();
-                            rb.AddForce(dir * force /* * power */);
-                        }
-                        else
-                        {
-                            rb.AddForce(transform.forward * force /* * power */);
-                        }
-                        // rb.AddForce(transform.forward * force /* * power */);
+
+                            rb.AddForce(transform.forward * force);
+                        
+
                         anim.SetTrigger("Boost 0");
                         Debug.Log("Boosted");
 
@@ -110,23 +103,9 @@ public class PropelSelf : MonoBehaviour
                 if (mobCharges.currentCharges > 0)
                 {
                     //rb.velocity = Vector3.zero;
-                    if (GetComponent<LockOn>().target != null)
-                    {
-                        if (Vector3.Distance(GetComponent<LockOn>().target.transform.position, transform.position) < targetBoostMaxDistance)
-                        {
-                            Vector3 dir = GetComponent<LockOn>().target.transform.position - transform.position;
-                            dir.Normalize();
-                            rb.AddForce(dir * force /* * power */);
-                        }
-                        else
-                        {
-                            rb.AddForce(transform.forward * force /* * power */);
-                        }
-                    }
-                    else
-                    {
-                        rb.AddForce(transform.forward * force /* * power */);
-                    }
+
+                        rb.AddForce(transform.forward * force);
+                    
                     // if(orb.enabled == true)
 
                     StartCoroutine(BoostEffect());

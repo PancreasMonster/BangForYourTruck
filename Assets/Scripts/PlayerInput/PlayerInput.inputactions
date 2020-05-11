@@ -172,6 +172,14 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "FaceButtonNorthRelease",
+                    "type": "Value",
+                    "id": "2d29dd56-4944-49da-b736-2ba03ffcd874",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -188,7 +196,7 @@
                 },
                 {
                     "name": "",
-                    "id": "d965b8b9-c85a-41f3-bc33-e25b1cb94df2",
+                    "id": "e0c9bc51-6345-4821-9992-697de2054ff4",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
@@ -403,6 +411,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "RightStickRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5052569-b34b-4a8e-bc8c-e545be6dd530",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FaceButtonNorthRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
