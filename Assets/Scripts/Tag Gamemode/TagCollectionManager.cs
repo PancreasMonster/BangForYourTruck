@@ -29,6 +29,9 @@ public class TagCollectionManager : MonoBehaviour
     public KillManager km;
     public bool countDownDisabled = false;
     public GameObject cameras;
+    bool wentToAwards;
+    public GameObject awardsHeader, rematchButton;
+    public AudioSource[] aud;
 
 
     // Start is called before the first frame update
@@ -69,20 +72,7 @@ public class TagCollectionManager : MonoBehaviour
             redTeamWon = true;
         }
 
-        if(allowSceneChange)
-        { 
-            for (int i = 0; i < 4; i++)
-            {
-                if (Input.GetButtonDown("PadA" + (i+1).ToString()))
-                {
-                    GoToAwards();
-                }
-                else if (Input.GetButtonDown("PadB" + (i + 1).ToString()))
-                {
-                    SceneManager.LoadScene("0_MainMenu");
-                }
-            }
-        }
+        
 
         if(gameTimer >= 0 && !gameWon && !countDownDisabled)
         {
@@ -149,16 +139,55 @@ public class TagCollectionManager : MonoBehaviour
     }  
 
     void GoToAwards()
-    {
+    {       
+        StartCoroutine(AwardsFinished());
         winCam.transform.position = targetPosition.position;
         winCam.transform.rotation = targetPosition.rotation;
         awardScene.SetUpAwardScene();
         vds.RemoveScoreboard();
+        awardsHeader.SetActive(true);
+    }
+
+    IEnumerator AwardsFinished()
+    {
+        allowSceneChange = false;
+        yield return new WaitForSeconds(5);
+        allowSceneChange = true;
+        rematchButton.SetActive(true);
+        wentToAwards = true;
     }
 
     void OnGUI()
     {
     //    GUI.Label(new Rect(0, 0, 100, 100), ((int)(1.0f / Time.smoothDeltaTime)).ToString());
+    }
+
+    public void AButton()
+    {
+        if (allowSceneChange)
+        {
+
+            if (!wentToAwards)
+            {
+                GoToAwards();
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
+        }
+    }
+
+    public void BButton()
+    {
+        if (allowSceneChange)
+        {
+            if (wentToAwards)
+            {
+                SceneManager.LoadScene("0_MainMenu");
+            }
+        }
     }
 }
 

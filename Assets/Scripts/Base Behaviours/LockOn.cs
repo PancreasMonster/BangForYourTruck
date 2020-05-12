@@ -78,6 +78,20 @@ public class LockOn : MonoBehaviour
     void Update()
     {       
         ImageDisplay();
+
+        if(target != null)
+        {
+            if(Vector3.Distance(transform.position, target.transform.position) > 1000)
+            {
+                target = null;
+                pivotCamera.target = null;
+                /*foreach (Image i in images)
+                    {
+                        i.gameObject.SetActive(false);
+                    }*/
+                lockedOn = false;
+            }
+        }
     }
 
     void ImageDisplay ()

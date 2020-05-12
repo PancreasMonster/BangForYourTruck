@@ -370,11 +370,7 @@ public class StuntChecker : MonoBehaviour
                     stuntScores.Add(curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold));
                 }
                 
-                float rand = Random.Range(0f, 1f);             
-                if (rand > randomAnnouncmentChance && flipScore >= maxScoreExplosion && !trainingMode)
-                {
-                    FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);                   
-                }
+                
                 if(currentStunt != "")
                 FlipConcussiveForce(flipScore);
                
@@ -457,6 +453,12 @@ public class StuntChecker : MonoBehaviour
                 if (h != null)
                     h.TakeDamage(damageImage, this.gameObject, concussiveForceDamage, Vector3.zero);
            // }
+        }
+
+        float rand = Random.Range(0f, 1f);
+        if (rand > randomAnnouncmentChance && flipScore >= maxScoreExplosion && !trainingMode)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);
         }
 
         GameObject flipPS = Instantiate(concussiveForcePS, new Vector3 (transform.position.x, transform.position.y  - 4f, transform.position.z), concussiveForcePS.transform.rotation);

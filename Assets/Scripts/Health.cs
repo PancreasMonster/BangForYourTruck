@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Health : MonoBehaviour
 {
@@ -23,11 +24,24 @@ public class Health : MonoBehaviour
     public GameObject damageSource;
     public bool drone, targetDrone;
     Sprite damageSourceImage;
+    public TagCollectionManager tcm;
 
     [FMODUnity.EventRef]
     public string dronePainSound;
 
     bool dronePainCooldown = true;
+
+    void OnFaceButtonSouth(InputValue value)
+    {
+        if (tcm)
+            tcm.AButton();
+    }
+
+    void OnFaceButtonEast(InputValue value)
+    {
+        if (tcm)
+            tcm.BButton();
+    }
 
     // Start is called before the first frame update
     void Start()
