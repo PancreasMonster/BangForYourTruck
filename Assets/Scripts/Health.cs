@@ -152,6 +152,7 @@ public class Health : MonoBehaviour
         {
             //GetComponent<KillTagSpawner>().SpawnKillTag();
             GetComponent<TargetDrone>().DeathTrigger();
+            GameObject.Find("AlfaHorizon").GetComponent<LockOn>().targets.Clear();
         }
 
         if (!mbase && !drone)

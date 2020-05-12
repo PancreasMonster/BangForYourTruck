@@ -9,7 +9,7 @@ public class TrainingManager : MonoBehaviour
     public GameObject drone;
     public int trainingStage = 0;
     GameObject trainingCanvas;
-    public BoxCollider[] triggers;
+    public GameObject[] triggers;
     public GameObject targetDrone;
     public AudioClip[] trainingAudioClips;
 
@@ -89,10 +89,9 @@ public class TrainingManager : MonoBehaviour
         audio = GetComponent<AudioSource>();
         trainingCanvas.SetActive(true);
         drone.SetActive(true);
-        triggers = GetComponentsInChildren<BoxCollider>();
         mc = player.GetComponent<MobilityCharges>();
         td = drone.GetComponent<TrainingDrone>();
-        FMODUnity.RuntimeManager.PlayOneShot(welcome);
+        StartCoroutine(Welcome());
     }
 
     // Update is called once per frame
@@ -104,19 +103,21 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline1);
                 playSound = false;
-                StartCoroutine(CanProceed(4.5f));
+                StartCoroutine(CanProceed(4.5f));               
+                StartCoroutine(DisplayText());
             }
             //Drone explains the driving controls
-            if(audio)
-            audio.Play();
-            Invoke("DisplayText", 3f);
+            //if(audio)
+            //audio.Play();
+            //Invoke("DisplayText", 4f);
 
             if (pressedLT && pressedRT)
             {
                 trainingStage = 2;
                 ClearText();
-                triggers[0].isTrigger = true;
-                triggers[1].isTrigger = true;
+                triggers[0].GetComponent<BoxCollider>().isTrigger = true;
+                triggers[0].GetComponent<MeshRenderer>().enabled = false;
+                triggers[1].GetComponent<BoxCollider>().isTrigger = true;
                 playSound = true;
             }
 
@@ -128,13 +129,14 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline2);
                 playSound = false;
+                StartCoroutine(DisplayText());
+
             }
             //Drone explains to select a weapon
-            if (audio)
-                audio.clip = trainingAudioClips[1];
-            Invoke("DisplayText", 2f);
-            if (audio)
-                audio.Play();
+            //if (audio)
+            //audio.clip = trainingAudioClips[1];
+            //if (audio)
+               // audio.Play();
 
            
 
@@ -144,15 +146,14 @@ public class TrainingManager : MonoBehaviour
         {
             if (playSound)
             {
+                ClearText();
                 StartCoroutine(PlayVoiceLine3());
                 playSound = false;
+                StartCoroutine(DisplayText());
+
             }
             //Drone explains A, B, X, Y controls, and tells you to try them all
-            if (audio)
-                audio.clip = trainingAudioClips[2];
-            if (audio)
-                audio.Play();
-            Invoke("DisplayText", 4f);
+            
             if (!mc.charge1 && !mc.charge2 && !mc.charge3)
             {
                 ClearText();
@@ -168,13 +169,11 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline4);
                 playSound = false;
+                StartCoroutine(DisplayText());
+
             }
             //Drone explains drifting and the benefits
-            if (audio)
-                audio.clip = trainingAudioClips[3];
-            if (audio)
-                audio.Play();
-            Invoke("DisplayText", 5f);
+            
             if (driftCompleted)
             {
                 ClearText();
@@ -189,13 +188,11 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline5);
                 playSound = false;
+                StartCoroutine(DisplayText());
+
             }
             //Drone explains how to fire your weapon
-            if (audio)
-                audio.clip = trainingAudioClips[4];
-            if (audio)
-                audio.Play();
-            Invoke("DisplayText", 2f);
+            
 
             if (player.GetComponent<PowerHolder>().powerAmount <= 50)
             {
@@ -215,14 +212,12 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(droneInArena);
                 playSound = false;
+                StartCoroutine(DisplayText());
+
             }
 
             //Drone tells you to kill the target drone
-            if (audio)
-                audio.clip = trainingAudioClips[5];
-            if (audio)
-                audio.Play();
-            Invoke("DisplayText", 5f);
+            
 
             if (targetDroneDestroyed)
             {
@@ -231,7 +226,7 @@ public class TrainingManager : MonoBehaviour
                 trainingStage = 7;
                 playSound = true;
                 droneAnim.SetBool("ProceedTraining3", true);
-                triggers[2].isTrigger = true;
+                //triggers[2].GetComponent<BoxCollider>().isTrigger = true;
             }
 
         }
@@ -242,14 +237,12 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline6);
                 playSound = false;
+                StartCoroutine(DisplayText());
+
             }
 
             //Drone tells the player to deliver a killtoken to their collection gate
-            if (audio)
-                audio.clip = trainingAudioClips[6];
-            Invoke("DisplayText", 5f);
-            if (audio)
-                audio.Play();
+            
 
         }
 
@@ -260,18 +253,13 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline7);
                 playSound = false;
+                StartCoroutine(DisplayText());
+                StartCoroutine(GoToTrainingStage9());
+
             }
-            Invoke("DisplayText", 1f);
 
             //player is shown how to purchase throwables
-            if (audio)
-                audio.clip = trainingAudioClips[7];
-            trainingCanvas.transform.GetChild(7).gameObject.SetActive(true);
-            if (audio)
-                audio.Play();
 
-            Invoke("ProceedToTraining9", 6f);// this Invoke needs to last as long as the drones purchase gate audioclip
-            droneAnim.SetBool("ProceedTraining5", true);
 
 
         }
@@ -282,15 +270,13 @@ public class TrainingManager : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline8);
                 playSound = false;
+                StartCoroutine(DisplayText());
+
             }
-            DisplayText();
 
             //Fade to black
-            if (audio)
-                audio.clip = trainingAudioClips[8];
-            trainingCanvas.transform.GetChild(8).gameObject.SetActive(true);
-            if (audio)
-                audio.Play();
+           
+            droneAnim.SetBool("ProceedTraining5", true);
 
         }
     }
@@ -301,12 +287,6 @@ public class TrainingManager : MonoBehaviour
         trainingStage = 1;
     }
 
-    public void ProceedToTraining9()
-    {
-        trainingStage = 9;
-        ClearText();
-        playSound = true;
-    }
 
     void ClearText()
     {
@@ -317,43 +297,74 @@ public class TrainingManager : MonoBehaviour
     }
 
 
-    void DisplayText()
+    IEnumerator DisplayText()
     {
+
         if (trainingStage == 1)
         {
+            textDelay = 5f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(0).gameObject.SetActive(true);
         }
         else if (trainingStage == 2)
         {
+            textDelay = .5f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(1).gameObject.SetActive(true);
         }
         else if (trainingStage == 3)
         {
+            textDelay = 16f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(2).gameObject.SetActive(true);
         }
         else if (trainingStage == 4)
         {
+            textDelay = 7.2f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(3).gameObject.SetActive(true);
         }
         else if (trainingStage == 5)
         {
+            textDelay = 4.5f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(4).gameObject.SetActive(true);
         }
         else if (trainingStage == 6)
         {
+            textDelay = 5f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(5).gameObject.SetActive(true);
         }
         else if (trainingStage == 7)
         {
+            textDelay = 10f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(6).gameObject.SetActive(true);
         }
         else if (trainingStage == 8)
         {
+            textDelay = 7f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(7).gameObject.SetActive(true);
         }
         else if (trainingStage == 9)
         {
+            textDelay = .5f;
+            yield return new WaitForSeconds(textDelay);
+            ClearText();
             trainingCanvas.transform.GetChild(8).gameObject.SetActive(true);
+            yield return new WaitForSeconds(3);
+            ClearText();
+
         }
     }
 
@@ -369,6 +380,13 @@ public class TrainingManager : MonoBehaviour
         kts.SpawnKillTag();
     }
 
+    IEnumerator GoToTrainingStage9()
+    {
+        yield return new WaitForSeconds(10);
+        trainingStage = 9;
+        playSound = true;
+    }
+
     public void Drift()
     {
         Debug.Log("Drifted");
@@ -378,6 +396,8 @@ public class TrainingManager : MonoBehaviour
 
     public void MoveToArena()
     {
+        ClearText();
+
         StartCoroutine(MoveToArenaCoroutine());
     }
 
@@ -404,14 +424,19 @@ public class TrainingManager : MonoBehaviour
         yield return new WaitForSeconds(0);
         ClearText();
         trainingStage = 8;
+        playSound = true;
         droneAnim.SetBool("ProceedTraining4", true);
     }
 
     IEnumerator PlayVoiceLine3()
     {
-        yield return new WaitForSeconds(4);
+        ClearText();
+
+        yield return new WaitForSeconds(8);
         FMODUnity.RuntimeManager.PlayOneShot(voiceline3);
         playSound = false;
+        Invoke("DisplayText", 12f);
+
     }
 
     public void PlayKILLHIMAudio() 
@@ -425,5 +450,12 @@ public class TrainingManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         canProceed = true;
+    }
+
+    IEnumerator Welcome() 
+    {
+        yield return new WaitForSeconds(2);
+        FMODUnity.RuntimeManager.PlayOneShot(welcome);
+
     }
 }
