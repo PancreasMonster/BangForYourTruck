@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -36687,9 +36687,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press ''Right Bumper'' to fire you weapons,
+  m_Text: 'Press ''Right Bumper'' to fire you main weapon,
 
-    overheat them to proceed'
+    overheat them to
+    proceed'
 --- !u!222 &791207960
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41297,7 +41298,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -101, y: 53}
-  m_SizeDelta: {x: 1200, y: 500}
+  m_SizeDelta: {x: 1200, y: 633.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953080919
 MonoBehaviour:
@@ -41331,10 +41332,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press ''Left Bumper'' to ready a missile and use dpad up and down to select
-    a trajectory,
+  m_Text: 'Lock on to the drone with ''Y'' when in range and press ''Left Bumper''
+    to ready a missile. You can use dpad up and down to select a trajectory,
 
-    Release ''Left bumper'' to fire'
+    and
+    release ''Left bumper'' when you want to fire'
 --- !u!222 &953080920
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -54678,7 +54680,7 @@ RectTransform:
   m_GameObject: {fileID: 1589968800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.32, y: 0.22, z: 0.5025}
+  m_LocalScale: {x: 0.32, y: 0.28, z: 0.5025}
   m_Children: []
   m_Father: {fileID: 930397290}
   m_RootOrder: 1
@@ -99697,8 +99699,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.38652346, z: 2.5636718}
-  m_Center: {x: 0, y: 0.066113286, z: 0.037207033}
+  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Center: {x: 0, y: 0.05, z: 0.037207033}
 --- !u!65 &8641693532552827550
 BoxCollider:
   m_ObjectHideFlags: 0

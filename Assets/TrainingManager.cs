@@ -394,7 +394,7 @@ public class TrainingManager : MonoBehaviour
 
     IEnumerator GoToTrainingStage9()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(15);
         trainingStage = 9;
         playSound = true;
     }
@@ -419,13 +419,13 @@ public class TrainingManager : MonoBehaviour
         td.AdvanceToNextWaypoint();
         td.droneSpeed = 3000;
         ClearText();
-        FMODUnity.RuntimeManager.PlayOneShot(waitForMe);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
         td.droneSpeed = 800;
-        yield return new WaitForSeconds(1.5f);
-        FMODUnity.RuntimeManager.PlayOneShot(wooHoo);
-        yield return new WaitForSeconds(2f);
+        FMODUnity.RuntimeManager.PlayOneShot(waitForMe);
+        //yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3.3f);
         td.BarrelRoll(10000);
+        FMODUnity.RuntimeManager.PlayOneShot(wooHoo);
         droneAnim.SetBool("ProceedTraining1", true);
     }
 
