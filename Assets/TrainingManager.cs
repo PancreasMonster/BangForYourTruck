@@ -75,6 +75,12 @@ public class TrainingManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string killHim;
 
+    [FMODUnity.EventRef]
+    public string waitForMe;
+
+    [FMODUnity.EventRef]
+    public string wooHoo;
+
     bool playSound = true;
 
     public KillTagSpawner kts;
@@ -146,15 +152,16 @@ public class TrainingManager : MonoBehaviour
         {
             if (playSound)
             {
+                canProceed = false;
                 ClearText();
                 StartCoroutine(PlayVoiceLine3());
                 playSound = false;
                 StartCoroutine(DisplayText());
-
+                StartCoroutine(CanProceed(16));
             }
             //Drone explains A, B, X, Y controls, and tells you to try them all
             
-            if (!mc.charge1 && !mc.charge2 && !mc.charge3)
+            if (!mc.charge1 && !mc.charge2 && !mc.charge3 && canProceed)
             {
                 ClearText();
                 playSound = true;
@@ -167,14 +174,16 @@ public class TrainingManager : MonoBehaviour
 
             if (playSound) 
             {
+                canProceed = false;
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline4);
                 playSound = false;
                 StartCoroutine(DisplayText());
+                StartCoroutine(CanProceed(7.2f));
 
             }
             //Drone explains drifting and the benefits
             
-            if (driftCompleted)
+            if (driftCompleted && canProceed)
             {
                 ClearText();
                 trainingStage = 5;
@@ -189,17 +198,18 @@ public class TrainingManager : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(voiceline5);
                 playSound = false;
                 StartCoroutine(DisplayText());
-
+                canProceed = false;
+                StartCoroutine(CanProceed(4.5f));
             }
             //Drone explains how to fire your weapon
             
 
-            if (player.GetComponent<PowerHolder>().powerAmount <= 50)
+            if (player.GetComponent<PowerHolder>().powerAmount <= 50 && canProceed)
             {
                 ClearText();
                 trainingStage = 6;
                 playSound = true;
-                targetDrone.GetComponentInChildren<Health>().enabled = true;
+                
                 droneAnim.SetBool("ProceedTraining2", true);
 
             }
@@ -213,13 +223,15 @@ public class TrainingManager : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(droneInArena);
                 playSound = false;
                 StartCoroutine(DisplayText());
-
+                canProceed = false;
+                StartCoroutine(CanProceed(5f));
+                StartCoroutine(HealthEnable(5f));
             }
 
             //Drone tells you to kill the target drone
             
 
-            if (targetDroneDestroyed)
+            if (targetDroneDestroyed && canProceed)
             {
                 player.GetComponent<LockOn>().targets.Clear();
                 ClearText();
@@ -407,9 +419,12 @@ public class TrainingManager : MonoBehaviour
         td.AdvanceToNextWaypoint();
         td.droneSpeed = 3000;
         ClearText();
+        FMODUnity.RuntimeManager.PlayOneShot(waitForMe);
         yield return new WaitForSeconds(1.5f);
         td.droneSpeed = 800;
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(1.5f);
+        FMODUnity.RuntimeManager.PlayOneShot(wooHoo);
+        yield return new WaitForSeconds(2f);
         td.BarrelRoll(10000);
         droneAnim.SetBool("ProceedTraining1", true);
     }
@@ -457,5 +472,11 @@ public class TrainingManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         FMODUnity.RuntimeManager.PlayOneShot(welcome);
 
+    }
+
+    IEnumerator HealthEnable(float time)
+    {
+        yield return new WaitForSeconds(time);
+        targetDrone.GetComponentInChildren<Health>().enabled = true;
     }
 }
