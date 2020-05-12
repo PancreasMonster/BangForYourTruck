@@ -150,7 +150,7 @@ public class LevelCreator : MonoBehaviour
         mainMenu = false;
         if(training)
         {
-            SceneManager.LoadScene("SinglePlayerScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("Gold SinglePlayer", LoadSceneMode.Single);
             
         }
 

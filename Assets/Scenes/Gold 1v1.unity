@@ -11155,6 +11155,11 @@ PrefabInstance:
       propertyPath: concussiveForce
       value: 12500
       objectReference: {fileID: 0}
+    - target: {fileID: 1413582964062431042, guid: fcf5971af3c83224bb0074cd9bd9dfa5,
+        type: 3}
+      propertyPath: km
+      value: 
+      objectReference: {fileID: 2000975789}
     - target: {fileID: 1430687208473188637, guid: fcf5971af3c83224bb0074cd9bd9dfa5,
         type: 3}
       propertyPath: PPV
@@ -11245,6 +11250,11 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 946776294}
+    - target: {fileID: 2464534497899719355, guid: fcf5971af3c83224bb0074cd9bd9dfa5,
+        type: 3}
+      propertyPath: km
+      value: 
+      objectReference: {fileID: 2000975789}
     - target: {fileID: 2686798515764667725, guid: fcf5971af3c83224bb0074cd9bd9dfa5,
         type: 3}
       propertyPath: breakForce
@@ -20269,6 +20279,8 @@ MonoBehaviour:
   blueTeamTokens: 0
   redTeamTokens: 0
   gameWinningAmount: 15
+  gameWon: 0
+  allowSceneChange: 0
   winCam: {fileID: 1452774031}
   ral: {fileID: 1452774029}
   canvasToDisable:
@@ -20282,6 +20294,10 @@ MonoBehaviour:
   targetPosition: {fileID: 0}
   km: {fileID: 0}
   countDownDisabled: 0
+  cameras: {fileID: 0}
+  awardsHeader: {fileID: 0}
+  rematchButton: {fileID: 0}
+  aud: []
 --- !u!4 &1267454970
 Transform:
   m_ObjectHideFlags: 0
@@ -32779,6 +32795,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 295684382373735634, guid: eab828b4e2c5f4e41a895de67c19e800,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 302077728016698618, guid: eab828b4e2c5f4e41a895de67c19e800,
         type: 3}
       propertyPath: m_IsActive
@@ -34514,6 +34535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650693003291825563, guid: eab828b4e2c5f4e41a895de67c19e800,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5672946782182349341, guid: eab828b4e2c5f4e41a895de67c19e800,
         type: 3}
@@ -38089,9 +38115,9 @@ MonoBehaviour:
   killSpreeCount: 00000000000000000000000000000000
   droneKills: 00000000000000000000000000000000
   longShotKills: 00000000000000000000000000000000
-  tagsDeposited: 0000000000000000
-  tagsDenied: 0000000000000000
-  score: 0000000000000000
+  tagsDeposited: 00000000000000000000000000000000
+  tagsDenied: 00000000000000000000000000000000
+  score: 00000000000000000000000000000000
   killSpreeNum: 3
   kf: {fileID: 1644939301}
   PI:
@@ -40191,7 +40217,7 @@ PrefabInstance:
     - target: {fileID: 4899377861343308067, guid: 98e37775a0301734fa7ceddc68fe831a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5019246226414355547, guid: 98e37775a0301734fa7ceddc68fe831a,
         type: 3}
