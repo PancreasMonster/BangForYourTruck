@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -34405,6 +34405,9 @@ MonoBehaviour:
   km: {fileID: 0}
   countDownDisabled: 1
   cameras: {fileID: 0}
+  awardsHeader: {fileID: 0}
+  rematchButton: {fileID: 0}
+  aud: []
 --- !u!4 &666428528
 Transform:
   m_ObjectHideFlags: 0
@@ -62178,7 +62181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2ff438d16104a9d48adcb05d2b9e846b, type: 2}
+  - {fileID: 2100000, guid: 25dcc965bdcf8af48bd31e940f4e3719, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98337,6 +98340,7 @@ MonoBehaviour:
   damageSource: {fileID: 0}
   drone: 0
   targetDrone: 1
+  tcm: {fileID: 0}
   dronePainSound: event:/Drone Voice/Pain
 --- !u!114 &8001009619004771646
 MonoBehaviour:
@@ -98371,6 +98375,7 @@ MonoBehaviour:
   damageSource: {fileID: 0}
   drone: 0
   targetDrone: 1
+  tcm: {fileID: 0}
   dronePainSound: event:/Drone Voice/Pain
 --- !u!114 &8001945755421479042
 MonoBehaviour:
