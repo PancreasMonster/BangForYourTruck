@@ -20,9 +20,10 @@ public class HealingGate : MonoBehaviour
             PlayerBank PB = col.GetComponent<PlayerBank>();
             if (PB.tagsInBank >= price)
             {
-                if (col.GetComponent<Health>().health < col.GetComponent<Health>().maxHealth)
+                Health hp = col.GetComponent<Health>();
+                if (hp.health < hp.maxHealth)
                 {
-                    col.GetComponent<Health>().health = 100;
+                    hp.health = hp.maxHealth;
                     PB.tagsInBank -= price;
                     audio.Play();
                 }
