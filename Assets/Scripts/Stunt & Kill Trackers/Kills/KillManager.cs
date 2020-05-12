@@ -137,11 +137,8 @@ public class KillManager : MonoBehaviour
     {
         List<string> flavourTexts = new List<string>();
         List<int> scoreList = new List<int>();
-        flavourTexts.Add("Kill");
-        scoreList.Add(100);
-        score[i] += 100;
         int killCount = -1;
-        foreach(int k in kills)
+        foreach (int k in kills)
         {
             killCount += k;
         }
@@ -152,6 +149,10 @@ public class KillManager : MonoBehaviour
             scoreList.Add(75);
             score[i] += 75;
         }
+        flavourTexts.Add("Kill");
+        scoreList.Add(100);
+        score[i] += 100;
+        
         if (doubleKill[i] == true)
         {
 
