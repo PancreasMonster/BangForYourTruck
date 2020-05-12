@@ -28,6 +28,7 @@ public class TagCollectionManager : MonoBehaviour
     public Transform targetPosition;
     public KillManager km;
     public bool countDownDisabled = false;
+    public GameObject cameras;
 
 
     // Start is called before the first frame update
@@ -130,7 +131,15 @@ public class TagCollectionManager : MonoBehaviour
         {
             g.SetActive(false);
         }
-        
+        if (cameras)
+        { 
+        Camera[] cams = cameras.GetComponentsInChildren<Camera>();
+        foreach(Camera c in cams)
+            {
+                c.enabled = false;
+            }
+        }
+
         winCam.enabled = true;
         ral.enabled = true;
         vds.StartDisplayEndScreenStats(victoryText);
@@ -141,16 +150,9 @@ public class TagCollectionManager : MonoBehaviour
 
     void GoToAwards()
     {
-        ral.enabled = false;
         winCam.transform.position = targetPosition.position;
         winCam.transform.rotation = targetPosition.rotation;
-        if (blueTeamWon)
-        {
-            //awardScene.SetUpPodium(1, km);
-        } else
-        {
-           // awardScene.SetUpPodium(2, km);
-        }
+        awardScene.SetUpAwardScene();
         vds.RemoveScoreboard();
     }
 

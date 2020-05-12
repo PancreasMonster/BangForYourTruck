@@ -190,7 +190,7 @@ public class DroneScript : MonoBehaviour
     public void DeathTrigger (int playerNum)
     {
         StartCoroutine(DroneDeath());
-        km.droneKills[playerNum]++;
+        km.droneKills[playerNum-1]++;
     }
 
     IEnumerator DroneDeath()

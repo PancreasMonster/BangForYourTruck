@@ -18,34 +18,9 @@ public class Podium : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            if (Input.GetButtonDown("PadA" + (i + 1).ToString()))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-            else if (Input.GetButtonDown("PadB" + (i + 1).ToString()))
-            {
-                SceneManager.LoadScene("0_MainMenu");
-            }
-        }
-    }
-
     public void SetUp(int teamNum, KillManager killManager)
     {
         km = killManager;
-        foreach (Renderer r in cubeColours)
-        {
-            if (teamNum == 1)
-                r.material.SetColor("_Emission", colors[0] * 2.5f);
-            else if (teamNum == 2)
-                r.material.SetColor("_Emission", colors[1] * 2.5f);
-            else
-                r.material.SetColor("_Emission", colors[2] * 2.5f);
-        }   
 
         GameObject firstAward;
         int kills = 0;
