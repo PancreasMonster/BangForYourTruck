@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class TrainingDrone : MonoBehaviour
@@ -20,6 +21,8 @@ public class TrainingDrone : MonoBehaviour
 
     public TrainingManager tm;
 
+    public Transform lookAtTransform;
+
     public void OnDrawGizmos()
     {
         if (isActiveAndEnabled && Application.isPlaying)
@@ -31,6 +34,7 @@ public class TrainingDrone : MonoBehaviour
 
     public void Start()
     {
+        lookAtTransform = player.transform;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -41,7 +45,7 @@ public class TrainingDrone : MonoBehaviour
 
         if (Vector3.Distance(transform.position, nextWaypoint) < arriveDistance)
         {
-            Vector3 lookDir = player.position - rb.position;
+            Vector3 lookDir = lookAtTransform.position - rb.position;
 
             lookDir.Normalize();
 

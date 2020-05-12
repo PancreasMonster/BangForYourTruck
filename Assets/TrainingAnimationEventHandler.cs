@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,9 +15,22 @@ public class TrainingAnimationEventHandler : MonoBehaviour
 
     public Animator droneFaceAnimator;
 
+    public Transform lookForwardTransform;
+    public Transform player;
+
     public void PlayKillHim() 
     {
         tm.PlayKILLHIMAudio();
+    }
+
+    public void LookAtCentreOfTheArena()
+    {
+        GetComponentInChildren<TrainingDrone>().lookAtTransform = lookForwardTransform;
+    }
+
+    public void LookAtPlayer()
+    {
+        GetComponentInChildren<TrainingDrone>().lookAtTransform = player.transform;
     }
 
     public void SwapToDroneCamera()
