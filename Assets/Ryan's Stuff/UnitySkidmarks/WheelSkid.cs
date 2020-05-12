@@ -106,7 +106,7 @@ public class WheelSkid : MonoBehaviour {
 
                     if (timer > 0.1f && intensity > .4f && rb.velocity.sqrMagnitude > 200 && !aud.isPlaying)
                     {
-                        aud.Play();
+                        //aud.Play();
                         foreach(ParticleSystem ps in particleSystems)
                         {
                             if (Input.GetButton("PadX" + playerNum.ToString()))
@@ -114,7 +114,7 @@ public class WheelSkid : MonoBehaviour {
                             else
                                 ps.Stop();
                         }
-                        aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
+                     //   aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
                         driftTimer += Time.deltaTime;
                     }
 
@@ -124,7 +124,7 @@ public class WheelSkid : MonoBehaviour {
                         {
                             ps.Stop();
                         }
-                        aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
+                       // aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
                         StartCoroutine(audioStop());
                         driftTimer = 0;
                     }
@@ -177,7 +177,7 @@ public class WheelSkid : MonoBehaviour {
 			lastSkid = -1;
             if (sound)
             {
-                aud.Stop();
+               // aud.Stop();
                 foreach (ParticleSystem ps in particleSystems)
                 {
                     ps.Stop();
@@ -190,7 +190,7 @@ public class WheelSkid : MonoBehaviour {
     IEnumerator audioStop ()
     {
         yield return new WaitForSeconds(.33f);
-        aud.Stop();
+      //  aud.Stop();
     }
 
 	// #### PUBLIC METHODS ####

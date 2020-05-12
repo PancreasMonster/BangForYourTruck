@@ -55,6 +55,7 @@ public class StuntChecker : MonoBehaviour
     bool landStunt = true;
     bool canSlam = true;
     public float randomAnnouncmentChance;
+    public List<ParticleSystem> particleSystems = new List<ParticleSystem>();
 
     public KillManager km;
     Vector2 leftStick;
@@ -177,6 +178,13 @@ public class StuntChecker : MonoBehaviour
                 driftString = "";
                 driftDisplay = false;
             }
+
+            foreach (ParticleSystem ps in particleSystems)
+            {
+                    ps.Play();
+            
+                    
+            }
             driftHold = true;   
             driftDist += rb.velocity.magnitude * Time.fixedDeltaTime / 10;
             driftScore += driftDist;
@@ -189,7 +197,11 @@ public class StuntChecker : MonoBehaviour
         }      
         else 
         {
-            if(driftDist >= 25)
+            foreach (ParticleSystem ps in particleSystems)
+            {
+                ps.Stop();
+            }
+            if (driftDist >= 25)
             km.ScoreFeedDrift(this.gameObject, Mathf.CeilToInt(driftDist));
             driftDist = 0;
             driftScore = 0;
