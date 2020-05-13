@@ -29,11 +29,7 @@ public class LevelCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !mainMenu)
-        {
-            SceneManager.LoadScene("0_MainMenu", LoadSceneMode.Single);
-            Destroy(this.gameObject);
-        }
+        
     }
 
     public void SetTrainingTrue()
