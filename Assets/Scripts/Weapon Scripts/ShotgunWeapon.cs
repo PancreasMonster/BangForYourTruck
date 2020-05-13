@@ -19,7 +19,8 @@ public class ShotgunWeapon : MonoBehaviour
     ParticleSystem emptyShellsLeft;
     Animation leftShotgunAnim;
     public bool canFire;
-
+    public float fireRate;
+    bool cooldown;
 
     bool rightFiredLast;
 
@@ -61,7 +62,7 @@ public class ShotgunWeapon : MonoBehaviour
     private void OnRightBumper(InputValue value)
     {
         PadRB = value.Get<float>();
-        if (canFire)
+        if (canFire && !cooldown)
         {
             if (PadLB == 0)
             {
@@ -69,11 +70,14 @@ public class ShotgunWeapon : MonoBehaviour
                 {
 
                     FireRightSide();
+                    cooldown = true;
+                    StartCoroutine(Cooldown(fireRate));
                 }
                 else
                 {
                     FireLeftSide();
-
+                    cooldown = true;
+                    StartCoroutine(Cooldown(fireRate));
                 }
             }
         }
@@ -137,5 +141,11 @@ public class ShotgunWeapon : MonoBehaviour
           //  Debug.Log("left fired");
 
         }
+    }
+
+    IEnumerator Cooldown(float time) 
+    {
+        yield return new WaitForSeconds(time);
+        cooldown = false;
     }
 }
