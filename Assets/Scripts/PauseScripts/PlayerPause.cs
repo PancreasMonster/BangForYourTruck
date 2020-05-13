@@ -144,6 +144,9 @@ public class PlayerPause : MonoBehaviour
         else if (GameIsPaused && lookingAtControls)
         {
             StopControls();
+        } else if (GameIsPaused && !lookingAtControls && !&& tryingToLeave)
+        {
+            Unpause();
         }
     }
 
