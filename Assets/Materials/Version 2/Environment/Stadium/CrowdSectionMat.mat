@@ -8,20 +8,20 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CrowdSectionMat
-  m_Shader: {fileID: -6465566751694194690, guid: 78f0a9b04c9bf5e4a9c28e09996f29fc,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2050
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_5E9DC883:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c03b080a443216a479babfe909b5a295, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8508C881:
@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d851adfd2fa3d4d499ac89a8e6385301, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 1, y: 1}
     - _BumpMap:
@@ -45,11 +45,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1972bb1609734b0458af10ede9031288, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d851adfd2fa3d4d499ac89a8e6385301, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 1, y: 1}
     - _MetallicGlossMap:
@@ -75,7 +75,7 @@ Material:
     - Vector1_8B87D16B: 0
     - Vector1_8DA925DC: 1
     - Vector1_B20190E: 0
-    - Vector1_B439D15C: 0
+    - Vector1_B439D15C: 1
     - Vector1_C6131EAC: 2
     - Vector1_CE08F08A: 0.6
     - Vector1_FA8CF296: 1
@@ -107,14 +107,14 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_464DED25: {r: 1, g: 1, b: 1, a: 0}
-    - Color_5DE2E5C: {r: 0, g: 0, b: 0, a: 0}
+    - Color_5DE2E5C: {r: 1, g: 1, b: 1, a: 0}
     - Color_A3AA72: {r: 0.2704254, g: 0.5855746, b: 0.9716981, a: 0}
     - Color_DCF8E055: {r: 0, g: 0, b: 0, a: 0}
     - Color_EED75798: {r: 14.259475, g: 14.259475, b: 14.259475, a: 0}
     - Vector2_CF4BD25E: {r: 0, g: 0.2, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmissionColor: {r: 1, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 2, g: 2, b: 2, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
 --- !u!114 &4117257670313173369

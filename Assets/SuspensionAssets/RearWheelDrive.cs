@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class RearWheelDrive : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class RearWheelDrive : MonoBehaviour {
     WheelHit hit, hit2, hit3, hit4;
     public AudioSource aud;
     public float sidewaySlipEx, sidewaySlipAS;
+    public bool trainingMode;
+    public TrainingManager tm;
 
 
     // here we find all the WheelColliders down in the hierarchy
@@ -41,17 +44,52 @@ public class RearWheelDrive : MonoBehaviour {
 		}
 	}
 
-	// this is a really simple approach to updating wheels
-	// here we simulate a rear wheel drive car and assume that the car is perfectly symmetric at local zero
-	// this helps us to figure our which wheels are front ones and which are rear
-	public void FixedUpdate()
+    Vector2 leftStick;
+    float rightTrigger;
+    float leftTrigger;
+    float XButton;
+
+    private void OnLeftStick (InputValue value)
+    {
+        leftStick = value.Get<Vector2>();
+    }
+
+    private void OnRightTrigger (InputValue value)
+    {
+        
+        rightTrigger = value.Get<float>();
+        if (trainingMode && tm.canProceed)
+            tm.pressedRT = true;
+    }
+
+    private void OnLeftTrigger (InputValue value)
+    {
+        leftTrigger = value.Get<float>();
+        if (trainingMode && tm.canProceed)
+            tm.pressedLT = true;
+    }
+
+    private void OnFaceButtonWest(InputValue value)
+    {
+        XButton = 1;
+    }
+
+    private void OnFaceButtonWestRelease(InputValue value)
+    {
+        XButton = 0;
+    }
+
+    // this is a really simple approach to updating wheels
+    // here we simulate a rear wheel drive car and assume that the car is perfectly symmetric at local zero
+    // this helps us to figure our which wheels are front ones and which are rear
+    public void FixedUpdate()
 	{
         Debug.DrawRay(transform.position, rigidbody.velocity * 100, Color.blue);
 
-		float angle = maxAngle * Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString());
-        float driftAmount = Mathf.Abs(Input.GetAxisRaw("Horizontal" + GetComponent<Health>().playerNum.ToString()));
-        forwardTorque = maxTorque * Input.GetAxisRaw("RightTrigger" + GetComponent<Health>().playerNum.ToString());
-        backwardTorque = maxTorque * -Input.GetAxisRaw("LeftTrigger" + GetComponent<Health>().playerNum.ToString());
+		float angle = maxAngle * leftStick.x;
+        float driftAmount = Mathf.Abs(leftStick.x);
+        forwardTorque = maxTorque * rightTrigger;
+        backwardTorque = maxTorque * -leftTrigger;
         sumTorque = forwardTorque + backwardTorque;
 
         if (forwardTorque > 0 && backwardTorque == 0)
@@ -90,7 +128,7 @@ public class RearWheelDrive : MonoBehaviour {
             // a simple car where front wheels steer while rear ones drive
             if (wheel.transform.localPosition.z > 0) {
 
-                if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
                 {
                     wheel.steerAngle = angle;
                 }
@@ -103,7 +141,7 @@ public class RearWheelDrive : MonoBehaviour {
             }
 
             WheelFrictionCurve curve = new WheelFrictionCurve();
-            if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
+            if (XButton > 0)
             {
                
             curve.extremumSlip = 30f;
@@ -142,7 +180,7 @@ public class RearWheelDrive : MonoBehaviour {
                     wheel.motorTorque = 0;
                     wheel.brakeTorque = breakForce;
                 }
-                if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString()))
+                if (XButton > 0)
                 {
 
                     
@@ -154,7 +192,7 @@ public class RearWheelDrive : MonoBehaviour {
                     curve.stiffness = 1.25f;
                 }
 
-                if (wheel.rpm > maxSpeed)
+                if (Mathf.Abs(wheel.rpm) > maxSpeed)
                     wheel.motorTorque = 0;
                 WheelHit wh;
                 if (wheel.GetGroundHit(out wh))
@@ -175,9 +213,9 @@ public class RearWheelDrive : MonoBehaviour {
 
             //  wheel.
 
-            if (Input.GetAxis("RightTrigger" + GetComponent<Health>().playerNum.ToString()) == 0 && Input.GetAxis("LeftTrigger" + GetComponent<Health>().playerNum.ToString()) == 0)
+            if (rightTrigger == 0 && leftTrigger == 0)
             {
-                wheel.brakeTorque = breakForce;
+                wheel.brakeTorque = breakForce / 20;
                // aud.Stop();
                 aud.volume = Mathf.Lerp(aud.volume, 0, .2f * Time.deltaTime);
             } else
@@ -198,14 +236,6 @@ public class RearWheelDrive : MonoBehaviour {
                 {
                     wheel.brakeTorque = 0;
                 }
-            }
-
-            if(Input.GetButton("PadB" + GetComponent<Health>().playerNum.ToString())) //handbrake, trying to get it to work
-            {
-              //  if(wheel.motorTorque > 0)
-                //    wheel.motorTorque =  -wheel.motorTorque;
-                //if (wheel.motorTorque < 0)
-                 //   wheel.motorTorque = 0;
             }
             
             if (wheelShape) 

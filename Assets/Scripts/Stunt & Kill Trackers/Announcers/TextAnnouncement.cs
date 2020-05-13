@@ -5,21 +5,25 @@ using UnityEngine.UI;
 
 public class TextAnnouncement : MonoBehaviour
 {
-    public Text announcementText;
-    public Image image;
-    public float fadeDelay = 5;
-    float delayTimer;
-    Color announcementTextColor, imageColor;
+    [SerializeField]
+    GameObject killfeedItemPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        announcementTextColor = announcementText.color;
+      /*  announcementTextColor = announcementText.color;
         imageColor = image.color;
         announcementTextColor.a = 0;
-        imageColor.a = 0;
+        imageColor.a = 0; */
     }
 
+    public void KillAnnouncement (GameObject killer, GameObject victim, Sprite sourceImage, int teamNumV, int teamNumK)
+    {
+        GameObject ka = Instantiate(killfeedItemPrefab, this.transform);
+        ka.GetComponent<KillFeedItem>().Setup(killer, victim, sourceImage, teamNumV, teamNumK);
+    }
+
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -42,11 +46,14 @@ public class TextAnnouncement : MonoBehaviour
         }
     }
 
-    public void PlayerKill (GameObject killer, GameObject victim)
+    public void PlayerKill (GameObject killer, GameObject victim, string damageString)
     {
-        announcementText.text = killer.transform.name + " has killed " + victim.transform.name;
+        if(damageString != null)
+            announcementText.text = "<b>" + killer.transform.name + "</b>" + " " + damageString + " " + "<b>" + victim.transform.name + "</b>";
+        else
+            announcementText.text = "<b>" + killer.transform.name + "</b>" + " " + "Has Killed + " + "<b>" + victim.transform.name + "</b>";
         announcementTextColor.a = 1;
         imageColor.a = 1;
         delayTimer = 5;
-    }
+    } */
 }

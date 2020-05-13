@@ -12,6 +12,7 @@ public class CannonBallScript : MonoBehaviour
     public float velocityDamage;
     public float damageToDeal;
     public float cannonAirDamageTimer = 0;
+    public Sprite damageImage;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -26,7 +27,7 @@ public class CannonBallScript : MonoBehaviour
     void Update()
     {
         if(cannonAirDamageTimer < 1)
-        cannonAirDamageTimer += Time.deltaTime;
+        cannonAirDamageTimer += Time.deltaTime * 2;
     }
 
     void FixedUpdate()
@@ -55,6 +56,8 @@ public class CannonBallScript : MonoBehaviour
             damageToDeal = velocityDamage;
 
         }
+
+        damageToDeal = Mathf.Clamp(damageToDeal, 0, float.PositiveInfinity);
     }
 
     void OnCollisionEnter(Collision coll)
@@ -62,11 +65,11 @@ public class CannonBallScript : MonoBehaviour
         if (coll.transform.GetComponent<Health>() != null && coll.transform.GetComponent<Health>().teamNum != teamNum)
         {
             
-            coll.transform.GetComponent<Health>().TakeDamage(null, damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
+            coll.transform.GetComponent<Health>().TakeDamage(damageImage, damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
         } else if (coll.transform.GetComponentInParent<Health>() != null && coll.transform.GetComponentInParent<Health>().teamNum != teamNum)
         {
             float damage = Mathf.RoundToInt(Mathf.Max(minimumDamage, oldVelocity / 2000));
-            coll.transform.GetComponentInParent<Health>().TakeDamage(null, damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
+            coll.transform.GetComponentInParent<Health>().TakeDamage(damageImage, damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
         }
 
         if (destroyOnCollision)

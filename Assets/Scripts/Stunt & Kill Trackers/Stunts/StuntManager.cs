@@ -50,6 +50,7 @@ public class Stunt
     [System.NonSerialized]
     public float progress;//How much rotation has happened during the stunt in radians?
     public float boostAdd;
+    public int score;
 
     //Use this to duplicate a stunt
     public Stunt(Stunt oldStunt)
@@ -61,5 +62,6 @@ public class Stunt
         angleThreshold = oldStunt.angleThreshold;
         multiplier = oldStunt.multiplier;
         boostAdd = oldStunt.boostAdd;
+        score = oldStunt.score;
     }
 }

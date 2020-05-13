@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CannonWeapon : MonoBehaviour
 {
     public float arcOffset;
     public float lockOnRange;
     public GameObject model;
+    public GameObject engineModel;
     bool charging;
     bool onCooldown;
     public float cooldownTime;
@@ -19,31 +21,76 @@ public class CannonWeapon : MonoBehaviour
     PowerHolder ph;
     public PowerCosts pc;
     ParticleSystem particle;
+    public bool canFire;
 
+    public Animator recoil;
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<LockOn>().maxDistance = lockOnRange;
-        model.SetActive(true);
 
         particle = cannonFiringPoint.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
         startForce = force;
+
+        if (canFire)
+        {
+            model.SetActive(true);
+        }
+        else
+        {
+            engineModel.SetActive(true);
+        }
+    }
+
+    float PadLB;
+    float PadRB;
+
+    private void OnLeftBumper(InputValue value)
+    {
+        PadLB = 1;
+    }
+
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        PadLB = 0;
+    }
+
+    private void OnRightBumper(InputValue value)
+    {
+        if (canFire && PadLB == 0)
+        {
+            PadRB = 1;
+            if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
+            {
+                //begin charging
+                charging = true;
+                chargingTime = 0f;
+            }
+            //Firecannon();
+
+        }
+
+    }
+
+    private void OnRightBumperRelease(InputValue value)
+    {
+
+        if (charging == true)
+        {
+            Firecannon();
+            model.GetComponent<Animation>().Play();
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()))
+        if (PadRB > 0 && PadLB == 0)
         {
-            if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
-            {
-            //begin charging
-             charging = true;
-             chargingTime = 0f;
-            }
-            //Firecannon();
+           
 
         }
 
@@ -58,10 +105,10 @@ public class CannonWeapon : MonoBehaviour
 
         }
 
-        if (Input.GetButtonUp("PadRB" + GetComponent<Health>().playerNum.ToString()) && charging == true)
+        if (PadRB > 0 && charging == true)
         {
-          Firecannon();
-
+            Firecannon();
+            model.GetComponent<Animation>().Play();
         }
     }
 
@@ -84,14 +131,16 @@ public class CannonWeapon : MonoBehaviour
                 force = startForce;
             chargingTime = 0f;
             charging = false;
-            //onCooldown = true;
-            //Invoke("Cooldown", cooldownTime);
+            recoil.SetTrigger("Cannon 0");
+            onCooldown = true;
+            Invoke("Cooldown", cooldownTime);
             }
         }
 
     void Cooldown()
     {
         onCooldown = false;
+        //recoil.SetBool("Cannon", false);
 
     }
 }

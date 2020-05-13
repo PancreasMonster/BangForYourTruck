@@ -5,7 +5,8 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     public Transform target;
-
+    public GameObject particles;
+    public GameObject source;
     public int teamNum;
 
     public float speed = 500f; // speed of the missle forward
@@ -20,12 +21,18 @@ public class Missile : MonoBehaviour
 
     private Rigidbody rb;
 
+    bool exploded;
+
+    private List<GameObject> playersHit = new List<GameObject>();
+
+    public Sprite damageImage;
+
     // Start is called before the first frame update
     void Start()
     {
         Destroy(this.gameObject, 60);
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(WaitForHoming());     
+        StartCoroutine(WaitForHoming());
     }
 
     // Update is called once per frame
@@ -50,26 +57,35 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision coll)
     {
-        Destroy(this.gameObject);
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRange);
-        foreach (Collider c in hitColliders)
+        if (!exploded)
         {
-            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
+            Instantiate(particles, transform.position, transform.rotation);
+            StopAllCoroutines();
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRange);
+            foreach (Collider c in hitColliders)
             {
-                if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
+                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
                 {
-                    if (Vector3.Distance(transform.position, c.transform.position) > damageRange / 2f)
+                    if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
                     {
-                        c.GetComponent<Health>().TakeDamage ("missiled", this.gameObject, maxDamage / 2f, Vector3.zero);
+                        if (Vector3.Distance(transform.position, c.transform.position) > damageRange / 2f)
+                        {
+                            c.GetComponent<Health>().TakeDamage(damageImage, source, maxDamage / 2f, Vector3.zero);
+                            Debug.Log(maxDamage / 2f);
+                            Debug.Log(c.transform.name);
+                        }
+                        else if (Vector3.Distance(transform.position, c.transform.position) <= damageRange / 2f)
+                        {
+                            c.GetComponent<Health>().TakeDamage(damageImage, source, maxDamage, Vector3.zero);
+                            Debug.Log(maxDamage);
+                            Debug.Log(c.transform.name);
+                        }
                     }
-                    else if (Vector3.Distance(transform.position, c.transform.position) <= damageRange / 2f)
-                    {
-                        c.GetComponent<Health>().TakeDamage("missiled", this.gameObject, maxDamage, Vector3.zero);
-                    }
-                    if (c.GetComponentInChildren<Shaker>() != null)
-                        c.GetComponentInChildren<Shaker>().PlayShake();
                 }
             }
+
+            Destroy(this.gameObject);
+            exploded = true;
         }
     }
 
@@ -85,7 +101,7 @@ public class Missile : MonoBehaviour
             List<Transform> targets = new List<Transform>();
             foreach (Collider c in hitColliders)
             {
-                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
+                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject && c.transform.tag != "Drone")
                 {
                     if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
                     {
@@ -105,6 +121,47 @@ public class Missile : MonoBehaviour
                     target = t;
                 }
             }
+        }
+            if(target == null)
+        {
+            StartCoroutine(CheckForTargets());
+        }
+    }
+
+    private IEnumerator CheckForTargets()
+    {
+
+        yield return new WaitForSeconds(.5f);
+        if (!target)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, checkRange);
+            List<Transform> targets = new List<Transform>();
+            foreach (Collider c in hitColliders)
+            {
+                if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject && c.transform.tag != "Drone")
+                {
+                    if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
+                    {
+                        targets.Add(c.transform);
+                    }
+                }
+            }
+
+            float dist = float.PositiveInfinity;
+
+            foreach (Transform t in targets)
+            {
+                float magDist = Vector3.Distance(t.transform.position, transform.position);
+                if (magDist < dist)
+                {
+                    dist = magDist;
+                    target = t;
+                }
+            }
+        }
+        if (target == null)
+        {
+            StartCoroutine(CheckForTargets());
         }
     }
 }

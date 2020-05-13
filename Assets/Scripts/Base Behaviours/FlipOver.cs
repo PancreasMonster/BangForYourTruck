@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FlipOver : MonoBehaviour
 {
-    RaycastHit hit, hit2, hit3, hit4;
+    public RaycastHit hit, hit2, hit3, hit4;
     public LayerMask layer;
     public float force, angForce, linearForce = 500, angularStabilityForce = 2000;
     [Range(0, 1)]
@@ -28,12 +29,97 @@ public class FlipOver : MonoBehaviour
     public List<WheelCollider> wheels = new List<WheelCollider>();
     public bool autoRollCorrection = true;
     public bool Grounded;
+    public int wheelsOnGround;
+    public bool crashing;
+    public float gravityForce;
+
+    float AButton;
+    float XButton;
+    Vector2 leftStick;
+    bool canSlam;
+    MobilityCharges mobCharges;
+
+    WheelFrictionCurve curve = new WheelFrictionCurve();
+    GameObject jumpParticlesParent;
+    ParticleSystem jumpParticles1;
+    ParticleSystem jumpParticles2;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        jumpParticlesParent = transform.Find("Jump particle").gameObject;
+        jumpParticles1 = jumpParticlesParent.GetComponent<ParticleSystem>();
+        jumpParticles2 = jumpParticlesParent.transform.GetChild(0).GetComponent<ParticleSystem>();
+        mobCharges = GetComponent<MobilityCharges>();
         rigidbody = GetComponentInParent<Rigidbody>();
         h = GetComponentInParent<Health>();
+        curve.extremumSlip = 60;
+        curve.extremumValue = 100;
+        curve.asymptoteSlip = 50;
+        curve.asymptoteValue = 85;
+        curve.stiffness = 1;
+        foreach (WheelCollider w in wheels)
+        {
+            w.forwardFriction = curve;
+        }
+    }
+
+   
+
+    private void OnFaceButtonSouth(InputValue value)
+    {
+        if (!delay)
+        {
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, out hit2, 7.5f, layer))
+            {
+                if (Vector3.Dot(transform.up, hit2.normal) < .2f)
+                {
+                    StartCoroutine(FlipWithRollingForce(rigidbody, hit2.normal));
+                    //StartCoroutine(JumpDelay());
+                    rigidbody.AddForce(Vector3.up * force * .65f);
+                    rigidbody.angularVelocity = Vector3.zero;
+                }
+                else 
+                {
+                    if (mobCharges.currentCharges > 0)
+                    {
+                        StartCoroutine(JumpDelay());
+                        mobCharges.UseCharge();
+                        jumpParticles1.Play();
+                        jumpParticles2.Play();
+                        rigidbody.AddForce(Vector3.up * force);
+                        rigidbody.angularVelocity = Vector3.zero;
+                    }                   
+                }
+            }
+            else if (mobCharges.currentCharges > 0 && Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
+            {
+                    mobCharges.UseCharge();
+                    jumpParticles1.Play();
+                    jumpParticles2.Play();
+                    StartCoroutine(JumpDelay());
+                    rigidbody.AddForce(transform.up * force);
+                    rigidbody.angularVelocity = Vector3.zero;
+
+                    //  Debug.Log("Hit");
+            }
+        }
+    }
+
+    private void OnFaceButtonWest(InputValue value)
+    {
+        XButton = 1;
+    }
+
+    private void OnFaceButtonWestRelease(InputValue value)
+    {
+        XButton = 0;
+    }
+
+    private void OnLeftStick(InputValue value)
+    {
+        leftStick = value.Get<Vector2>();
     }
 
     private void Update()
@@ -44,6 +130,11 @@ public class FlipOver : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (wheelsOnGround > 1)
+        {
+            crashing = false;
+        }
 
         {
             if (!delay)
@@ -63,8 +154,8 @@ public class FlipOver : MonoBehaviour
                             wheelPoints.Add(wheels[i].transform);
                         }
                     }
-
-                    if (wheelsGrounded < 3 && wheelsGrounded > 0)
+                    wheelsOnGround = wheelsGrounded;
+                    if (wheelsGrounded < 2 && wheelsGrounded > 0)
                     {
                         ApplyLinearStabilityForces(rigidbody, wheelPoints);
                     }
@@ -75,8 +166,8 @@ public class FlipOver : MonoBehaviour
                             ApplyAngularStabilityForces(rigidbody, hit2.normal);
                     }
 
-                    if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
-                    {
+                    if (AButton > 0)
+                    { 
                         if (Vector3.Dot(transform.up, hit2.normal) < .2f)
                         {
                             StartCoroutine(FlipWithRollingForce(rigidbody, hit2.normal));
@@ -92,18 +183,17 @@ public class FlipOver : MonoBehaviour
                             rigidbody.angularVelocity = Vector3.zero;
                         }
 
-                        //  Debug.Log("Hit");
                     }
+                    hit4 = hit2;
                 }
                 else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
                 {
-                    if (Input.GetButtonDown("PadA" + h.playerNum.ToString()))
+                    if (AButton > 0)
                     {
                         StartCoroutine(JumpDelay());
                         rigidbody.AddForce(transform.up * force);
                         rigidbody.angularVelocity = Vector3.zero;
 
-                        //  Debug.Log("Hit");
                     }
                 }
         }
@@ -113,12 +203,13 @@ public class FlipOver : MonoBehaviour
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit, 7, layer) && !turnDelay)
             {
                 timer = 0;
-                rigidbody.AddForce(75f * -transform.up, ForceMode.Acceleration);
+                rigidbody.AddForce(gravityForce * -transform.up, ForceMode.Acceleration);
+
             }
             else
             {
                 timer += Time.deltaTime;
-                rigidbody.AddForce(75f * -Vector3.up, ForceMode.Acceleration);
+                rigidbody.AddForce(gravityForce * -Vector3.up, ForceMode.Acceleration);
             }
         }
         else
@@ -139,19 +230,25 @@ public class FlipOver : MonoBehaviour
 
         if (timer > timerAllowance)
         {
-           
+            canSlam = true;
 
-            if (XtoRoll)
+
+            curve.extremumSlip = 2200;
+            curve.asymptoteSlip = 2200;
+            foreach (WheelCollider w in wheels)
             {
-                float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
-                float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
-                if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
+                w.forwardFriction = curve;
+            }
+
+            float horAngle = leftStick.x;
+                float vertAngle = leftStick.y;
+                if (leftStick.x == 0 && leftStick.y == 0)
                     rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
                 if (camDependent)
                 {
 
                     rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
-                    if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                    if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
                     {
                         rigidbody.AddTorque(cam.transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
                     }
@@ -164,7 +261,7 @@ public class FlipOver : MonoBehaviour
                 else
                 {
                     rigidbody.AddTorque(transform.right * vertAngle * angForce, ForceMode.Force);
-                    if (Input.GetButton("PadX" + GetComponent<Health>().playerNum.ToString())) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                    if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
                     {
                         rigidbody.AddTorque(transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
                     }
@@ -174,33 +271,19 @@ public class FlipOver : MonoBehaviour
 
                     }
                 }
-            }
-            else
+            } else
+        {
+            if (canSlam)
             {
-
-
-                float horAngle = Input.GetAxisRaw("Horizontal" + h.playerNum.ToString());
-                float vertAngle = Input.GetAxisRaw("Vertical" + h.playerNum.ToString());
-                float rollAngle = Input.GetAxisRaw("RightTrigger" + h.playerNum.ToString()) - Input.GetAxisRaw("LeftTrigger" + h.playerNum.ToString());
-                if (Input.GetAxisRaw("Horizontal" + h.playerNum.ToString()) == 0 && Input.GetAxisRaw("Vertical" + h.playerNum.ToString()) == 0)
-                    rigidbody.angularVelocity = rigidbody.angularVelocity * angularDamping;
-                if (camDependent)
-                {
-                    rigidbody.AddTorque(cam.transform.right * vertAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(cam.transform.forward * rollAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(cam.transform.up * horAngle * angForce, ForceMode.Force);
-
-                }
-                else
-                {
-                    rigidbody.AddTorque(transform.right * vertAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(transform.forward * rollAngle * angForce, ForceMode.Force);
-                    rigidbody.AddTorque(transform.up * horAngle * angForce, ForceMode.Force);
-                }
+                canSlam = false;
+                StartCoroutine(HelpLanding());
+                
             }
-
-
         }
+            
+
+
+        
 
     }
 
@@ -230,6 +313,16 @@ public class FlipOver : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.contacts.Length > 0 && wheelsOnGround == 0)
+        {
+
+            crashing = true;   
+            
+        }
+    }
+
 
     IEnumerator JumpDelay()
     {
@@ -253,8 +346,14 @@ public class FlipOver : MonoBehaviour
         rigidbody.angularVelocity = Vector3.zero;
         yield return new WaitForSeconds(.25f);
         turnDelay = false;
-        while (Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f)
+        float t = 0;
+        bool flippedOrTimeOver = false;
+        while (!flippedOrTimeOver && Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f)
         {
+            if(Vector3.Dot(transform.up, averageColliderSurfaceNormal) > .95f || t > 1.5f)
+            {
+                flippedOrTimeOver = true;
+            }
             //Gets the angle in order to determine the direction the vehicle needs to roll
             float angle = Vector3.SignedAngle(rigidbody.transform.up, averageColliderSurfaceNormal, rigidbody.transform.forward);
 
@@ -262,9 +361,30 @@ public class FlipOver : MonoBehaviour
             Vector3 torqueAmount = Mathf.Sign(angle) * rigidbody.transform.forward * angularStabilityForce * Time.fixedDeltaTime;
 
             rigidbody.AddTorque(torqueAmount, ForceMode.Acceleration);
+            t += Time.deltaTime;
             yield return null;
         }
         delay = false;
     }
 
+
+    public IEnumerator HelpLanding()
+    {
+      
+        float t = 0;
+     
+        while (t < .25f)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        curve.extremumSlip = 60;
+        curve.asymptoteSlip = 50;
+        foreach (WheelCollider w in wheels)
+        {
+            w.forwardFriction = curve;
+        }
+
+    }
 }

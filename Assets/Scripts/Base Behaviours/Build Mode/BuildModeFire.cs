@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class BuildModeFire : MonoBehaviour
@@ -8,6 +9,7 @@ public class BuildModeFire : MonoBehaviour
     
     public Text text;
     public List<GameObject> discSelection = new List<GameObject>();
+    public List<GameObject> discUIImages = new List<GameObject>();
     public List<int> ammo = new List<int>();
     public Image image;
     public List<Sprite> icons = new List<Sprite>();
@@ -18,7 +20,7 @@ public class BuildModeFire : MonoBehaviour
     public float mortarSpeed;
     public Transform aimTarget, firingPoint;
     public GameObject bomb;
-    public int currentI;
+    public int currentI = 0;
     private bool cooldown;
     public float cooldownDelay = 1.5f;
     ResourceHolder rh;
@@ -41,7 +43,11 @@ public class BuildModeFire : MonoBehaviour
     public int currentRange = 1;
     public bool forwardRange = true, backwardRange = true;
     public float rangeDelay;
-
+    public Transform cardParent;
+    //public GameObject selectorPrefab;
+    //GameObject selector;
+    public Color imageCol, blackHoleCol;
+    bool release = false;
 
 
     void Start()
@@ -52,25 +58,89 @@ public class BuildModeFire : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics.gravity.y);
         targetOriginalPos = aimTarget.transform.localPosition;
+        //GameObject clone = Instantiate(selectorPrefab, transform.position, Quaternion.identity);
+        //selector = clone;
+        StartCoroutine(assignColour());
+        targetZDistance = ranges[0];
     }
+
+    Vector2 rightStick;
+    float PadLB;
+    float display = 0;
+    float PadRB;
+    float DPadLeftRight;
+    float DPadUpDown;
+
+    private void OnRightStick(InputValue value)
+    {
+        rightStick = value.Get<Vector2>();
+    }
+
+    private void OnLeftBumper(InputValue value)
+    {
+
+        display = 1;
+
+            
+    }
+
+    private void OnRightBumper(InputValue value)
+    {
+        
+    }
+
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
+        {
+            PadLB = 1;
+            release = true;
+            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown(0);
+        }
+        display = 0;
+    }
+
+    private void OnRightBumperRelease(InputValue value)
+    {
+        PadRB = 0;
+    }
+
+    private void OnDPADLeftRight(InputValue value)
+    {
+        DPadLeftRight = value.Get<float>();
+        //Debug.Log(DPadLeftRight);
+    }
+
+    private void OnDPADUpDown(InputValue value)
+    {
+        DPadUpDown = value.Get<float>();
+        if(DPadUpDown == 1)
+        {
+            targetZDistance = ranges[0];
+        } else if (DPadUpDown == -1)
+        {
+            targetZDistance = ranges[1];
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+        
         // text.text = rc.resourcesID[currentI];
         //  image.sprite = icons[currentI];
-        if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
-        {
-            aimTarget.transform.localPosition = targetOriginalPos;
-        }  
+        //if (Input.GetButtonDown("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        //   {
+        //       aimTarget.transform.localPosition = targetOriginalPos;
+        //  }  
 
-        if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        if (display > 0)
         {
          
             RenderArc();
-            targetZDistance = ranges[currentRange];
 
-            if(Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) < 0 && currentRange < ranges.Count - 1 && forwardRange)
+          /*  if(rightStick.y < 0 && currentRange < ranges.Count - 1 && forwardRange)
             {
                 backwardRange = true;
                 forwardRange = false;
@@ -78,21 +148,20 @@ public class BuildModeFire : MonoBehaviour
 
                 StartCoroutine(resetRangeBools(0));
             }
-            else if (Input.GetAxisRaw("RVertical" + GetComponent<Health>().playerNum.ToString()) > 0 && currentRange > 0 && backwardRange)
+            else if (rightStick.y > 0 && currentRange > 0 && backwardRange)
             {
                 forwardRange = true;
                 backwardRange = false;
                 currentRange--;
 
                 StartCoroutine(resetRangeBools(1));
-            }
+            }*/
             aimTarget.localPosition = new Vector3(aimTarget.transform.localPosition.x, aimTarget.transform.localPosition.y, targetOriginalPos.z + targetZDistance);
         }
 
         FindVelocity(aimTarget, fireAngle);
-        if (Input.GetButtonUp("PadLB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        if (display == 0)
         {
-            targetZDistance = 0;
             lr.positionCount = 0;
            /* if (ammo[currentI] > 0)
             {
@@ -117,46 +186,66 @@ public class BuildModeFire : MonoBehaviour
             }*/
         }
 
-        if (Input.GetButton("PadLB" + GetComponent<Health>().playerNum.ToString()) && Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()) && !cooldown)
+        if (!cooldown && release)
         {
-            targetZDistance = 0;
-            lr.positionCount = 0;
-            if (ammo[currentI] > 0)
-            {
+            release = false;
+            //lr.positionCount = 0;
+            
                 cooldown = true;
                 StartCoroutine(Cooldown());
                 GameObject clone = Instantiate(currentDisc, firingPoint.position, transform.rotation);
-               // clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
+            // clone.transform.rotation = Quaternion.Lerp(clone.transform.rotation, transform.rotation, 1);
+            if (clone.transform.name == "BlueLaserTurret(Clone)" || clone.transform.name == "RedLaserTurret(Clone)"
+                || clone.transform.name == "BlueParticleTurret(Clone)" || clone.transform.name == "RedParticleTurret(Clone)")
+            {
+                clone.transform.eulerAngles = new Vector3(-90, 0, 0);
+            }
                 if (clone.GetComponent<ResourceCollection>() != null)
                     clone.GetComponent<ResourceCollection>().mbase = this.gameObject;
                 if (clone.GetComponent<Health>() != null)
                     clone.GetComponent<Health>().teamNum = GetComponent<Health>().teamNum;
-                if (clone.GetComponent<Bomb>() != null)
+            if (clone.GetComponent<Missile>() != null)
+            {
+                clone.GetComponent<Missile>().source = this.gameObject;
+                if(GetComponent<LockOn>().target != null)
+                    clone.GetComponent<Missile>().target = GetComponent<LockOn>().target.transform;
+            }
+
+
+            if (clone.GetComponent<BlackHole>() != null)
+                clone.GetComponent<BlackHole>().source = this.gameObject;
+            if (clone.GetComponent<MoonGravity>() != null)
+                clone.GetComponent<MoonGravity>().teamNum = GetComponent<Health>().teamNum;
+            if (clone.GetComponent<ClusterMine>() != null)
+                clone.GetComponent<ClusterMine>().source = this.gameObject;
+            if (clone.GetComponentInChildren<ParticleTurret>() != null)
+                clone.GetComponentInChildren<ParticleTurret>().source = this.gameObject;
+                /*if (clone.GetComponent<Bomb>() != null)
                 {                 
                     cooldown = false;
-                }
+                }*/
                 if (clone.GetComponent<Missile>() != null)
                     clone.GetComponent<Missile>().teamNum = GetComponent<Health>().teamNum;
 
                 Rigidbody unitRB = clone.GetComponent<Rigidbody>();
                 unitRB.velocity = BallisticVel(aimTarget, fireAngle);
-                ammo[currentI]--;
-            }
+                //ammo[currentI]--;
+            
         }
 
-        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) < 0 && !dpadTrigger)
+        if (DPadLeftRight < 0 && !dpadTrigger)
         {
             dpadTrigger = true;
             dpadLeft = true;
         }
 
-        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) > 0 && !dpadTrigger)
+        if (DPadLeftRight > 0 && !dpadTrigger)
         {
             dpadTrigger = true;
             dpadRight = true;
         }
 
-        if (Input.GetAxis("DPADHorizontal" + GetComponent<Health>().playerNum.ToString()) == 0 && dpadTrigger)
+        if (DPadLeftRight == 0 && dpadTrigger)
         {
             if (dpadLeft)
             {
@@ -165,12 +254,24 @@ public class BuildModeFire : MonoBehaviour
                     currentI = discSelection.Count - 1;
                     currentDisc = discSelection[currentI];
                     dpadLeft = false;
+                    if(discUIImages.Count > 1)
+                    discUIImages[0].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
                 }
                 else
                 {
                     currentI--;
                     currentDisc = discSelection[currentI];
                     dpadLeft = false;
+                    if (discUIImages.Count > 1)
+                    discUIImages[currentI + 1].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
                 }
             }
 
@@ -181,12 +282,24 @@ public class BuildModeFire : MonoBehaviour
                     currentI = 0;
                     currentDisc = discSelection[currentI];
                     dpadRight = false;
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                    discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
+                    if (discUIImages.Count > 1)
+                    discUIImages[discSelection.Count - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
                 }
                 else
                 {
                     currentI++;
                     currentDisc = discSelection[currentI];
                     dpadRight = false;
+                    if (discUIImages.Count > 1)
+                        discUIImages[currentI - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
+                    if (discUIImages[currentI].transform.name == "Black Hole(Clone)")
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = blackHoleCol;
+                    else
+                        discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
                 }
             }
             dpadTrigger = false;
@@ -242,7 +355,9 @@ public class BuildModeFire : MonoBehaviour
         float radAngle = angle * Mathf.Deg2Rad;
         targetDir.y = dist * Mathf.Tan(radAngle);
         float fireVelocity = Mathf.Sqrt(dist * Physics.gravity.magnitude * mortarSpeed / Mathf.Sin(radAngle * 2));
-        return fireVelocity * targetDir.normalized;
+        Vector3 targetVel = fireVelocity * targetDir.normalized;
+        float dotVector = Vector3.Dot(transform.up, Vector3.up);
+        return new Vector3(targetVel.x, dotVector * targetVel.y, targetVel.z);
     }
 
     public void FindVelocity (Transform target, float angle)
@@ -273,5 +388,11 @@ public class BuildModeFire : MonoBehaviour
             yield return new WaitForSeconds(rangeDelay);
             backwardRange = true;
         }
+    }
+
+    IEnumerator assignColour ()
+    {
+        yield return null;
+        discUIImages[0].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
     }
 }

@@ -106,7 +106,7 @@ public class WheelSkid : MonoBehaviour {
 
                     if (timer > 0.1f && intensity > .4f && rb.velocity.sqrMagnitude > 200 && !aud.isPlaying)
                     {
-                        aud.Play();
+                        //aud.Play();
                         foreach(ParticleSystem ps in particleSystems)
                         {
                             if (Input.GetButton("PadX" + playerNum.ToString()))
@@ -114,7 +114,7 @@ public class WheelSkid : MonoBehaviour {
                             else
                                 ps.Stop();
                         }
-                        aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
+                     //   aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
                         driftTimer += Time.deltaTime;
                     }
 
@@ -124,7 +124,7 @@ public class WheelSkid : MonoBehaviour {
                         {
                             ps.Stop();
                         }
-                        aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
+                       // aud.volume = Mathf.Lerp(aud.volume, 0, 1.5f * Time.deltaTime);
                         StartCoroutine(audioStop());
                         driftTimer = 0;
                     }
@@ -134,39 +134,39 @@ public class WheelSkid : MonoBehaviour {
                     DepthOfField dop = null;
                     PPV.profile.TryGetSettings(out dop);
 
-                    if (timer > .2f)
-                    {
-                        ChromAberr.intensity.value = Mathf.Clamp(timer - .2f, 0, .6f);
-                        dop.focalLength.value = Mathf.Clamp((timer * 12) + 260, 260, 280);
-                    } else if (ChromAberr.intensity.value > 0)
-                    {
-                        ChromAberr.intensity.value = Mathf.Lerp(ChromAberr.intensity.value, 0, 2 * Time.deltaTime);
-                        dop.focalLength.value = Mathf.Lerp(dop.focalLength.value, 260, 2 * Time.deltaTime);
-                    }
-                   /* while (ChromAberr.intensity.value <= 1)
-                    {
-                        ChromAberr.intensity.value += (10f * Time.deltaTime);
-                        dop.focalLength.value += (40f * Time.deltaTime);
-                        yield return null;
-                    }
-                    yield return new WaitForSeconds(.4f);
-                    
+                    /*  if (timer > .2f)
+                     {
+                         ChromAberr.intensity.value = Mathf.Clamp(timer - .2f, 0, .6f);
+                         dop.focalLength.value = Mathf.Clamp((timer * 12) + 260, 260, 280);
+                     } else if (ChromAberr.intensity.value > 0)
+                     {
+                         ChromAberr.intensity.value = Mathf.Lerp(ChromAberr.intensity.value, 0, 2 * Time.deltaTime);
+                         dop.focalLength.value = Mathf.Lerp(dop.focalLength.value, 260, 2 * Time.deltaTime);
+                     }
+                    /* while (ChromAberr.intensity.value <= 1)
+                     {
+                         ChromAberr.intensity.value += (10f * Time.deltaTime);
+                         dop.focalLength.value += (40f * Time.deltaTime);
+                         yield return null;
+                     }
+                     yield return new WaitForSeconds(.4f);
 
-                    while (ChromAberr.intensity.value >= 0)
-                    {
-                        ChromAberr.intensity.value -= (5 * Time.deltaTime);
-                        dop.focalLength.value -= (40f * Time.deltaTime);
-                        yield return null;
-                    }
-                    dop.focalLength.value = 260f; */
-                
 
+                     while (ChromAberr.intensity.value >= 0)
+                     {
+                         ChromAberr.intensity.value -= (5 * Time.deltaTime);
+                         dop.focalLength.value -= (40f * Time.deltaTime);
+                         yield return null;
+                     }
+                     dop.focalLength.value = 260f; */
 
 
 
-            }
-				// Account for further movement since the last FixedUpdate
-				Vector3 skidPoint = wheelHitInfo.point + (rb.velocity * (Time.time - lastFixedUpdateTime));
+
+
+                }
+                // Account for further movement since the last FixedUpdate
+                Vector3 skidPoint = wheelHitInfo.point + (rb.velocity * (Time.time - lastFixedUpdateTime));
 				lastSkid = skidmarksController.AddSkidMark(skidPoint, wheelHitInfo.normal, intensity, lastSkid);
 			}
 			else {
@@ -177,7 +177,7 @@ public class WheelSkid : MonoBehaviour {
 			lastSkid = -1;
             if (sound)
             {
-                aud.Stop();
+               // aud.Stop();
                 foreach (ParticleSystem ps in particleSystems)
                 {
                     ps.Stop();
@@ -190,7 +190,7 @@ public class WheelSkid : MonoBehaviour {
     IEnumerator audioStop ()
     {
         yield return new WaitForSeconds(.33f);
-        aud.Stop();
+      //  aud.Stop();
     }
 
 	// #### PUBLIC METHODS ####

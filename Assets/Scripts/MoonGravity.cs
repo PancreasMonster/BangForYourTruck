@@ -5,9 +5,11 @@ using UnityEngine;
 public class MoonGravity : MonoBehaviour
 {
     public List<GameObject> targets = new List<GameObject>();
+    public List<GameObject> pullTargets = new List<GameObject>();
     Vector3 centerOfGravity;
     public float force;
     public float maxDistance;
+    public int teamNum;
     float relativeForce;
 
     // Start is called before the first frame update
@@ -19,12 +21,20 @@ public class MoonGravity : MonoBehaviour
         GameObject[] mineTargets = GameObject.FindGameObjectsWithTag("Mine");
         targets.AddRange(mineTargets);
         relativeForce = force * transform.localScale.x;
+        foreach(GameObject g in targets)
+        {
+            if(g.GetComponent<Health>().teamNum != teamNum)
+            {
+                pullTargets.Add(g);
+            }
+        }
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach (GameObject t in targets)
+        foreach (GameObject t in pullTargets)
         {
             float currentDistance = Vector3.Distance(transform.position, t.transform.position);
             Vector3 objectPosition = t.gameObject.transform.position;

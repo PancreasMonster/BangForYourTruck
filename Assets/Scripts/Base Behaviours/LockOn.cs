@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class LockOn : MonoBehaviour
@@ -14,26 +15,26 @@ public class LockOn : MonoBehaviour
     public float maxDistance = 100f;
     public Orbit camTarget;
     public FollowObject pivotCamera;
+    GameObject targetImageGO;
     public Transform carFront;
     bool lockedOn;
+    Color origCol, origColNoA;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < targets.Count; i++)
-        {
             GameObject imageClone = Instantiate(targetImage, transform.position, Quaternion.identity);
             imageClone.transform.SetParent(targetImagesParent.transform, false);
             images.Add(imageClone.GetComponent<Image>());
-        }
+            origCol = images[0].color;
+            origColNoA = new Color(0, 0, 0, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnFaceButtonNorth (InputValue value)
     {
-        if (Input.GetButtonDown("PadY" + GetComponent<Health>().playerNum.ToString()) && target == null)
+        if (target == null)
         {
-           // Debug.Log("Found");
+            // Debug.Log("Found");
             List<GameObject> detectedTargets = new List<GameObject>();
             foreach (GameObject t in targets)
             {
@@ -43,7 +44,7 @@ public class LockOn : MonoBehaviour
                 if (Vector3.Dot(carFront.forward, dir) > .2f)
                 {
                     detectedTargets.Add(t);
-                 //   Debug.Log(t.transform.name);
+                    //   Debug.Log(t.transform.name);
                 }
             }
 
@@ -54,14 +55,14 @@ public class LockOn : MonoBehaviour
                 if (magDist < dist)
                 {
                     target = t;
-                    pivotCamera.target = t;                    
+                    pivotCamera.target = t;
                     dist = magDist;
                     StartCoroutine(targetAcquire());
                 }
             }
         }
 
-        if (Input.GetButtonDown("PadY" + GetComponent<Health>().playerNum.ToString()) && target != null && lockedOn)
+        if (target != null && lockedOn)
         {
             target = null;
             pivotCamera.target = null;
@@ -71,164 +72,78 @@ public class LockOn : MonoBehaviour
                 }*/
             lockedOn = false;
         }
+    }
 
-        if (target != null)
-        {           
-            float magDist = Vector3.Distance(target.transform.position, transform.position);
-            if (magDist > 1500)
+    // Update is called once per frame
+    void Update()
+    {       
+        ImageDisplay();
+
+        if(target != null)
+        {
+            if(Vector3.Distance(transform.position, target.transform.position) > 1000)
             {
                 target = null;
                 pivotCamera.target = null;
                 /*foreach (Image i in images)
-                {
-                    i.gameObject.SetActive(false);
-                }*/
+                    {
+                        i.gameObject.SetActive(false);
+                    }*/
                 lockedOn = false;
             }
         }
-
-       ImageDisplay();
-
-        /*if (target != null)
-        {
-            LockedOn();
-            Vector3 dir = target.transform.position - transform.position;
-            float magDist = Vector3.Distance(target.transform.position, transform.position);
-            if (Vector3.Dot(transform.forward, dir) < 0 || magDist > maxDistance)
-            {
-                target = null;
-                image.gameObject.SetActive(false);
-                lockedOn = false;
-            }
-        }*/
     }
 
     void ImageDisplay ()
     {
-        float UIdist = maxDistance;
-        List<GameObject> UITargets = new List<GameObject>();
-       
-        
-        for (int i = 0; i < targets.Count; i++)
+
+        if (target != null)
         {
-            images[i].color = Color.white;
-            Vector3 screenPoint = cam.WorldToViewportPoint(targets[i].transform.position);
-            bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
-            if (onScreen)
-            {
-                images[i].rectTransform.position = cam.WorldToScreenPoint(new Vector3(targets[i].transform.position.x, targets[i].transform.position.y, targets[i].transform.position.z));
-            } else
-            {
-                images[i].color = Color.white;
-            }
-            List<GameObject> detectedTargets = new List<GameObject>();
-
-
-            if (target == null)
-            {
-                images[i].gameObject.SetActive(true);
-                Vector3 dir = targets[i].transform.position - carFront.position;
-                dir.Normalize();
-
-
-                float UImagDist = Vector3.Distance(targets[i].transform.position, carFront.position);
-                if (Vector3.Dot(carFront.forward, dir) > .2f && UImagDist <= UIdist)
-                {
-                    images[i].color = Color.red;
-                    UITargets.Add(targets[i]);
-                    UIdist = UImagDist;
-                }
-                else if (UImagDist <= maxDistance)
-                {
-                    images[i].color = Color.blue;
-                }
-                else
-                {
-                    images[i].color = Color.white;
-                }
-            } else
-            {
-                if (GameObject.ReferenceEquals(target, targets[i]))
-                {
-                    float UImagDist = Vector3.Distance(targets[i].transform.position, carFront.position);
-                    if (UImagDist < 50)
-                    {
-                        images[i].color = Color.green;
-                    } else
-                    {
-                        images[i].color = Color.yellow;
-                    }
-
-                    
-                } else
-                {
-                    images[i].gameObject.SetActive(false);
-                }
-            }
-
-            /* if (i == targets.Count - 1)
-             {
-                 foreach(Image iImage in images)
-                 {
-                     if (UImagDist >= maxDistance)
-                     {
-                         images[i].color = Color.blue;
-                     }
-                     else
-                     {
-
-                     }
-                 }
-                 UITargets.Clear();
-                 UIdist = maxDistance;
-             } */
-
-
-
-
-            //float dist = maxDistance;
-
-            //    float magDist = Vector3.Distance(t.transform.position, transform.position);
-            /* if (magDist < dist)
-             {
-                 target = t;
-                 pivotCamera.target = t;                       
-                 dist = magDist;
-                 */
-
-          
+            images[0].color = origColNoA;
+            return;
+            
         }
 
-            for (int x = 0; x < UITargets.Count; x++)
+            List<GameObject> detectedTargets2 = new List<GameObject>();
+        foreach (GameObject t in targets)
+        {
+            Vector3 dir = t.transform.position - carFront.position;
+            dir.Normalize();
+            //Debug.Log(Vector3.Dot(transform.forward, dir));
+            if (Vector3.Dot(carFront.forward, dir) > .2f)
             {
-                float UImagDist = Vector3.Distance(UITargets[x].transform.position, carFront.position);
-          
-                if (UImagDist > UIdist && UImagDist <= maxDistance)
-                {
-                    images[x].color = Color.blue;
-                }
-                else
-                {
-                    images[x].color = Color.red;
-                }
+                detectedTargets2.Add(t);
+                //   Debug.Log(t.transform.name);
+            }
+        }
 
-
-            } 
-
-           /* for (int y = 0; y < targets.Count; y++)
+        
+        float dist2 = maxDistance;
+        int listSize2 = 0;
+        foreach (GameObject t in detectedTargets2)
+        {
+            float magDist = Vector3.Distance(t.transform.position, carFront.position);
+            if (magDist < dist2)
             {
-                Vector3 dir = targets[y].transform.position - transform.position;
-                dir.Normalize();
+                targetImageGO = t;
+                dist2 = magDist;
+                listSize2++;
+            }
+        }
 
+        if (listSize2 == 0)
+        {
+            targetImageGO = null;
+            images[0].color = origColNoA;
+        }
 
-                float UImagDist = Vector3.Distance(targets[y].transform.position, transform.position);
-                if (Vector3.Dot(transform.forward, dir) < .2f)
-                {
-                    images[y].color = Color.blue;                 
-                }
+        if (targetImageGO)
+        {
+            images[0].rectTransform.position = cam.WorldToScreenPoint(new Vector3(targetImageGO.transform.position.x, targetImageGO.transform.position.y, targetImageGO.transform.position.z));
+            images[0].color = origCol;
+        }
 
-                
-            } */
+        
 
            
            

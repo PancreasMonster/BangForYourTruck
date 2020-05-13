@@ -14,6 +14,7 @@ public class ShotgunBullet : MonoBehaviour
 
     public bool player;
     bool active;
+    public Sprite damageImage;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,7 @@ public class ShotgunBullet : MonoBehaviour
     {
         if (other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().teamNum != teamNum)
         {
-            other.transform.GetComponent<Health>().TakeDamage("Shotgunned", damageSource, damageToDeal, Vector3.zero);
+            other.transform.GetComponent<Health>().TakeDamage(damageImage, damageSource, damageToDeal, Vector3.zero);
         }
     }
 }

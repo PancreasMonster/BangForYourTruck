@@ -9,6 +9,9 @@ public class CrowdSection : MonoBehaviour
 
     public AudioSpectrumData ASD;
     public int bandNum;
+    public int colorNum = 0;
+    Color col;
+
 
     // Use this for initialization
     void Start()
@@ -22,20 +25,23 @@ public class CrowdSection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         for (int i = 0; i < crowdSections.Count; i++)
         {
+            
             if (((float)(i + 1 / crowdSections.Count)) < ((float)ASD.audSamples[bandNum]))
             {
                 
-                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_EED75798", ASD.col2);
+                col = Color.Lerp(col, ASD.colors[colorNum], ASD.colorLerpTime * Time.deltaTime);
                
     }
             else
             {
-               
-                crowdSections[i].GetComponent<Renderer>().material.SetColor("Color_EED75798", ASD.col1);
+
+                col = Color.Lerp(col, ASD.col1, ASD.colorLerpTime * Time.deltaTime);
 
             }
+            crowdSections[i].GetComponent<Renderer>().material.SetColor("_EmissionColor", col * ASD.intensity);
         }
     }
 

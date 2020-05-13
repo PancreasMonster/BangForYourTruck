@@ -22,3 +22,4 @@ public class CameraLerp : MonoBehaviour
         //transform.rotation = followCam.rotation;
     }
 }
+

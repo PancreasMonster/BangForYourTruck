@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShotgunWeapon : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class ShotgunWeapon : MonoBehaviour
     ParticleSystem buckshotParticlesLeft;
     ParticleSystem emptyShellsLeft;
     Animation leftShotgunAnim;
-
+    public bool canFire;
 
 
     bool rightFiredLast;
@@ -26,7 +27,6 @@ public class ShotgunWeapon : MonoBehaviour
     void Start()
     {
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
-        model.SetActive(true);
         GameObject leftShotGun = model.transform.Find("Shotgun Left").gameObject;
         GameObject rightShotGun = model.transform.Find("Shotgun Right").gameObject;
         leftShotgunAnim = leftShotGun.GetComponent<Animation>();
@@ -38,23 +38,53 @@ public class ShotgunWeapon : MonoBehaviour
         buckshotParticlesRight = ShotgunWeaponFiringPoint.gameObject.GetComponent<ParticleSystem>();
         buckshotParticlesLeft = ShotgunWeaponFiringPoint2.gameObject.GetComponent<ParticleSystem>();
         ph = GetComponent<PowerHolder>();
+
+        if (canFire)
+        {
+            model.SetActive(true);
+        }
+    }
+
+    float PadLB;
+    float PadRB;
+
+    private void OnLeftBumper(InputValue value)
+    {
+        PadLB = 1;
+    }
+
+    private void OnLeftBumperRelease(InputValue value)
+    {
+        PadLB = 0;
+    }
+
+    private void OnRightBumper(InputValue value)
+    {
+        PadRB = value.Get<float>();
+        if (canFire)
+        {
+            if (PadLB == 0)
+            {
+                if (!rightFiredLast)
+                {
+
+                    FireRightSide();
+                }
+                else
+                {
+                    FireLeftSide();
+
+                }
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("PadRB" + GetComponent<Health>().playerNum.ToString()))
+        if (PadRB > 0 && PadLB == 0)
         {
-            if (!rightFiredLast)
-            {
-
-                FireRightSide();
-            }
-            else
-            {
-                FireLeftSide();
-
-            }
+            
         }
     }
 

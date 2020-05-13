@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Health : MonoBehaviour
 {
@@ -21,12 +22,35 @@ public class Health : MonoBehaviour
     public float killerTimer;
     public float killMaxTime = 15;
     public GameObject damageSource;
+    public bool drone, targetDrone;
+    Sprite damageSourceImage;
+    public TagCollectionManager tcm;
 
+    [FMODUnity.EventRef]
+    public string dronePainSound;
+
+    bool dronePainCooldown = true;
+
+    void OnFaceButtonSouth(InputValue value)
+    {
+        if (tcm)
+            tcm.AButton();
+    }
+
+    void OnFaceButtonEast(InputValue value)
+    {
+        if (tcm)
+            tcm.BButton();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        km = GameObject.Find("KillManager").GetComponent<KillManager>();
+        if (GameObject.Find("KillManager") == true)
+        {
+            km = GameObject.Find("KillManager").GetComponent<KillManager>();
+        }
+
         maxHealth = health;
        /* if (!mbase)
         {
@@ -54,6 +78,7 @@ public class Health : MonoBehaviour
         } else
         {
             damageSource = null;
+            damageSourceImage = null;
         }
 
 
@@ -65,17 +90,18 @@ public class Health : MonoBehaviour
             }         
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
 
         //hpBarFill.fillAmount = health / maxHealth;
 
         if (health <= 0 && !dead)
+        
             Death();
+
 
     }
 
-    public void TakeDamage(string playerSourceString, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)
+    public void TakeDamage(Sprite sourceImage, GameObject playerSourceGameObject, float damageTaken, Vector3 damagePoint)
     {
         //If dead, stop code here
         if (dead)
@@ -83,6 +109,7 @@ public class Health : MonoBehaviour
 
         killerTimer = killMaxTime;
         damageSource = playerSourceGameObject;
+        damageSourceImage = sourceImage;
 
         //Instantiates the damage text mesh on the players position
         GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
@@ -101,24 +128,48 @@ public class Health : MonoBehaviour
         damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
 
         //Deals the damage to the player's health
-        health -= damageTaken;
+        float damageToTake = Mathf.Max(damageTaken, 0);
+        health -= damageToTake;
 
-        if (health - damageTaken <= 0)
-            Death();
+        if (drone && dronePainCooldown)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(dronePainSound);
+            dronePainCooldown = false;
+            StartCoroutine(DronePainCooldown());
+        }
+
+        
     }
 
     public void Death()
     {
-        km.KillTracked(damageSource, this.gameObject);
+       
         health = 0;
         dead = true;
         if (mbase)
         {
+            if (GameObject.Find("KillManager") == true)
+            {
+                km.KillTracked(damageSource, this.gameObject, damageSourceImage, teamNum, damageSource.GetComponent<Health>().teamNum);
+            }
+            
             //Destroy(baseUI);
             StartCoroutine(deadTime());
         }
 
-        if (!mbase)
+        if(drone)
+        {
+            GetComponent<DroneScript>().DeathTrigger(damageSource.GetComponent<Health>().playerNum);
+        }
+
+        if (targetDrone)
+        {
+            //GetComponent<KillTagSpawner>().SpawnKillTag();
+            GetComponent<TargetDrone>().DeathTrigger();
+            GameObject.Find("AlfaHorizon").GetComponent<LockOn>().targets.Clear();
+        }
+
+        if (!mbase && !drone)
         {
             Destroy(this.gameObject, 5);
             Destroy(hpBarHolder);
@@ -151,7 +202,7 @@ public class Health : MonoBehaviour
     {
         GameObject Car = Instantiate(car, transform.position, transform.rotation);
         Rigidbody carRB = Car.GetComponent<Rigidbody>();
-        carRB.AddForce((Vector3.up * 80000) + GetComponent<Rigidbody>().velocity);
+        carRB.AddForce((Vector3.up * 80000) + GetComponent<Rigidbody>().velocity * 10);
         //Car.GetComponentInChildren<BaseExplodeOnDeath>().Explode();
         Destroy(Car, 10);
         for (int x = 0; x < 2; x++)
@@ -172,5 +223,15 @@ public class Health : MonoBehaviour
         //hpBarHolder.SetActive(true);
     }
 
-    
+    IEnumerator DronePainCooldown ()
+    {
+        yield return new WaitForSeconds(8);
+        dronePainCooldown = true;
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 100), Mathf.FloorToInt((1.0f / Time.smoothDeltaTime)).ToString());
+    }
+
 }

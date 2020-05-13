@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StuntChecker : MonoBehaviour
 {
+    [FMODUnity.EventRef]
+    public string flipSound;
+
     Transform tr;
     Rigidbody rb;
     FlipOver fo;
     Health h;
+    MobilityCharges mc;
     public WheelSkid ws;
     public float driftIntensity = 2;
     public float stuntStringHoldTime = 1;
+    float oldVelocity;
 
-    [System.NonSerialized]
     public float score = 0;
     List<Stunt> stunts = new List<Stunt>();
     List<Stunt> doneStunts = new List<Stunt>();
@@ -33,23 +38,79 @@ public class StuntChecker : MonoBehaviour
     public string driftString;//String indicating drift distance
     public string jumpString;//String indicating jump distance
     public string flipString;//String indicating flips
-    [System.NonSerialized]
     public string stuntString;//String containing all stunts
+    public string currentStunt;
     Vector3 localAngularVel;
+    int teamNum;
+
+    [Header("Concussive Flip")]
+    public float concussiveRange;
+    [Range(-1,1)]
+    public float concussiveRadius;
+    public float concussiveForce;
+    public GameObject concussiveForcePS;
+    public float concussiveForceDamage;
+    public float maxScoreExplosion; //at what score does the explosion reach Max Damage;
+    public int flipScore;
+    bool landStunt = true;
+    bool canSlam = true;
+    public float randomAnnouncmentChance;
+    public List<ParticleSystem> particleSystems = new List<ParticleSystem>();
+
+    public KillManager km;
+    Vector2 leftStick;
+    float rightTrigger;
+    float leftTrigger;
+    float XButton;
+    RaycastHit hit;
+    Vector3 hitNormal = Vector3.up;
+    public Animator anim;
+    bool animCrash = false;
+    public Sprite damageImage;
+    public bool trainingMode;
+
+    private void OnLeftStick(InputValue value)
+    {
+        leftStick = value.Get<Vector2>();
+    }
+
+    private void OnRightTrigger(InputValue value)
+    {
+        rightTrigger = value.Get<float>();
+    }
+
+    private void OnLeftTrigger(InputValue value)
+    {
+        leftTrigger = value.Get<float>();
+    }
+
+    private void OnFaceButtonWest(InputValue value)
+    {
+        XButton = 1;
+    }
+
+    private void OnFaceButtonWestRelease(InputValue value)
+    {
+        XButton = 0;
+    }
 
     void Start()
     {
+        teamNum = GetComponent<Health>().teamNum;
         tr = transform;
         rb = GetComponent<Rigidbody>();
         fo = GetComponent<FlipOver>();
         h = GetComponent<Health>();
+        mc = GetComponent<MobilityCharges>();
+        km = GetComponent<Health>().km;
     }
 
     void FixedUpdate()
     {
         localAngularVel = tr.InverseTransformDirection(rb.angularVelocity);
+        oldVelocity = Mathf.Abs(rb.velocity.y);
         //Detect drifts
-        if (detectDrift)
+        if (detectDrift && !fo.crashing)
         {
             DetectDrift();
         }
@@ -62,9 +123,9 @@ public class StuntChecker : MonoBehaviour
         }
 
         //Detect jumps
-        if (detectJump)
+        if (detectJump && !fo.crashing)
         {
-            DetectJump();
+            //DetectJump();
         }
         else
         {
@@ -74,18 +135,31 @@ public class StuntChecker : MonoBehaviour
         }
 
         //Detect flips
-        if (detectFlips)
+        if (detectFlips && !fo.crashing)
         {
             DetectFlips();
         }
         else
         {
             stunts.Clear();
+            doneStunts.Clear();
+            flipScore = 0;
             flipString = "";
         }
 
         //Combine strings into final stunt string
-        stuntString = driftString + jumpString + (string.IsNullOrEmpty(flipString) || string.IsNullOrEmpty(jumpString) ? "" : " + ") + flipString;
+        stuntString = fo.crashing ? "Crashed" : driftString;
+
+        if (!animCrash && fo.crashing)
+        {
+            //animCrash = true;
+           // anim.SetBool("Crashed",true);
+        }
+
+        if(!fo.crashing)
+        {
+            //animCrash = false;
+        }
     }
 
     void DetectDrift()
@@ -94,7 +168,7 @@ public class StuntChecker : MonoBehaviour
         drifting = endDriftTime > 0;
         Vector3 localVelocity = tr.InverseTransformDirection(rb.velocity);
 
-        if (drifting && Input.GetButton("PadX" + h.playerNum.ToString()) && localVelocity.z > 20)
+        if (drifting && XButton > 0 && localVelocity.z > 20)
         {
             if(driftDisplay)
             {
@@ -104,9 +178,16 @@ public class StuntChecker : MonoBehaviour
                 driftString = "";
                 driftDisplay = false;
             }
-            driftHold = true;
-            driftScore += (StuntManager.driftScoreRateStatic * Mathf.Abs(rb.velocity.x)) * Time.timeScale;
-            driftDist += rb.velocity.magnitude * Time.fixedDeltaTime;
+
+            foreach (ParticleSystem ps in particleSystems)
+            {
+                    ps.Play();
+            
+                    
+            }
+            driftHold = true;   
+            driftDist += rb.velocity.magnitude * Time.fixedDeltaTime / 10;
+            driftScore += driftDist;
             driftString = "Drift: " + driftDist.ToString("n0") + " m ";
 
             /*  if (engine)
@@ -114,20 +195,25 @@ public class StuntChecker : MonoBehaviour
                   engine.boost += (StuntManager.driftBoostAddStatic * Mathf.Abs(vp.localVelocity.x)) * Time.timeScale * 0.0002f;
               } */
         }      
-        else if (!driftHold)
+        else 
         {
-            score += driftScore;
+            foreach (ParticleSystem ps in particleSystems)
+            {
+                ps.Stop();
+            }
+            if (driftDist >= 25)
+            km.ScoreFeedDrift(this.gameObject, Mathf.CeilToInt(driftDist));
             driftDist = 0;
             driftScore = 0;
             driftString = "";
         }
-        else
-        {
-            StartCoroutine(driftHoldActivation());
-        }
+       // else
+       // {
+       //     StartCoroutine(driftHoldActivation());
+      //  }
     }
 
-    void DetectJump()
+   /* void DetectJump()
     {
         if (fo.timer > fo.timerAllowance)
         {
@@ -135,10 +221,7 @@ public class StuntChecker : MonoBehaviour
             {
                 score += (jumpDist + jumpTime) * StuntManager.jumpScoreRateStatic;
 
-                /* if (engine)
-                 {
-                     engine.boost += (jumpDist + jumpTime) * StuntManager.jumpBoostAddStatic * Time.timeScale * 0.01f * TimeMaster.inverseFixedTimeFactor;
-                 } */
+               
 
                 jumpStart = tr.position;
                 jumpDist = 0;
@@ -147,24 +230,17 @@ public class StuntChecker : MonoBehaviour
                 jumpDisplay = false;
             }
             jumpHold = true;
-            jumpDist = Vector3.Distance(jumpStart, tr.position);
+            jumpDist = Vector3.Distance(jumpStart, tr.position) / 10;
             jumpTime += Time.fixedDeltaTime;
             jumpString = "Jump: " + jumpDist.ToString("n0") + " m";
 
-          /*  if (engine)
-            {
-                engine.boost += StuntManager.jumpBoostAddStatic * Time.timeScale * 0.01f * TimeMaster.inverseFixedTimeFactor;
-            } */
+         
         }
         else if (!jumpHold)
         {
             score += (jumpDist + jumpTime) * StuntManager.jumpScoreRateStatic;
 
-           /* if (engine)
-            {
-                engine.boost += (jumpDist + jumpTime) * StuntManager.jumpBoostAddStatic * Time.timeScale * 0.01f * TimeMaster.inverseFixedTimeFactor;
-            } */
-
+           
             jumpStart = tr.position;
             jumpDist = 0;
             jumpTime = 0;
@@ -174,7 +250,7 @@ public class StuntChecker : MonoBehaviour
         {
             StartCoroutine(jumpHoldActivation());
         }
-    }
+    } */
 
     void DetectFlips()
     {
@@ -185,21 +261,25 @@ public class StuntChecker : MonoBehaviour
                 //Add stunt points to the score
                 foreach (Stunt curStunt in stunts)
                 {
-                    score += curStunt.progress * Mathf.Rad2Deg * curStunt.scoreRate * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold) * curStunt.multiplier;
+                    // score += curStunt.score;
+                    //  flipScore = Mathf.RoundToInt(score);
+                    //flipScore += curStunt.score;
 
-                    //Add boost to the engine
-                    /* if (engine)
-                     {
-                         engine.boost += curStunt.progress * Mathf.Rad2Deg * curStunt.boostAdd * curStunt.multiplier * 0.01f;
-                     } */
                 }
 
+                score += flipScore;
                 stunts.Clear();
                 doneStunts.Clear();
                 flipString = "";
                 flipDisplay = false;
             }
+
+            if(!flipHold)
+            flipScore = 0;
             flipHold = true;
+            canSlam = true;
+            landStunt = true;
+
             //Check to see if vehicle is performing a stunt and add it to the stunts list
             foreach (Stunt curStunt in StuntManager.stuntsStatic)
             {
@@ -211,6 +291,7 @@ public class StuntChecker : MonoBehaviour
                     {
                         if (curStunt.name == checkStunt.name)
                         {
+                           // flipScore += checkStunt.score;
                             stuntExists = true;
                             break;
                         }
@@ -218,6 +299,7 @@ public class StuntChecker : MonoBehaviour
 
                     if (!stuntExists)
                     {
+                        
                         stunts.Add(new Stunt(curStunt));
                     }
                 }
@@ -234,11 +316,14 @@ public class StuntChecker : MonoBehaviour
                 if (curStunt2.progress * Mathf.Rad2Deg >= curStunt2.angleThreshold)
                 {
                     bool stuntDoneExists = false;
+                    
 
                     foreach (Stunt curDoneStunt in doneStunts)
                     {
+                       
                         if (curDoneStunt == curStunt2)
                         {
+                            
                             stuntDoneExists = true;
                             break;
                         }
@@ -246,6 +331,8 @@ public class StuntChecker : MonoBehaviour
 
                     if (!stuntDoneExists)
                     {
+                        
+                        currentStunt = curStunt2.name;
                         doneStunts.Add(curStunt2);
                     }
                 }
@@ -253,34 +340,62 @@ public class StuntChecker : MonoBehaviour
 
             string stuntCount = "";
             flipString = "";
+            
 
             foreach (Stunt curDoneStunt2 in doneStunts)
             {
                 stuntCount = curDoneStunt2.progress * Mathf.Rad2Deg >= curDoneStunt2.angleThreshold * 2 ? " x" + Mathf.FloorToInt((curDoneStunt2.progress * Mathf.Rad2Deg) / curDoneStunt2.angleThreshold).ToString() : "";
                 flipString = string.IsNullOrEmpty(flipString) ? curDoneStunt2.name + stuntCount : flipString + " + " + curDoneStunt2.name + stuntCount;
+               
             }
         }
-        else if (!flipHold)
+       /* else if (!flipHold)
         {
             //Add stunt points to the score
-            foreach (Stunt curStunt in stunts)
+            foreach (Stunt curStunt in doneStunts)
             {
-                score += curStunt.progress * Mathf.Rad2Deg * curStunt.scoreRate * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold) * curStunt.multiplier;
-
-                //Add boost to the engine
-                /* if (engine)
-                 {
-                     engine.boost += curStunt.progress * Mathf.Rad2Deg * curStunt.boostAdd * curStunt.multiplier * 0.01f;
-                 } */
+                
+                score += flipScore;
             }
-
+            
             stunts.Clear();
             doneStunts.Clear();
             flipString = "";
-        }
+        } */
         else
         {
+            List<string> dStunts = new List<string>();
+            List<int> stuntScores = new List<int>();
             StartCoroutine(flipHoldActivation());
+
+            if (!fo.crashing && canSlam)
+            {
+               
+                foreach (Stunt curStunt in doneStunts)
+                {
+                    flipScore += curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold);
+                    if (Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold) >= 2)
+                        dStunts.Add(curStunt.name + " x" + Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold));
+                    else
+                        dStunts.Add(curStunt.name);
+
+                    stuntScores.Add(curStunt.score * Mathf.FloorToInt((curStunt.progress * Mathf.Rad2Deg) / curStunt.angleThreshold));
+                }
+                
+                
+                if(currentStunt != "")
+                FlipConcussiveForce(flipScore);
+               
+                
+            } 
+            currentStunt = "";
+            if(dStunts.Count > 0)
+            km.ScoreFeedStunt(this.gameObject, dStunts, stuntScores);
+            stunts.Clear();
+            doneStunts.Clear();
+            dStunts.Clear();
+            stuntScores.Clear();
+            flipString = "";
         }
     }
 
@@ -298,6 +413,7 @@ public class StuntChecker : MonoBehaviour
         yield return new WaitForSeconds(stuntStringHoldTime);
         jumpHold = false;
         jumpDisplay = false;
+        //anim.SetBool("GoToScoreText",true);
     }
 
     IEnumerator flipHoldActivation()
@@ -306,6 +422,100 @@ public class StuntChecker : MonoBehaviour
         yield return new WaitForSeconds(stuntStringHoldTime);
         flipHold = false;
         flipDisplay = false;
+        landStunt = true;
+        //anim.SetBool("GoToScoreText",true);
     }
 
+    public void FlipEffect()
+    {  
+        //FlipConcussiveForce();   
+    }
+
+    private void FlipConcussiveForce (int currFlipScore)
+    {
+        canSlam = false;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, concussiveRange);
+        List<Transform> targets = new List<Transform>();
+        float slamDamage = concussiveForceDamage * (currFlipScore / maxScoreExplosion);
+        if (currFlipScore > maxScoreExplosion)
+            slamDamage = concussiveForceDamage;
+
+        foreach (Collider c in hitColliders)
+        {
+            if (c.gameObject.GetComponent<Health>() != null && c.gameObject != this.gameObject)
+            {
+                if (c.gameObject.GetComponent<Health>().teamNum != teamNum)
+                {
+                    targets.Add(c.transform);
+                }
+            }
+        }
+
+        foreach (Transform t in targets)
+        {
+            Vector3 dir = t.position - transform.position;
+            dir.Normalize();
+            //if (Vector3.Dot(transform.forward, dir) > concussiveRadius)
+           // {
+                Rigidbody rb = t.GetComponent<Rigidbody>();
+                if (rb != null)
+                    rb.AddExplosionForce(concussiveForce * Mathf.Min(1, currFlipScore / maxScoreExplosion) * rb.mass, transform.position, concussiveRange);
+
+                Health h = t.GetComponent<Health>();
+                if (h != null)
+                    h.TakeDamage(damageImage, this.gameObject, concussiveForceDamage, Vector3.zero);
+           // }
+        }
+
+        float rand = Random.Range(0f, 1f);
+        if (rand > randomAnnouncmentChance && flipScore >= maxScoreExplosion && !trainingMode)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(flipSound, transform.position);
+        }
+
+        GameObject flipPS = Instantiate(concussiveForcePS, new Vector3 (transform.position.x, transform.position.y  - 4f, transform.position.z), concussiveForcePS.transform.rotation);
+        Destroy(flipPS, 3);
+        StartCoroutine(HelpLanding());
+    }
+
+    private void GainMobilityCharge ()
+    {
+        if(!mc.charge1)
+        {
+            mc.charge1Time = mc.rechargeTime;
+            Debug.Log("mc1");
+        } else if (!mc.charge2)
+        {
+            mc.charge2Time = mc.rechargeTime;
+            Debug.Log("mc2");
+        } else if (!mc.charge3)
+        {
+            mc.charge3Time = mc.rechargeTime;
+            Debug.Log("mc3");
+        }
+    }
+
+    public IEnumerator HelpLanding ()
+    {
+        float newVelocity = oldVelocity * .5f;
+        
+        float t = 0;
+        rb.angularVelocity *= .25f;
+        while (t < .25f)
+        {
+            rb.angularVelocity *= .25f;
+            rb.velocity =  new Vector3(rb.velocity.x, rb.velocity.y *.6f, rb.velocity.z);
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, out hit, 7.5f, 14))
+                hitNormal = hit.normal;
+
+            Vector3 rotateAmount = Vector3.Cross(transform.up, hitNormal);
+            rb.angularVelocity = rotateAmount;
+            t += Time.deltaTime;
+            
+            rb.AddForce(transform.forward * newVelocity * Time.deltaTime / .25f, ForceMode.Acceleration);
+            yield return null;
+        }
+        
+        hitNormal = Vector3.up;
+    }
 }

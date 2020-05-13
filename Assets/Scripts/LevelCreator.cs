@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LevelCreator : MonoBehaviour
@@ -8,12 +9,21 @@ public class LevelCreator : MonoBehaviour
     
 {
     public bool mainMenu;
-    public bool singlePlayer;
+    public bool training, devRoom, twoPlayer, fourPlayer;
     public int levelToActivate;
+    public float volumeSetting;
+    public GameObject volumeSlider;
+    public bool hints;
+    public bool AVCrowd;
+    public bool credits;
+
+
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+
+       
     }
 
     // Update is called once per frame
@@ -26,20 +36,72 @@ public class LevelCreator : MonoBehaviour
         }
     }
 
-    public void SetSinglePlayer()
+    public void SetTrainingTrue()
     {
-        singlePlayer = true;
+    
+        training = true;
+        
     }
 
-    public void SetMultiPlayer()
+    public void SetTrainingFalse()
     {
-        singlePlayer = false;            
+
+        training = false;
+
     }
+
+    public void SetDevRoomTrue()
+    {
+
+        devRoom = true;
+
+    }
+
+    public void SetDevRoomFalse()
+    {
+
+        devRoom = false;
+
+    }
+
+    public void Set1v1False()
+    {
+
+        twoPlayer = false;
+
+    }
+
+    public void Set1v1True()
+    {
+
+        twoPlayer = true;
+
+    }
+
+    public void Set2v2False()
+    {
+
+        fourPlayer = false;
+
+    }
+
+    public void Set2v2True()
+    {
+
+        fourPlayer = true;
+
+    }
+
+    public void GetVolumeSliderValue()
+    {
+        volumeSetting = volumeSlider.GetComponent<Slider>().value;
+    }
+
 
     public void SetLevelIndex (int i)
     {
         levelToActivate = i;
-        LoadScene();
+        //LoadScene();
     }
 
     public void QuitGame()
@@ -47,17 +109,64 @@ public class LevelCreator : MonoBehaviour
         Application.Quit();
     }
 
+    public void ToggleHints() 
+    {
+        if (hints)
+        {
+            hints = false;
+        }
+        else 
+        {
+            hints = true;
+        }
+    }
+
+    public void ToggleAVCrowd()
+    {
+        if (AVCrowd)
+        {
+            AVCrowd = false;
+        }
+        else
+        {
+            AVCrowd = true;
+        }
+    }
+
+    public void ToggleCredits()
+    {
+        if (credits)
+        {
+            credits = false;
+        }
+        else
+        {
+            credits = true;
+        }
+    }
+
     public void LoadScene()
     {
         mainMenu = false;
-        if(singlePlayer)
+        if(training)
         {
-            SceneManager.LoadScene("SinglePlayerScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("Gold SinglePlayer", LoadSceneMode.Single);
             
-        } else
+        }
+
+        if (devRoom)
+        {
+            SceneManager.LoadScene("Gold Dev Room", LoadSceneMode.Single);
+
+        }
+        if (twoPlayer){
+            SceneManager.LoadScene("Gold 1v1", LoadSceneMode.Single);
+            
+        }
+        if (fourPlayer)
         {
             SceneManager.LoadScene("Alpha Playtest", LoadSceneMode.Single);
-            
+
         }
     }
    

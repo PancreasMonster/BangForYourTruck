@@ -16,6 +16,10 @@ public class BlackHole : MonoBehaviour
     public float damage;
     public float explosiveForce;
     MoonGravity gravity;
+    public ParticleSystem vacuumParticle;
+    public Sprite damageImage;
+
+    public GameObject source;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,7 @@ public class BlackHole : MonoBehaviour
             timeActive += Time.deltaTime;
             range = Mathf.Max(maxRange * ((timeActive / duration)), minRange);
             GetComponent<MoonGravity>().maxDistance = range;
+            
         }
     }
 
@@ -42,6 +47,7 @@ public class BlackHole : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePositionX |
                          RigidbodyConstraints.FreezePositionY |
                          RigidbodyConstraints.FreezePositionZ;
+        vacuumParticle.Play();
         activated = true;
         Invoke("ExplodingFinish", duration);
     }
@@ -58,7 +64,7 @@ public class BlackHole : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.health -= damage;
+                h.TakeDamage(damageImage, source, damage, Vector3.zero);
         }
         transform.GetChild(0).gameObject.SetActive(false);
         Invoke("DestroyThisGameObject", 1f);

@@ -8,15 +8,18 @@ public class TagCollectionGate : MonoBehaviour
     public bool redTeam, blueTeam;
     public TagCollectionManager tagCollectionManager;
     public int gateTeamNum;
+    KillManager km;
     AudioSource audio;
+
+    public ParticleSystem left;
+    public ParticleSystem right;
 
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
         tagCollectionManager = GameObject.Find("TagCollectionManager").GetComponent<TagCollectionManager>();
-        StartCoroutine(AssignPBs());
-        
+        km = GameObject.Find("KillManager").GetComponent<KillManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class TagCollectionGate : MonoBehaviour
                 TagHolder TH = col.GetComponent<TagHolder>();
                 if(TH.currentTags > 0)
                 {
+                    int i = TH.currentTags;
                     tagCollectionManager.blueTeamTokens += TH.currentTags;
                     foreach (PlayerBank pb in playerBanks)
                     {
@@ -42,6 +46,9 @@ public class TagCollectionGate : MonoBehaviour
                     }
                     TH.currentTags = 0;
                     TH.EmptyTags();
+                    left.Play();
+                    right.Play();
+                    km.ScoreFeedDepositToken(col.gameObject, i);
                 }
             } else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
             {
@@ -59,6 +66,7 @@ public class TagCollectionGate : MonoBehaviour
                 TagHolder TH = col.GetComponent<TagHolder>();
                 if (TH.currentTags > 0)
                 {
+                    int i = TH.currentTags;
                     tagCollectionManager.redTeamTokens += TH.currentTags;
                     foreach (PlayerBank pb in playerBanks)
                     {
@@ -67,6 +75,9 @@ public class TagCollectionGate : MonoBehaviour
                     }
                     TH.currentTags = 0;
                     TH.EmptyTags();
+                    left.Play();
+                    right.Play();
+                    km.ScoreFeedDepositToken(col.gameObject, i);
                 }
             }
             else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 1)

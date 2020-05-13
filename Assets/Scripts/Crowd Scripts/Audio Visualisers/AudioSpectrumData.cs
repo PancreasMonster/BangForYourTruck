@@ -6,15 +6,20 @@ public class AudioSpectrumData : MonoBehaviour
 {
     
     //public GameObject[][] crowdSections = new GameObject[10][];
-    AudioSource aud;
+    public AudioSource aud;
     public float[] audSamples = new float[512];
-    public Color col1, col2;
+    public Color col1;
+    public List<Color> colors = new List<Color>();
+    public float colorLerpTime = 10;
+    [Range(1, 5)]
+    public float intensity;
 
 
 
     // Use this for initialization
     void Start()
     {
+        if(aud == null)
         aud = GameObject.Find("MainGameMusic").GetComponent<AudioSource>();
       
     }

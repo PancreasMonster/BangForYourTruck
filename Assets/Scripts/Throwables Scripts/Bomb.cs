@@ -16,7 +16,8 @@ public class Bomb : MonoBehaviour
     Animation anim;
     AudioSource audio;
     Rigidbody rb;
-    public ParticleSystem particles;
+    public GameObject particles;
+    public Sprite damageImage;
 
     // Start is called before the first frame update
     void Start()
@@ -67,8 +68,9 @@ public class Bomb : MonoBehaviour
         }
 
         StopAllCoroutines();
-        audio.Play();
-        particles.Play();
+        //audio.Play();
+        Instantiate(particles, transform.position, transform.rotation);
+        //particles.Play();
         this.gameObject.layer = 10;
         Invoke("DestroyThisGameObject", 1f);
     }
@@ -84,7 +86,7 @@ public class Bomb : MonoBehaviour
 
             Health h = c.GetComponent<Health>();
             if (h != null)
-                h.health -= damage;
+                h.TakeDamage (damageImage, this.gameObject, damage, Vector3.zero);
         }
 
         if (artillery)
@@ -98,8 +100,9 @@ public class Bomb : MonoBehaviour
 
 
         StopAllCoroutines();
-        audio.Play();
-        particles.Play();
+        //audio.Play();
+        Instantiate(particles, transform.position, transform.rotation);
+        //particles.Play();
         this.gameObject.layer = 10;
         Invoke("DestroyThisGameObject",1f);
     }
