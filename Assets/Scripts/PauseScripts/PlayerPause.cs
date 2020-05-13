@@ -73,7 +73,7 @@ public class PlayerPause : MonoBehaviour
 
         if (!tryingToLeave && !lookingAtControls)
         {
-            if (leftStick.y > 0 && canChange && GameIsPaused)
+            if (leftStick.y > .8f && canChange && GameIsPaused)
             {
                 canChange = false;
                 if (i == 0)
@@ -86,11 +86,11 @@ public class PlayerPause : MonoBehaviour
                 }
 
             }
-            else if (leftStick.y == 0)
+            else if (leftStick.y < .8f && leftStick.y > -.8f)
             {
                 canChange = true;
             }
-            else if (leftStick.y < 0 && canChange && GameIsPaused)
+            else if (leftStick.y < -.8f && canChange && GameIsPaused)
             {
                 canChange = false;
                 if (i == buttons.Count - 1)
@@ -189,6 +189,9 @@ public class PlayerPause : MonoBehaviour
 
         GameIsPaused = false;
         noJumpOrBoost = false;
+        lookingAtControls = false;
+        tryingToLeave = false;
+        controls.SetActive(false);
     }
 
     public void Controls ()
