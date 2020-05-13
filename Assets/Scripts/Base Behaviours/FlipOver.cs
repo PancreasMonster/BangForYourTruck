@@ -122,7 +122,15 @@ public class FlipOver : MonoBehaviour
 
     private void OnLeftStick(InputValue value)
     {
-        leftStick = value.Get<Vector2>();
+        if (!pp.noPlayerInput)
+        {
+            leftStick = value.Get<Vector2>();
+        }
+        else
+        {
+            leftStick = Vector2.zero;
+        }
+    
     }
 
     private void Update()

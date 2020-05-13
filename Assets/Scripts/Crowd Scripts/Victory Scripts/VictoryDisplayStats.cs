@@ -71,6 +71,11 @@ public class VictoryDisplayStats : MonoBehaviour
     public void DisplayEndScreenStats(string victoryText)
     {
 
+        foreach(GameObject g in km.players)
+        {
+            g.GetComponent<PlayerPause>().noPlayerInput = true;
+        }
+
         UpdateScore();
 
         scoreBoard.gameObject.SetActive(true);

@@ -24,6 +24,8 @@ public class ShotgunWeapon : MonoBehaviour
 
     bool rightFiredLast;
 
+    PlayerPause pp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,8 @@ public class ShotgunWeapon : MonoBehaviour
         {
             model.SetActive(true);
         }
+
+        pp = GetComponent<PlayerPause>();
     }
 
     float PadLB;
@@ -51,35 +55,46 @@ public class ShotgunWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = 1;
+        if (!pp.noPlayerInput)
+        
+            PadLB = 1;
     }
 
     private void OnLeftBumperRelease(InputValue value)
     {
-        PadLB = 0;
+        if (!pp.noPlayerInput)
+        
+            PadLB = 0;
     }
 
     private void OnRightBumper(InputValue value)
     {
-        PadRB = value.Get<float>();
-        if (canFire && !cooldown)
+        if (!pp.noPlayerInput)
         {
-            if (PadLB == 0)
+            PadRB = value.Get<float>();
+            if (canFire && !cooldown)
             {
-                if (!rightFiredLast)
+                if (PadLB == 0)
                 {
+                    if (!rightFiredLast)
+                    {
 
-                    FireRightSide();
-                    cooldown = true;
-                    StartCoroutine(Cooldown(fireRate));
-                }
-                else
-                {
-                    FireLeftSide();
-                    cooldown = true;
-                    StartCoroutine(Cooldown(fireRate));
+                        FireRightSide();
+                        cooldown = true;
+                        StartCoroutine(Cooldown(fireRate));
+                    }
+                    else
+                    {
+                        FireLeftSide();
+                        cooldown = true;
+                        StartCoroutine(Cooldown(fireRate));
+                    }
                 }
             }
+        }
+        else
+        {
+            PadRB = 0;
         }
     }
 
