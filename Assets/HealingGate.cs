@@ -7,6 +7,9 @@ public class HealingGate : MonoBehaviour
     public int price;
     AudioSource audio;
 
+    [FMODUnity.EventRef]
+    public string wrench;
+
     void Start()
     {
         audio = GetComponent<AudioSource>();
@@ -25,7 +28,7 @@ public class HealingGate : MonoBehaviour
                 {
                     hp.health = hp.maxHealth;
                     PB.tagsInBank -= price;
-                    audio.Play();
+                    FMODUnity.RuntimeManager.PlayOneShot(wrench);
                 }
 
             }
