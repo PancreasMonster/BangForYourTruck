@@ -27,7 +27,7 @@ public class LevelInfo : MonoBehaviour
 
     public void LoadImage()
     {
-        GetComponentInChildren<Image>().sprite = spriteToDisplay;
+        tranform.GetChild(1).GetComponent<Image>().sprite = spriteToDisplay;
     }
 
     public void GridGulchImage()
