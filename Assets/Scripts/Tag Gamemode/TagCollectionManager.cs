@@ -108,8 +108,8 @@ public class TagCollectionManager : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot(blueWinSound);
         } else if (blueTeamTokens < redTeamTokens)
         {
-            winText.text = "Blue Team Wins!";
-            StartCoroutine(Victory("Blue Team Wins!"));
+            winText.text = "Red Team Wins!";
+            StartCoroutine(Victory("Red Team Wins!"));
             FMODUnity.RuntimeManager.PlayOneShot(redWinSound);
         }
     }
