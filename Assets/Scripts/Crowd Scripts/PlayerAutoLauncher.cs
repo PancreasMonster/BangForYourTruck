@@ -10,7 +10,7 @@ public class PlayerAutoLauncher : MonoBehaviour
     public Transform launchPoint;
     public float maxTime = 10;
     public Text text;
-    public PlayerPause pp;
+    PlayerPause pp;
 
     // Start is called before the first frame update
     void Start()

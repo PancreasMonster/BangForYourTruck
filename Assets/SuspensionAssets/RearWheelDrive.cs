@@ -105,10 +105,9 @@ public class RearWheelDrive : MonoBehaviour {
 
     private void OnFaceButtonWestRelease(InputValue value)
     {
-        if (!pp.noPlayerInput)
-        {
+      
             XButton = 0;
-        }
+        
     }
 
     public void FixedUpdate()

@@ -119,6 +119,9 @@ public class Health : MonoBehaviour
         //The text is equal to the damage taken
         damageTextGameObject.GetComponentInChildren<TextMesh>().text = ((int)damageTaken).ToString();
 
+
+        damageTextGameObject.GetComponentInChildren<TextMesh>().fontSize = ((int)Mathf.Min(550, Mathf.Max(150, 550 * damageTaken / maxHealth)));
+
         //Changes the layer of the text so only the opposite team can see it
         damageTextGameObject.gameObject.layer = damageTextLayer;
         foreach (Transform t in damageTextGameObject.transform)
