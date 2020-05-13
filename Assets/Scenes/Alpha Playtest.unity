@@ -24095,6 +24095,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 230492884965192893, guid: b58566f566b86844a80fe7b64f3c9e78,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1277900118755851785, guid: b58566f566b86844a80fe7b64f3c9e78,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -24154,6 +24159,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775191613189908868, guid: b58566f566b86844a80fe7b64f3c9e78,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1775191613189908869, guid: b58566f566b86844a80fe7b64f3c9e78,
         type: 3}
@@ -24400,6 +24410,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6175680350528675748, guid: b58566f566b86844a80fe7b64f3c9e78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6176366760210705390, guid: b58566f566b86844a80fe7b64f3c9e78,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -24498,6 +24513,11 @@ PrefabInstance:
     - target: {fileID: 7413313348616166255, guid: b58566f566b86844a80fe7b64f3c9e78,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526400228737977077, guid: b58566f566b86844a80fe7b64f3c9e78,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771391427076781989, guid: b58566f566b86844a80fe7b64f3c9e78,
@@ -24644,7 +24664,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1250808564}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1250808573}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -24665,6 +24685,18 @@ GameObject:
 --- !u!1 &1250808572 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7233170810950696631, guid: b58566f566b86844a80fe7b64f3c9e78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1250808564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1250808573 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1775191611936213345, guid: b58566f566b86844a80fe7b64f3c9e78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1250808564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1250808574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6129223255966463373, guid: b58566f566b86844a80fe7b64f3c9e78,
     type: 3}
   m_PrefabInstance: {fileID: 1250808564}
   m_PrefabAsset: {fileID: 0}
@@ -24788,7 +24820,7 @@ MonoBehaviour:
   - {fileID: 1666152157}
   - {fileID: 664598956}
   - {fileID: 1062710912}
-  gameTimer: 300
+  gameTimer: 2
   gameTimerText: {fileID: 1950057582}
   blueTeamTokenString: {fileID: 340562080}
   redTeamTokenString: {fileID: 1973647089}
@@ -24833,10 +24865,12 @@ MonoBehaviour:
   winText: {fileID: 1250808567}
   km: {fileID: 2000975789}
   players: []
+  victoryItems: []
   victoryScreenItem: {fileID: 3468395311562254224, guid: ccedc901db2d614418efa12c0766fc33,
     type: 3}
   victoryScreenItemHolder: {fileID: 1250808565}
   victoryScreenHeaderHolder: {fileID: 1250808566}
+  victoryScreenItemHolder2: {fileID: 1250808574}
   continueButtons: {fileID: 1250808570}
 --- !u!114 &1267454972
 MonoBehaviour:
@@ -31779,6 +31813,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 608151020}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714849688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714849687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fbe3dc8d538aac40baaccb786118e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tcm: {fileID: 1267454969}
+  scoreBoardItems:
+  - {fileID: 1250808573}
+  - {fileID: 1250808566}
+  - {fileID: 1250808565}
+  - {fileID: 1250808574}
 --- !u!114 &1714849691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6180139760554990229, guid: fcf5971af3c83224bb0074cd9bd9dfa5,
@@ -39724,6 +39776,7 @@ MonoBehaviour:
   stadiumPyrotechnicParticles: {fileID: 146748197}
   longShotDistance: 300
   tm: {fileID: 0}
+  vds: {fileID: 1267454971}
 --- !u!4 &2000975790
 Transform:
   m_ObjectHideFlags: 0

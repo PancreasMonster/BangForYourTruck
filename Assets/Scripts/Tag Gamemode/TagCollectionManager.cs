@@ -32,6 +32,7 @@ public class TagCollectionManager : MonoBehaviour
     bool wentToAwards;
     public GameObject awardsHeader, rematchButton;
     public AudioSource[] aud;
+    public bool scoreBoardShown = false;
 
 
     // Start is called before the first frame update
@@ -117,6 +118,7 @@ public class TagCollectionManager : MonoBehaviour
     {
         winPanelImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(5);
+        scoreBoardShown = true;
         foreach(GameObject g in canvasToDisable)
         {
             g.SetActive(false);

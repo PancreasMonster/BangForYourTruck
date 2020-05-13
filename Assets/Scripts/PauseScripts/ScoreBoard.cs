@@ -7,12 +7,26 @@ public class ScoreBoard : MonoBehaviour
 {
     public TagCollectionManager tcm;
     public List<GameObject> scoreBoardItems = new List<GameObject>();
+    bool changeToScoreBoard = false;
 
-    private void OnStart(InputValue value)
+    private void OnSelect(InputValue value)
     {
-        if(!tcm.gameWon)
+        Debug.Log("Yes");
+        if(!tcm.scoreBoardShown && !changeToScoreBoard)
         {
-            
+            changeToScoreBoard = true;
+            foreach(GameObject g in scoreBoardItems)
+            {
+                g.SetActive(true);
+            }
+        }
+        else if (!tcm.scoreBoardShown && changeToScoreBoard)
+        {
+            changeToScoreBoard = false;
+            foreach (GameObject g in scoreBoardItems)
+            {
+                g.SetActive(false);
+            }
         }
     }
 

@@ -14,7 +14,7 @@ public class VictoryDisplayStats : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> victoryItems = new List<GameObject>();
     public GameObject victoryScreenItem;
-    public GameObject victoryScreenItemHolder, victoryScreenHeaderHolder;
+    public GameObject victoryScreenItemHolder, victoryScreenHeaderHolder, victoryScreenItemHolder2;
     public GameObject continueButtons;
 
     // Start is called before the first frame update
@@ -70,23 +70,14 @@ public class VictoryDisplayStats : MonoBehaviour
 
     public void DisplayEndScreenStats(string victoryText)
     {
-        for(int num = 0; num < players.Count; num++)
-        {
-                GameObject VSI = Instantiate(victoryScreenItem, victoryScreenItemHolder.transform);
-                Text[] texts = new Text[6];
-                texts = VSI.GetComponentsInChildren<Text>();
-                
-                texts[0].text = players[num].transform.name.ToString();
-                texts[1].text = km.kills[num].ToString();
-                texts[2].text = km.deaths[num].ToString();
-                texts[3].text = km.tagsDeposited[num].ToString();
-                texts[4].text = km.tagsDenied[num].ToString();
-                texts[5].text = km.score[num].ToString();
-        }
+
+        UpdateScore();
 
         scoreBoard.gameObject.SetActive(true);
 
         victoryScreenItemHolder.gameObject.SetActive(true);
+
+        victoryScreenItemHolder2.gameObject.SetActive(true);
 
         victoryScreenHeaderHolder.gameObject.SetActive(true);
 
@@ -106,6 +97,8 @@ public class VictoryDisplayStats : MonoBehaviour
         scoreBoard.gameObject.SetActive(false);
 
         victoryScreenItemHolder.gameObject.SetActive(false);
+
+        victoryScreenItemHolder2.gameObject.SetActive(false);
 
         victoryScreenHeaderHolder.gameObject.SetActive(false);
 
