@@ -28,7 +28,7 @@ public class VictoryDisplayStats : MonoBehaviour
             Text[] texts = new Text[6];
             texts = VSI.GetComponentsInChildren<Text>();
 
-            texts[0].text = players[num].transform.name.ToString();
+            texts[0].text = km.players[num].transform.name.ToString();
             texts[1].text = km.kills[num].ToString();
             texts[2].text = km.deaths[num].ToString();
             texts[3].text = km.tagsDeposited[num].ToString();
@@ -53,7 +53,7 @@ public class VictoryDisplayStats : MonoBehaviour
             Text[] texts = new Text[6];
             texts = victoryItems[num].GetComponentsInChildren<Text>();
 
-            texts[0].text = players[num].transform.name.ToString();
+            texts[0].text = km.players[num].transform.name.ToString();
             texts[1].text = km.kills[num].ToString();
             texts[2].text = km.deaths[num].ToString();
             texts[3].text = km.tagsDeposited[num].ToString();
