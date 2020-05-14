@@ -16,6 +16,7 @@ public class VictoryDisplayStats : MonoBehaviour
     public GameObject victoryScreenItem;
     public GameObject victoryScreenItemHolder, victoryScreenHeaderHolder, victoryScreenItemHolder2;
     public GameObject continueButtons;
+    public bool gameVictory = false;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +77,8 @@ public class VictoryDisplayStats : MonoBehaviour
             g.GetComponent<PlayerPause>().noPlayerInput = true;
         }
 
+        gameVictory = true;
+
         UpdateScore();
 
         scoreBoard.gameObject.SetActive(true);
@@ -110,5 +113,21 @@ public class VictoryDisplayStats : MonoBehaviour
         winPanel.gameObject.SetActive(false);
 
         continueButtons.SetActive(false);
+    }
+
+    public void DisableInput()
+    {
+        foreach (GameObject g in km.players)
+        {
+            g.GetComponent<PlayerPause>().noPlayerInput = true;
+        }
+    }
+
+    public void EnableInput()
+    {
+        foreach (GameObject g in km.players)
+        {
+            g.GetComponent<PlayerPause>().noPlayerInput = false;
+        }
     }
 }

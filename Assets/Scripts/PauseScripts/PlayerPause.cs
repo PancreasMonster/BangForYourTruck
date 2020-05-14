@@ -13,41 +13,49 @@ public class PlayerPause : MonoBehaviour
     public bool noPlayerInput = false;
     public bool tryingToLeave = false;
     public bool lookingAtControls = false;
+    public bool canWork;
+    public TagCollectionManager tcm;
     public List<GameObject> UIElements = new List<GameObject>();
     public List<GameObject> buttons = new List<GameObject>();
     public List<GameObject> exitButtons = new List<GameObject>();
     public GameObject controls;
     public GameObject continueButton, controlsBackButton, confirmButton, currentGameObject;
     public EventSystem e;
+    PlayerAutoLauncher pal;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        pal = GetComponent<PlayerAutoLauncher>();
     }
 
     private void OnStart(InputValue value)
     {
-        if (GameIsPaused == false)
+        if (canWork && !tcm.vds.gameVictory)
         {
-            foreach (GameObject g in UIElements)
+            if (GameIsPaused == false && !tcm.gamePaused)
             {
-                g.SetActive(true);
-            }
+                foreach (GameObject g in UIElements)
+                {
+                    g.SetActive(true);
+                }
 
-            foreach (GameObject g in exitButtons)
+                foreach (GameObject g in exitButtons)
+                {
+                    g.SetActive(false);
+                }
+
+                GameIsPaused = true;
+                noJumpOrBoost = true;
+                goToPauseMenu();
+                tcm.vds.DisableInput();
+                tcm.gamePaused = true;
+            }
+            else
             {
-                g.SetActive(false);
+                Unpause();
             }
-
-            GameIsPaused = true;
-            noJumpOrBoost = true;
-            goToPauseMenu();
-        }
-        else
-        {
-            
         }
     }
 
@@ -72,7 +80,11 @@ public class PlayerPause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonUp(0))
+        {
+         //   e.SetSelectedGameObject(null);
+         //   e.SetSelectedGameObject(currentGameObject);
+        }
     }
 
     public void Exit () 
@@ -111,10 +123,13 @@ public class PlayerPause : MonoBehaviour
         }
 
         GameIsPaused = false;
+        if(pal.inArena)
         noJumpOrBoost = false;
         lookingAtControls = false;
         tryingToLeave = false;
         controls.SetActive(false);
+        tcm.vds.EnableInput();
+        tcm.gamePaused = false;
     }
 
     public void Controls ()

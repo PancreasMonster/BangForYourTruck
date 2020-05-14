@@ -22,7 +22,7 @@ public class TagCollectionManager : MonoBehaviour
     public float gameTimer = 600;
     public Text gameTimerText;
     public Text blueTeamTokenString, redTeamTokenString;
-    VictoryDisplayStats vds;
+    public VictoryDisplayStats vds;
     AwardScene awardScene;
     bool redTeamWon, blueTeamWon;
     public Transform targetPosition;
@@ -33,6 +33,7 @@ public class TagCollectionManager : MonoBehaviour
     public GameObject awardsHeader, rematchButton;
     public AudioSource[] aud;
     public bool scoreBoardShown = false;
+    public bool gamePaused;
 
 
     // Start is called before the first frame update
