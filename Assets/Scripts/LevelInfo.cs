@@ -28,7 +28,7 @@ public class LevelInfo : MonoBehaviour
     public void LoadImage()
     {
         transform.GetChild(1).GetComponent<Image>().sprite = spriteToDisplay;
-
+        TurnOnLevelInfo();
         if (spriteToDisplay == gridGulch)
         {
             levelInfoParent.transform.GetChild(0).gameObject.SetActive(true);
@@ -71,6 +71,12 @@ public class LevelInfo : MonoBehaviour
     public void TurnOffLevelInfo()
     {
         levelInfoParent.SetActive(false);
+
+    }
+
+    public void TurnOnLevelInfo()
+    {
+        levelInfoParent.SetActive(true);
 
     }
 }
