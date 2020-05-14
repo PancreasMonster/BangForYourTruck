@@ -478,5 +478,6 @@ public class TrainingManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         targetDrone.GetComponentInChildren<Health>().enabled = true;
+        targetDrone.GetComponentInChildren<Health>().health = 1;
     }
 }

@@ -48,6 +48,7 @@ public class BuildModeFire : MonoBehaviour
     //GameObject selector;
     public Color imageCol, blackHoleCol;
     bool release = false;
+    PlayerPause pp;
 
 
     void Start()
@@ -62,6 +63,7 @@ public class BuildModeFire : MonoBehaviour
         //selector = clone;
         StartCoroutine(assignColour());
         targetZDistance = ranges[0];
+        pp = GetComponent<PlayerPause>();
     }
 
     Vector2 rightStick;
@@ -73,13 +75,25 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnRightStick(InputValue value)
     {
-        rightStick = value.Get<Vector2>();
+        if (!pp.noPlayerInput)
+        {
+            rightStick = value.Get<Vector2>();
+        } else
+        {
+            rightStick = Vector2.zero;
+        }
     }
 
     private void OnLeftBumper(InputValue value)
     {
-
-        display = 1;
+        if(!pp.noPlayerInput)
+        {
+            display = 1;
+        } 
+        else
+        {
+            display = 0;
+        }
 
             
     }
@@ -91,36 +105,53 @@ public class BuildModeFire : MonoBehaviour
 
     private void OnLeftBumperRelease(InputValue value)
     {
-        if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
+        if (!pp.noPlayerInput)
         {
-            PadLB = 1;
-            release = true;
-            discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown(0);
+            if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1)
+            {
+                PadLB = 1;
+                release = true;
+                discUIImages[currentI].GetComponent<ThrowableCooldown>().GoOnCooldown(0);
+            }
+            display = 0;
         }
-        display = 0;
     }
 
     private void OnRightBumperRelease(InputValue value)
     {
-        PadRB = 0;
+        if (!pp.noPlayerInput)
+        {
+            PadRB = 0;
+        }
     }
 
     private void OnDPADLeftRight(InputValue value)
     {
-        DPadLeftRight = value.Get<float>();
+        if (!pp.noPlayerInput)
+        {
+            DPadLeftRight = value.Get<float>();
+        } 
+        else
+        {
+            DPadLeftRight = 0;
+        }
         //Debug.Log(DPadLeftRight);
     }
 
     private void OnDPADUpDown(InputValue value)
     {
-        DPadUpDown = value.Get<float>();
-        if(DPadUpDown == 1)
+        if (!pp.noPlayerInput)
         {
-            targetZDistance = ranges[0];
-        } else if (DPadUpDown == -1)
-        {
-            targetZDistance = ranges[1];
-        }
+            DPadUpDown = value.Get<float>();
+            if (DPadUpDown == 1)
+            {
+                targetZDistance = ranges[0];
+            }
+            else if (DPadUpDown == -1)
+            {
+                targetZDistance = ranges[1];
+            }
+        } 
     }
 
 

@@ -13,7 +13,7 @@ public class NeutralCollectionGate : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         tagCollectionManager = GameObject.Find("TagCollectionManager").GetComponent<TagCollectionManager>();
-        StartCoroutine(AssignPBs());
+        //StartCoroutine(AssignPBs());
 
     }
 

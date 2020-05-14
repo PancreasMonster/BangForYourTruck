@@ -19,9 +19,12 @@ public class ShotgunWeapon : MonoBehaviour
     ParticleSystem emptyShellsLeft;
     Animation leftShotgunAnim;
     public bool canFire;
-
+    public float fireRate;
+    bool cooldown;
 
     bool rightFiredLast;
+
+    PlayerPause pp;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,8 @@ public class ShotgunWeapon : MonoBehaviour
         {
             model.SetActive(true);
         }
+
+        pp = GetComponent<PlayerPause>();
     }
 
     float PadLB;
@@ -50,32 +55,46 @@ public class ShotgunWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = 1;
+        if (!pp.noPlayerInput)
+        
+            PadLB = 1;
     }
 
     private void OnLeftBumperRelease(InputValue value)
     {
-        PadLB = 0;
+        if (!pp.noPlayerInput)
+        
+            PadLB = 0;
     }
 
     private void OnRightBumper(InputValue value)
     {
-        PadRB = value.Get<float>();
-        if (canFire)
+        if (!pp.noPlayerInput)
         {
-            if (PadLB == 0)
+            PadRB = value.Get<float>();
+            if (canFire && !cooldown)
             {
-                if (!rightFiredLast)
+                if (PadLB == 0)
                 {
+                    if (!rightFiredLast)
+                    {
 
-                    FireRightSide();
-                }
-                else
-                {
-                    FireLeftSide();
-
+                        FireRightSide();
+                        cooldown = true;
+                        StartCoroutine(Cooldown(fireRate));
+                    }
+                    else
+                    {
+                        FireLeftSide();
+                        cooldown = true;
+                        StartCoroutine(Cooldown(fireRate));
+                    }
                 }
             }
+        }
+        else
+        {
+            PadRB = 0;
         }
     }
 
@@ -137,5 +156,11 @@ public class ShotgunWeapon : MonoBehaviour
           //  Debug.Log("left fired");
 
         }
+    }
+
+    IEnumerator Cooldown(float time) 
+    {
+        yield return new WaitForSeconds(time);
+        cooldown = false;
     }
 }

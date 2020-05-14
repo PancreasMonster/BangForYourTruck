@@ -41,6 +41,8 @@ public class KillManager : MonoBehaviour
 
     public TrainingManager tm;
 
+    public VictoryDisplayStats vds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -185,6 +187,8 @@ public class KillManager : MonoBehaviour
         }
         Debug.Log(flavourTexts.Count);
         killer.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedDrift(GameObject player, int driftLength)
@@ -217,6 +221,8 @@ public class KillManager : MonoBehaviour
 
 
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedStunt(GameObject player, List<string> stunts, List<int> scores)
@@ -237,6 +243,8 @@ public class KillManager : MonoBehaviour
         }
 
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedDepositToken(GameObject player, int tokens)
@@ -252,6 +260,8 @@ public class KillManager : MonoBehaviour
         int i = player.GetComponent<Health>().playerNum - 1;
         tagsDeposited[i]++;
         score[i] += 50;
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedCollectToken(GameObject player)
@@ -263,6 +273,8 @@ public class KillManager : MonoBehaviour
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
         int i = player.GetComponent<Health>().playerNum - 1;
         score[i] += 50;
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedDeny(GameObject player)
@@ -275,6 +287,8 @@ public class KillManager : MonoBehaviour
         int i = player.GetComponent<Health>().playerNum - 1;
         tagsDenied[i]++;
         score[i] += 50;
+        if (vds)
+            vds.UpdateScore();
     }
 
     IEnumerator DoubleKillDialougeBool(int i)

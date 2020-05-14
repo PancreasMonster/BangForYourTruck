@@ -19,12 +19,8 @@ public class FloatingDamageText : MonoBehaviour
         randomXSpeed = Random.Range(-15, 15);
         randomZSpeed = Random.Range(-15, 15);
 
-        randomColor = new Color(
-        Random.Range(.5f, 1f),
-        Random.Range(0f, .1f),
-        Random.Range(.5f, 1f),
-        1
-        );
+        randomColor = Color.white;
+        
     }
 
     // Update is called once per frame

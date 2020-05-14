@@ -5,11 +5,13 @@ using UnityEngine;
 public class HealingGate : MonoBehaviour
 {
     public int price;
-    AudioSource audio;
+
+    [FMODUnity.EventRef]
+    public string wrench;
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+
     }
 
     private void OnTriggerEnter(Collider col)
@@ -25,7 +27,7 @@ public class HealingGate : MonoBehaviour
                 {
                     hp.health = hp.maxHealth;
                     PB.tagsInBank -= price;
-                    audio.Play();
+                    FMODUnity.RuntimeManager.PlayOneShot(wrench);
                 }
 
             }

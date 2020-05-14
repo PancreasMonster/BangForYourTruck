@@ -45,8 +45,6 @@ public class ParticleTurret : AIBehaviours
                 dir.Normalize();              
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z)), rotationSpeed * Time.deltaTime);
                 var psShape = ps.shape;
-                psShape.position = firingPoint.localPosition;
-                psShape.rotation = dir;
             }
         }
 

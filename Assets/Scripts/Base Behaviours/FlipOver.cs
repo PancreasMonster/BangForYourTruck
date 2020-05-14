@@ -44,6 +44,8 @@ public class FlipOver : MonoBehaviour
     ParticleSystem jumpParticles1;
     ParticleSystem jumpParticles2;
 
+    PlayerPause pp;
+
 
     // Start is called before the first frame update
     void Start()
@@ -63,13 +65,14 @@ public class FlipOver : MonoBehaviour
         {
             w.forwardFriction = curve;
         }
+        pp = GetComponent<PlayerPause>();
     }
 
    
 
     private void OnFaceButtonSouth(InputValue value)
     {
-        if (!delay)
+        if (!delay && !pp.noJumpOrBoost)
         {
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, out hit2, 7.5f, layer))
             {
@@ -119,7 +122,15 @@ public class FlipOver : MonoBehaviour
 
     private void OnLeftStick(InputValue value)
     {
-        leftStick = value.Get<Vector2>();
+        if (!pp.noPlayerInput)
+        {
+            leftStick = value.Get<Vector2>();
+        }
+        else
+        {
+            leftStick = Vector2.zero;
+        }
+    
     }
 
     private void Update()

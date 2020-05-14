@@ -58,7 +58,7 @@ public class TagHolder : MonoBehaviour
             GameObject droppedTag = Instantiate(teamTag, new Vector3(transform.position.x + newPos.x, transform.position.y + 1, transform.position.z + newPos.z), Quaternion.identity);
             droppedTag.GetComponentInChildren<TeamTagPickUp>().tagTeamNum = GetComponent<Health>().teamNum;
             droppedTag.GetComponentInChildren<TeamTagPickUp>().km = km;
-            droppedTag.GetComponent<Rigidbody>().AddForce(Vector3.up * dropForce);
+            droppedTag.GetComponent<Rigidbody>().AddForce(Vector3.up * dropForce);            
             currentTags = 0;
         }
         EmptyTags();

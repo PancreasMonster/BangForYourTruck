@@ -20,6 +20,7 @@ public class RearWheelDrive : MonoBehaviour {
     public float sidewaySlipEx, sidewaySlipAS;
     public bool trainingMode;
     public TrainingManager tm;
+    PlayerPause pp;
 
 
     // here we find all the WheelColliders down in the hierarchy
@@ -42,6 +43,7 @@ public class RearWheelDrive : MonoBehaviour {
                     ws.transform.localScale = new Vector3(ws.transform.localScale.x * -1f, ws.transform.localScale.y, ws.transform.localScale.z);
 			}
 		}
+        pp = GetComponent<PlayerPause>();
 	}
 
     Vector2 leftStick;
@@ -51,37 +53,63 @@ public class RearWheelDrive : MonoBehaviour {
 
     private void OnLeftStick (InputValue value)
     {
-        leftStick = value.Get<Vector2>();
+        if (!pp.noPlayerInput)
+        {
+            leftStick = value.Get<Vector2>();
+        }
+        else
+        {
+            leftStick = Vector2.zero;
+        }
     }
 
     private void OnRightTrigger (InputValue value)
     {
-        
-        rightTrigger = value.Get<float>();
-        if (trainingMode && tm.canProceed)
-            tm.pressedRT = true;
+        if (!pp.noPlayerInput)
+        {
+            rightTrigger = value.Get<float>();
+            if (trainingMode && tm.canProceed)
+                tm.pressedRT = true;
+        }
+        else
+        {
+            rightTrigger = 0;
+        }
     }
 
     private void OnLeftTrigger (InputValue value)
     {
-        leftTrigger = value.Get<float>();
-        if (trainingMode && tm.canProceed)
-            tm.pressedLT = true;
+        if (!pp.noPlayerInput)
+        {
+            leftTrigger = value.Get<float>();
+            if (trainingMode && tm.canProceed)
+                tm.pressedLT = true;
+        }
+        else
+        {
+            leftTrigger = 0;
+        }
     }
 
     private void OnFaceButtonWest(InputValue value)
     {
-        XButton = 1;
+        if (!pp.noPlayerInput)
+        {
+            XButton = 1;
+        }
+        else
+        {
+            XButton = 0;
+        }
     }
 
     private void OnFaceButtonWestRelease(InputValue value)
     {
-        XButton = 0;
+      
+            XButton = 0;
+        
     }
 
-    // this is a really simple approach to updating wheels
-    // here we simulate a rear wheel drive car and assume that the car is perfectly symmetric at local zero
-    // this helps us to figure our which wheels are front ones and which are rear
     public void FixedUpdate()
 	{
         Debug.DrawRay(transform.position, rigidbody.velocity * 100, Color.blue);
@@ -125,7 +153,6 @@ public class RearWheelDrive : MonoBehaviour {
 
         foreach (WheelCollider wheel in wheels)
 		{
-            // a simple car where front wheels steer while rear ones drive
             if (wheel.transform.localPosition.z > 0) {
 
                 if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
@@ -244,7 +271,6 @@ public class RearWheelDrive : MonoBehaviour {
 				Vector3 p;
 				wheel.GetWorldPose (out p, out q);
 
-				// assume that the only child of the wheelcollider is the wheel shape
 				Transform shapeTransform = wheel.transform.GetChild (0);
 				shapeTransform.position = p;
 				shapeTransform.rotation = q;

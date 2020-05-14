@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +12,14 @@ public class ThrowableCooldown : MonoBehaviour
     bool onCooldown;
     public float fillAmountValue = 1;
     public Image[] images = new Image[2];
+    public Animation selectionAnim;
 
     // Start is called before the first frame update
     void Start()
     {
         images[0] = transform.GetChild(2).GetComponent<Image>();
         images[1] = transform.GetChild(3).GetComponent<Image>();
-
+        selectionAnim = transform.Find("SelectingText").GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class ThrowableCooldown : MonoBehaviour
             {
                 Debug.Log("FINISHED");
                 onCooldown = false;
+                selectionAnim.Play();
             }
         }
     }

@@ -5,12 +5,14 @@ using UnityEngine;
 public class CreateLevel : MonoBehaviour
 {
     public List<GameObject> levels = new List<GameObject>();
-    int i;
+    int i = -1;
     public RotateAroundLevel ral;
     // Start is called before the first frame update
     void Start()
     {
+        if(GameObject.Find("PersistentSceneLoader"))
         i = GameObject.Find("PersistentSceneLoader").GetComponent<LevelCreator>().levelToActivate;
+        if(i != -1)
         activateLevel(i);
     }
 
