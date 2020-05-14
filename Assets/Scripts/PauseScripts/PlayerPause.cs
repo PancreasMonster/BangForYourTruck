@@ -112,7 +112,6 @@ public class PlayerPause : MonoBehaviour
         }
         else
         {
-            Destroy(psl);
             SceneManager.LoadScene("0_MainMenu", LoadSceneMode.Single);
         }
     }

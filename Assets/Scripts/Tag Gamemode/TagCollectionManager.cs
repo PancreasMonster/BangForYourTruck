@@ -189,7 +189,6 @@ public class TagCollectionManager : MonoBehaviour
         {
             if (wentToAwards)
             {
-                Destroy(psl);
                 SceneManager.LoadScene("0_MainMenu");
             }
         }
