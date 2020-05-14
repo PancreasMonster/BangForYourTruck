@@ -155,7 +155,7 @@ public class RearWheelDrive : MonoBehaviour {
 		{
             if (wheel.transform.localPosition.z > 0) {
 
-                if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
+                if (XButton > 0 && wheel.rpm / maxSpeed > .3f) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
                 {
                     wheel.steerAngle = angle;
                 }
@@ -168,7 +168,7 @@ public class RearWheelDrive : MonoBehaviour {
             }
 
             WheelFrictionCurve curve = new WheelFrictionCurve();
-            if (XButton > 0)
+            if (XButton > 0 && wheel.rpm / maxSpeed > .3f)
             {
                
             curve.extremumSlip = 30f;
@@ -178,7 +178,7 @@ public class RearWheelDrive : MonoBehaviour {
             curve.stiffness = 1f;
                 maxAngle = 30;
                 sidewaySlipAS = 6;
-                sidewaySlipEx = 6;
+                sidewaySlipEx = 6; 
             }
             else
             {
@@ -207,7 +207,7 @@ public class RearWheelDrive : MonoBehaviour {
                     wheel.motorTorque = 0;
                     wheel.brakeTorque = breakForce;
                 }
-                if (XButton > 0)
+                if (XButton > 0 && wheel.rpm / maxSpeed > .3f)
                 {
 
                     

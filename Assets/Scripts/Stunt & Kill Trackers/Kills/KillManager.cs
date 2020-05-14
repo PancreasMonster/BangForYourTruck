@@ -258,7 +258,7 @@ public class KillManager : MonoBehaviour
         scoreList.Add(100 * tokens);
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
         int i = player.GetComponent<Health>().playerNum - 1;
-        tagsDeposited[i]++;
+        tagsDeposited[i] += tokens;
         score[i] += 50;
         if (vds)
             vds.UpdateScore();
