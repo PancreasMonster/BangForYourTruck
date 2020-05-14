@@ -26,7 +26,9 @@ public class AudioSpectrumData : MonoBehaviour
         aud = GameObject.Find("MainGameMusic").GetComponent<AudioSource>();
 
         if (PlayerPrefs.GetInt("AVOn") == 1)
+        {
             audioVisualiser.SetActive(false);
+        }
         else
         {
             audioVisualiser.SetActive(true);
@@ -47,7 +49,9 @@ public class AudioSpectrumData : MonoBehaviour
         if (audioVisualiser && MainMenu)
         {
             if (PlayerPrefs.GetInt("AVOn") == 1)
+            {
                 audioVisualiser.SetActive(false);
+            }
             else
             {
                 audioVisualiser.SetActive(true);
