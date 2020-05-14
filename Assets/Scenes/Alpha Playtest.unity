@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -18128,6 +18128,7 @@ GameObject:
   - component: {fileID: 729411367}
   - component: {fileID: 729411366}
   - component: {fileID: 729411368}
+  - component: {fileID: 729411369}
   m_Layer: 0
   m_Name: MainGameMusic
   m_TagString: Untagged
@@ -18266,6 +18267,28 @@ MonoBehaviour:
   onSpectrum:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &729411369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729411365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f6731d7f4900f4e8f06c4e204bcd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracks:
+  - {fileID: 8300000, guid: e88a93e0919bc814c81e3f8b51b476ad, type: 3}
+  - {fileID: 8300000, guid: 707a229fb69738b4090614415fd37f70, type: 3}
+  - {fileID: 8300000, guid: 56a428fcc210f6f409e4fa23209c3218, type: 3}
+  - {fileID: 8300000, guid: e88a93e0919bc814c81e3f8b51b476ad, type: 3}
+  - {fileID: 8300000, guid: 707a229fb69738b4090614415fd37f70, type: 3}
+  - {fileID: 8300000, guid: 56a428fcc210f6f409e4fa23209c3218, type: 3}
+  - {fileID: 8300000, guid: e88a93e0919bc814c81e3f8b51b476ad, type: 3}
+  - {fileID: 8300000, guid: 707a229fb69738b4090614415fd37f70, type: 3}
+  - {fileID: 8300000, guid: 56a428fcc210f6f409e4fa23209c3218, type: 3}
 --- !u!1 &740040876 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1151130791346427739, guid: b1e206e0db106024c840d97d0ecd393b,
