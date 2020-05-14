@@ -23,6 +23,7 @@ public class PlayerPause : MonoBehaviour
     public EventSystem e;
     PlayerAutoLauncher pal;
     ScoreBoard sb;
+    public GameObject psl;
 
 
     // Start is called before the first frame update
@@ -111,6 +112,7 @@ public class PlayerPause : MonoBehaviour
         }
         else
         {
+            Destroy(psl);
             SceneManager.LoadScene("0_MainMenu", LoadSceneMode.Single);
         }
     }

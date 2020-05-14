@@ -34,6 +34,7 @@ public class TagCollectionManager : MonoBehaviour
     public AudioSource[] aud;
     public bool scoreBoardShown = false;
     public bool gamePaused;
+    public GameObject psl;
 
 
     // Start is called before the first frame update
@@ -188,6 +189,7 @@ public class TagCollectionManager : MonoBehaviour
         {
             if (wentToAwards)
             {
+                Destroy(psl);
                 SceneManager.LoadScene("0_MainMenu");
             }
         }
