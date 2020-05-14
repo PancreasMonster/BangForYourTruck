@@ -79,10 +79,6 @@ public class CannonBallScript : MonoBehaviour
                 coll.transform.GetComponentInParent<Health>().TakeDamage(damageImage, damageSource, damageToDeal * cannonAirDamageTimer, Vector3.zero);
                 canHit = false;
             }
-
-
-            if (coll.transform.GetComponent<Health>().teamNum != teamNum || coll.transform.GetComponentInParent<Health>().teamNum != teamNum)
-                Destroy(this.gameObject);
         }
         
     }
