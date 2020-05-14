@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -17230,6 +17230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &946513584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6129223255966463373, guid: b58566f566b86844a80fe7b64f3c9e78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1696196730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &946776292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6489122560384611853, guid: 8f6f80320f83df84d980caf0e8d8ab32,
@@ -28747,6 +28753,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1775191611936213345, guid: b58566f566b86844a80fe7b64f3c9e78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775191613189908868, guid: b58566f566b86844a80fe7b64f3c9e78,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1775191613189908869, guid: b58566f566b86844a80fe7b64f3c9e78,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30087,6 +30103,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6129223255966463373, guid: b58566f566b86844a80fe7b64f3c9e78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6204783076767947176, guid: b58566f566b86844a80fe7b64f3c9e78,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -31411,6 +31432,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 608151020}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714849688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714849687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fbe3dc8d538aac40baaccb786118e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tcm: {fileID: 1267454969}
+  scoreBoardItems:
+  - {fileID: 946513584}
+  - {fileID: 1696196733}
+  - {fileID: 1696196732}
+  changeToScoreBoard: 0
 --- !u!114 &1714849691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6180139760554990229, guid: fcf5971af3c83224bb0074cd9bd9dfa5,
