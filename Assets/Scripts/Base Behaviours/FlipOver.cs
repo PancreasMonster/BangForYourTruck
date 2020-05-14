@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class FlipOver : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class FlipOver : MonoBehaviour
 
     PlayerPause pp;
 
+    public Image autoUI;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +69,7 @@ public class FlipOver : MonoBehaviour
             w.forwardFriction = curve;
         }
         pp = GetComponent<PlayerPause>();
+        anim = autoUI.GetComponent<Animator>();
     }
 
    
@@ -165,16 +169,25 @@ public class FlipOver : MonoBehaviour
                             wheelPoints.Add(wheels[i].transform);
                         }
                     }
-                    wheelsOnGround = wheelsGrounded;
-                    if (wheelsGrounded < 2 && wheelsGrounded > 0)
+
+
+                    /* wheelsOnGround = wheelsGrounded;
+                     if (wheelsGrounded < 2 && wheelsGrounded > 0)
+                     {
+                         ApplyLinearStabilityForces(rigidbody, wheelPoints);
+                     }
+                     if (autoRollCorrection)
+                     {
+                         float dotProduct = Vector3.Dot(transform.up, hit2.normal);
+                         if (dotProduct > 0 && dotProduct < .5f)
+                             ApplyAngularStabilityForces(rigidbody, hit2.normal);
+                     }*/
+
+
+                    if (Vector3.Dot(transform.up, hit2.normal) < .2f)
                     {
-                        ApplyLinearStabilityForces(rigidbody, wheelPoints);
-                    }
-                    if (autoRollCorrection)
-                    {
-                        float dotProduct = Vector3.Dot(transform.up, hit2.normal);
-                        if (dotProduct > 0 && dotProduct < .5f)
-                            ApplyAngularStabilityForces(rigidbody, hit2.normal);
+                        autoUI.gameObject.SetActive(true);
+                        anim.SetBool("PlayAnimation", true);
                     }
 
                     if (AButton > 0)
@@ -206,6 +219,12 @@ public class FlipOver : MonoBehaviour
                         rigidbody.angularVelocity = Vector3.zero;
 
                     }
+                    autoUI.gameObject.SetActive(false);
+                    anim.SetBool("PlayAnimation", false);
+                } else
+                {
+                    autoUI.gameObject.SetActive(false);
+                    anim.SetBool("PlayAnimation", false);
                 }
         }
 
