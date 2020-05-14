@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -34550,6 +34550,7 @@ MonoBehaviour:
   awardsHeader: {fileID: 0}
   rematchButton: {fileID: 0}
   aud: []
+  scoreBoardShown: 0
 --- !u!4 &666428528
 Transform:
   m_ObjectHideFlags: 0
@@ -35849,12 +35850,12 @@ PrefabInstance:
     - target: {fileID: 808691975034998935, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 476.19836
+      value: 476.28638
       objectReference: {fileID: 0}
     - target: {fileID: 808691975034998935, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 21.164371
+      value: 21.168285
       objectReference: {fileID: 0}
     - target: {fileID: 808691975034998935, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -35864,7 +35865,7 @@ PrefabInstance:
     - target: {fileID: 808691975034998935, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.602563
+      value: 5.4433136
       objectReference: {fileID: 0}
     - target: {fileID: 1313134319466311643, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -35959,12 +35960,12 @@ PrefabInstance:
     - target: {fileID: 2623023931995201903, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 333.8017
+      value: 333.71353
       objectReference: {fileID: 0}
     - target: {fileID: 2623023931995201903, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 14.835629
+      value: 14.831713
       objectReference: {fileID: 0}
     - target: {fileID: 2623023931995201903, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -35974,7 +35975,7 @@ PrefabInstance:
     - target: {fileID: 2623023931995201903, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.602563
+      value: 5.4433136
       objectReference: {fileID: 0}
     - target: {fileID: 2626484327334847539, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -36079,17 +36080,17 @@ PrefabInstance:
     - target: {fileID: 5241426700754520379, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 325.63614
+      value: 325.92505
       objectReference: {fileID: 0}
     - target: {fileID: 5241426700754520379, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 14.472719
+      value: 14.485558
       objectReference: {fileID: 0}
     - target: {fileID: 5241426700754520379, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.602563
+      value: 5.4433136
       objectReference: {fileID: 0}
     - target: {fileID: 5241426700754520379, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -36284,12 +36285,12 @@ PrefabInstance:
     - target: {fileID: 6062455831455861597, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 484.3637
+      value: 484.07504
       objectReference: {fileID: 0}
     - target: {fileID: 6062455831455861597, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 21.527277
+      value: 21.514448
       objectReference: {fileID: 0}
     - target: {fileID: 6062455831455861597, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -36299,7 +36300,7 @@ PrefabInstance:
     - target: {fileID: 6062455831455861597, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_ForceAppPointDistance
-      value: 5.602563
+      value: 5.4433136
       objectReference: {fileID: 0}
     - target: {fileID: 6877032889733651669, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -41625,6 +41626,7 @@ MonoBehaviour:
   stadiumPyrotechnicParticles: {fileID: 615179443}
   longShotDistance: 300
   tm: {fileID: 1619019563}
+  vds: {fileID: 0}
 --- !u!4 &959143763
 Transform:
   m_ObjectHideFlags: 0
@@ -67946,6 +67948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 1
+  wrench: 
 --- !u!43 &1672484871
 Mesh:
   m_ObjectHideFlags: 0
@@ -98957,7 +98960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34586655caa8129448857388951ce7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 100000
   maxHealth: 100
   playerNum: 0
   teamNum: 0
