@@ -238,9 +238,5 @@ public class Health : MonoBehaviour
         dronePainCooldown = true;
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 100, 100), Mathf.FloorToInt((1.0f / Time.smoothDeltaTime)).ToString());
-    }
 
 }
