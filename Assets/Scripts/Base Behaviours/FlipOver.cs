@@ -33,6 +33,7 @@ public class FlipOver : MonoBehaviour
     public int wheelsOnGround;
     public bool crashing;
     public float gravityForce;
+    public bool noFlipping;
 
     float AButton;
     float XButton;
@@ -69,7 +70,9 @@ public class FlipOver : MonoBehaviour
             w.forwardFriction = curve;
         }
         pp = GetComponent<PlayerPause>();
-        anim = autoUI.GetComponent<Animator>();
+        if (autoUI)
+        
+            anim = autoUI.GetComponent<Animator>();
     }
 
    
@@ -171,8 +174,8 @@ public class FlipOver : MonoBehaviour
                     }
 
 
-                    /* wheelsOnGround = wheelsGrounded;
-                     if (wheelsGrounded < 2 && wheelsGrounded > 0)
+                     wheelsOnGround = wheelsGrounded;
+                    /* if (wheelsGrounded < 2 && wheelsGrounded > 0)
                      {
                          ApplyLinearStabilityForces(rigidbody, wheelPoints);
                      }
@@ -184,7 +187,7 @@ public class FlipOver : MonoBehaviour
                      }*/
 
 
-                    if (Vector3.Dot(transform.up, hit2.normal) < .2f)
+                    if (Vector3.Dot(transform.up, hit2.normal) < .2f && autoUI)
                     {
                         autoUI.gameObject.SetActive(true);
                         anim.SetBool("PlayAnimation", true);
@@ -219,12 +222,17 @@ public class FlipOver : MonoBehaviour
                         rigidbody.angularVelocity = Vector3.zero;
 
                     }
-                    autoUI.gameObject.SetActive(false);
-                    anim.SetBool("PlayAnimation", false);
+                    if ( autoUI) {
+                        autoUI.gameObject.SetActive(false);
+                        anim.SetBool("PlayAnimation", false);
+                    }
                 } else
                 {
-                    autoUI.gameObject.SetActive(false);
-                    anim.SetBool("PlayAnimation", false);
+                    if (autoUI)
+                    {
+                        autoUI.gameObject.SetActive(false);
+                        anim.SetBool("PlayAnimation", false);
+                    }
                 }
         }
 
@@ -290,13 +298,16 @@ public class FlipOver : MonoBehaviour
                 }
                 else
                 {
+                    if(!noFlipping)
                     rigidbody.AddTorque(transform.right * vertAngle * angForce, ForceMode.Force);
                     if (XButton > 0) //this if statement reduces the steering angle when the vehicle approachs max speed and the drift button hasn't been used
                     {
+                        if (!noFlipping)
                         rigidbody.AddTorque(transform.forward * .75f * -horAngle * angForce, ForceMode.Force);
                     }
                     else
                     {
+                        if (!noFlipping)
                         rigidbody.AddTorque(transform.up * horAngle * angForce, ForceMode.Force);
 
                     }
@@ -378,6 +389,7 @@ public class FlipOver : MonoBehaviour
         turnDelay = false;
         float t = 0;
         bool flippedOrTimeOver = false;
+        noFlipping = true;
         while (!flippedOrTimeOver && Vector3.Dot(transform.up, averageColliderSurfaceNormal) < .95f)
         {
             if(Vector3.Dot(transform.up, averageColliderSurfaceNormal) > .95f || t > 1.5f)
@@ -394,6 +406,7 @@ public class FlipOver : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
+        noFlipping = false;
         delay = false;
     }
 
