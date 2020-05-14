@@ -113,24 +113,28 @@ public class Health : MonoBehaviour
         damageSource = playerSourceGameObject;
         damageSourceImage = sourceImage;
 
+
         //Instantiates the damage text mesh on the players position
-        GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
-
-        //The text is equal to the damage taken
-        damageTextGameObject.GetComponentInChildren<TextMesh>().text = ((int)damageTaken).ToString();
-
-
-        damageTextGameObject.GetComponentInChildren<TextMesh>().fontSize = ((int)Mathf.Min(550, Mathf.Max(150, 550 * damageTaken / maxHealth)));
-
-        //Changes the layer of the text so only the opposite team can see it
-        damageTextGameObject.gameObject.layer = damageTextLayer;
-        foreach (Transform t in damageTextGameObject.transform)
+        if (damageTaken >= 1)
         {
-            t.gameObject.layer = damageTextLayer;
-        }
+            GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
 
-        //Makes the text mesh face the player 
-        damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
+            //The text is equal to the damage taken
+            damageTextGameObject.GetComponentInChildren<TextMesh>().text = ((int)damageTaken).ToString();
+
+
+            damageTextGameObject.GetComponentInChildren<TextMesh>().fontSize = ((int)Mathf.Min(550, Mathf.Max(150, 550 * damageTaken / maxHealth)));
+
+            //Changes the layer of the text so only the opposite team can see it
+            damageTextGameObject.gameObject.layer = damageTextLayer;
+            foreach (Transform t in damageTextGameObject.transform)
+            {
+                t.gameObject.layer = damageTextLayer;
+            }
+
+            //Makes the text mesh face the player 
+            damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
+        }
 
         //Deals the damage to the player's health
         float damageToTake = Mathf.Max(damageTaken, 0);

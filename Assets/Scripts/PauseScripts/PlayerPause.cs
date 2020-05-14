@@ -31,6 +31,7 @@ public class PlayerPause : MonoBehaviour
     {
         pal = GetComponent<PlayerAutoLauncher>();
         sb = GetComponent<ScoreBoard>();
+
     }
 
     private void OnStart(InputValue value)

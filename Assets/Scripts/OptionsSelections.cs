@@ -13,7 +13,13 @@ public class OptionsSelections : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    }  
+
+    }
+
+    public void Update()
+    {
+        
+    }
 
     public void ToggleButtonText() 
     {

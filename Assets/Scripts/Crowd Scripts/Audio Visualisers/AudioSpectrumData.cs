@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioSpectrumData : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class AudioSpectrumData : MonoBehaviour
     public float colorLerpTime = 10;
     [Range(1, 5)]
     public float intensity;
-
+    public AudioMixer audMix;
+    public GameObject audioVisualiser;
 
 
     // Use this for initialization
@@ -21,13 +23,19 @@ public class AudioSpectrumData : MonoBehaviour
     {
         if(aud == null)
         aud = GameObject.Find("MainGameMusic").GetComponent<AudioSource>();
-      
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         GetSpectrum();
+        if (audMix)
+        {
+            audMix.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicMixer"));
+            audMix.SetFloat("Master", PlayerPrefs.GetFloat("MasterMixer"));
+            audMix.SetFloat("SFX", PlayerPrefs.GetFloat("SFXMixer"));
+        }
     }
 
     void GetSpectrum()
