@@ -79,7 +79,7 @@ public class FlipOver : MonoBehaviour
 
     private void OnFaceButtonSouth(InputValue value)
     {
-        if (!delay && !pp.noJumpOrBoost)
+        if (!delay)
         {
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, out hit2, 7.5f, layer))
             {
@@ -202,7 +202,7 @@ public class FlipOver : MonoBehaviour
                             rigidbody.AddForce(Vector3.up * force * .65f);
                             rigidbody.angularVelocity = Vector3.zero;
                         }
-                        else
+                        else if (!pp.noJumpOrBoost)
                         {
                             StartCoroutine(JumpDelay());
 
@@ -215,7 +215,7 @@ public class FlipOver : MonoBehaviour
                 }
                 else if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
                 {
-                    if (AButton > 0)
+                    if (AButton > 0 && !pp.noJumpOrBoost)
                     {
                         StartCoroutine(JumpDelay());
                         rigidbody.AddForce(transform.up * force);
