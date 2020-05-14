@@ -14,10 +14,11 @@ public class PlayerPause : MonoBehaviour
     public bool tryingToLeave = false;
     public bool lookingAtControls = false;
     public List<GameObject> UIElements = new List<GameObject>();
+    public List<GameObject> buttons = new List<GameObject>();
+    public List<GameObject> exitButtons = new List<GameObject>();
+    public GameObject controls;
     public GameObject continueButton, controlsBackButton, confirmButton, currentGameObject;
-    public int i;
-    public Vector2 leftStick;
-    public bool canChange = true;
+    public EventSystem e;
 
 
     // Start is called before the first frame update
@@ -35,6 +36,10 @@ public class PlayerPause : MonoBehaviour
                 g.SetActive(true);
             }
 
+            foreach (GameObject g in exitButtons)
+            {
+                g.SetActive(false);
+            }
 
             GameIsPaused = true;
             noJumpOrBoost = true;
@@ -46,7 +51,7 @@ public class PlayerPause : MonoBehaviour
         }
     }
 
-    /*
+    
 
     private void OnFaceButtonEast(InputValue value)
     {
@@ -76,7 +81,7 @@ public class PlayerPause : MonoBehaviour
         {
             tryingToLeave = true;
 
-            foreach(GameObject g in buttonGameObjects)
+            foreach(GameObject g in buttons)
             {
                 g.SetActive(false);
             }
@@ -139,7 +144,7 @@ public class PlayerPause : MonoBehaviour
 
             tryingToLeave = false;
 
-            foreach (GameObject g in buttonGameObjects)
+            foreach (GameObject g in buttons)
             {
                 g.SetActive(true);
             }
@@ -149,26 +154,26 @@ public class PlayerPause : MonoBehaviour
                 g.SetActive(false);
             }
         goToPauseMenu();
-    } */
+    } 
 
     public void goToPauseMenu()
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(continueButton);
-        currentGameObject = EventSystem.current.currentSelectedGameObject;
+        e.SetSelectedGameObject(null);
+        e.SetSelectedGameObject(continueButton);
+        currentGameObject = e.currentSelectedGameObject;
     }
 
     public void goToControls()
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(controlsBackButton);
-        currentGameObject = EventSystem.current.currentSelectedGameObject;
+        e.SetSelectedGameObject(null);
+        e.SetSelectedGameObject(controlsBackButton);
+        currentGameObject = e.currentSelectedGameObject;
     }
 
     public void goToConfirm()
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(confirmButton);
-        currentGameObject = EventSystem.current.currentSelectedGameObject;
+        e.SetSelectedGameObject(null);
+        e.SetSelectedGameObject(confirmButton);
+        currentGameObject = e.currentSelectedGameObject;
     }
 }
