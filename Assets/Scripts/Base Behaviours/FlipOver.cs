@@ -190,7 +190,6 @@ public class FlipOver : MonoBehaviour
                     if (Vector3.Dot(transform.up, hit2.normal) < .2f && autoUI)
                     {
                         autoUI.gameObject.SetActive(true);
-                        anim.SetBool("PlayAnimation", true);
                     }
 
                     if (AButton > 0)
@@ -224,14 +223,12 @@ public class FlipOver : MonoBehaviour
                     }
                     if ( autoUI) {
                         autoUI.gameObject.SetActive(false);
-                        anim.SetBool("PlayAnimation", false);
                     }
                 } else
                 {
                     if (autoUI)
                     {
                         autoUI.gameObject.SetActive(false);
-                        anim.SetBool("PlayAnimation", false);
                     }
                 }
         }
