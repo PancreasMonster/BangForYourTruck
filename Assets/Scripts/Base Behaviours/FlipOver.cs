@@ -92,7 +92,7 @@ public class FlipOver : MonoBehaviour
                 }
                 else 
                 {
-                    if (mobCharges.currentCharges > 0)
+                    if (mobCharges.currentCharges > 0 && !pp.noJumpOrBoost)
                     {
                         StartCoroutine(JumpDelay());
                         mobCharges.UseCharge();
@@ -103,7 +103,7 @@ public class FlipOver : MonoBehaviour
                     }                   
                 }
             }
-            else if (mobCharges.currentCharges > 0 && Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer))
+            else if (mobCharges.currentCharges > 0 && Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), -transform.up, out hit4, 7.5f, layer) && !pp.noJumpOrBoost)
             {
                     mobCharges.UseCharge();
                     jumpParticles1.Play();
