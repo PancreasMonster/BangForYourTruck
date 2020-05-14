@@ -42,7 +42,6 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {       
         if(noUI)
         {
-            pp.ChangeToMouse(i);
             Debug.Log("Yup");
         }
 

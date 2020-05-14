@@ -14,14 +14,10 @@ public class PlayerPause : MonoBehaviour
     public bool tryingToLeave = false;
     public bool lookingAtControls = false;
     public List<GameObject> UIElements = new List<GameObject>();
-    public List<Button> buttons = new List<Button>();
-    public List<GameObject> buttonGameObjects = new List<GameObject>();
-    public List<GameObject> exitButtons = new List<GameObject>();
-    public GameObject controls;
+    public GameObject continueButton, controlsBackButton, confirmButton, currentGameObject;
     public int i;
     public Vector2 leftStick;
     public bool canChange = true;
-    public EventSystem e;
 
 
     // Start is called before the first frame update
@@ -39,101 +35,18 @@ public class PlayerPause : MonoBehaviour
                 g.SetActive(true);
             }
 
-            foreach (GameObject g in exitButtons)
-            {
-                g.SetActive(false);
-            }
 
             GameIsPaused = true;
             noJumpOrBoost = true;
-            i = 0;
-
-
-            for (int b = 0; b < buttons.Count; b++)
-            {
-                if (b == 0)
-                {
-                    buttons[b].GetComponent<Image>().color = buttons[b].colors.highlightedColor;
-                }
-                else
-                {
-                    buttons[b].GetComponent<Image>().color = buttons[b].colors.normalColor;
-                }
-            }
+            goToPauseMenu();
         }
         else
         {
-            Unpause();
+            
         }
     }
 
-    private void OnLeftStick(InputValue value)
-    {
-        leftStick = value.Get<Vector2>();
-
-        if (!tryingToLeave && !lookingAtControls)
-        {
-            if (leftStick.y > .8f && canChange && GameIsPaused)
-            {
-                canChange = false;
-                if (i == 0)
-                {
-                    i = buttons.Count - 1;
-                }
-                else
-                {
-                    i--;
-                }
-
-            }
-            else if (leftStick.y < .8f && leftStick.y > -.8f)
-            {
-                canChange = true;
-            }
-            else if (leftStick.y < -.8f && canChange && GameIsPaused)
-            {
-                canChange = false;
-                if (i == buttons.Count - 1)
-                {
-                    i = 0;
-                }
-                else
-                {
-                    i++;
-                }
-
-            }
-            for (int b = 0; b < buttons.Count; b++)
-            {
-                if (b == i)
-                {
-                    buttons[b].GetComponent<Image>().color = buttons[b].colors.highlightedColor;
-                }
-                else
-                {
-                    buttons[b].GetComponent<Image>().color = buttons[b].colors.normalColor;
-                }
-            }
-
-        }
-    }
-
-    private void OnFaceButtonSouth(InputValue value)
-    {
-        if(GameIsPaused)
-        {
-           if(i == 0)
-            {
-                Unpause();
-            } else if (i == 1)
-            {
-                Controls();
-            } else if (i == 2)
-            {
-                Exit();
-            }
-        }
-    }
+    /*
 
     private void OnFaceButtonEast(InputValue value)
     {
@@ -144,7 +57,8 @@ public class PlayerPause : MonoBehaviour
         else if (GameIsPaused && lookingAtControls)
         {
             StopControls();
-        } else if (GameIsPaused && !lookingAtControls && !tryingToLeave)
+        }
+        else if (GameIsPaused && !lookingAtControls && !tryingToLeave)
         {
             Unpause();
         }
@@ -171,6 +85,7 @@ public class PlayerPause : MonoBehaviour
             {
                 g.SetActive(true);
             }
+            goToConfirm();
         }
         else
         {
@@ -205,6 +120,7 @@ public class PlayerPause : MonoBehaviour
         {
             g.SetActive(false);
         }
+        goToControls();
     }
 
     public void StopControls ()
@@ -215,6 +131,7 @@ public class PlayerPause : MonoBehaviour
         {
             g.SetActive(true);
         }
+        goToPauseMenu();
     }
 
     public void Cancel()
@@ -231,22 +148,27 @@ public class PlayerPause : MonoBehaviour
             {
                 g.SetActive(false);
             }
-        
+        goToPauseMenu();
+    } */
+
+    public void goToPauseMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(continueButton);
+        currentGameObject = EventSystem.current.currentSelectedGameObject;
     }
 
-    public void ChangeToMouse (int ctm)
+    public void goToControls()
     {
-        for (int b = 0; b < buttons.Count; b++)
-        {
-            if (b == ctm)
-            {
-                buttons[b].GetComponent<Image>().color = buttons[b].colors.highlightedColor;
-            }
-            else
-            {
-                buttons[b].GetComponent<Image>().color = buttons[b].colors.normalColor;
-            }
-        }
-        i = ctm;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(controlsBackButton);
+        currentGameObject = EventSystem.current.currentSelectedGameObject;
+    }
+
+    public void goToConfirm()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(confirmButton);
+        currentGameObject = EventSystem.current.currentSelectedGameObject;
     }
 }
