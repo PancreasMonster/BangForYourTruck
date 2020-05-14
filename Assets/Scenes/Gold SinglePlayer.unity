@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -34530,6 +34530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 666428528}
   - component: {fileID: 666428527}
+  - component: {fileID: 666428529}
   m_Layer: 0
   m_Name: TagCollectionManager
   m_TagString: Untagged
@@ -34567,6 +34568,7 @@ MonoBehaviour:
   gameTimerText: {fileID: 864435264}
   blueTeamTokenString: {fileID: 864435266}
   redTeamTokenString: {fileID: 864435265}
+  vds: {fileID: 0}
   targetPosition: {fileID: 1964333286}
   km: {fileID: 0}
   countDownDisabled: 1
@@ -34575,6 +34577,7 @@ MonoBehaviour:
   rematchButton: {fileID: 0}
   aud: []
   scoreBoardShown: 0
+  gamePaused: 0
 --- !u!4 &666428528
 Transform:
   m_ObjectHideFlags: 0
@@ -34590,6 +34593,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &666428529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666428526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f029d18d2fb36cb449ea93a951732b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAlpha: 0
+  fadeTime: 0
+  scoreBoard: {fileID: 0}
+  winPanel: {fileID: 0}
+  winText: {fileID: 0}
+  km: {fileID: 959143762}
+  players: []
+  victoryItems: []
+  victoryScreenItem: {fileID: 0}
+  victoryScreenItemHolder: {fileID: 0}
+  victoryScreenHeaderHolder: {fileID: 0}
+  victoryScreenItemHolder2: {fileID: 0}
+  continueButtons: {fileID: 0}
+  gameVictory: 0
 --- !u!1 &674843194
 GameObject:
   m_ObjectHideFlags: 0
@@ -36059,7 +36088,7 @@ PrefabInstance:
     - target: {fileID: 3958377735510516656, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4154782214775946960, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
@@ -36236,6 +36265,16 @@ PrefabInstance:
       propertyPath: currentGameObject
       value: 
       objectReference: {fileID: 1353147908}
+    - target: {fileID: 5769034158848722061, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: tcm
+      value: 
+      objectReference: {fileID: 666428527}
+    - target: {fileID: 5769034158848722061, guid: d3a34a1908fc16e4489de870084c559c,
+        type: 3}
+      propertyPath: canWork
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5769034158848722088, guid: d3a34a1908fc16e4489de870084c559c,
         type: 3}
       propertyPath: m_LocalPosition.x
