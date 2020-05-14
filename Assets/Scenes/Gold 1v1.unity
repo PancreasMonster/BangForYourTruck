@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -14243,6 +14243,7 @@ GameObject:
   - component: {fileID: 729411367}
   - component: {fileID: 729411366}
   - component: {fileID: 729411368}
+  - component: {fileID: 729411369}
   m_Layer: 0
   m_Name: MainGameMusic
   m_TagString: Untagged
@@ -14260,7 +14261,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 46da283989817c34bbd604e5b8692b0f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e88a93e0919bc814c81e3f8b51b476ad, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.15
   m_Pitch: 1
@@ -14381,6 +14382,22 @@ MonoBehaviour:
   onSpectrum:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &729411369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729411365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f6731d7f4900f4e8f06c4e204bcd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracks:
+  - {fileID: 8300000, guid: e88a93e0919bc814c81e3f8b51b476ad, type: 3}
+  - {fileID: 8300000, guid: 707a229fb69738b4090614415fd37f70, type: 3}
+  - {fileID: 8300000, guid: 56a428fcc210f6f409e4fa23209c3218, type: 3}
 --- !u!43 &745322335
 Mesh:
   m_ObjectHideFlags: 0
@@ -20530,6 +20547,7 @@ MonoBehaviour:
   awardsHeader: {fileID: 1696196738}
   rematchButton: {fileID: 1696196737}
   aud: []
+  scoreBoardShown: 0
 --- !u!4 &1267454970
 Transform:
   m_ObjectHideFlags: 0
@@ -20564,10 +20582,12 @@ MonoBehaviour:
   winText: {fileID: 1696196734}
   km: {fileID: 2000975789}
   players: []
+  victoryItems: []
   victoryScreenItem: {fileID: 3468395311562254224, guid: ccedc901db2d614418efa12c0766fc33,
     type: 3}
   victoryScreenItemHolder: {fileID: 1696196732}
   victoryScreenHeaderHolder: {fileID: 1696196733}
+  victoryScreenItemHolder2: {fileID: 0}
   continueButtons: {fileID: 1696196731}
 --- !u!43 &1288844847
 Mesh:
@@ -38416,6 +38436,7 @@ MonoBehaviour:
   stadiumPyrotechnicParticles: {fileID: 146748197}
   longShotDistance: 300
   tm: {fileID: 0}
+  vds: {fileID: 0}
 --- !u!4 &2000975790
 Transform:
   m_ObjectHideFlags: 0
