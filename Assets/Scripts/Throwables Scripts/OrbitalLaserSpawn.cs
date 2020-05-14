@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class OrbitalLaserSpawn : MonoBehaviour
 {
-    bool laserSpawned = false;
+    public bool laserSpawned = false;
 
     public float laserRechargeTime;
 
