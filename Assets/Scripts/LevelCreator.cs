@@ -107,25 +107,27 @@ public class LevelCreator : MonoBehaviour
 
     public void ToggleHints() 
     {
-        if (hints)
+
+        
+        if (PlayerPrefs.GetInt("hintsOn") == 1)
         {
-            hints = false;
-        }
-        else 
+            PlayerPrefs.SetInt("hintsOn", 0);
+        } else if (PlayerPrefs.GetInt("hintsOn") == 0)
         {
-            hints = true;
+            PlayerPrefs.SetInt("hintsOn", 1);
         }
+
     }
 
     public void ToggleAVCrowd()
     {
-        if (AVCrowd)
+        if (PlayerPrefs.GetInt("AVOn") == 1)
         {
-            AVCrowd = false;
+            PlayerPrefs.SetInt("AVOn", 0);
         }
-        else
+        else if (PlayerPrefs.GetInt("AVOn") == 0)
         {
-            AVCrowd = true;
+            PlayerPrefs.SetInt("AVOn", 1);
         }
     }
 

@@ -16,6 +16,7 @@ public class AudioSpectrumData : MonoBehaviour
     public float intensity;
     public AudioMixer audMix;
     public GameObject audioVisualiser;
+    public bool MainMenu = false;
 
 
     // Use this for initialization
@@ -23,7 +24,13 @@ public class AudioSpectrumData : MonoBehaviour
     {
         if(aud == null)
         aud = GameObject.Find("MainGameMusic").GetComponent<AudioSource>();
-        
+
+        if (PlayerPrefs.GetInt("AVOn") == 1)
+            audioVisualiser.SetActive(false);
+        else
+        {
+            audioVisualiser.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -35,6 +42,16 @@ public class AudioSpectrumData : MonoBehaviour
             audMix.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicMixer"));
             audMix.SetFloat("Master", PlayerPrefs.GetFloat("MasterMixer"));
             audMix.SetFloat("SFX", PlayerPrefs.GetFloat("SFXMixer"));
+        }
+
+        if (audioVisualiser && MainMenu)
+        {
+            if (PlayerPrefs.GetInt("AVOn") == 1)
+                audioVisualiser.SetActive(false);
+            else
+            {
+                audioVisualiser.SetActive(true);
+            }
         }
     }
 
