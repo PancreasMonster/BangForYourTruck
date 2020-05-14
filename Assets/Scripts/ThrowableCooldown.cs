@@ -12,7 +12,7 @@ public class ThrowableCooldown : MonoBehaviour
     bool onCooldown;
     public float fillAmountValue = 1;
     public Image[] images = new Image[2];
-    Animation selectionAnim;
+    public Animation selectionAnim;
 
     // Start is called before the first frame update
     void Start()
