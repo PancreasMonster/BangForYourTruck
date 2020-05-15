@@ -45,6 +45,8 @@ public class KillManager : MonoBehaviour
 
     public bool twoPlayers = false;
 
+    public bool ps4ControllerInEditor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +67,18 @@ public class KillManager : MonoBehaviour
     string[] names = Input.GetJoystickNames();
         for (int x = 0; x < names.Length; x++)
         {
+
+            if (ps4ControllerInEditor)
+            {
+                if (names[x].Length == 19)
+                {
+
+                    //set a controller bool to true
+                    conTrollerCount++;
+
+                }
+            }
+
             if (names[x].Length == 33)
             {
                 
@@ -75,7 +89,9 @@ public class KillManager : MonoBehaviour
         }
 
 
-        Debug.Log(conTrollerCount);
+        if (conTrollerCount == 0)
+            conTrollerCount = 1;
+
     
         for (int i = 0; i < PI.Count; i++)
         {
