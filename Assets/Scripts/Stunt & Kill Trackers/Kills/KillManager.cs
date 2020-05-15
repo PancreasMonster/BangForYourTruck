@@ -150,7 +150,7 @@ public class KillManager : MonoBehaviour
         } 
         else
         {
-            killNum = victim.GetComponent<Health>().playerNum - 1;
+            killNum = killer.GetComponent<Health>().playerNum - 1;
         }
 
         kills[killNum]++;
