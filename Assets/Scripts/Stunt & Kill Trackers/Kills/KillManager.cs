@@ -123,7 +123,7 @@ public class KillManager : MonoBehaviour
         int killNum;
         if (twoPlayers)
         {
-            if (victim.GetComponent<Health>().playerNum == 3)
+            if (killer.GetComponent<Health>().playerNum == 3)
             {
                 killNum = 1;
             }

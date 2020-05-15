@@ -294,7 +294,7 @@ public class BuildModeFire : MonoBehaviour
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
 
                     if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1 && discUIImages.Count > 1)
-                        transform.Find("SelectingText").GetComponent<Animation>().Play();
+                        discUIImages[currentI].transform.Find("SelectingText").GetComponent<Animation>().Play();
                 }
                 else
                 {
@@ -309,7 +309,7 @@ public class BuildModeFire : MonoBehaviour
                         discUIImages[currentI].GetComponent<ThrowableCooldown>().images[1].color = imageCol;
 
                     if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1 && discUIImages.Count > 1)
-                        transform.Find("SelectingText").GetComponent<Animation>().Play();
+                        discUIImages[currentI].transform.Find("SelectingText").GetComponent<Animation>().Play();
                 }
             }
 
@@ -328,7 +328,7 @@ public class BuildModeFire : MonoBehaviour
                     discUIImages[discSelection.Count - 1].GetComponent<ThrowableCooldown>().images[1].color = Color.white;
 
                     if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1 && discUIImages.Count > 1)
-                        transform.Find("SelectingText").GetComponent<Animation>().Play();
+                        discUIImages[currentI].transform.Find("SelectingText").GetComponent<Animation>().Play();
                 }
                 else
                 {
@@ -344,7 +344,7 @@ public class BuildModeFire : MonoBehaviour
 
 
                     if (discUIImages[currentI].GetComponent<ThrowableCooldown>().fillAmountValue >= 1 && discUIImages.Count > 1)
-                        transform.Find("SelectingText").GetComponent<Animation>().Play();
+                        discUIImages[currentI].transform.Find("SelectingText").GetComponent<Animation>().Play();
                 }
             }
             dpadTrigger = false;

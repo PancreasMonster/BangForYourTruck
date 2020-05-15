@@ -89,6 +89,7 @@ public class FlipOver : MonoBehaviour
                     //StartCoroutine(JumpDelay());
                     rigidbody.AddForce(Vector3.up * force * .65f);
                     rigidbody.angularVelocity = Vector3.zero;
+                    
                 }
                 else 
                 {
@@ -115,6 +116,7 @@ public class FlipOver : MonoBehaviour
                     //  Debug.Log("Hit");
             }
         }
+        autoUI.gameObject.SetActive(false);
     }
 
     private void OnFaceButtonWest(InputValue value)
@@ -403,6 +405,7 @@ public class FlipOver : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
+        rigidbody.angularVelocity *= .5f;
         noFlipping = false;
         delay = false;
     }

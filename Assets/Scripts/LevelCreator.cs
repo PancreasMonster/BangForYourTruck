@@ -21,7 +21,6 @@ public class LevelCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
 
        
     }
@@ -96,7 +95,7 @@ public class LevelCreator : MonoBehaviour
 
     public void SetLevelIndex (int i)
     {
-        levelToActivate = i;
+        PlayerPrefs.SetInt("LevelToLoad", i);
         //LoadScene();
     }
 

@@ -15,21 +15,11 @@ public class CreateLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PSL = GameObject.Find("PersistentSceneLoader");
-        if (trainingMode && PSL)
-        {
-            Destroy(PSL);
-            return;
-        }
-
-        if (GameObject.Find("PersistentSceneLoader"))
-            i = PSL.GetComponent<LevelCreator>().levelToActivate;
-            
-        if (i != -1)
-            activateLevel(i);
+        
+            activateLevel(PlayerPrefs.GetInt("LevelToLoad"));
 
 
-        Destroy(PSL);
+
     }
 
     // Update is called once per frame
