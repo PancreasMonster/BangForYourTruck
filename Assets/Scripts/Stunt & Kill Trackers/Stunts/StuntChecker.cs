@@ -68,6 +68,7 @@ public class StuntChecker : MonoBehaviour
     bool animCrash = false;
     public Sprite damageImage;
     public bool trainingMode;
+    float time = 0;
 
     private void OnLeftStick(InputValue value)
     {
@@ -256,8 +257,10 @@ public class StuntChecker : MonoBehaviour
     {
         if (fo.timer > fo.timerAllowance)
         {
+            time += Time.deltaTime;
             if(flipDisplay)
             {
+
                 //Add stunt points to the score
                 foreach (Stunt curStunt in stunts)
                 {
@@ -385,9 +388,11 @@ public class StuntChecker : MonoBehaviour
                 
                 if(currentStunt != "")
                 FlipConcussiveForce(flipScore);
-               
-                
-            } 
+
+                if(time >= 1)
+                StartCoroutine(HelpLanding());
+            }
+            time = 0;
             currentStunt = "";
             if(dStunts.Count > 0)
             km.ScoreFeedStunt(this.gameObject, dStunts, stuntScores);
@@ -434,7 +439,7 @@ public class StuntChecker : MonoBehaviour
     private void FlipConcussiveForce (int currFlipScore)
     {
         canSlam = false;
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, concussiveRange);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, concussiveRange * 1.5f);
         List<Transform> targets = new List<Transform>();
         float slamDamage = concussiveForceDamage * (currFlipScore / maxScoreExplosion);
         if (currFlipScore > maxScoreExplosion)
@@ -459,7 +464,7 @@ public class StuntChecker : MonoBehaviour
            // {
                 Rigidbody rb = t.GetComponent<Rigidbody>();
                 if (rb != null)
-                    rb.AddExplosionForce(concussiveForce * Mathf.Min(1, currFlipScore / maxScoreExplosion) * rb.mass, transform.position, concussiveRange);
+                    rb.AddExplosionForce(concussiveForce * Mathf.Min(1, currFlipScore / maxScoreExplosion) * rb.mass, transform.position, concussiveRange * 1.5f);
 
                 Health h = t.GetComponent<Health>();
                 if (h != null)
@@ -475,7 +480,6 @@ public class StuntChecker : MonoBehaviour
 
         GameObject flipPS = Instantiate(concussiveForcePS, new Vector3 (transform.position.x, transform.position.y  - 4f, transform.position.z), concussiveForcePS.transform.rotation);
         Destroy(flipPS, 3);
-        StartCoroutine(HelpLanding());
     }
 
     private void GainMobilityCharge ()

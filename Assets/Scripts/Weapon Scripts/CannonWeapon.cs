@@ -22,6 +22,7 @@ public class CannonWeapon : MonoBehaviour
     public PowerCosts pc;
     ParticleSystem particle;
     public bool canFire;
+    PlayerPause pp;
 
     public Animator recoil;
     // Start is called before the first frame update
@@ -42,6 +43,7 @@ public class CannonWeapon : MonoBehaviour
         {
             engineModel.SetActive(true);
         }
+        pp = GetComponent<PlayerPause>();
     }
 
     float PadLB;
@@ -49,40 +51,47 @@ public class CannonWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-        PadLB = 1;
+        if (!pp.noPlayerInput)
+        
+            PadLB = 1;
     }
 
     private void OnLeftBumperRelease(InputValue value)
     {
-        PadLB = 0;
+        if (!pp.noPlayerInput)
+        
+            PadLB = 0;
     }
 
     private void OnRightBumper(InputValue value)
     {
-        if (canFire && PadLB == 0)
+        if (!pp.noPlayerInput)
         {
-            PadRB = 1;
-            if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
+            if (canFire && PadLB == 0)
             {
-                //begin charging
-                charging = true;
-                chargingTime = 0f;
+                PadRB = 1;
+                if (!onCooldown && ph.powerAmount >= pc.powerCosts[6])
+                {
+                    //begin charging
+                    charging = true;
+                    chargingTime = 0f;
+                }
+                //Firecannon();
+
             }
-            //Firecannon();
-
         }
-
     }
 
     private void OnRightBumperRelease(InputValue value)
     {
-
-        if (charging == true)
+        if (!pp.noPlayerInput)
         {
-            Firecannon();
-            model.GetComponent<Animation>().Play();
+            if (charging == true)
+            {
+                Firecannon();
+                model.GetComponent<Animation>().Play();
+            }
         }
-
     }
 
     // Update is called once per frame

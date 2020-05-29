@@ -176,23 +176,23 @@ public class MobilityCharges : MonoBehaviour
             emissionMat1.material.SetColor("_EmissionColor", new Color(1.0f, 0.64f, 0.0f) * intensity);
         }
 
-        if (charge1Time >= (rechargeTime * .75f) && charge1Time <= (rechargeTime))
+        if (charge1Time >= (rechargeTime * .75f) && charge1Time < (rechargeTime))
         {
             //sprite1.color = new Color(.64f, 1f, 0.0f);
-            emissionMat1.material.SetColor("_EmissionColor", new Color(.64f, 1f, 0.0f) * intensity);
+            emissionMat1.material.SetColor("_EmissionColor", new Color(.32f, 1f, 0.0f) * intensity);
             //emissionMat1.color = new Color(.64f, 1f, 0.0f);
         }
 
-        if (charge2Time >= (rechargeTime * .75f) && charge2Time <= (rechargeTime))
+        if (charge2Time >= (rechargeTime * .75f) && charge2Time < (rechargeTime))
         {
             //sprite2.color = new Color(.64f, 1f, 0.0f);
-            emissionMat2.material.SetColor("_EmissionColor", new Color(.64f, 1f, 0.0f) * intensity);
+            emissionMat2.material.SetColor("_EmissionColor", new Color(.32f, 1f, 0.0f) * intensity);
         }
 
-        if (charge3Time >= (rechargeTime * .75f) && charge3Time <= (rechargeTime))
+        if (charge3Time >= (rechargeTime * .75f) && charge3Time < (rechargeTime))
         {
             //sprite3.color = new Color(.64f, 1f, 0.0f);
-            emissionMat3.material.SetColor("_EmissionColor", new Color(.64f, 1f, 0.0f) * intensity);
+            emissionMat3.material.SetColor("_EmissionColor", new Color(.32f, 1f, 0.0f) * intensity);
         }
         
     }

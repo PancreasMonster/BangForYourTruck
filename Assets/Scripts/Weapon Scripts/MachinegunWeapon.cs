@@ -23,6 +23,8 @@ public class MachinegunWeapon : MonoBehaviour
 
     private PlayerInput pi;
 
+    PlayerPause pp;
+
     private void Awake()
     {
 
@@ -42,6 +44,8 @@ public class MachinegunWeapon : MonoBehaviour
         {
             model.SetActive(true);
         }
+
+        pp = GetComponent<PlayerPause>();
     }
 
     float PadLB;
@@ -49,8 +53,9 @@ public class MachinegunWeapon : MonoBehaviour
 
     private void OnLeftBumper(InputValue value)
     {
-       
-        PadLB = 1;
+        if (!pp.noPlayerInput)
+        
+            PadLB = 1;
     }
 
     private void OnRightBumper(InputValue value)
@@ -61,30 +66,38 @@ public class MachinegunWeapon : MonoBehaviour
 
     private void OnRightBumperHold(InputValue value)
     {
-        if (canFire && PadLB == 0)
+        if (!pp.noPlayerInput)
         {
-            FireBullet();
-            shellsParticles1.Play();
-            shellsParticles2.Play();
-            InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
-            InvokeRepeating("FireBullet", fireRate, fireRate);
-            anim.SetBool("Spinning", true);
+            if (canFire && PadLB == 0)
+            {
+                FireBullet();
+                shellsParticles1.Play();
+                shellsParticles2.Play();
+                InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
+                InvokeRepeating("FireBullet", fireRate, fireRate);
+                anim.SetBool("Spinning", true);
+            }
         }
-
     }
 
     private void OnLeftBumperRelease(InputValue value)
     {
-        PadLB = 0;
+        if (!pp.noPlayerInput)
+        {
+            PadLB = 0;
+        }
     }
 
     private void OnRightBumperRelease(InputValue value)
     {
-        PadRB = 0;
-        CancelInvoke();
-        shellsParticles1.Stop();
-        shellsParticles2.Stop();
-        anim.SetBool("Spinning", false);
+        if (!pp.noPlayerInput)
+        {
+            PadRB = 0;
+            CancelInvoke();
+            shellsParticles1.Stop();
+            shellsParticles2.Stop();
+            anim.SetBool("Spinning", false);
+        }
     }
 
     // Update is called once per frame

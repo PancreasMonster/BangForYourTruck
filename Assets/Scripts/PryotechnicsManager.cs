@@ -17,22 +17,14 @@ public class PryotechnicsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("t"))
-        {
-            RedTeamParticlesFire();
-        }
 
-        if (Input.GetKeyDown("y"))
-        {
-            BlueTeamParticlesFire();
-        }
     }
 
     public void RedTeamParticlesFire()
     {
         for(int i = 0; i < redTeamParticles.Length; i++)
         {
-            redTeamParticles[i].Play();
+            blueTeamParticles[i].Play();
         }
     }
 
@@ -40,7 +32,7 @@ public class PryotechnicsManager : MonoBehaviour
     {
         for (int i = 0; i < blueTeamParticles.Length; i++)
         {
-            blueTeamParticles[i].Play();
+            redTeamParticles[i].Play();
         }
     }
 }

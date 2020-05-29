@@ -25,6 +25,7 @@ public class Health : MonoBehaviour
     public bool drone, targetDrone;
     Sprite damageSourceImage;
     public TagCollectionManager tcm;
+    PlayerPause pp;
 
     [FMODUnity.EventRef]
     public string dronePainSound;
@@ -46,6 +47,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pp = GetComponent<PlayerPause>();
         if (GameObject.Find("KillManager") == true)
         {
             km = GameObject.Find("KillManager").GetComponent<KillManager>();
@@ -111,21 +113,28 @@ public class Health : MonoBehaviour
         damageSource = playerSourceGameObject;
         damageSourceImage = sourceImage;
 
+
         //Instantiates the damage text mesh on the players position
-        GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
-
-        //The text is equal to the damage taken
-        damageTextGameObject.GetComponentInChildren<TextMesh>().text = ((int)damageTaken).ToString();
-
-        //Changes the layer of the text so only the opposite team can see it
-        damageTextGameObject.gameObject.layer = damageTextLayer;
-        foreach (Transform t in damageTextGameObject.transform)
+        if (damageTaken >= 1)
         {
-            t.gameObject.layer = damageTextLayer;
-        }
+            GameObject damageTextGameObject = Instantiate(damageText, transform.position, Quaternion.identity);
 
-        //Makes the text mesh face the player 
-        damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
+            //The text is equal to the damage taken
+            damageTextGameObject.GetComponentInChildren<TextMesh>().text = ((int)damageTaken).ToString();
+
+
+            damageTextGameObject.GetComponentInChildren<TextMesh>().fontSize = ((int)Mathf.Min(550, Mathf.Max(150, 550 * damageTaken / maxHealth)));
+
+            //Changes the layer of the text so only the opposite team can see it
+            damageTextGameObject.gameObject.layer = damageTextLayer;
+            foreach (Transform t in damageTextGameObject.transform)
+            {
+                t.gameObject.layer = damageTextLayer;
+            }
+
+            //Makes the text mesh face the player 
+            damageTextGameObject.transform.LookAt(playerSourceGameObject.transform);
+        }
 
         //Deals the damage to the player's health
         float damageToTake = Mathf.Max(damageTaken, 0);
@@ -152,7 +161,8 @@ public class Health : MonoBehaviour
             {
                 km.KillTracked(damageSource, this.gameObject, damageSourceImage, teamNum, damageSource.GetComponent<Health>().teamNum);
             }
-            
+
+            pp.noJumpOrBoost = true;
             //Destroy(baseUI);
             StartCoroutine(deadTime());
         }
@@ -200,6 +210,7 @@ public class Health : MonoBehaviour
 
     public IEnumerator deadTime()
     {
+        pp.noPlayerInput = true;
         GameObject Car = Instantiate(car, transform.position, transform.rotation);
         Rigidbody carRB = Car.GetComponent<Rigidbody>();
         carRB.AddForce((Vector3.up * 80000) + GetComponent<Rigidbody>().velocity * 10);
@@ -218,6 +229,8 @@ public class Health : MonoBehaviour
         pr.playerDeath(playerNum, Car.transform);
         //hpBarHolder.SetActive(false);
         yield return new WaitForSeconds(pr.deathTimer);
+        if(!tcm.scoreBoardShown)
+        pp.noPlayerInput = false;
         dead = false;
 
         //hpBarHolder.SetActive(true);
@@ -229,9 +242,5 @@ public class Health : MonoBehaviour
         dronePainCooldown = true;
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 100, 100), Mathf.FloorToInt((1.0f / Time.smoothDeltaTime)).ToString());
-    }
 
 }

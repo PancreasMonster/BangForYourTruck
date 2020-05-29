@@ -25,6 +25,7 @@ public class PropelSelf : MonoBehaviour
     public bool canBoost = true;
     public Animator anim;
     public float boostDurationFactor;
+    PlayerPause pp;
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +34,14 @@ public class PropelSelf : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ph = GetComponent<PowerHolder>();
         pc = GameObject.Find("PowerCost").GetComponent<PowerCosts>();
+        pp = GetComponent<PlayerPause>();
     }
 
     float BButton = 1;
 
     private void OnFaceButtonEast(InputValue value)
     {
-        if (canBoost)
+        if (canBoost && !pp.noJumpOrBoost)
         {
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), -transform.up * 5, out hit, 5, layer))
             {

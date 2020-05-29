@@ -13,7 +13,7 @@ public class NeutralCollectionGate : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         tagCollectionManager = GameObject.Find("TagCollectionManager").GetComponent<TagCollectionManager>();
-        StartCoroutine(AssignPBs());
+        //StartCoroutine(AssignPBs());
 
     }
 
@@ -42,7 +42,7 @@ public class NeutralCollectionGate : MonoBehaviour
                 TH.EmptyTags();
             }
         }
-        else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
+        else if (col.transform.tag == "Player" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
         {
             Destroy(col.gameObject);
             tagCollectionManager.blueTeamTokens++;

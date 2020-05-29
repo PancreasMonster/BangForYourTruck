@@ -10,12 +10,15 @@ public class PlayerAutoLauncher : MonoBehaviour
     public Transform launchPoint;
     public float maxTime = 10;
     public Text text;
+    PlayerPause pp;
+    public bool inArena;
 
     // Start is called before the first frame update
     void Start()
     {
         if(text != null)
         text.text = "";
+        pp = GetComponent<PlayerPause>();
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class PlayerAutoLauncher : MonoBehaviour
 
     public void GetLaunched ()
     {
+        inArena = true;
         startLaunch = false;
         transform.position = launchPoint.position;
         transform.rotation = launchPoint.rotation;
@@ -51,7 +55,10 @@ public class PlayerAutoLauncher : MonoBehaviour
 
     public void StopLaunch()
     {
+        inArena = true;
         startLaunch = false;
+        if(text)
         text.text = "";
+        pp.noJumpOrBoost = false;
     }
 }

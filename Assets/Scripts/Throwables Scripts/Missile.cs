@@ -94,6 +94,7 @@ public class Missile : MonoBehaviour
 
             rb.AddForce(transform.forward * launchForce, ForceMode.Impulse);
             yield return new WaitForSeconds(waitTimeForHoming);
+            GetComponent<AudioSource>().Play();
             lockedOn = true;     
             if(!target)
         {

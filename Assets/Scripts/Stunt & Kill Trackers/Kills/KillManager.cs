@@ -41,6 +41,12 @@ public class KillManager : MonoBehaviour
 
     public TrainingManager tm;
 
+    public VictoryDisplayStats vds;
+
+    public bool twoPlayers = false;
+
+    public bool ps4ControllerInEditor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +67,18 @@ public class KillManager : MonoBehaviour
     string[] names = Input.GetJoystickNames();
         for (int x = 0; x < names.Length; x++)
         {
+
+            if (ps4ControllerInEditor)
+            {
+                if (names[x].Length == 19)
+                {
+
+                    //set a controller bool to true
+                    conTrollerCount++;
+
+                }
+            }
+
             if (names[x].Length == 33)
             {
                 
@@ -71,7 +89,9 @@ public class KillManager : MonoBehaviour
         }
 
 
-        Debug.Log(conTrollerCount);
+        if (conTrollerCount == 0)
+            conTrollerCount = 1;
+
     
         for (int i = 0; i < PI.Count; i++)
         {
@@ -88,7 +108,22 @@ public class KillManager : MonoBehaviour
 
     public void KillTracked (GameObject killer, GameObject victim, Sprite sourceImage, int teamNumV, int teamNumK)
     {
-        int deathNum = victim.GetComponent<Health>().playerNum - 1;
+        int deathNum;
+        if (twoPlayers)
+        {
+            if (victim.GetComponent<Health>().playerNum == 3)
+            {
+                deathNum = 1;
+            }
+            else
+            {
+                deathNum = victim.GetComponent<Health>().playerNum - 1;
+            }
+        }
+        else
+        {
+            deathNum = victim.GetComponent<Health>().playerNum - 1;
+        }
 
         if (victim.GetComponent<Health>().teamNum == 1)
         {
@@ -101,7 +136,23 @@ public class KillManager : MonoBehaviour
 
         deaths[deathNum]++;
         killSpree[deathNum] = 0;
-        int killNum = killer.GetComponent<Health>().playerNum - 1;
+        int killNum;
+        if (twoPlayers)
+        {
+            if (killer.GetComponent<Health>().playerNum == 3)
+            {
+                killNum = 1;
+            }
+            else
+            {
+                killNum = killer.GetComponent<Health>().playerNum - 1;
+            }
+        } 
+        else
+        {
+            killNum = killer.GetComponent<Health>().playerNum - 1;
+        }
+
         kills[killNum]++;
         killSpree[killNum]++;
         if (killSpree[killNum] > killSpreeCount[killNum])
@@ -138,6 +189,11 @@ public class KillManager : MonoBehaviour
         List<string> flavourTexts = new List<string>();
         List<int> scoreList = new List<int>();
         int killCount = -1;
+
+        if(twoPlayers && i == 3)
+        {
+            i = 1;
+        }
         foreach (int k in kills)
         {
             killCount += k;
@@ -185,6 +241,8 @@ public class KillManager : MonoBehaviour
         }
         Debug.Log(flavourTexts.Count);
         killer.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedDrift(GameObject player, int driftLength)
@@ -192,6 +250,11 @@ public class KillManager : MonoBehaviour
         List<string> flavourTexts = new List<string>();
         List<int> scoreList = new List<int>();
         int i = player.GetComponent<Health>().playerNum - 1;
+
+        if (twoPlayers && i == 2)
+        {
+            i = 1;
+        }
         if (driftLength > 100)
         {
             flavourTexts.Add("Long Drift");
@@ -217,6 +280,8 @@ public class KillManager : MonoBehaviour
 
 
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedStunt(GameObject player, List<string> stunts, List<int> scores)
@@ -224,6 +289,11 @@ public class KillManager : MonoBehaviour
         List<string> flavourTexts = new List<string>();
         List<int> scoreList = new List<int>();
         int i = player.GetComponent<Health>().playerNum - 1;
+
+        if (twoPlayers && i == 2)
+        {
+            i = 1;
+        }
 
         foreach (string s in stunts)
         {
@@ -237,6 +307,8 @@ public class KillManager : MonoBehaviour
         }
 
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedDepositToken(GameObject player, int tokens)
@@ -250,8 +322,15 @@ public class KillManager : MonoBehaviour
         scoreList.Add(100 * tokens);
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
         int i = player.GetComponent<Health>().playerNum - 1;
-        tagsDeposited[i]++;
+
+        if (twoPlayers && i == 2)
+        {
+            i = 1;
+        }
+        tagsDeposited[i] += tokens;
         score[i] += 50;
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedCollectToken(GameObject player)
@@ -262,7 +341,14 @@ public class KillManager : MonoBehaviour
         scoreList.Add(50);
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
         int i = player.GetComponent<Health>().playerNum - 1;
+
+        if (twoPlayers && i == 2)
+        {
+            i = 1;
+        }
         score[i] += 50;
+        if (vds)
+            vds.UpdateScore();
     }
 
     public void ScoreFeedDeny(GameObject player)
@@ -273,8 +359,15 @@ public class KillManager : MonoBehaviour
         scoreList.Add(50);
         player.GetComponent<TextPopUp>().ScoreFeedMessage(flavourTexts, scoreList);
         int i = player.GetComponent<Health>().playerNum - 1;
+
+        if (twoPlayers && i == 2)
+        {
+            i = 1;
+        }
         tagsDenied[i]++;
         score[i] += 50;
+        if (vds)
+            vds.UpdateScore();
     }
 
     IEnumerator DoubleKillDialougeBool(int i)

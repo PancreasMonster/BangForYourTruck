@@ -21,7 +21,6 @@ public class LevelCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
 
        
     }
@@ -29,11 +28,7 @@ public class LevelCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !mainMenu)
-        {
-            SceneManager.LoadScene("0_MainMenu", LoadSceneMode.Single);
-            Destroy(this.gameObject);
-        }
+        
     }
 
     public void SetTrainingTrue()
@@ -100,7 +95,7 @@ public class LevelCreator : MonoBehaviour
 
     public void SetLevelIndex (int i)
     {
-        levelToActivate = i;
+        PlayerPrefs.SetInt("LevelToLoad", i);
         //LoadScene();
     }
 
@@ -111,25 +106,27 @@ public class LevelCreator : MonoBehaviour
 
     public void ToggleHints() 
     {
-        if (hints)
+
+        
+        if (PlayerPrefs.GetInt("hintsOn") == 1)
         {
-            hints = false;
-        }
-        else 
+            PlayerPrefs.SetInt("hintsOn", 0);
+        } else if (PlayerPrefs.GetInt("hintsOn") == 0)
         {
-            hints = true;
+            PlayerPrefs.SetInt("hintsOn", 1);
         }
+
     }
 
     public void ToggleAVCrowd()
     {
-        if (AVCrowd)
+        if (PlayerPrefs.GetInt("AVOn") == 1)
         {
-            AVCrowd = false;
+            PlayerPrefs.SetInt("AVOn", 0);
         }
-        else
+        else if (PlayerPrefs.GetInt("AVOn") == 0)
         {
-            AVCrowd = true;
+            PlayerPrefs.SetInt("AVOn", 1);
         }
     }
 
