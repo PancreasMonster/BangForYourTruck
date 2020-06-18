@@ -15,8 +15,8 @@ public class MusicRandomizer : MonoBehaviour
         int trackToPlay = UnityEngine.Random.Range(0,tracks.Length-1);
 
         //audio = GetComponent<AudioSource>();
-        GetComponent<AudioSource>().clip = tracks[trackToPlay];
-        GetComponent<AudioSource>().Play();
+        ScenesManager.instance.changeMusic(tracks[trackToPlay]);
+        ScenesManager.instance.gameMusic.Play();
 
     }
 }

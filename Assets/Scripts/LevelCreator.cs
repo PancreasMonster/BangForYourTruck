@@ -16,13 +16,16 @@ public class LevelCreator : MonoBehaviour
     public bool hints;
     public bool AVCrowd;
     public bool credits;
+    public AudioClip mainMenuMusic;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-       
+        ScenesManager.instance.changeMusic(mainMenuMusic);
+        ScenesManager.instance.gameMusic.Play();
+        ScenesManager.instance.FadeIn();
+        ScenesManager.instance.gameMusic.GetComponent<AudioProcessor>().enabled = true;
     }
 
     // Update is called once per frame
@@ -147,23 +150,23 @@ public class LevelCreator : MonoBehaviour
         mainMenu = false;
         if(training)
         {
-            SceneManager.LoadScene("Gold SinglePlayer", LoadSceneMode.Single);
-            
+            ScenesManager.instance.LoadGame((int)ScenesHolder.MAINMENU, (int)ScenesHolder.TUTORIAL, 1);
+
         }
 
         if (devRoom)
         {
-            SceneManager.LoadScene("Gold Dev Room", LoadSceneMode.Single);
+            ScenesManager.instance.LoadGame((int)ScenesHolder.MAINMENU, (int)ScenesHolder.DEVROOM, 1);
 
         }
         if (twoPlayer){
-            SceneManager.LoadScene("Gold 1v1", LoadSceneMode.Single);
-            
+            ScenesManager.instance.LoadGame((int)ScenesHolder.MAINMENU, (int)ScenesHolder.ONEVONE, 1);
+
         }
         if (fourPlayer)
         {
-            SceneManager.LoadScene("Alpha Playtest", LoadSceneMode.Single);
-
+            ScenesManager.instance.LoadGame((int)ScenesHolder.MAINMENU, (int)ScenesHolder.TWOVTWO, 1);
+            Debug.Log("Hit");
         }
     }
    

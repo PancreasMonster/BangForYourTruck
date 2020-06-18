@@ -26,6 +26,6 @@ public class SplashCode : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         FMODUnity.RuntimeManager.PlayOneShot(splashSound);
         yield return new WaitForSeconds(3.5f);
-        SceneManager.LoadScene("0_MainMenu", LoadSceneMode.Single);
+        ScenesManager.instance.LoadGame((int)ScenesHolder.SPLASHSCENE, (int)ScenesHolder.MAINMENU, 0);
     }
 }

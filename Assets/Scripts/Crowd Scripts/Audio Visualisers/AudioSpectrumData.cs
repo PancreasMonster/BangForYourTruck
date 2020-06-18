@@ -22,8 +22,7 @@ public class AudioSpectrumData : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(aud == null)
-        aud = GameObject.Find("MainGameMusic").GetComponent<AudioSource>();
+        aud = ScenesManager.instance.gameMusic;
 
         if (PlayerPrefs.GetInt("AVOn") == 1)
         {
