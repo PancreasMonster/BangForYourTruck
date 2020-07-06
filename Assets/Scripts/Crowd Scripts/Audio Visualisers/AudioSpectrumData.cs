@@ -17,7 +17,7 @@ public class AudioSpectrumData : MonoBehaviour
     public AudioMixer audMix;
     public GameObject audioVisualiser;
     public bool MainMenu = false;
-    string vcaPath;
+    string vcaPath = "vca:/Voicelines";
     FMOD.Studio.VCA vca;
 
     // Use this for initialization
@@ -34,7 +34,7 @@ public class AudioSpectrumData : MonoBehaviour
             audioVisualiser.SetActive(true);
         }
 
-        vcaPath = "vca:/Voicelines";
+        
         vca = FMODUnity.RuntimeManager.GetVCA(vcaPath);
     }
 
@@ -47,7 +47,8 @@ public class AudioSpectrumData : MonoBehaviour
             audMix.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicMixer"));
             audMix.SetFloat("Master", PlayerPrefs.GetFloat("MasterMixer"));
             audMix.SetFloat("SFX", PlayerPrefs.GetFloat("SFXMixer"));
-            vca.setVolume(PlayerPrefs.GetFloat("VoicelinesMixer"));
+            vca.setVolume(PlayerPrefs.GetFloat("VoicelinesMixer") * (1 - ((Mathf.Abs(PlayerPrefs.GetFloat("MasterMixer")) / 60))));
+            Debug.Log(PlayerPrefs.GetFloat("VoicelinesMixer") * (1 - ((Mathf.Abs(PlayerPrefs.GetFloat("MasterMixer")) / 60))));
         }
 
         if (audioVisualiser && MainMenu)
