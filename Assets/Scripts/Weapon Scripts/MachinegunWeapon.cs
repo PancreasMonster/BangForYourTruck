@@ -72,7 +72,7 @@ public class MachinegunWeapon : MonoBehaviour
             if (canFire && PadLB == 0)
             {
                 BeginFiring();
-                //FireBullet();
+                PadRB = 1;
                 //shellsParticles1.Play();
                 //shellsParticles2.Play();
                 //InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
@@ -95,7 +95,7 @@ public class MachinegunWeapon : MonoBehaviour
         if (!pp.noPlayerInput)
         {
             StopFiring();
-            //PadRB = 0;
+            PadRB = 0;
             //CancelInvoke();
             //shellsParticles1.Stop();
             //shellsParticles2.Stop();
@@ -194,21 +194,27 @@ public class MachinegunWeapon : MonoBehaviour
 
     IEnumerator MachineGunFire() 
     {
-        if (ph.powerAmount >= pc.powerCosts[2]) 
+        if (ph.powerAmount >= pc.powerCosts[2])
         {
             if (!rightFiredLast)
             {
                 FireBullet();
                 rightFiredLast = true;
             }
-            else 
+            else
             {
                 FireBullet2();
                 rightFiredLast = false;
             }
             yield return new WaitForSeconds(fireRate);
+
+            if (PadRB == 1)
+                StartCoroutine("MachineGunFire");
+            else
+                StopFiring();
+        } else
+        {
+            StopFiring();
         }
-        StopFiring();
-        yield return null;
     }
 }
