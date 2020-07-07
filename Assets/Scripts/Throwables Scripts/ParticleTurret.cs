@@ -16,9 +16,12 @@ public class ParticleTurret : AIBehaviours
     bool cooldown;
     List<GameObject> targets = new List<GameObject>();
     public AudioSource shootAudio;
+    public Animation anim;
     public float rotationSpeed = 2.5f;
 
     public ParticleSystem ps;
+    public ParticleSystem ps2;
+
     public List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
     //public LineRenderer lr;
     public GameObject source;
@@ -88,6 +91,9 @@ public class ParticleTurret : AIBehaviours
         {
             //lr.positionCount = 0;
             ps.Stop();
+            ps2.Stop();
+            anim.Stop();
+            shootAudio.Stop();
         }
     }
 
@@ -190,12 +196,19 @@ public class ParticleTurret : AIBehaviours
         {
            if(!ps.isPlaying)
             ps.Play();
+            ps2.Play();
+            shootAudio.Play();
+            anim.Play();
+
         } else
         {
             ps.Stop();
+            ps2.Stop();
+            shootAudio.Stop();
+            anim.Stop();
         }
 
-       
+
     }
 
     void OnParticleCollision(GameObject other)

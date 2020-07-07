@@ -20,6 +20,7 @@ public class MachinegunWeapon : MonoBehaviour
     ParticleSystem bulletParticles2;
     public ParticleSystem shellsParticles2;
     public bool canFire;
+    bool rightFiredLast;
 
     private PlayerInput pi;
 
@@ -70,12 +71,13 @@ public class MachinegunWeapon : MonoBehaviour
         {
             if (canFire && PadLB == 0)
             {
-                FireBullet();
-                shellsParticles1.Play();
-                shellsParticles2.Play();
-                InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
-                InvokeRepeating("FireBullet", fireRate, fireRate);
-                anim.SetBool("Spinning", true);
+                BeginFiring();
+                //FireBullet();
+                //shellsParticles1.Play();
+                //shellsParticles2.Play();
+                //InvokeRepeating("FireBullet2", fireRate / 2, fireRate);
+                //InvokeRepeating("FireBullet", fireRate, fireRate);
+                //anim.SetBool("Spinning", true);
             }
         }
     }
@@ -92,11 +94,12 @@ public class MachinegunWeapon : MonoBehaviour
     {
         if (!pp.noPlayerInput)
         {
-            PadRB = 0;
-            CancelInvoke();
-            shellsParticles1.Stop();
-            shellsParticles2.Stop();
-            anim.SetBool("Spinning", false);
+            StopFiring();
+            //PadRB = 0;
+            //CancelInvoke();
+            //shellsParticles1.Stop();
+            //shellsParticles2.Stop();
+            //anim.SetBool("Spinning", false);
         }
     }
 
@@ -121,8 +124,8 @@ public class MachinegunWeapon : MonoBehaviour
 
     void FireBullet()
     {
-        if (ph.powerAmount >= pc.powerCosts[2])
-        {
+        //if (ph.powerAmount >= pc.powerCosts[2])
+        //{
 
             GameObject Bullet = Instantiate(weaponProjectile, AutoWeaponFiringPoint.position, AutoWeaponFiringPoint.transform.rotation);
 
@@ -136,20 +139,20 @@ public class MachinegunWeapon : MonoBehaviour
 
             ph.losePower(pc.powerCosts[2]);
 
-        }
-        else
-        {
-            CancelInvoke();
-            shellsParticles1.Stop();
-            shellsParticles2.Stop();
-            anim.SetBool("Spinning", false);
-        }
+        //}
+        //else
+        //{
+        //    CancelInvoke();
+        //    shellsParticles1.Stop();
+        //    shellsParticles2.Stop();
+        //    anim.SetBool("Spinning", false);
+        //}
     }
 
     void FireBullet2()
     {
-        if (ph.powerAmount >= pc.powerCosts[2])
-        {
+        //if (ph.powerAmount >= pc.powerCosts[2])
+        //{
 
             GameObject Bullet = Instantiate(weaponProjectile, AutoWeaponFiringPoint2.position, AutoWeaponFiringPoint2.transform.rotation);
 
@@ -163,13 +166,49 @@ public class MachinegunWeapon : MonoBehaviour
 
             ph.losePower(pc.powerCosts[2]);
 
-        }
-        else
+        //}
+        //else
+        //{
+        //    CancelInvoke();
+        //    shellsParticles1.Stop();
+        //    shellsParticles2.Stop();
+        //    anim.SetBool("Spinning", false);
+        //}
+    }
+
+    void BeginFiring() 
+    {
+        StartCoroutine("MachineGunFire");
+        anim.SetBool("Spinning", true);
+        shellsParticles1.Play();
+        shellsParticles2.Play();
+    }
+
+    void StopFiring()
+    {
+        StopCoroutine("MachineGunFire");
+        anim.SetBool("Spinning", false);
+        shellsParticles1.Stop();
+        shellsParticles2.Stop();
+    }
+
+    IEnumerator MachineGunFire() 
+    {
+        if (ph.powerAmount >= pc.powerCosts[2]) 
         {
-            CancelInvoke();
-            shellsParticles1.Stop();
-            shellsParticles2.Stop();
-            anim.SetBool("Spinning", false);
+            if (!rightFiredLast)
+            {
+                FireBullet();
+                rightFiredLast = true;
+            }
+            else 
+            {
+                FireBullet2();
+                rightFiredLast = false;
+            }
+            yield return new WaitForSeconds(fireRate);
         }
+        StopFiring();
+        yield return null;
     }
 }
