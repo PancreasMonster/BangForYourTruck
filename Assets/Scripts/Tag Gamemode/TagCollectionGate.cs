@@ -14,6 +14,8 @@ public class TagCollectionGate : MonoBehaviour
     public ParticleSystem left;
     public ParticleSystem right;
 
+    public Animator gridBaseAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,11 +50,13 @@ public class TagCollectionGate : MonoBehaviour
                     TH.EmptyTags();
                     left.Play();
                     right.Play();
+                    gridBaseAnim.SetTrigger("BlueCapture");
                     km.ScoreFeedDepositToken(col.gameObject, i);
                 }
             } else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
             {
                 Destroy(col.gameObject);
+                gridBaseAnim.SetTrigger("BlueCapture");
                 tagCollectionManager.blueTeamTokens++;
                 foreach (PlayerBank pb in playerBanks)
                 {
@@ -76,6 +80,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.currentTags = 0;
                     TH.EmptyTags();
                     left.Play();
+                    gridBaseAnim.SetTrigger("RedCapture");
                     right.Play();
                     km.ScoreFeedDepositToken(col.gameObject, i);
                 }
@@ -83,6 +88,7 @@ public class TagCollectionGate : MonoBehaviour
             else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 1)
             {
                 Destroy(col.gameObject);
+                gridBaseAnim.SetTrigger("RedCapture");
                 tagCollectionManager.redTeamTokens++;
                 foreach (PlayerBank pb in playerBanks)
                 {

@@ -47,12 +47,13 @@ public class KillManager : MonoBehaviour
 
     public bool ps4ControllerInEditor;
 
+    public Animator gridBaseAnim;
+
     // Start is called before the first frame update
     void Start()
     {
         if(!tm)
         FMODUnity.RuntimeManager.PlayOneShot(startSound, players[0].transform.position);
-
     }
 
     
@@ -128,10 +129,12 @@ public class KillManager : MonoBehaviour
         if (victim.GetComponent<Health>().teamNum == 1)
         {
             stadiumPyrotechnicParticles.GetComponent<PryotechnicsManager>().BlueTeamParticlesFire();
+            gridBaseAnim.SetTrigger("BlueKill");
         }
         else
         {
             stadiumPyrotechnicParticles.GetComponent<PryotechnicsManager>().RedTeamParticlesFire();
+            gridBaseAnim.SetTrigger("RedKill");
         }
 
         deaths[deathNum]++;
