@@ -1,15 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class GridBaseAnimationManager : MonoBehaviour
+public class CavernsGridBaseAnimationManager : MonoBehaviour
 {
     KillManager km;
     GameObject[] tcg;
-    GridFloorBeatVisualiser base3;
+    GridFloorBeatVisualiser[] gfbv;
     bool off;
 
     // Start is called before the first frame update
@@ -18,27 +15,32 @@ public class GridBaseAnimationManager : MonoBehaviour
         off = false;
         km = GameObject.Find("KillManager").GetComponent<KillManager>();
         tcg = GameObject.FindGameObjectsWithTag("CollectionGate");
-        base3 = GetComponentInChildren<GridFloorBeatVisualiser>();
+        gfbv = GetComponentsInChildren<GridFloorBeatVisualiser>();
         km.gridBaseAnim = this.gameObject.GetComponent<Animator>();
-        foreach(GameObject gate in tcg)
+        foreach (GameObject gate in tcg)
         {
             TagCollectionGate gateScript = gate.GetComponent<TagCollectionGate>();
             gateScript.gridBaseAnim = this.gameObject.GetComponent<Animator>();
-        } 
+        }
     }
 
     public void ToggleGridFloorBeatVisualiser()
     {
-        if (!off) 
+        if (!off)
         {
-            base3.enabled = false;
+            foreach (GridFloorBeatVisualiser x in gfbv) 
+            {
+                x.enabled = false;
+            }
             off = true;
-        } 
-        else 
+        }
+        else
         {
-            base3.enabled = true;
+            foreach (GridFloorBeatVisualiser x in gfbv)
+            {
+                x.enabled = true;
+            }
             off = false;
         }
     }
-
 }
