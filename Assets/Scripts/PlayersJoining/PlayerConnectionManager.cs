@@ -14,6 +14,12 @@ public class PlayerConnectionManager : MonoBehaviour
 
     public List<PlayerConnectItem> playerConnectItems = new List<PlayerConnectItem>();
 
+
+    private void OnPlayerLeft(Text t)
+    {
+        Debug.Log("Left");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
