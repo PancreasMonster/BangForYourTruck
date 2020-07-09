@@ -79,5 +79,13 @@ public class GridFloorBeatVisualiser : MonoBehaviour
         
     }
 
-    public void 
+    public void ChangeToTeamColour()
+    {
+
+    }
+
+    IEnumerator TeamColourChange ()
+    {
+        yield return null;
+    }
 }
