@@ -28,7 +28,7 @@ public class GridFloorBeatVisualiser : MonoBehaviour
     void Start()
     {
         mat = GetComponent<Renderer>().material;
-
+        KillManager.instance.gridFloors.Add(this);
         //to this object
         AudioProcessor processor = FindObjectOfType<AudioProcessor>();
         processor.onBeat.AddListener(onOnbeatDetected);
@@ -78,4 +78,6 @@ public class GridFloorBeatVisualiser : MonoBehaviour
         mat.SetColor("_EmissionColor", origMatColor * (initialGlow + (glowAmplitude * baseColorValue)));
         
     }
+
+    public void 
 }

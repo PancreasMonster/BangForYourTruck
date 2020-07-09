@@ -16,10 +16,10 @@ public class GridBaseAnimationManager : MonoBehaviour
     void Start()
     {
         off = false;
-        km = GameObject.Find("KillManager").GetComponent<KillManager>();
         tcg = GameObject.FindGameObjectsWithTag("CollectionGate");
         base3 = GetComponentInChildren<GridFloorBeatVisualiser>();
-        km.gridBaseAnim = this.gameObject.GetComponent<Animator>();
+        KillManager.instance.gridBaseAnim = this.gameObject.GetComponent<Animator>();
+        KillManager.instance.Test();
         foreach(GameObject gate in tcg)
         {
             TagCollectionGate gateScript = gate.GetComponent<TagCollectionGate>();

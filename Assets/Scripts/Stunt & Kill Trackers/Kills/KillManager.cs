@@ -49,9 +49,21 @@ public class KillManager : MonoBehaviour
 
     public Animator gridBaseAnim;
 
+    public static KillManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    [HideInInspector]
+    public List<GridFloorBeatVisualiser> gridFloors = new List<GridFloorBeatVisualiser>();
+
     // Start is called before the first frame update
     void Start()
     {
+        
+
         if(!tm)
         FMODUnity.RuntimeManager.PlayOneShot(startSound, players[0].transform.position);
     }
@@ -378,5 +390,10 @@ public class KillManager : MonoBehaviour
         doubleKill[i] = true;
         yield return new WaitForSeconds(doubleKillTimer);
         doubleKill[i] = false;
+    }
+
+    public void Test ()
+    {
+        Debug.Log("Test");
     }
 }

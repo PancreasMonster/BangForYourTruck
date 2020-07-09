@@ -44,14 +44,14 @@ public class ScenesManager : MonoBehaviour
         
         scenesLoading.Add(SceneManager.UnloadSceneAsync(unloadScene));
         scenesLoading.Add(SceneManager.LoadSceneAsync(loadScene, LoadSceneMode.Additive));
-        StartCoroutine(GetSceneLoadProgress());
+        StartCoroutine(GetSceneLoadProgress(loadScene));
         
     }
 
 
 
     float totalSceneProgress;
-    IEnumerator GetSceneLoadProgress ()
+    IEnumerator GetSceneLoadProgress (int loadScene)
     {
         for(int i = 0; i < scenesLoading.Count; i++)
         {
@@ -75,6 +75,8 @@ public class ScenesManager : MonoBehaviour
         loadingScreen.SetActive(false);
 
         scenesLoading.Clear();
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(loadScene));
     }
 
     public IEnumerator FadeOutMusic(float fadeTime)
