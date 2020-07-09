@@ -23,6 +23,7 @@ public class GridFloorBeatVisualiser : MonoBehaviour
 
     private float lastChange = 0.0f;
     private float timer = 0.0f;
+    private bool teamColourChange = false;
 
     // Use this for initialization
     void Start()
@@ -58,34 +59,65 @@ public class GridFloorBeatVisualiser : MonoBehaviour
 
     void Update()
     {
-
-        timer += Time.deltaTime;
-
-        if (timer > changeColourTime)
+        if (!teamColourChange)
         {
-            currentIndex = (currentIndex + 1) % colors.Length;
-            nextIndex = (currentIndex + 1) % colors.Length;
-            timer = 0.0f;
+            timer += Time.deltaTime;
 
-        }
-        origMatColor = Color.Lerp(colors[currentIndex], colors[nextIndex], timer / changeColourTime);
+            if (timer > changeColourTime)
+            {
+                currentIndex = (currentIndex + 1) % colors.Length;
+                nextIndex = (currentIndex + 1) % colors.Length;
+                timer = 0.0f;
 
-        if (baseColorValue > 0)
-        {
-            baseColorValue = Mathf.Lerp(baseColorValue, 0, baseColorValueFadeSpeed * Time.deltaTime);
+            }
+            origMatColor = Color.Lerp(colors[currentIndex], colors[nextIndex], timer / changeColourTime);
+
+            if (baseColorValue > 0)
+            {
+                baseColorValue = Mathf.Lerp(baseColorValue, 0, baseColorValueFadeSpeed * Time.deltaTime);
+            }
+            //matColor = new Color(baseColorValue, baseColorValue, baseColorValue, origMatColor.a);
+            mat.SetColor("_EmissionColor", origMatColor * (initialGlow + (glowAmplitude * baseColorValue)));
         }
-        //matColor = new Color(baseColorValue, baseColorValue, baseColorValue, origMatColor.a);
-        mat.SetColor("_EmissionColor", origMatColor * (initialGlow + (glowAmplitude * baseColorValue)));
-        
     }
 
-    public void ChangeToTeamColour()
+    public void ChangeToTeamColour(Color t)
     {
-
+        StopAllCoroutines();
+        teamColourChange = false;
+        StartCoroutine(TeamColourChange(t));
     }
 
-    IEnumerator TeamColourChange ()
+    IEnumerator TeamColourChange (Color t)
     {
-        yield return null;
+        teamColourChange = true;
+        float teamColourChangeTimer = 0;
+        Color currentColour = origMatColor;
+        Color targetColour = t;
+        while (teamColourChangeTimer < 1)
+        {
+            currentColour = Color.Lerp(currentColour, Color.black, teamColourChangeTimer);
+            mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
+            teamColourChangeTimer += 3 * Time.deltaTime;
+            yield return null;
+        }
+        teamColourChangeTimer = 0;
+        while (teamColourChangeTimer < 1)
+        {
+            currentColour = Color.Lerp(currentColour, targetColour, teamColourChangeTimer);
+            mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
+            teamColourChangeTimer += Time.deltaTime;
+            yield return null;
+        }
+        teamColourChangeTimer = 0;
+        yield return new WaitForSeconds(.33f);
+        while (teamColourChangeTimer < 1)
+        {
+            currentColour = Color.Lerp(currentColour, origMatColor, teamColourChangeTimer);
+            mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
+            teamColourChangeTimer += Time.deltaTime;
+            yield return null;
+        }
+        teamColourChange = false;
     }
 }

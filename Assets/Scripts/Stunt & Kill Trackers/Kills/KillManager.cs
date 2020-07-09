@@ -51,6 +51,8 @@ public class KillManager : MonoBehaviour
 
     public static KillManager instance;
 
+    public Color blueTeamColor, redTeamColor;
+
     private void Awake()
     {
         instance = this;
@@ -140,13 +142,13 @@ public class KillManager : MonoBehaviour
 
         if (victim.GetComponent<Health>().teamNum == 1)
         {
-            stadiumPyrotechnicParticles.GetComponent<PryotechnicsManager>().BlueTeamParticlesFire();
-            gridBaseAnim.SetTrigger("BlueKill");
+            stadiumPyrotechnicParticles.GetComponent<PryotechnicsManager>().BlueTeamParticlesFire(); //switch names
+            ChangeGridColours(redTeamColor);
         }
         else
         {
             stadiumPyrotechnicParticles.GetComponent<PryotechnicsManager>().RedTeamParticlesFire();
-            gridBaseAnim.SetTrigger("RedKill");
+            ChangeGridColours(blueTeamColor);
         }
 
         deaths[deathNum]++;
@@ -392,8 +394,11 @@ public class KillManager : MonoBehaviour
         doubleKill[i] = false;
     }
 
-    public void Test ()
+    public void ChangeGridColours (Color t)
     {
-        Debug.Log("Test");
+        foreach(GridFloorBeatVisualiser g in gridFloors)
+        {
+            g.ChangeToTeamColour(t);
+        }
     }
 }

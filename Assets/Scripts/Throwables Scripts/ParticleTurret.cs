@@ -196,9 +196,12 @@ public class ParticleTurret : AIBehaviours
         {
            if(!ps.isPlaying)
             ps.Play();
-            ps2.Play();
+            if (!ps2.isPlaying)
+                ps2.Play();
+            if(!shootAudio.isPlaying)
             shootAudio.Play();
-            anim.Play();
+            if (!anim.isPlaying)
+                anim.Play();
 
         } else
         {
