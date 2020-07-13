@@ -399,6 +399,16 @@ public class KillManager : MonoBehaviour
         foreach(GridFloorBeatVisualiser g in gridFloors)
         {
             g.ChangeToTeamColour(t);
+            g.lerpsToPerform = 1;
+        }
+    }
+
+    public void ChangeGridColoursThreeTimes(Color t)
+    {
+        foreach (GridFloorBeatVisualiser g in gridFloors)
+        {
+            g.ChangeToTeamColour(t);
+            g.lerpsToPerform = 3;
         }
     }
 }

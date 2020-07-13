@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class GridFloorBeatVisualiser : MonoBehaviour
@@ -25,6 +26,9 @@ public class GridFloorBeatVisualiser : MonoBehaviour
     private float timer = 0.0f;
     private bool teamColourChange = false;
 
+    public int lerpsToPerform;
+    private Color lerpColor;
+    
     // Use this for initialization
     void Start()
     {
@@ -53,7 +57,7 @@ public class GridFloorBeatVisualiser : MonoBehaviour
         {
             Vector3 start = new Vector3(i, 0, 0);
             Vector3 end = new Vector3(i, spectrum[i], 0);
-            Debug.DrawLine(start, end);
+            //Debug.DrawLine(start, end);
         }
     }
 
@@ -94,15 +98,15 @@ public class GridFloorBeatVisualiser : MonoBehaviour
         float teamColourChangeTimer = 0;
         Color currentColour = origMatColor;
         Color targetColour = t;
-        while (teamColourChangeTimer < 1)
+        while (teamColourChangeTimer < .1)
         {
             currentColour = Color.Lerp(currentColour, Color.black, teamColourChangeTimer);
             mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
-            teamColourChangeTimer += 3 * Time.deltaTime;
+            teamColourChangeTimer += Time.deltaTime;
             yield return null;
         }
         teamColourChangeTimer = 0;
-        while (teamColourChangeTimer < 1)
+        while (teamColourChangeTimer < .2)
         {
             currentColour = Color.Lerp(currentColour, targetColour, teamColourChangeTimer);
             mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
@@ -111,13 +115,25 @@ public class GridFloorBeatVisualiser : MonoBehaviour
         }
         teamColourChangeTimer = 0;
         yield return new WaitForSeconds(.33f);
-        while (teamColourChangeTimer < 1)
+        while (teamColourChangeTimer < .1)
         {
             currentColour = Color.Lerp(currentColour, origMatColor, teamColourChangeTimer);
             mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
             teamColourChangeTimer += Time.deltaTime;
             yield return null;
         }
-        teamColourChange = false;
+
+        lerpsToPerform--;
+        print("Grid Colour Lerped");
+
+        if (lerpsToPerform == 0)
+        {
+            teamColourChange = false;
+            //yield return null;
+        }
+        else 
+        {
+            StartCoroutine(TeamColourChange(lerpColor));
+        } 
     }
 }
