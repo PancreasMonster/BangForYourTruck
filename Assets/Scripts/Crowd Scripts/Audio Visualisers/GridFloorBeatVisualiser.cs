@@ -85,10 +85,12 @@ public class GridFloorBeatVisualiser : MonoBehaviour
         }
     }
 
-    public void ChangeToTeamColour(Color t)
+    public void ChangeToTeamColour(Color t, int i)
     {
         StopAllCoroutines();
         teamColourChange = false;
+        lerpsToPerform = i;
+        lerpColor = t;
         StartCoroutine(TeamColourChange(t));
     }
 
@@ -113,21 +115,22 @@ public class GridFloorBeatVisualiser : MonoBehaviour
             teamColourChangeTimer += Time.deltaTime;
             yield return null;
         }
-        teamColourChangeTimer = 0;
         yield return new WaitForSeconds(.33f);
-        while (teamColourChangeTimer < .1)
-        {
-            currentColour = Color.Lerp(currentColour, origMatColor, teamColourChangeTimer);
-            mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
-            teamColourChangeTimer += Time.deltaTime;
-            yield return null;
-        }
+        
 
         lerpsToPerform--;
         print("Grid Colour Lerped");
 
         if (lerpsToPerform == 0)
         {
+            while (teamColourChangeTimer < .1)
+            {
+                currentColour = Color.Lerp(currentColour, origMatColor, teamColourChangeTimer);
+                mat.SetColor("_EmissionColor", currentColour * (initialGlow + (glowAmplitude * baseColorValue)));
+                teamColourChangeTimer += Time.deltaTime;
+                yield return null;
+            }
+            teamColourChangeTimer = 0;
             teamColourChange = false;
             //yield return null;
         }

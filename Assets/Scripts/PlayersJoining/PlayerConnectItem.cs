@@ -11,6 +11,11 @@ public class PlayerConnectItem : MonoBehaviour
 
     public string connectName;
 
+    bool connected;
+
+    public bool inCustomisation;
+
+
     private void OnDeviceLost(InputValue value)
     {
         if (!player1)
@@ -21,6 +26,7 @@ public class PlayerConnectItem : MonoBehaviour
     {
         if (!player1)
             connectState = connectName;
+        connected = true;
     }
 
     // Start is called before the first frame update

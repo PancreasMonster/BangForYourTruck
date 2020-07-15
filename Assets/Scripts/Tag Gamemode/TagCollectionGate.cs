@@ -50,7 +50,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.EmptyTags();
                     left.Play();
                     right.Play();
-                    km.ChangeGridColours(km.blueTeamColor);
+                    km.ChangeGridColoursTags(km.blueTeamColor, i);
                     km.ScoreFeedDepositToken(col.gameObject, i);
                 }
             } else if (col.transform.tag == "TeamTag" && col.GetComponent<TeamTagPickUp>().tagTeamNum == 2)
@@ -80,7 +80,7 @@ public class TagCollectionGate : MonoBehaviour
                     TH.currentTags = 0;
                     TH.EmptyTags();
                     left.Play();
-                    km.ChangeGridColours(km.redTeamColor);
+                    km.ChangeGridColoursTags(km.redTeamColor, i);
                     right.Play();
                     km.ScoreFeedDepositToken(col.gameObject, i);
                 }

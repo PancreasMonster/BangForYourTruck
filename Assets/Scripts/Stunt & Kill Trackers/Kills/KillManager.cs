@@ -398,17 +398,15 @@ public class KillManager : MonoBehaviour
     {
         foreach(GridFloorBeatVisualiser g in gridFloors)
         {
-            g.ChangeToTeamColour(t);
-            g.lerpsToPerform = 1;
+            g.ChangeToTeamColour(t, 1);
         }
     }
 
-    public void ChangeGridColoursThreeTimes(Color t)
+    public void ChangeGridColoursTags(Color t, int i)
     {
         foreach (GridFloorBeatVisualiser g in gridFloors)
         {
-            g.ChangeToTeamColour(t);
-            g.lerpsToPerform = 3;
+            g.ChangeToTeamColour(t, i);
         }
     }
 }
