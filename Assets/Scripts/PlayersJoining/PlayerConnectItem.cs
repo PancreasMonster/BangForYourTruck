@@ -27,6 +27,9 @@ public class PlayerConnectItem : MonoBehaviour
     public bool inCustomisation = false;
     public GameObject trucksForCustomisation;
     public GameObject playerTruck;
+    bool coolingDown = false;
+    float cooldownDuration = .5f;
+    float currentCooldown;
 
     Vector2 leftStick;
 
@@ -56,7 +59,8 @@ public class PlayerConnectItem : MonoBehaviour
         if (playerNum == 1)
             connected = true;
             connectState = "Player 1";
-            //playerTruck.SetActive(true);
+        //playerTruck.SetActive(true);
+        playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().color = Color.white;
     }
 
     private void OnLeftStick(InputValue value)
@@ -69,61 +73,78 @@ public class PlayerConnectItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (inCustomisation) 
         {
-            if (playerNum == 1) 
-            {
-                if (leftStick.x > 0.1) 
+
+            if (!coolingDown) {
+
+                if (leftStick.x > 0.5)
                 {
                     //change currently selected option
-                    if (verticalPosition == 0) 
+                    if (verticalPosition == 0)
                     {
 
                         if (currentTypeSelected == truckComponentType.Length)
                         {
                             currentTypeSelected = 0;
                         }
-                        else 
+                        else
                         {
                             currentTypeSelected++;
                         }
                         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = truckComponentType[currentTypeSelected];
                     }
 
-                    if (verticalPosition == 1) 
+                    if (verticalPosition == 1)
                     {
-                        if (currentTypeSelected == 0) 
+                        if (currentTypeSelected == 0)
                         {
-                            selectedWheel++;
+                            if (selectedWheel < wheelComponent.Length)
+                            {
+                                selectedWheel++;
+                            }
+                            else
+                            {
+                                selectedWheel = 0;
+                            }
                             playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = wheelComponent[selectedWheel];
                         }
-                    
-                        if (currentTypeSelected == 1) 
+
+                        if (currentTypeSelected == 1)
                         {
-                            selectedThruster++;
+                            if (selectedThruster < thrusterComponent.Length)
+                            {
+                                selectedThruster++;
+                            }
+                            else
+                            {
+                                selectedThruster = 0;
+                            }
                             playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = thrusterComponent[selectedThruster]; ;
                         }
 
                     }
                 }
 
-                if (leftStick.x < -0.1)
+                if (leftStick.x < -0.5)
                 {
                     //change currently selected option
                     if (verticalPosition == 0)
                     {
-                        if (currentTypeSelected == 0)
-                        {
-                            currentTypeSelected = truckComponentType.Length;
-                        }
-                        else 
+                        if (currentTypeSelected > 0)
                         {
                             currentTypeSelected--;
+                        }
+                        else
+                        {
+                            currentTypeSelected = truckComponentType.Length;
                         }
                         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = truckComponentType[currentTypeSelected];
                     }
 
-                    if (verticalPosition == 1) 
+                    if (verticalPosition == 1)
                     {
                         if (currentTypeSelected == 0)
                         {
@@ -131,7 +152,7 @@ public class PlayerConnectItem : MonoBehaviour
                             {
                                 selectedWheel = wheelComponent.Length;
                             }
-                            else 
+                            else
                             {
                                 selectedWheel--;
                             }
@@ -153,7 +174,7 @@ public class PlayerConnectItem : MonoBehaviour
                     }
                 }
 
-                if (leftStick.y > 0.1)
+                if (leftStick.y > 0.5)
                 {
                     //change option to customise
                     if (verticalPosition == 0)
@@ -163,7 +184,7 @@ public class PlayerConnectItem : MonoBehaviour
                         playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().color = Color.white;
 
                     }
-                    else 
+                    else
                     {
                         verticalPosition = 0;
                         playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().color = Color.gray;
@@ -171,7 +192,7 @@ public class PlayerConnectItem : MonoBehaviour
                     }
                 }
 
-                if (leftStick.y < -0.1)
+                if (leftStick.y < -0.5)
                 {
                     //change option to customise
                     if (verticalPosition == 0)
@@ -187,27 +208,23 @@ public class PlayerConnectItem : MonoBehaviour
                         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().color = Color.white;
                     }
                 }
-                playerTruck.transform.GetChild(1).transform.GetChild(0);
-                playerTruck.transform.GetChild(1).transform.GetChild(1);
-
             }
 
-            if (playerNum == 2)
-            {
-                playerTruck.transform.GetChild(1).transform.GetChild(0);
-                playerTruck.transform.GetChild(1).transform.GetChild(1);
-            }
+            coolingDown = true;
 
-            if (playerNum == 3)
-            {
-                playerTruck.transform.GetChild(1).transform.GetChild(0);
-                playerTruck.transform.GetChild(1).transform.GetChild(1);
-            }
+        }
 
-            if (playerNum == 4)
+
+
+        if (coolingDown) 
+        {
+            if (currentCooldown < cooldownDuration) 
             {
-                playerTruck.transform.GetChild(1).transform.GetChild(0);
-                playerTruck.transform.GetChild(1).transform.GetChild(1);
+                currentCooldown += Time.deltaTime;
+            }
+            else 
+            {
+                coolingDown = false;
             }
         }
     }
