@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -27,8 +28,8 @@ public class PlayerConnectItem : MonoBehaviour
     public bool inCustomisation = false;
     public GameObject trucksForCustomisation;
     public GameObject playerTruck;
-    bool coolingDown = false;
-    float cooldownDuration = .5f;
+    public bool coolingDown;
+    float cooldownDuration = 2f;
     float currentCooldown;
 
     Vector2 leftStick;
@@ -56,11 +57,19 @@ public class PlayerConnectItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (playerNum == 1)
+        if (playerNum == 1) 
+        {
             connected = true;
             connectState = "Player 1";
-        //playerTruck.SetActive(true);
+        }
+
+        coolingDown = false;
         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().color = Color.white;
+
+        WriteCustomisationOptions();
+        ClearAllCustomisation();
+        LoadCustomisationOptions();
+        ApplyAllCustomisations();
     }
 
     private void OnLeftStick(InputValue value)
@@ -69,6 +78,8 @@ public class PlayerConnectItem : MonoBehaviour
             leftStick = value.Get<Vector2>();
         
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -169,7 +180,7 @@ public class PlayerConnectItem : MonoBehaviour
                             {
                                 selectedThruster--;
                             }
-                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = thrusterComponent[selectedThruster]; ;
+                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = thrusterComponent[selectedThruster];
                         }
                     }
                 }
@@ -208,10 +219,10 @@ public class PlayerConnectItem : MonoBehaviour
                         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().color = Color.white;
                     }
                 }
+
+                coolingDown = true;
+
             }
-
-            coolingDown = true;
-
         }
 
 
@@ -246,8 +257,53 @@ public class PlayerConnectItem : MonoBehaviour
             if (player1)
                 trucksForCustomisation.SetActive(false);
         }
+    }
 
-       
+    public void LoadCustomisationOptions()
+    {
+        selectedWheel = PlayerPrefs.GetInt("WheelSelection", 0);
+        selectedThruster = PlayerPrefs.GetInt("ThrusterSelection", 0);
+        print("Loaded customisations");
+    }
 
+    public void WriteCustomisationOptions() 
+    {
+        PlayerPrefs.SetInt("Player " + playerNum + " WheelSelection", selectedWheel);
+        PlayerPrefs.SetInt("Player " + playerNum + " ThrusterSelection", selectedThruster);
+        
+    }
+
+    void ClearAllCustomisation()
+    {
+        currentTypeSelected = 0;
+        while (currentTypeSelected < truckComponentType.Length)
+        {
+            if (currentTypeSelected == 0)
+            {
+                //foreach (GameObject wheel in wheelComponent)
+                //{
+                    //wheel.SetActive(false);
+                //}
+            }
+
+            if (currentTypeSelected == 1)
+            {
+                //foreach (GameObject thruster in thrusterComponent)
+                //{
+                    //thruster.SetActive(false);
+
+                //}
+            }
+            currentTypeSelected++;
+        }
+        print("Cleared customisation");
+    }
+
+    void ApplyAllCustomisations()
+    {
+        //wheelComponent[selectedWheel].gameObject.SetActive(true);
+        //thrusterComponent[selectedThruster].gameObject.SetActive(true);
+        print("Loaded: Wheel" + wheelComponent[selectedWheel].ToString());
+        print("Loaded: Thruster" + thrusterComponent[selectedThruster].ToString());
     }
 }
