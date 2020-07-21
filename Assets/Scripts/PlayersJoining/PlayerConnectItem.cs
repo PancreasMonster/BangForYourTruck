@@ -21,9 +21,9 @@ public class PlayerConnectItem : MonoBehaviour
     int currentTypeSelected;
     int verticalPosition = 0;
     public string[] truckComponentType;
-    public string[] wheelComponent;
+    public GameObject[] wheelComponents;
     int selectedWheel = 0;
-    public string[] thrusterComponent;
+    public GameObject[] thrusterComponents;
     int selectedThruster = 0;
     public bool inCustomisation = false;
     public GameObject trucksForCustomisation;
@@ -105,14 +105,15 @@ public class PlayerConnectItem : MonoBehaviour
                         {
                             currentTypeSelected++;
                         }
-                        playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = truckComponentType[currentTypeSelected];
+                        playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = 
+                            truckComponentType[currentTypeSelected];
                     }
 
                     if (verticalPosition == 1)
                     {
                         if (currentTypeSelected == 0)
                         {
-                            if (selectedWheel < wheelComponent.Length)
+                            if (selectedWheel < wheelComponents.Length)
                             {
                                 selectedWheel++;
                             }
@@ -120,12 +121,25 @@ public class PlayerConnectItem : MonoBehaviour
                             {
                                 selectedWheel = 0;
                             }
-                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = wheelComponent[selectedWheel];
+                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = 
+                                wheelComponents[selectedWheel].gameObject.transform.name.ToString();
+
+                            foreach (GameObject wheel in wheelComponents) 
+                            {
+                                if (wheel != wheelComponents[selectedWheel])
+                                {
+                                    wheel.SetActive(false);
+                                }
+                                else 
+                                {
+                                    wheel.SetActive(true);
+                                }
+                            }
                         }
 
                         if (currentTypeSelected == 1)
                         {
-                            if (selectedThruster < thrusterComponent.Length)
+                            if (selectedThruster < thrusterComponents.Length)
                             {
                                 selectedThruster++;
                             }
@@ -133,7 +147,20 @@ public class PlayerConnectItem : MonoBehaviour
                             {
                                 selectedThruster = 0;
                             }
-                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = thrusterComponent[selectedThruster]; ;
+                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = 
+                                thrusterComponents[selectedThruster].gameObject.transform.name.ToString();
+
+                            foreach (GameObject thruster in thrusterComponents)
+                            {
+                                if (thruster != thrusterComponents[selectedThruster])
+                                {
+                                    thruster.SetActive(false);
+                                }
+                                else
+                                {
+                                    thruster.SetActive(true);
+                                }
+                            }
                         }
 
                     }
@@ -152,7 +179,8 @@ public class PlayerConnectItem : MonoBehaviour
                         {
                             currentTypeSelected = truckComponentType.Length;
                         }
-                        playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = truckComponentType[currentTypeSelected];
+                        playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = 
+                            truckComponentType[currentTypeSelected];
                     }
 
                     if (verticalPosition == 1)
@@ -161,26 +189,52 @@ public class PlayerConnectItem : MonoBehaviour
                         {
                             if (selectedWheel == 0)
                             {
-                                selectedWheel = wheelComponent.Length;
+                                selectedWheel = wheelComponents.Length;
                             }
                             else
                             {
                                 selectedWheel--;
                             }
-                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = wheelComponent[selectedWheel];
+                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = 
+                                wheelComponents[selectedWheel].gameObject.transform.name.ToString();
+
+                            foreach (GameObject wheel in wheelComponents)
+                            {
+                                if (wheel != wheelComponents[selectedWheel])
+                                {
+                                    wheel.SetActive(false);
+                                }
+                                else
+                                {
+                                    wheel.SetActive(true);
+                                }
+                            }
                         }
 
                         if (currentTypeSelected == 1)
                         {
                             if (selectedThruster == 0)
                             {
-                                selectedThruster = thrusterComponent.Length;
+                                selectedThruster = thrusterComponents.Length;
                             }
                             else
                             {
                                 selectedThruster--;
                             }
-                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = thrusterComponent[selectedThruster];
+                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = 
+                                thrusterComponents[selectedThruster].gameObject.transform.name.ToString();
+
+                            foreach (GameObject thruster in thrusterComponents)
+                            {
+                                if (thruster != thrusterComponents[selectedThruster])
+                                {
+                                    thruster.SetActive(false);
+                                }
+                                else
+                                {
+                                    thruster.SetActive(true);
+                                }
+                            }
                         }
                     }
                 }
@@ -303,7 +357,7 @@ public class PlayerConnectItem : MonoBehaviour
     {
         //wheelComponent[selectedWheel].gameObject.SetActive(true);
         //thrusterComponent[selectedThruster].gameObject.SetActive(true);
-        print("Loaded: Wheel" + wheelComponent[selectedWheel].ToString());
-        print("Loaded: Thruster" + thrusterComponent[selectedThruster].ToString());
+        print("Loaded: Wheel" + wheelComponents[selectedWheel].ToString());
+        print("Loaded: Thruster" + thrusterComponents[selectedThruster].ToString());
     }
 }
