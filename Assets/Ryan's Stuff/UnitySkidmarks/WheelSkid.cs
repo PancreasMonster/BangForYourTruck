@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
 
 
@@ -40,13 +41,36 @@ public class WheelSkid : MonoBehaviour {
     public MobilityCharges mobCharges;
     public float driftMultiplierOffset;
 
+    float XButton;
+    PlayerPause pp;
+
     // #### UNITY INTERNAL METHODS ####
+
+    private void OnFaceButtonWest(InputValue value)
+    {
+        if (!pp.noPlayerInput)
+        {
+            XButton = 1;
+        }
+        else
+        {
+            XButton = 0;
+        }
+    }
+
+    private void OnFaceButtonWestRelease(InputValue value)
+    {
+
+        XButton = 0;
+
+    }
 
     protected void Awake() {
 		wheelCollider = GetComponent<WheelCollider>();
         if(sound)
         PPV.profile.TryGetSettings(out ChromAberr);
         lastFixedUpdateTime = Time.time;
+        pp = GetComponent<PlayerPause>();
 	}
 
 	protected void FixedUpdate() {
@@ -109,8 +133,11 @@ public class WheelSkid : MonoBehaviour {
                         //aud.Play();
                         foreach(ParticleSystem ps in particleSystems)
                         {
-                            if (Input.GetButton("PadX" + playerNum.ToString()))
-                                ps.Play();
+                            if (XButton == 1)
+                            {
+                                if (!ps.isPlaying)
+                                    ps.Play();
+                            }
                             else
                                 ps.Stop();
                         }

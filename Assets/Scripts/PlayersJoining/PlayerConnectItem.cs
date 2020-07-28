@@ -18,8 +18,8 @@ public class PlayerConnectItem : MonoBehaviour
 
     bool connected;
 
-    int currentTypeSelected;
-    int verticalPosition = 0;
+    public int currentTypeSelected = 0;
+    public int verticalPosition = 0;
     public string[] truckComponentType;
     public GameObject[] wheelComponents;
     int selectedWheel = 0;
@@ -29,7 +29,7 @@ public class PlayerConnectItem : MonoBehaviour
     public GameObject trucksForCustomisation;
     public GameObject playerTruck;
     public bool coolingDown;
-    float cooldownDuration = 2f;
+    float cooldownDuration = .5f;
     float currentCooldown;
 
     Vector2 leftStick;
@@ -97,7 +97,7 @@ public class PlayerConnectItem : MonoBehaviour
                     if (verticalPosition == 0)
                     {
 
-                        if (currentTypeSelected == truckComponentType.Length)
+                        if (currentTypeSelected == truckComponentType.Length - 1)
                         {
                             currentTypeSelected = 0;
                         }
@@ -105,6 +105,7 @@ public class PlayerConnectItem : MonoBehaviour
                         {
                             currentTypeSelected++;
                         }
+                        Debug.Log(truckComponentType[currentTypeSelected]);
                         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = 
                             truckComponentType[currentTypeSelected];
                     }
@@ -113,7 +114,7 @@ public class PlayerConnectItem : MonoBehaviour
                     {
                         if (currentTypeSelected == 0)
                         {
-                            if (selectedWheel < wheelComponents.Length)
+                            if (selectedWheel < wheelComponents.Length - 1)
                             {
                                 selectedWheel++;
                             }
@@ -139,7 +140,7 @@ public class PlayerConnectItem : MonoBehaviour
 
                         if (currentTypeSelected == 1)
                         {
-                            if (selectedThruster < thrusterComponents.Length)
+                            if (selectedThruster < thrusterComponents.Length - 1)
                             {
                                 selectedThruster++;
                             }
@@ -177,7 +178,7 @@ public class PlayerConnectItem : MonoBehaviour
                         }
                         else
                         {
-                            currentTypeSelected = truckComponentType.Length;
+                            currentTypeSelected = truckComponentType.Length - 1;
                         }
                         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = 
                             truckComponentType[currentTypeSelected];
@@ -189,7 +190,7 @@ public class PlayerConnectItem : MonoBehaviour
                         {
                             if (selectedWheel == 0)
                             {
-                                selectedWheel = wheelComponents.Length;
+                                selectedWheel = wheelComponents.Length - 1;
                             }
                             else
                             {
@@ -215,7 +216,7 @@ public class PlayerConnectItem : MonoBehaviour
                         {
                             if (selectedThruster == 0)
                             {
-                                selectedThruster = thrusterComponents.Length;
+                                selectedThruster = thrusterComponents.Length - 1;
                             }
                             else
                             {
@@ -283,13 +284,14 @@ public class PlayerConnectItem : MonoBehaviour
 
         if (coolingDown) 
         {
-            if (currentCooldown < cooldownDuration) 
+            if (currentCooldown < cooldownDuration && leftStick.x != 0) 
             {
                 currentCooldown += Time.deltaTime;
             }
             else 
             {
                 coolingDown = false;
+                currentCooldown = 0;
             }
         }
     }
@@ -330,7 +332,7 @@ public class PlayerConnectItem : MonoBehaviour
     void ClearAllCustomisation()
     {
         currentTypeSelected = 0;
-        while (currentTypeSelected < truckComponentType.Length)
+        while (currentTypeSelected < truckComponentType.Length - 1)
         {
             if (currentTypeSelected == 0)
             {

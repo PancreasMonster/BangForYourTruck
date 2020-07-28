@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class RearWheelDrive : MonoBehaviour {
+public class RearWheelDrive : MonoBehaviourPunCallbacks
+{
 
 	private WheelCollider[] wheels;
 
@@ -65,29 +68,35 @@ public class RearWheelDrive : MonoBehaviour {
 
     private void OnRightTrigger (InputValue value)
     {
-        if (!pp.noPlayerInput)
-        {
-            rightTrigger = value.Get<float>();
-            if (trainingMode && tm.canProceed)
-                tm.pressedRT = true;
-        }
-        else
-        {
-            rightTrigger = 0;
+        if (photonView.IsMine)
+       {
+            if (!pp.noPlayerInput)
+            {
+                rightTrigger = value.Get<float>();
+                if (trainingMode && tm.canProceed)
+                    tm.pressedRT = true;
+            }
+            else
+            {
+                rightTrigger = 0;
+            }
         }
     }
 
     private void OnLeftTrigger (InputValue value)
     {
-        if (!pp.noPlayerInput)
+        if (photonView.IsMine)
         {
-            leftTrigger = value.Get<float>();
-            if (trainingMode && tm.canProceed)
-                tm.pressedLT = true;
-        }
-        else
-        {
-            leftTrigger = 0;
+            if (!pp.noPlayerInput)
+            {
+                leftTrigger = value.Get<float>();
+                if (trainingMode && tm.canProceed)
+                    tm.pressedLT = true;
+            }
+            else
+            {
+                leftTrigger = 0;
+            }
         }
     }
 

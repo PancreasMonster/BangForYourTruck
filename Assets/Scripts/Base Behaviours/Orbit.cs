@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Orbit : MonoBehaviour
+public class Orbit : MonoBehaviourPunCallbacks
 {
 
     public float turnSpeed = 4.0f;
@@ -50,45 +52,53 @@ public class Orbit : MonoBehaviour
 
     private void OnRightStickClick(InputValue value)
     {
-
-        /*lockedBehind = !lockedBehind;
-        offset = origPos;
-        offset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * offset;
-        */
-        origPos = new Vector3(origPos.x, origPos.y, -origPos.z);
-        jumpOffset = new Vector3(jumpOffset.x, jumpOffset.y, -jumpOffset.z);
+        if (photonView.IsMine)
+        {
+            /*lockedBehind = !lockedBehind;
+            offset = origPos;
+            offset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * offset;
+            */
+            origPos = new Vector3(origPos.x, origPos.y, -origPos.z);
+            jumpOffset = new Vector3(jumpOffset.x, jumpOffset.y, -jumpOffset.z);
+        }
     }
 
     private void OnRightStickRelease(InputValue value)
     {
-
-        /*lockedBehind = !lockedBehind;
-        offset = origPos;
-        offset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * offset;
-        */
-        origPos = new Vector3(origPos.x, origPos.y, -origPos.z);
-        jumpOffset = new Vector3(jumpOffset.x, jumpOffset.y, -jumpOffset.z);
+        if (photonView.IsMine)
+        {
+            /*lockedBehind = !lockedBehind;
+            offset = origPos;
+            offset = Quaternion.AngleAxis(player.transform.localEulerAngles.y - 180, Vector3.up) * offset;
+            */
+            origPos = new Vector3(origPos.x, origPos.y, -origPos.z);
+            jumpOffset = new Vector3(jumpOffset.x, jumpOffset.y, -jumpOffset.z);
+        }
     }
 
     private void OnRightStick(InputValue value)
     {
-
-        rightStick = value.Get<Vector2>();
+        if (photonView.IsMine)
+        {
+            rightStick = value.Get<Vector2>();
+        }
         
     }
 
     private void OnLeftBumper(InputValue value)
     {
-
-        leftBumper = 1;
-
+        if (photonView.IsMine)
+        {
+            leftBumper = 1;
+        }
     }
 
     private void OnLeftBumperRelease(InputValue value)
     {
-
-        leftBumper = 0;
-
+        if (photonView.IsMine)
+        {
+            leftBumper = 0;
+        }
     }
 
     /* private void Update()
