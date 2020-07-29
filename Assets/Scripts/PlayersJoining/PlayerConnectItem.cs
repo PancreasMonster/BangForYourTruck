@@ -66,8 +66,8 @@ public class PlayerConnectItem : MonoBehaviour
         coolingDown = false;
         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().color = Color.white;
 
-        WriteCustomisationOptions();
-        ClearAllCustomisation();
+        //WriteCustomisationOptions();
+        //ClearAllCustomisation();
         LoadCustomisationOptions();
         ApplyAllCustomisations();
     }
