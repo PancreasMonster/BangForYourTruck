@@ -63,13 +63,18 @@ public class PlayerConnectItem : MonoBehaviour
             connectState = "Player 1";
         }
 
+        LoadCustomisationOptions();
+        ApplyAllCustomisations();
+        currentTypeSelected = 0;
+
         coolingDown = false;
+        playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = truckComponentType[currentTypeSelected];
+        playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = wheelComponents[selectedWheel].gameObject.transform.name.ToString();
         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().color = Color.white;
 
         //WriteCustomisationOptions();
         //ClearAllCustomisation();
-        LoadCustomisationOptions();
-        ApplyAllCustomisations();
+        
     }
 
     private void OnLeftStick(InputValue value)
@@ -108,6 +113,18 @@ public class PlayerConnectItem : MonoBehaviour
                         Debug.Log(truckComponentType[currentTypeSelected]);
                         playerTruck.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = 
                             truckComponentType[currentTypeSelected];
+
+                        if (currentTypeSelected == 0) 
+                        {
+                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text =
+                                wheelComponents[selectedWheel].gameObject.transform.name.ToString();
+                        }
+
+                        if (currentTypeSelected == 1)
+                        {
+                            playerTruck.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text =
+                                thrusterComponents[selectedThruster].gameObject.transform.name.ToString();
+                        }
                     }
 
                     if (verticalPosition == 1)
