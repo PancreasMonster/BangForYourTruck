@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Diagnostics;
+using System.Security.Cryptography;
 
 public class Health : MonoBehaviour
 {
@@ -188,23 +190,24 @@ public class Health : MonoBehaviour
             if (GetComponentInChildren<ExplodeOnDeath>() != null)
             {
                 BroadcastMessage("Explode");
-
-
-
             }
 
-            if (GetComponentInChildren<Turret>() != null)
+            if (GetComponentInChildren<ParticleTurret>() != null)
             {
-                GetComponentInChildren<Turret>().enabled = false;
-                GetComponentInChildren<Turret>().StopAllCoroutines();
-
-            }
-
-            if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
-            {
+                transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+                GetComponentInChildren<ParticleTurret>().enabled = false;
+                GetComponentInChildren<ParticleTurret>().ps.Stop();
+                GetComponentInChildren<ParticleTurret>().ps2.Stop();
+                GetComponentInChildren<ParticleTurret>().StopAllCoroutines();
                 BroadcastMessage("Explode");
-
+                print("turret exploded from health");
             }
+
+            //if (GetComponentInChildren<BaseExplodeOnDeath>() != null)
+            //{
+                
+
+            //}
         }
     }
 
