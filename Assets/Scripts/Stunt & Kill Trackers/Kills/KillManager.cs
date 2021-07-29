@@ -58,33 +58,7 @@ public class KillManager : MonoBehaviour
     {
         
 
-        int conTrollerCount = 0;
 
-    string[] names = Input.GetJoystickNames();
-        for (int x = 0; x < names.Length; x++)
-        {
-            if (names[x].Length == 33)
-            {
-                
-                //set a controller bool to true
-                conTrollerCount++;
-
-            }
-        }
-
-
-        Debug.Log(conTrollerCount);
-    
-        for (int i = 0; i < PI.Count; i++)
-        {
-            if((i+1) <= conTrollerCount)
-            {
-                PI[i].enabled = true;
-            } else
-            {
-                PI[i].enabled = false;
-            }
-        }
 
     }
 
